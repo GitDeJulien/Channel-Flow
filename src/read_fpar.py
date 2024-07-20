@@ -26,7 +26,7 @@ def read_fpar_extract_plane(infile):
             quaternion = np.array([1.0, 0.0, 0.0, 0.0])
         elif version == -1:
             # New version
-            print('New version')
+            #print('New version')
             data_array = np.fromfile(fid, np.int32, 5)
             nt = data_array[0]  # Number of timesteps
             n1 = data_array[1]
