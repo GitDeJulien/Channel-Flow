@@ -31,6 +31,47 @@ def get_nperseg(len_sig):
     return int(nperseg)
 
 #====================================================================
+#===================== Get ellipses slop ============================
+#====================================================================
+
+def get_ellispses_slop(R, levels, eps, Dt, Dx, n1, split_t = None):
+    
+    x_slop = []
+    y_slop = []
+    
+    for level in levels:
+        imax = 0
+        jmax = 0
+        for i in range(R.shape[0]//2):
+            for j in range(R.shape[1]//2):
+                if R[i,j] > level - eps and R[i,j] < level + eps:
+                    if i>imax:
+                        imax = i
+                    if j>jmax:
+                        jmax = j
+        y_slop.append(Dt[imax])
+        x_slop.append(Dx[jmax])
+        
+    
+    for level in levels:
+        imin = R.shape[0]
+        jmin = R.shape[1]
+        for i in range(R.shape[0]//2 , R.shape[0]):
+            for j in range(R.shape[1]//2 , R.shape[1]):
+                if R[i,j] > level - eps and R[i,j] < level + eps:
+                    if i<imin:
+                        imin = i
+                    if j<jmin:
+                        jmin = j
+        y_slop.append(Dt[split_t-1 + imin])
+        x_slop.append(Dx[n1-1+jmin])
+
+        
+    coef = np.polyfit(x_slop, y_slop, 1)
+    
+    return(coef)
+
+#====================================================================
 #======================= Welsh Power Spectra ========================
 #====================================================================
 
@@ -180,3 +221,44 @@ def Autocorrelation_1d(data, geom = 'plan', mode_corr = 'half', axis = 'time'):
     else:
         print('Error: The argument mode_corr is incorrect. Please choose between \'full\' and \'half\'.')
         exit(-1)
+        
+
+
+#====================================================================
+#======================= Autocorrelation 2D =========================
+#====================================================================        
+def Correlation_2d(data, geom = 'plan', axis = 'streamwise'):
+    
+    if geom == 'line':
+        niters, npts = data.shape
+        phi = np.zeros((niters, npts))
+        R = np.zeros((niters, npts))
+        fourier = fft.fft2(data[:,:], workers = 3)
+        phi += np.real(fourier * np.conj(fourier))
+        R = np.real(fft.ifft2(phi, workers=3))
+        R /= np.max(R, axis=(0,1))
+        
+    if geom == 'plan':
+        if axis == 'streamwise' or axis == 'wallnormal':
+            niters, npts, nlines = data.shape
+            phi = np.zeros((niters, npts), dtype=complex)
+            R = np.zeros((niters, npts))
+            for lines in range(nlines):
+                fourier = fft.fft2(data[:,:,lines], workers=3)
+                phi += fourier * np.conj(fourier)
+            phi /= nlines
+            R = np.real(fft.ifft2(phi, workers=3))
+            R /= np.max(R, axis=(0,1))
+            
+        if axis == 'spanwise':
+            niters, nlines, npts = data.shape
+            phi = np.zeros((niters, npts))
+            R = np.zeros((niters, npts))
+            for lines in range(nlines):
+                fourier = fft.fft2(data[:,lines,:], workers=3)
+                phi += np.real(fourier * np.conj(fourier))
+            phi /= nlines
+            R = np.real(fft.ifft2(phi, workers=3))
+            R /= np.max(R, axis=(0,1))
+        
+    return(phi, R)
