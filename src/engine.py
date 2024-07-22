@@ -77,7 +77,9 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_full[0:split_t, n1:2*n1] = R
             R_full[split_t:2*split_t, n1:2*n1] = R
             
-            coef = get_ellispses_slop(R, [0.9, 0.92, 0.94, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998], 0.001, Dt, Dx, n1, split_t=split_t)
+            #levels = [0.9, 0.92, 0.94, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
+            levels = [0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
+            coef = get_ellispses_slop(R, levels , 0.001, Dt, Dx, n1, split_t=split_t)
             
             print('slop:', 1./coef[0])
             

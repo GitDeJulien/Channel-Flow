@@ -47,7 +47,7 @@ def main():
     cflow = ChannelFlow(xlen=xlen, ylen=ylen, zlen=zlen, rho=rho, uinf=uinf, re=re, ret=ret)
     
     #Reading input files.
-    zp = [5, 20, 40, 60, 80, 98, 151, 199, 251, 302, 392]
+    zp = [5, 20, 40, 60, 80, 98, 151, 199, 251, 302]
     z = []
     for he in zp:
         z.append(he * cflow.nu / cflow.ut)
@@ -155,25 +155,25 @@ def main():
         # del omega
         # del k
         
-        # #### Autocorrelation ####
-        # Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr")
+        #### Autocorrelation ####
+        Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr")
 
-        # frozen_turbulence_plot(fig2, col, Uc=Uc, R_time = R_time, R_space = R_space, Dt = Dt, Dx = Dx, ch = "corr")
-        
-        # del Dt
-        # del Dx
-        # del R_time
-        # del R_space
-        
-        #### Autocorrelation 2D ####
-        
-        Dt, Dx, R2d, coef = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
-        
-        frozen_turbulence_plot(fig3, col, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+        frozen_turbulence_plot(fig2, col, Uc=Uc, R_time = R_time, R_space = R_space, Dt = Dt, Dx = Dx, ch = "corr")
         
         del Dt
         del Dx
-        del R2d
+        del R_time
+        del R_space
+        
+        #### Autocorrelation 2D ####
+        
+        # Dt, Dx, R2d, coef = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
+        
+        # frozen_turbulence_plot(fig3, col, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+        
+        # del Dt
+        # del Dx
+        # del R2d
         
         col +=1
         del datas_u1
@@ -188,10 +188,37 @@ def main():
     
     if split_time == 'Y':
         # save_figures(fig1, "output/split_time/frozen_turbulence/PowerSpectraComparison.png")
-        # save_figures(fig2, "output/split_time/frozen_turbulence/CorrelationComparison.png")
-        save_figures(fig3, "output/split_time/frozen_turbulence/Correlation2D.png")
+        save_figures(fig2, "output/split_time/frozen_turbulence/CorrelationComparison.png")
+        # save_figures(fig3, "output/split_time/frozen_turbulence/Correlation2D.png")
     
     print(f'\n Frozen turbulence valiation done in : {int(minutes)}m {seconds:.2f}s \n')
+    
+    #### Mean velocity profile ####
+    # Uc_list = []
+    # for zplan, zvalue in enumerate(z):
+    #     print("========================================")
+    #     print(f'Veocity profile for {YELLOW}z={zvalue:.2f}{RESET}')
+    #     print('Plan number:', zplan)
+    #     print("Reading input files ...\n")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        
+    #     datas_u1 = var[1:,:,:]
+    #     Uc = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+    #     Uc_list.append(Uc)
+        
+    # print('Uc:',Uc_list)
+    # print('z:',z)
+    # Uc_list = [0, *Uc_list]
+    # z = [0, *z]
+    # print('Uc:',Uc_list)
+    # print('z:',z)
+    # fig = go.Figure()
+    # fig.add_trace(go.Scatter(x=Uc_list, y=z, mode= 'lines+markers', line=dict(color='firebrick', width=3), name='$Uc$'))
+    # fig.add_trace(go.Scatter(x=np.linspace(0, 1.5, 10), y=np.zeros((10)), mode= 'lines', line=dict(color='black', width=3), name='$z=0$'))
+    # fig.update_xaxes(title='$x(m)$')#, range=[-np.pi,np.pi])
+    # fig.update_yaxes(title='$z(m)$')#, range=[0,1])
+    # fig.update_layout(height=600, width=800, title="Mean velocity profile", font=font, showlegend=True)
+    # save_figures(fig, "output/velocity_profile.png")
             
         # _,_,_, datas_u2,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
         # del datas_u2
