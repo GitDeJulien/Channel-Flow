@@ -14,9 +14,11 @@ def init_figures(z, n2):
     
     fig3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\delta t$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
     
-    return(fig1, fig2, fig3)
+    fig4 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
+    
+    return(fig1, fig2, fig3, fig4)
 
-def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = None, k = None, space_spectra = None, R_time = None, R_space = None, Dt = None, Dx = None, R2d=None, coef=None, ch = "spectra"):
+def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = None, k = None, space_spectra = None, R_time = None, R_space = None, Dt = None, Dx = None, R2d=None, coef=None, delta_x=None, funct=None, r=None, ch = "spectra"):
     
     if ch == "spectra":
         
@@ -101,6 +103,26 @@ def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = Non
             fig.update_xaxes(range=[-np.pi,np.pi], row=1, col=col, title_text="$\delta x$")
             
             fig.add_annotation(x=-1.5, y=4, text=f'$Uc\simeq{1./coef[0]:.2f}$', showarrow = False, row=1, col=col)
+            
+            
+    if ch == 'w_gamma':
+        
+        if col == 4:
+            if delta_x == 1:
+                slop = np.polyfit(omega, funct,1)
+                fig.add_trace(go.Scatter(x=omega, y=slop[0]*omega+10, name=f'r = {r:.2f}, fit: {slop[0]:.4f} ({col})', line=dict(color='darkgreen', dash='dash', width=2)), row=1, col=col)
+                
+            fig.add_trace(go.Scatter(x=omega, y=funct, showlegend=False), row=1, col=col)
+            
+        else:
+            if delta_x == 1:
+                slop = np.polyfit(omega, funct,1)
+                fig.add_trace(go.Scatter(x=omega, y=slop[0]*omega+10, name=f'r = {r:.2f}, fit: {slop[0]:.4f} ({col})', line=dict(color='darkgreen', dash='dash', width=2)), row=1, col=col)
+                
+            fig.add_trace(go.Scatter(x=omega, y=funct, showlegend=False), row=1, col=col)
+            
+        # Update axis properties
+        fig.update_xaxes(title_text="$\omega(s^{-1})$", row=1, col=col)
             
             
             

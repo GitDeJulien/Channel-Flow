@@ -35,6 +35,16 @@ def get_nperseg(len_sig):
 #====================================================================
 
 def get_ellispses_slop(R, levels, eps, Dt, Dx, n1, split_t = None):
+    """ Get the appropriate slop of ellispses for the 2D Correlation contour plot 
+    INPUT: - R (np.array) : 2D correlation
+        - levels (list) : list of relevent ellipse values
+        - eps (float) : precision of ellipse points
+        - Dt, Dx (np.array) : time and space series
+        - n1 (int) : number of points
+        - split_t (None or int) : number of time iteration if the time is splited
+        
+    OUTPUT: - coef (tuple (float, float)) : a and b coeffitient of the fited line y = a*x+b
+    """
     
     x_slop = []
     y_slop = []
@@ -262,3 +272,97 @@ def Correlation_2d(data, geom = 'plan', axis = 'streamwise'):
             R /= np.max(R, axis=(0,1))
         
     return(phi, R)
+
+
+#====================================================================
+#======================= Crosscorelation 2D =========================
+#==================================================================== 
+
+def Crosscorrelation_2d(datas, delta_x, coords, dt, Uc, geom = "plan", axis = "streamwise"):
+    
+    if geom == 'line':
+        niters, npts = datas.shape
+        nperseg_time = get_nperseg(niters)
+        
+        r = np.abs(coords[delta_x] - coords[0])
+
+        frequency, psd = signal.welch(datas[:, :], fs=1/dt, window='hann', nperseg=nperseg_time//8, scaling='density', axis=0)
+        psd = np.mean(psd, axis=1)
+
+        avg_corr = np.zeros((niters))
+        cnt = 0
+        for x in range(0, npts-delta_x-1, 2):
+            corr = signal.correlate(datas[:, x], datas[:, x+delta_x], mode='full')
+            avg_corr += corr[corr.size//2:]
+            cnt += 1
+        avg_corr /= cnt
+        n = frequency.shape[0]
+        phi = np.real(fft.fft(avg_corr, n=n))
+        
+        # phi, R = Correlation_2d(datas, geom = geom, axis = axis)
+        # phi = np.mean(phi, axis=0)
+        
+        kc = 2*np.pi*frequency/Uc
+
+        funct = np.abs(phi*np.exp(-1j * kc * r) / psd)
+        funct = np.log(funct)
+            
+    if geom == 'plan':
+        if axis == 'streamwise':
+            niters, npts, nlines = datas.shape
+            nperseg_time = get_nperseg(niters)
+            
+            r = np.abs(coords[delta_x] - coords[0])
+
+            frequency, psd = signal.welch(datas[:, :, :], fs=1/dt, window='hann', nperseg=nperseg_time//8, scaling='density', axis=0)
+            psd = np.mean(np.mean(psd, axis=2), axis=1)
+
+            avg_corr = np.zeros((niters))
+            cnt = 0
+            for line in range(nlines):
+                for x in range(0, npts-delta_x-1, 2):
+                    corr = signal.correlate(datas[:, x, line], datas[:, x+delta_x, line], mode='full')
+                    avg_corr += corr[corr.size//2:]
+                    cnt += 1
+            avg_corr /= cnt
+            n = frequency.shape[0]
+            phi = np.real(fft.fft(avg_corr, n=n))
+            
+            # phi, R = Correlation_2d(datas, geom = geom, axis = axis)
+            # phi = np.mean(phi, axis=0)
+            
+            kc = 2*np.pi*frequency/Uc
+
+            funct = np.abs(phi[:n]*np.exp(-1j * kc * r) / psd)
+            funct = np.log(funct)
+            
+        if axis == 'spanwise':
+            niters, nlines, npts = datas.shape
+            nperseg_time = get_nperseg(niters)
+            
+            r = np.abs(coords[delta_x] - coords[0])
+
+            frequency, psd = signal.welch(datas[:, :, :], fs=1/dt, window='hann', nperseg=nperseg_time//8, scaling='density', axis=0)
+            psd = np.mean(np.mean(psd, axis=2), axis=1)
+
+            avg_corr = np.zeros((niters))
+            cnt = 0
+            for line in range(nlines):
+                for x in range(0, npts-delta_x-1, 2):
+                    corr = signal.correlate(datas[:, line, x], datas[:, line, x+delta_x], mode='full')
+                    avg_corr += corr[corr.size//2:]
+                    cnt += 1
+            avg_corr /= cnt
+            n = frequency.shape[0]
+            phi = np.real(fft.fft(avg_corr, n=n))
+            
+            # phi, R = Correlation_2d(datas, geom = geom, axis = axis)
+            # phi = np.mean(phi, axis=0)
+            
+            kc = 2*np.pi*frequency/Uc
+
+            funct = np.abs(phi[:n]*np.exp(-1j * kc * r) / psd)
+            funct = np.log(funct)
+            
+
+    return (frequency, phi, psd, funct, kc, r)

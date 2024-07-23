@@ -7,7 +7,7 @@ from plot import *
 
 
 
-def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd = None, tStart = None, ch = "spectra"):
+def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd = None, tStart = None, x1 = None, Uc = None, ch = "spectra"):
     
     if split_time == 'Y':
         split_t = 1000
@@ -85,6 +85,24 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             
             return(Dt, Dx, R_full, coef)
         
+        if ch == 'gamma':
+            frequency,_,_,_,_,_ = Crosscorrelation_2d(datas[0:split_t,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")
+            length = frequency.shape[0]
+            funct = np.zeros((length))
+            kc = np.zeros((length))
+            
+            
+            for n in tqdm(range(1,num_split_t), desc=f'Crosscorr', colour= 'GREEN'):
+                funct += Crosscorrelation_2d(datas[(n-1)*split_t:n*split_t,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[3]
+                kc += Crosscorrelation_2d(datas[(n-1)*split_t:n*split_t,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[4]
+            
+            funct /= (num_split_t-1)
+            kc /= (num_split_t-1)
+            omega = 2*np.pi*frequency
+            
+            return(kc, omega, funct)
+
+        
     if split_time == 'n':
         
         if ch == "spectra":
@@ -135,6 +153,18 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             print('slop:', 1./coef[0])
             
             return(Dt, Dx, R_full, coef)
+        
+        
+        if ch == 'gamma':
+            
+            frequency = Crosscorrelation_2d(datas[:,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[1]
+            funct = Crosscorrelation_2d(datas[:,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[3]
+            kc = Crosscorrelation_2d(datas[:,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[4]
+            
+
+            omega = 2*np.pi*frequency
+            
+            return(kc, omega, funct)
         
     
     
