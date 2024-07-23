@@ -52,27 +52,28 @@ def main():
     for he in zp:
         z.append(he * cflow.nu / cflow.ut)
     
-    
+    # path = 'input/' #change it as you want
+    path = '/media/julien/Verbatim/julien/channel_wrles_retau395/' #on the external disc
     #### Streamwise files ####
-    fpars_files_streamwise_p = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/streamwise/*fpar.p"))
+    fpars_files_streamwise_p = sorted(glob.glob(path + "streamwise/*fpar.p"))
     
-    fpars_files_streamwise_u1 = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/streamwise/*fpar.u1"))
+    fpars_files_streamwise_u1 = sorted(glob.glob(path + "streamwise/*fpar.u1"))
     
-    fpars_files_streamwise_u2 = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/streamwise/*fpar.u2"))
+    fpars_files_streamwise_u2 = sorted(glob.glob(path + "streamwise/*fpar.u2"))
     
-    fpars_files_streamwise_u3 = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/streamwise/*fpar.u3"))
+    fpars_files_streamwise_u3 = sorted(glob.glob(path + "streamwise/*fpar.u3"))
     
     #### Spanwise files ####
-    fpars_files_spanwise_p = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/spanwise/*fpar.p"))
+    fpars_files_spanwise_p = sorted(glob.glob(path + "spanwise/*fpar.p"))
     
-    fpars_files_spanwise_u1 = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/spanwise/*fpar.u1"))
+    fpars_files_spanwise_u1 = sorted(glob.glob(path + "spanwise/*fpar.u1"))
     
-    fpars_files_spanwise_u2 = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/spanwise/*fpar.u2"))
+    fpars_files_spanwise_u2 = sorted(glob.glob(path + "spanwise/*fpar.u2"))
     
-    fpars_files_spanwise_u3 = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/spanwise/*fpar.u3"))
+    fpars_files_spanwise_u3 = sorted(glob.glob(path + "spanwise/*fpar.u3"))
     
     #### Wall normal files ####
-    fpars_files_normal = sorted(glob.glob("/media/julien/Verbatim/julien/channel_wrles_retau395/normal/*fpar*"))
+    fpars_files_normal = sorted(glob.glob(path + "normal/*fpar*"))
     
     if len(fpars_files_streamwise_u1) == 0:
         print("Error: Input fiels didn't find.")
