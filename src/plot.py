@@ -112,14 +112,14 @@ def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = Non
                 slop = np.polyfit(omega, funct,1)
                 fig.add_trace(go.Scatter(x=omega, y=slop[0]*omega+10, name=f'r = {r:.2f}, fit: {slop[0]:.4f} ({col})', line=dict(color='darkgreen', dash='dash', width=2)), row=1, col=col)
                 
-            fig.add_trace(go.Scatter(x=omega, y=funct, showlegend=False), row=1, col=col)
+            fig.add_trace(go.Scatter(x=omega[1:], y=funct[1:], showlegend=False), row=1, col=col)
             
         else:
             if delta_x == 1:
                 slop = np.polyfit(omega, funct,1)
                 fig.add_trace(go.Scatter(x=omega, y=slop[0]*omega+10, name=f'r = {r:.2f}, fit: {slop[0]:.4f} ({col})', line=dict(color='darkgreen', dash='dash', width=2)), row=1, col=col)
                 
-            fig.add_trace(go.Scatter(x=omega, y=funct, showlegend=False), row=1, col=col)
+            fig.add_trace(go.Scatter(x=omega[1:], y=funct[1:], showlegend=False), row=1, col=col)
             
         # Update axis properties
         fig.update_xaxes(title_text="$\omega(s^{-1})$", row=1, col=col)
