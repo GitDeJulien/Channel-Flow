@@ -261,11 +261,14 @@ def main():
             
         datas_fluct_u1 /= (num_split_t-1)    
         sigma_u_squared = sigma_power2(datas_fluct_u1, axis = "streamwise")
-            
+        # sigma_u_squared = sigma(datas_fluct_u1, ko2_omega.shape[0], axis = "streamwise")
+        # sigma_u_squared = sigma_u_squared**2
         
     if split_time == 'n':
         datas_fluct_u1 = np.abs(datas_u1 - Ux)
         sigma_u_squared = sigma_power2(datas_fluct_u1, axis = "streamwise")
+        # sigma_u_squared = sigma(datas_fluct_u1, ko2_omega.shape[0], axis = "streamwise")
+        # sigma_u_squared = sigma_u_squared**2
         
     del datas_u1
     del datas_fluct_u1
@@ -290,11 +293,15 @@ def main():
             
         datas_fluct_u2 /= (num_split_t-1)    
         sigma_v_squared = sigma_power2(datas_fluct_u2, axis = "streamwise")
+        # sigma_v_squared = sigma(datas_fluct_u2, ko2_omega.shape[0], axis = "streamwise")
+        # sigma_v_squared = sigma_v_squared**2
             
         
     if split_time == 'n':
         datas_fluct_u2 = np.abs(datas_u2 - Uy)
         sigma_v_squared = sigma_power2(datas_fluct_u2, axis = "streamwise")
+        # sigma_v_squared = sigma(datas_fluct_u2, ko2_omega.shape[0], axis = "streamwise")
+        # sigma_v_squared = sigma_v_squared**2
         
     del datas_u2
     del datas_fluct_u2
@@ -319,11 +326,15 @@ def main():
             
         datas_fluct_u3 /= (num_split_t-1)    
         sigma_w_squared = sigma_power2(datas_fluct_u3, axis = "streamwise")
+        # sigma_w_squared = sigma(datas_fluct_u3, ko2_omega.shape[0], axis = "streamwise")
+        # sigma_w_squared = sigma_w_squared**2
             
         
     if split_time == 'n':
         datas_fluct_u3 = np.abs(datas_u3 - Uz)
         sigma_w_squared = sigma_power2(datas_fluct_u3, axis = "streamwise")
+        # sigma_w_squared = sigma(datas_fluct_u3, ko2_omega.shape[0], axis = "streamwise")
+        # sigma_w_squared = sigma_w_squared**2
         
     del datas_u3
     del datas_fluct_u3
@@ -340,14 +351,16 @@ def main():
     
     Le = L(0.09*0.519, ko2_tke, tens = 'omega', omega=ko2_omega) #list length omega
     
-    R11 = R_11(ko2_omega, 1, Ux, sigma1c, Le)
-    R22 = R_22(ko2_omega, 1, Ux, sigma1c, Le) #=R33
+    R11 = R_11(ko2_omega, 1.0, Ux, sigma1c, Le)
+    R22 = R_22(ko2_omega, 1.0, Ux, sigma1c, Le) #=R33
+    
+    print('R11.shape:',R11.shape)
     
     fig_vanK = go.Figure()
     fig_vanK.add_trace(go.Scatter(x=ko2_omega, y=R11, mode= 'lines+markers', line=dict(color='firebrick', width=3), name='$R^{0}_{11}$'))
     fig_vanK.add_trace(go.Scatter(x=ko2_omega, y=R22, mode= 'lines+markers', line=dict(color='midnightblue', width=3), name='$R^{0}_{22}$'))
-    fig_vanK.update_xaxes(title='$\omega(s^{-1})$')
-    fig_vanK.update_yaxes(title='$R_{ij}(\omega)$')
+    fig_vanK.update_xaxes(title='$\omega(s^{-1})$', type="log", exponentformat='power')
+    fig_vanK.update_yaxes(title='$R_{ij}(\omega)$', type="log", exponentformat='power')
     fig_vanK.update_layout(height=600, width=800, title=f"Von Karman Correlation for z={z[0]:.2f}", font=font, showlegend=True)
     save_figures(fig_vanK, "output/von_karman/von_karman_correlation.png")
     
