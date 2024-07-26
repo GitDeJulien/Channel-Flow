@@ -51,9 +51,10 @@ def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = Non
         
         if col == 4:
             fig.add_trace(go.Scatter(x=Dt, y=R_time, name='$time$', line=dict(color='midnightblue', width=3)), row=1, col=col)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=R_space, name='$space$', line=dict(color='firebrick', width=3)), row=1, col=col)
+            R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
+            fig.add_trace(go.Scatter(x=Dt, y=R_space_interpol, name='$space$', line=dict(color='firebrick', width=3)), row=1, col=col)
             
-            fit_space = np.polyfit(Dx/Uc, np.log(R_space), 1)
+            fit_space = np.polyfit(Dt, np.log(R_space_interpol), 1)
             curve_fit_space = np.exp(fit_space[0]*Dx/Uc)
             fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='darkgreen', dash='dash', width=3), name='$y=e^{-\delta x/(T*Uc)}$'), row=1, col=col)
             fig.add_annotation(xanchor='left',x=0.1, yanchor='bottom', y=0.1, text=f'$\gamma = 1/T \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
