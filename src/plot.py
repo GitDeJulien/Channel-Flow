@@ -10,7 +10,7 @@ font = dict(family="serif",
 def init_figures(z, n2):
     fig1 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\phi(k_x)$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
     
-    fig2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$R_{UU}(\delta t)$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
+    fig2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$R_{UU}(\delta t)$', horizontal_spacing=0.02, subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
     
     fig3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\delta t$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
     
@@ -18,7 +18,7 @@ def init_figures(z, n2):
     
     return(fig1, fig2, fig3, fig4)
 
-def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = None, k = None, space_spectra = None, R_time = None, R_space = None, Dt = None, Dx = None, R2d=None, coef=None, delta_x=None, funct=None, r=None, ch = "spectra"):
+def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = None, k = None, space_spectra = None, R_time = None, R_space = None, Dt = None, Dx = None, R2d=None, coef=None, delta_x=None, funct=None, r=None, ind=None, ch = "spectra"):
     
     if ch == "spectra":
         
@@ -50,37 +50,46 @@ def frozen_turbulence_plot(fig, col, omega = None, Uc = None, time_spectra = Non
     if ch == "corr":
         
         if col == 4:
-            fig.add_trace(go.Scatter(x=Dt, y=R_time, name='$time$', line=dict(color='midnightblue', width=3)), row=1, col=col)
-            R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
-            fig.add_trace(go.Scatter(x=Dt, y=R_space_interpol, name='$space$', line=dict(color='firebrick', width=3)), row=1, col=col)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=R_time[:ind], name='time', line=dict(color='midnightblue', width=3)), row=1, col=col)
+            R_space_interpol = np.interp(Dt[:ind]*Uc, Dx, R_space)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=R_space_interpol, name='space', line=dict(color='firebrick', width=3)), row=1, col=col)
             
-            fit_space = np.polyfit(Dt, np.log(R_space_interpol), 1)
-            curve_fit_space = np.exp(fit_space[0]*Dx/Uc)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='darkgreen', dash='dash', width=3), name='$y=e^{-\delta x/(T*Uc)}$'), row=1, col=col)
-            fig.add_annotation(xanchor='left',x=0.1, yanchor='bottom', y=0.1, text=f'$\gamma = 1/T \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
+            fit_space = np.polyfit(Dt[:ind], np.log(R_space_interpol), 1)
+            fit_time = np.polyfit(Dt[:ind], np.log(R_time[:ind]), 1)
+            curve_fit_space = np.exp(fit_space[0]*Dt)
+            curve_fit_time = np.exp(fit_time[0]*Dt)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=1, col=col)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=curve_fit_time, line=dict(color='midnightblue', dash='dash', width=3), name='$\\text{fit time } (\gamma)$'), row=1, col=col)
+            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=1, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
+            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=0.9, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
             
-            print('gamma:', np.abs(fit_space[0]))
+            print('Gamma:', np.abs(fit_space[0]))
+            print('gamma:', np.abs(fit_time[0]))
             
             # Update axis properties
             fig.update_xaxes(title_text="$\delta t$")
-            fig.update_yaxes(type="log", exponentformat='power')
+            #fig.update_yaxes(type="log", exponentformat='power')
             
         else:
-            fig.add_trace(go.Scatter(x=Dt, y=R_time, line=dict(color='midnightblue', width=3), showlegend=False), row=1, col=col)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=R_space, line=dict(color='firebrick', width=3), showlegend=False), row=1, col=col)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=R_time[:ind], line=dict(color='midnightblue', width=3), showlegend=False), row=1, col=col)
+            R_space_interpol = np.interp(Dt[:ind]*Uc, Dx, R_space)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=R_space_interpol, line=dict(color='firebrick', width=3), showlegend=False), row=1, col=col)
             
-            fit_space = np.polyfit(Dx/Uc, np.log(R_space), 1)
-            curve_fit_space = np.exp(fit_space[0]*Dx/Uc)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='darkgreen', dash='dash', width=3), showlegend=False), row=1, col=col)
+            fit_space = np.polyfit(Dt[:ind], np.log(R_space_interpol), 1)
+            fit_time = np.polyfit(Dt[:ind], np.log(R_time[:ind]), 1)
+            curve_fit_space = np.exp(fit_space[0]*Dt)
+            curve_fit_time = np.exp(fit_time[0]*Dt)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=1, col=col)
+            fig.add_trace(go.Scatter(x=Dt[:ind], y=curve_fit_time, line=dict(color='midnightblue', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\gamma\delta t}$', showlegend=False), row=1, col=col)
+            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=1, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
+            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=0.9, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
             
-            fig.add_annotation(xanchor='left',x=0.1, yanchor='bottom', y=0.1, text=f'$\gamma = 1/T \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=1, col=col)
-
-            
-            print('gamma:', np.abs(fit_space[0]))
+            print('Gamma:', np.abs(fit_space[0]))
+            print('gamma:', np.abs(fit_time[0]))
             
             # Update axis properties
             fig.update_xaxes(title_text="$\delta t$", row=1, col=col)
-            fig.update_yaxes(type="log", exponentformat='power')
+            #fig.update_yaxes(type="log", exponentformat='power')
             
 
     if ch == 'corr2d':

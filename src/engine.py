@@ -56,7 +56,16 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_space /= (num_split_t-1)
             R_time /= (num_split_t-1)
             
-            return(Dt, Dx, R_time, R_space)
+            cut_t = (tEnd-tStart)*dt/3
+            ind = 0
+            for i in range(R_time.shape[0]):
+                if Dt[i]>cut_t:
+                    ind = i
+                    break
+                
+            print('ind:', ind)
+            
+            return(ind, Dt, Dx, R_time, R_space)
         
         if ch == 'corr2d':
             

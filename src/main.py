@@ -117,8 +117,6 @@ def main():
     # t = np.linspace(0,(tEnd-tStart)*dt,nt)
     # X = np.linspace(-np.pi, np.pi, n1)
     
-    dx = cflow.xlen / n1
-    
     print(f'{YELLOW}Streamwise paraeters{RESET}')
     print('len x1:', len(x1))
     print('len x2:', len(x2))
@@ -130,7 +128,8 @@ def main():
 
     ##### FROZEN TURBULENCE #####
     col = 1
-    fig1, fig2, fig3, fig4 = init_figures(z, n2) #Figure initialization
+    fig1u1, fig2u1, fig3u1, fig4u1 = init_figures(z, n2) #Figure initialization
+    fig1u2, fig2u2, fig3u2, fig4u2 = init_figures(z, n2)
     start_time = time.time()
     
     for zplan in np.arange(0, n2, n2//3, dtype=int):
@@ -138,40 +137,44 @@ def main():
         print("========================================")
         print(f'Frozen turbulence validation for {YELLOW}z={z[zplan]:.2f}{RESET}')
         print('Plan number:', zplan)
-        print("Reading input files ...\n")
+        print("Reading input files u1 streamwise...\n")
         _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
         nt = nt - 1
         dx = cflow.xlen / n1
         datas_u1 = var[1:,:,:]
         
-        Uc = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-        print('Uc:', Uc)
+        U1 = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        print('U1:', U1)
+        print('dx/U1:', dx/U1)
+        print('dt:', dt)
+        print('dx:', dx)
+        print('dt*Uc', dt*U1)
         
         #### Spectra ####
-        # omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
         
-        # frozen_turbulence_plot(fig1, col, omega = omega, Uc = Uc, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        frozen_turbulence_plot(fig1u1, col, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
-        # del time_spectra
-        # del space_spectra
-        # del omega
-        # del k
+        del time_spectra
+        del space_spectra
+        del omega
+        del k
         
         #### Autocorrelation ####
-        Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr")
+        # ind, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr", dx=dx, Uc=U1)
 
-        frozen_turbulence_plot(fig2, col, Uc=Uc, R_time = R_time, R_space = R_space, Dt = Dt, Dx = Dx, ch = "corr")
+        # frozen_turbulence_plot(fig2u1, col, Uc=U1, R_time = R_time, R_space = R_space, Dt = Dt, Dx = Dx, ch = "corr", ind=ind)
         
-        del Dt
-        del Dx
-        del R_time
-        del R_space
+        # del Dt
+        # del Dx
+        # del R_time
+        # del R_space
         
         #### Autocorrelation 2D ####
         
         # Dt, Dx, R2d, coef = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
         
-        # frozen_turbulence_plot(fig3, col, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+        # frozen_turbulence_plot(fig3u1, col, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
         
         # del Dt
         # del Dx
@@ -180,34 +183,102 @@ def main():
         #### Gamma ####
         
         # for delta_x in range(1, 20, 5):
-        #     kc, omega, funct = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx = delta_x, x1 = x1, Uc = Uc, ch = "gamma")
+        #     kc, omega, funct = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx = delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
         #     r = np.abs(x1[delta_x] - x1[0])
             
             
-        #     frozen_turbulence_plot(fig4, col, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, ch = "w_gamma")
+        #     frozen_turbulence_plot(fig4u1, col, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, ch = "w_gamma")
             
         # del omega
         # del funct
         # del kc
         
-        # col +=1
-        # del datas_u1
+        
+        del datas_u1
+        
+        print("Reading input files u2 streamwise ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        nt = nt - 1
+        dx = cflow.xlen / n1
+        datas_u2 = var[1:,:,:]
+        
+        U2 = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        print('U2:', U2)
+        
+        #### Spectra ####
+        omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        
+        frozen_turbulence_plot(fig1u2, col, omega = omega, Uc = U2, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        
+        del time_spectra
+        del space_spectra
+        del omega
+        del k
+        
+        #### Autocorrelation ####
+        # ind, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr", dx=dx, Uc=U2)
+
+        # frozen_turbulence_plot(fig2u2, col, Uc=U2, R_time = R_time, R_space = R_space, Dt = Dt, Dx = Dx, ch = "corr", ind=ind)
+        
+        # del Dt
+        # del Dx
+        # del R_time
+        # del R_space
+        
+        #### Autocorrelation 2D ####
+        
+        # Dt, Dx, R2d, coef = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
+        
+        # frozen_turbulence_plot(fig3u2, col, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+        
+        # del Dt
+        # del Dx
+        # del R2d
+        
+        #### Gamma ####
+        
+        # for delta_x in range(1, 20, 5):
+        #     kc, omega, funct = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx = delta_x, x1 = x1, Uc = U2, ch = "gamma")
+            
+        #     r = np.abs(x1[delta_x] - x1[0])
+            
+            
+        #     frozen_turbulence_plot(fig4u2, col, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, ch = "w_gamma")
+            
+        # del omega
+        # del funct
+        # del kc
+        
+        
+        del datas_u2
+        
+        col +=1
         
     elapsed_time = time.time() - start_time
     minutes, seconds = divmod(elapsed_time, 60)
         
     # Update layout properties
-    fig1.update_layout(height=600, width=900, title_text="Power spectra streawise", font=font, legend=dict(y=1.2, x=0.9))
-    fig2.update_layout(height=600, width=900, title_text='Autocorrelation comparison Streamwise', legend=dict(y=1.2, x=0.9), font=font)
-    fig3.update_layout(height=600, width=1100, title_text='Correlation 2D Streamwise', legend=dict(y=1.2, x=0.9), font=font)
-    fig4.update_layout(height=600, width=1100, title_text='Gamma determmination', legend=dict(y=1.2, x=1.0), font=font)
+    fig1u1.update_layout(height=600, width=1000, title_text="Power spectra streawise u1", font=font, legend=dict(y=1.2, x=1.0))
+    fig2u1.update_layout(height=600, width=1100, title_text='Autocorrelation comparison Streamwise u1', font=font,  legend=dict(y=1.2, x=1.0))
+    fig3u1.update_layout(height=600, width=1100, title_text='Correlation 2D Streamwise u1', legend=dict(y=1.2, x=0.9), font=font)
+    fig4u1.update_layout(height=600, width=1100, title_text='Gamma determination u1', legend=dict(y=1.2, x=1.0), font=font)
+    
+    fig1u2.update_layout(height=600, width=900, title_text="Power spectra Streawise u2", font=font, legend=dict(y=1.2, x=0.9))
+    fig2u2.update_layout(height=600, width=1100, title_text='Autocorrelation comparison Streamwise u2', font=font,  legend=dict(y=1.2, x=1.0))
+    fig3u2.update_layout(height=600, width=1100, title_text='Correlation 2D Streamwise u2', legend=dict(y=1.2, x=0.9), font=font)
+    fig4u2.update_layout(height=600, width=1100, title_text='Gamma determination u2', legend=dict(y=1.2, x=1.0), font=font)
     
     if split_time == 'Y':
-        # save_figures(fig1, "output/split_time/frozen_turbulence/PowerSpectraComparison.png")
-        save_figures(fig2, "output/split_time/frozen_turbulence/CorrelationComparison.png")
-        # save_figures(fig3, "output/split_time/frozen_turbulence/Correlation2D.png")
-        #save_figures(fig4, "output/split_time/frozen_turbulence/Crosscorrelation_omega.png")
+        save_figures(fig1u1, "output/split_time/frozen_turbulence/power_spectra/u1.png")
+        #save_figures(fig2u1, "output/split_time/frozen_turbulence/Autocorreation_u1.png")
+        # save_figures(fig3u1, "output/split_time/frozen_turbulence/Correlation2D_u1.png")
+        #save_figures(fig4u1, "output/split_time/gamma/gamma_u1.png")
+        
+        save_figures(fig1u2, "output/split_time/frozen_turbulence/power_spectra/u2.png")
+        #save_figures(fig2u2, "output/split_time/frozen_turbulence/Autocorreation_u2.png")
+        # save_figures(fig3u2, "output/split_time/frozen_turbulence/Correlation2D_u2.png")
+        #save_figures(fig4u2, "output/split_time/gamma/gamma_u1.png")
     
     print(f'\n Frozen turbulence valiation done in : {int(minutes)}m {seconds:.2f}s \n')
     
