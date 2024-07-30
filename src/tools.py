@@ -366,3 +366,70 @@ def Crosscorrelation_2d(datas, delta_x, coords, dt, Uc, geom = "plan", axis = "s
             
 
     return (frequency, phi, psd, funct, kc, r)
+
+
+def Space_correation(data1, data2, geom = "plan", mode_corr = 'half', axis = "streamwise"):
+    
+    if geom == 'line':
+            
+        if axis == 'streamwise' or axis == 'spanwise' or axis == 'wallnormal':
+            niters, npts = data1.shape
+            full_corr = np.zeros((2*npts-1))
+            R = np.zeros((npts))
+            for iters in range(niters):
+                full_corr[:] += signal.correlate(data1[iters,:], data2[iters,:], mode='full', method='auto')
+            full_corr /= (niters)
+            full_corr /= max(full_corr)
+            R[:] = full_corr[full_corr.size //2 :]
+            
+        else:
+            print('Error: The argument axis is incorrect. Please choose between \'time\', \'streamwise\', \'spanwise\' and \'wallnormal\'.')
+            exit(-1)
+        
+        if mode_corr == 'full':
+            return(full_corr)
+        elif mode_corr == 'half':
+            return(R)
+        else:
+            print('Error: The argument mode_corr is incorrect. Please choose between \'full\' and \'half\'.')
+            exit(-1)
+        
+    elif geom == 'plan':
+            
+        if axis == 'streamwise' or axis == 'wallnormal':
+            niters, npts, nlines = data1.shape
+            full_corr = np.zeros((2*npts-1))
+            R = np.zeros((npts))
+            for lines in range(nlines):
+                for iters in range(niters):
+                    full_corr[:] += signal.correlate(data1[iters,:,lines], data2[iters,:,lines], mode='full', method='auto')
+            full_corr /= (niters*nlines)
+            full_corr /= max(full_corr)
+            R[:] = full_corr[full_corr.size //2 : ]
+            
+        elif axis == 'spanwise':
+            niters, nlines, npts = data1.shape
+            full_corr = np.zeros((2*npts-1))
+            R = np.zeros((npts))
+            for lines in range(nlines):
+                for iters in range(niters):
+                    full_corr[:] += signal.correlate(data1[iters,lines,:], data2[iters,lines,:], mode='full', method='auto')
+            full_corr /= (niters*nlines)
+            full_corr /= max(full_corr)
+            R[:] = full_corr[full_corr.size //2 :]
+            
+        else:
+            print('Error: The argument axis is incorrect. Please choose between \'time\', \'streamwise\', \'spanwise\' and \'wallnormal\'.')
+            exit(-1)
+        
+        if mode_corr == 'full':
+            return(full_corr)
+        elif mode_corr == 'half':
+            return(R)
+        else:
+            print('Error: The argument geom is incorrect. Please choose between \'line\' and \'plan\'.')
+            exit(-1)
+            
+    else:
+        print('Error: The argument mode_corr is incorrect. Please choose between \'full\' and \'half\'.')
+        exit(-1)
