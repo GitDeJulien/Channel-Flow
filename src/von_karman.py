@@ -4,23 +4,23 @@ from scipy import special
 
 from tools import *
 
-def R_22(omega, a1, Uc, sigma1c, Le): #same as R_33
+def phi_22(omega, a1, Uc, sigma1c, Le): #same as R_33
     nw = omega.shape[0]
     res = np.zeros((nw))
     kc = Uc / omega
     ke = 1./Le
     for w in range(nw):
         res[w] = a1 * 6*special.gamma(17/6.)*sigma1c**2*ke[w]**(2/3.)*(3*ke[w]**2 + 8*(a1*kc[w])**2) / (Uc*np.sqrt(np.pi)*55*special.gamma(1/3.) * (ke[w]**2 + (a1*kc[w])**2)**(11/6.))
-    return(res)
+    return(kc, res)
 
-def R_11(omega, a1, Uc, sigma1c, Le):
+def phi_11(omega, a1, Uc, sigma1c, Le):
     nw = omega.shape[0]
     res = np.zeros((nw))
     kc = Uc / omega
     ke = 1./Le
     for w in range(nw):
         res[w] = a1 * 36*special.gamma(17/6.)*sigma1c**2*ke[w]**(2/3.) / (Uc*np.sqrt(np.pi)*55*special.gamma(1/3.) * (ke[w]**2 + (a1*kc[w])**2)**(5/6.))
-    return(res)
+    return(kc, res)
 
 def L(C, kt, tens = 'omega', eps=None, omega=None):
     if tens == 'omega':

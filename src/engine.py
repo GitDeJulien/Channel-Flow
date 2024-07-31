@@ -7,7 +7,7 @@ from plot import *
 
 
 
-def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd = None, tStart = None, x1 = None, Uc = None, ch = "spectra"):
+def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd = None, tStart = None, x1 = None, Uc = None, delta_x=None, ch = "spectra"):
     
     if split_time == 'Y':
         split_t = int(2**10)
@@ -96,21 +96,29 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             return(Dt, Dx, R_full, coef)
         
         if ch == 'gamma':
-            frequency,_,_,_,_,_ = Crosscorrelation_2d(datas[0:split_t,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")
+            frequency,_,_,_,_,_ = Crosscorrelation_2d(datas[0:split_t,:,:], delta_x, x1, dt, Uc, geom = "plan", axis = "streamwise")
             length = frequency.shape[0]
             funct = np.zeros((length))
             kc = np.zeros((length))
             
             
             for n in tqdm(range(1,num_split_t), desc=f'Crosscorr', colour= 'GREEN'):
-                funct += Crosscorrelation_2d(datas[(n-1)*split_t:n*split_t,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[3]
-                kc += Crosscorrelation_2d(datas[(n-1)*split_t:n*split_t,:,:], dx, x1, dt, Uc, geom = "plan", axis = "streamwise")[4]
+                funct += Crosscorrelation_2d(datas[(n-1)*split_t:n*split_t,:,:], delta_x, x1, dt, Uc, geom = "plan", axis = "streamwise")[3]
+                kc += Crosscorrelation_2d(datas[(n-1)*split_t:n*split_t,:,:], delta_x, x1, dt, Uc, geom = "plan", axis = "streamwise")[4]
             
             funct /= (num_split_t-1)
             kc /= (num_split_t-1)
             omega = 2*np.pi*frequency
             
-            return(kc, omega, funct)
+            #omega_lim = 2*np.pi*Uc/dx
+            omega_lim = 100 ##have to be computed (mesh size?)
+            for i in range(omega.shape[0]):
+                if omega[i]>omega_lim:
+                    ind = i
+                    break
+            
+            
+            return(ind, kc, omega, funct)
 
         
     if split_time == 'n':
@@ -177,6 +185,13 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
 
             omega = 2*np.pi*frequency
             
-            return(kc, omega, funct)
+            #omega_lim = 2*np.pi*Uc/dx
+            omega_lim = 100
+            for i in range(omega.shape[0]):
+                if omega[i]>omega_lim:
+                    ind = i
+                    break
+            
+            return(ind, kc, omega, funct)
         
 
