@@ -433,3 +433,63 @@ def Space_correation(data1, data2, geom = "plan", mode_corr = 'half', axis = "st
     else:
         print('Error: The argument mode_corr is incorrect. Please choose between \'full\' and \'half\'.')
         exit(-1)
+        
+        
+def von_karman_spectra(data1, data2, geom = 'plan', axis = "streamwise"):
+    
+    if geom == "plan":
+        
+        if axis == 'streamwise' or axis == 'wallnormal':
+            niters, npts, nlines = data1.shape
+            split_t = int(2**10)
+            num_split_t = niters // split_t
+            phi = np.zeros((split_t, npts, nlines))
+            
+            for n in tqdm(range(1,num_split_t), desc=f'psd', colour= 'GREEN'):
+                f = fft.fft(data1[(n-1)*split_t:n*split_t,:,:],axis=1)
+                ft = fft.fft(f,axis=0)
+                fourier1 = fft.fft(ft,axis=2)
+                f = fft.fft(data2[(n-1)*split_t:n*split_t,:,:],axis=1)
+                ft = fft.fft(f,axis=0)
+                fourier2 = fft.fft(ft,axis=2)
+                phi += np.real(fourier1*np.conj(fourier2))
+            phi /= (num_split_t-1)
+            
+        elif axis == "spanwise":
+            niters, nlines, npts = data1.shape
+            split_t = int(2**10)
+            num_split_t = niters // split_t
+            phi = np.zeros((split_t, nlines, npts))
+            
+            for n in tqdm(range(1,num_split_t), desc=f'psd', colour= 'GREEN'):
+                f = fft.fft(data1[(n-1)*split_t:n*split_t,:,:],axis=1)
+                fourier1 = fft.fft(f,axis=2)
+                f = fft.fft(data2[(n-1)*split_t:n*split_t,:,:],axis=1)
+                fourier2 = fft.fft(f,axis=2)
+                phi += np.real(fourier1*np.conj(fourier2))
+            phi /= (num_split_t-1)
+            
+        else:
+            print('Error: The argument axis is incorrect. Please choose between \'streamwise\', \'spanwise\' and \'wallnormal\'.')
+            exit(-1)
+            
+    elif geom == "line":
+        
+        niters, npts = data1.shape
+        split_t = int(2**10)
+        num_split_t = niters // split_t
+        phi = np.zeros((split_t, npts, nlines))
+        
+        for n in tqdm(range(1,num_split_t), desc=f'psd', colour= 'GREEN'):
+            fourier1 = fft.fft(data1[(n-1)*split_t:n*split_t,:],axis=1)
+            fourier2 = fft.fft(data2[(n-1)*split_t:n*split_t,:],axis=1)
+            phi += np.real(fourier1*np.conj(fourier2))
+        phi /= (num_split_t-1)
+        
+    else:
+        print('Error: The argument geom is incorrect. Please choose between \'plan\' and \'line\'.')
+        exit(-1)
+        
+        
+    return(phi)
+        

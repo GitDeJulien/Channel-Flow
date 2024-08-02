@@ -1,51 +1,48 @@
 import numpy as np
 
-with open('input/chan395_rans2d.dat', 'r') as f:
+with open('input/chan_rans_mean.dat', 'r') as f:
+    y = []
     ko2_omega = []
     ko2_tke = []
     normal = []
-    Points_0 = []
-    Points_1 = []
-    Points_2 = []
-    Points_Magnitude = []
     pressure = []
-    u = []
-    v = []
+    u_velocity = []
+    v_velocity = []
     vis = []
     vorticity = []
-    w = []
+    w_velocity = []
     
     for line in f:
         if "#" in line:
             continue
         data = line.split()
-        ko2_omega.append(float(data[1]))
-        ko2_tke.append(float(data[2]))
-        normal.append(float(data[3]))
-        Points_0.append(float(data[4]))
-        Points_1.append(float(data[5]))
-        Points_2.append(float(data[6]))
-        Points_Magnitude.append(float(data[7]))
-        pressure.append(float(data[8]))
-        u.append(float(data[9]))
-        v.append(float(data[10]))
-        vis.append(float(data[11]))
-        vorticity.append(float(data[12]))
-        w.append(float(data[13]))
-        
-ko2_omega = np.array(ko2_omega)
-ko2_tke = np.array(ko2_tke)
-normal = np.array(normal)
-Points_0 = np.array(Points_0)
-Points_1 = np.array(Points_1)
-Points_2 = np.array(Points_2)
-Points_Magnitude = np.array(Points_Magnitude)
+        y.append(float(data[0]))
+        u_velocity.append(float(data[1]))
+        v_velocity.append(float(data[2]))
+        w_velocity.append(float(data[3]))
+        pressure.append(float(data[4]))
+        vis.append(float(data[5]))
+        vorticity.append(float(data[6]))
+        normal.append(float(data[7]))
+        ko2_tke.append(float(data[8]))
+        ko2_omega.append(float(data[9]))
+
+y= np.array(y)
+u_velocity = np.array(u_velocity)
+v_velocity = np.array(v_velocity)
+w_velocity = np.array(w_velocity)
 pressure = np.array(pressure)
-u = np.array(u)
-v = np.array(v)
 vis = np.array(vis)
 vorticity = np.array(vorticity)
-w = np.array(w) 
+normal = np.array(normal)
+ko2_tke = np.array(ko2_tke)
+ko2_omega = np.array(ko2_omega)
+
+
+
+
+
+
 
 
 

@@ -151,16 +151,17 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
 def init_figures_gamma(z, n2, ch='normal'):
     
     if ch == 'normal':
-        figu1 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
-        figu2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{VV}(\omega))$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
-        figu3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{WW}(\omega))$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
+        figu1 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', subplot_titles=(f"z={z[0]}", f"z={z[n2//3]}", f"z={z[2*n2//3]}", f"z={z[3*floor(n2//3)]}"))
+        figu2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{VV}(\omega))$', subplot_titles=(f"z={z[0]}", f"z={z[n2//3]}", f"z={z[2*n2//3]}", f"z={z[3*floor(n2//3)]}"))
+        figu3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{WW}(\omega))$', subplot_titles=(f"z={z[0]}", f"z={z[n2//3]}", f"z={z[2*n2//3]}", f"z={z[3*floor(n2//3)]}"))
         
     if ch == "all":
-        figu1 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]:.2f}$", f"$z^+={z[1]:.2f}$", f"$z^+={z[2]:.2f}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]:.2f}$", f"$z^+={z[5]:.2f}$", f"$z^+={z[6]:.2f}$", f"$z^+={z[7]:.2f}$", f"$z^+={z[8]:.2f}$", f"$z^+={z[9]:.2f}$"))
-        figu2 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]:.2f}$", f"$z^+={z[1]:.2f}$", f"$z^+={z[2]:.2f}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]:.2f}$", f"$z^+={z[5]:.2f}$", f"$z^+={z[6]:.2f}$", f"$z^+={z[7]:.2f}$", f"$z^+={z[8]:.2f}$", f"$z^+={z[9]:.2f}$"))
-        figu3 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]:.2f}$", f"$z^+={z[1]:.2f}$", f"$z^+={z[2]:.2f}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]:.2f}$", f"$z^+={z[5]:.2f}$", f"$z^+={z[6]:.2f}$", f"$z^+={z[7]:.2f}$", f"$z^+={z[8]:.2f}$", f"$z^+={z[9]:.2f}$"))
+        figu1 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        figu2 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        figu3 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
         
     return(figu1, figu2, figu3)
+
 
 def init_figures_sc(z, n2, ch='normal'):
     
@@ -171,6 +172,30 @@ def init_figures_sc(z, n2, ch='normal'):
         fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$R(\delta x)$', '$\R(\delta x)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]:.2f}$", f"$z^+={z[1]:.2f}$", f"$z^+={z[2]:.2f}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]:.2f}$", f"$z^+={z[5]:.2f}$", f"$z^+={z[6]:.2f}$", f"$z^+={z[7]:.2f}$", f"$z^+={z[8]:.2f}$", f"$z^+={z[9]:.2f}$"))
     
     return(fig)
+
+def init_figures_vk(z, n2, ch='normal'):
+    
+    if ch == 'normal':
+        fig = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$k_c.\phi_{ij}(k_c)$', subplot_titles=(f"z={z[0]:.2f}", f"z={z[n2//3]:.2f}", f"z={z[2*n2//3]:.2f}", f"z={z[3*floor(n2//3)]:.2f}"))
+        
+    if ch == "all":
+        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$k_c.\phi_{ij}(k_c)$', '$k_c.\phi_{ij}(k_c)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]:.2f}$", f"$z^+={z[1]:.2f}$", f"$z^+={z[2]:.2f}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]:.2f}$", f"$z^+={z[5]:.2f}$", f"$z^+={z[6]:.2f}$", f"$z^+={z[7]:.2f}$", f"$z^+={z[8]:.2f}$", f"$z^+={z[9]:.2f}$"))
+    
+    return(fig)
+
+def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', symbols='circle'):
+    
+    if col == 4 and row == 1:
+        fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols)), row=row, col=col)
+        fig.update_xaxes(title='$k_c(m.s^{-2})$', type="log", exponentformat='power', row=row, col=col)
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col)
+        
+    else:
+        fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols), showlegend=False), row=row, col=col)
+        fig.update_xaxes(title='$k_c(m.s^{-2})$', type="log", exponentformat='power', row=row, col=col)
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col)
+        
+    return(None)
 
 
 

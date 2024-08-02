@@ -7,7 +7,7 @@ from tools import *
 def phi_22(omega, a1, Uc, sigma1c, Le): #same as R_33
     nw = omega.shape[0]
     res = np.zeros((nw))
-    kc = Uc / omega
+    kc = Uc*omega
     ke = 1./Le
     for w in range(nw):
         res[w] = a1 * 6*special.gamma(17/6.)*sigma1c**2*ke[w]**(2/3.)*(3*ke[w]**2 + 8*(a1*kc[w])**2) / (Uc*np.sqrt(np.pi)*55*special.gamma(1/3.) * (ke[w]**2 + (a1*kc[w])**2)**(11/6.))
@@ -16,7 +16,7 @@ def phi_22(omega, a1, Uc, sigma1c, Le): #same as R_33
 def phi_11(omega, a1, Uc, sigma1c, Le):
     nw = omega.shape[0]
     res = np.zeros((nw))
-    kc = Uc / omega
+    kc = Uc*omega
     ke = 1./Le
     for w in range(nw):
         res[w] = a1 * 36*special.gamma(17/6.)*sigma1c**2*ke[w]**(2/3.) / (Uc*np.sqrt(np.pi)*55*special.gamma(1/3.) * (ke[w]**2 + (a1*kc[w])**2)**(5/6.))
@@ -70,19 +70,19 @@ def sigma_power2(data_fluct, axis = "streamwise"):
 
 
 def Lambda2_22(a1, a2, ke, omega, Uc):
-    kc = Uc / omega
+    kc = Uc * omega
     res = a2 * 55 * np.sqrt(np.pi) * special.gamma(1/3.) * (3*ke**2 + 11*(a1*kc)**2) * (ke**2 + (a1*kc)**2)**(-1/2.) /(108 * special.gamma(17/6.) * (3*ke**2 + 8*(a1*kc)**2))
     return(kc, res)
     
     
 def Lambda2_33(a1, a2, ke, omega, Uc):
-    kc = Uc / omega
+    kc = Uc * omega
     res = 55 * np.sqrt(np.pi) * special.gamma(1/3.) * (a1**3*a2*kc**2) * (ke**2 + (a1*kc)**2)**(-1/2.) /(a1*6 * special.gamma(17/6.) * (3*ke**2 + 8*(a1*kc)**2))
     return(kc, res)
 
 
 def Lambda2_11(a1, a2, ke, omega, Uc):
-    kc = Uc / omega
+    kc = Uc * omega
     res = 55 * np.sqrt(np.pi) * special.gamma(1/3.) * (a1*a2) * (ke**2 + (a1*kc)**2)**(-1/2.) /(216 * a1 * special.gamma(17/6.))
     return(kc, res)
     
