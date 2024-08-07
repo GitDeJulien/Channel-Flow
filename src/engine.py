@@ -56,16 +56,28 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_space /= (num_split_t-1)
             R_time /= (num_split_t-1)
             
-            cut_t = (tEnd-tStart)*dt/3
-            ind = 0
-            for i in range(R_time.shape[0]):
+            # cut_t = (tEnd-tStart)*dt/3
+            cut_t = 3.0
+            ind1 = 0
+            ind2 = 0
+            for i in range(Dt.shape[0]):
                 if Dt[i]>cut_t:
-                    ind = i
+                    ind1 = i
+                    break
+            
+            for i in range(Dx.shape[0]):
+                if Dx[i]/Uc>cut_t:
+                    ind2 = i
                     break
                 
-            print('ind:', ind)
+            if ind1 == 0:
+                ind1 = Dt.shape[0]
             
-            return(ind, Dt, Dx, R_time, R_space)
+            if ind2 == 0:
+                ind2 = Dx.shape[0]
+                
+            
+            return(ind1, ind2, Dt, Dx, R_time, R_space)
         
         if ch == 'corr2d':
             
@@ -89,7 +101,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             #levels = [0.9, 0.92, 0.94, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
             # levels = [0.9, 0.95, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
             levels = [0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]
-            coef = get_ellispses_slop(R, levels , 0.001, Dt, Dx, n1, split_t=split_t)
+            coef = get_ellispses_slop(R, levels , 0.01, Dt, Dx, n1, split_t=split_t)
             
             print('slop:', 1./coef[0])
             
@@ -111,14 +123,20 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             omega = 2*np.pi*frequency
             
             #omega_lim = 2*np.pi*Uc/dx
-            omega_lim = 100 ##have to be computed (mesh size?)
+            omega_lim = 80 ##have to be computed (mesh size?)
             for i in range(omega.shape[0]):
                 if omega[i]>omega_lim:
-                    ind = i
+                    ind1 = i
+                    break
+                
+            omega_lim = 40
+            for i in range(omega.shape[0]):
+                if omega[i]>omega_lim:
+                    ind2 = i
                     break
             
             
-            return(ind, kc, omega, funct)
+            return(ind1, ind2, kc, omega, funct)
 
         
     if split_time == 'n':
@@ -169,7 +187,8 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_full[0:nt, n1:2*n1] = R
             R_full[nt:2*nt, n1:2*n1] = R
             
-            coef = get_ellispses_slop(R, [0.9, 0.92, 0.94, 0.96, 0.98], 0.001, Dt, Dx, n1, split_t=nt)
+            levels = [0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]
+            coef = get_ellispses_slop(R, levels, 0.001, Dt, Dx, n1, split_t=nt)
             
             print('slop:', 1./coef[0])
             

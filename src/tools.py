@@ -63,18 +63,18 @@ def get_ellispses_slop(R, levels, eps, Dt, Dx, n1, split_t = None):
         x_slop.append(Dx[jmax])
         
     
-    for level in levels:
-        imin = R.shape[0]
-        jmin = R.shape[1]
-        for i in range(R.shape[0]//2 , R.shape[0]):
-            for j in range(R.shape[1]//2 , R.shape[1]):
-                if R[i,j] > level - eps and R[i,j] < level + eps:
-                    if i<imin:
-                        imin = i
-                    if j<jmin:
-                        jmin = j
-        y_slop.append(Dt[split_t-1 + imin])
-        x_slop.append(Dx[n1-1+jmin])
+    # for level in levels:
+    #     imin = R.shape[0]
+    #     jmin = R.shape[1]
+    #     for i in range(R.shape[0]//2 , R.shape[0]):
+    #         for j in range(R.shape[1]//2 , R.shape[1]):
+    #             if R[i,j] > level - eps and R[i,j] < level + eps:
+    #                 if i<imin:
+    #                     imin = i
+    #                 if j<jmin:
+    #                     jmin = j
+    #     y_slop.append(Dt[split_t-1 + imin])
+    #     x_slop.append(Dx[n1-1+jmin])
 
         
     coef = np.polyfit(x_slop, y_slop, 1)
@@ -297,7 +297,7 @@ def Crosscorrelation_2d(datas, delta_x, coords, dt, Uc, geom = "plan", axis = "s
             cnt += 1
         avg_corr /= cnt
         n = frequency.shape[0]
-        phi = np.real(fft.fft(avg_corr, n=n))
+        phi = np.real(fft.fft(avg_corr, n=n, workers=3))
         
         # phi, R = Correlation_2d(datas, geom = geom, axis = axis)
         # phi = np.mean(phi, axis=0)
@@ -326,7 +326,7 @@ def Crosscorrelation_2d(datas, delta_x, coords, dt, Uc, geom = "plan", axis = "s
                     cnt += 1
             avg_corr /= cnt
             n = frequency.shape[0]
-            phi = np.real(fft.fft(avg_corr, n=n))
+            phi = np.real(fft.fft(avg_corr, n=n, workers=3))
             
             # phi, R = Correlation_2d(datas, geom = geom, axis = axis)
             # phi = np.mean(phi, axis=0)
@@ -354,7 +354,7 @@ def Crosscorrelation_2d(datas, delta_x, coords, dt, Uc, geom = "plan", axis = "s
                     cnt += 1
             avg_corr /= cnt
             n = frequency.shape[0]
-            phi = np.real(fft.fft(avg_corr, n=n))
+            phi = np.real(fft.fft(avg_corr, n=n, workers=3))
             
             # phi, R = Correlation_2d(datas, geom = geom, axis = axis)
             # phi = np.mean(phi, axis=0)

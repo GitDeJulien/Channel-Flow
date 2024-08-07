@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  2 AUG 2024 16:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  7 AUG 2024 14:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -647,10 +647,11 @@ LaTeX Info: Redefining \nameref on input line 37.
 \@outlinefile=\write4
 \openout4 = `annexe_figures.out'.
 
-<../output/RANS/profiles.png, id=4, 803.0pt x 602.25pt>
-File: ../output/RANS/profiles.png Graphic file (type png)
-<use ../output/RANS/profiles.png>
-Package pdftex.def Info: ../output/RANS/profiles.png  used on input line 47.
+<../output/RANS/RANS_profiles.png, id=32, 803.0pt x 602.25pt>
+File: ../output/RANS/RANS_profiles.png Graphic file (type png)
+<use ../output/RANS/RANS_profiles.png>
+Package pdftex.def Info: ../output/RANS/RANS_profiles.png  used on input line 4
+7.
 (pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
 
@@ -663,114 +664,208 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../output/RANS/profiles.pn
-g>]
-<../output/velocity_profile.png, id=20, 803.0pt x 602.25pt>
-File: ../output/velocity_profile.png Graphic file (type png)
-<use ../output/velocity_profile.png>
-Package pdftex.def Info: ../output/velocity_profile.png  used on input line 59.
-
+)
+<../output/RANS/mean_velocity_profiles.png, id=34, 803.0pt x 602.25pt>
+File: ../output/RANS/mean_velocity_profiles.png Graphic file (type png)
+<use ../output/RANS/mean_velocity_profiles.png>
+Package pdftex.def Info: ../output/RANS/mean_velocity_profiles.png  used on inp
+ut line 58.
 (pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-<../output/split_time/frozen_turbulence/power_spectra/u1_all.png, id=21, 903.37
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/RANS/var_velocity_profiles.png, id=35, 803.0pt x 602.25pt>
+File: ../output/RANS/var_velocity_profiles.png Graphic file (type png)
+<use ../output/RANS/var_velocity_profiles.png>
+Package pdftex.def Info: ../output/RANS/var_velocity_profiles.png  used on inpu
+t line 65.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/RANS/velocity_ratio_profiles.png, id=36, 803.0pt x 602.25pt>
+File: ../output/RANS/velocity_ratio_profiles.png Graphic file (type png)
+<use ../output/RANS/velocity_ratio_profiles.png>
+Package pdftex.def Info: ../output/RANS/velocity_ratio_profiles.png  used on in
+put line 72.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/split_time/frozen_turbulence/power_spectra/u1_all.png, id=37, 903.37
 5pt x 903.375pt>
 File: ../output/split_time/frozen_turbulence/power_spectra/u1_all.png Graphic f
 ile (type png)
 <use ../output/split_time/frozen_turbulence/power_spectra/u1_all.png>
 Package pdftex.def Info: ../output/split_time/frozen_turbulence/power_spectra/u
-1_all.png  used on input line 70.
-(pdftex.def)             Requested size: 460.93153pt x 460.93571pt.
-
+1_all.png  used on input line 83.
+(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../output/split_time/frozen_turbulence/power_spectra/u2_all.png, id=22, 903.37
+<../output/split_time/frozen_turbulence/power_spectra/u2_all.png, id=38, 903.37
 5pt x 903.375pt>
 File: ../output/split_time/frozen_turbulence/power_spectra/u2_all.png Graphic f
 ile (type png)
 <use ../output/split_time/frozen_turbulence/power_spectra/u2_all.png>
 Package pdftex.def Info: ../output/split_time/frozen_turbulence/power_spectra/u
-2_all.png  used on input line 76.
-(pdftex.def)             Requested size: 460.93153pt x 460.93571pt.
+2_all.png  used on input line 89.
+(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../output/split_time/frozen_turbulence/power_spectra/u3_all.png, id=23, 903.37
+<../output/split_time/frozen_turbulence/power_spectra/u3_all.png, id=39, 903.37
 5pt x 903.375pt>
 File: ../output/split_time/frozen_turbulence/power_spectra/u3_all.png Graphic f
 ile (type png)
 <use ../output/split_time/frozen_turbulence/power_spectra/u3_all.png>
 Package pdftex.def Info: ../output/split_time/frozen_turbulence/power_spectra/u
-3_all.png  used on input line 82.
-(pdftex.def)             Requested size: 460.93153pt x 460.93571pt.
+3_all.png  used on input line 95.
+(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../output/split_time/space_correlation/streamwise.png, id=24, 903.375pt x 602.
+<../output/split_time/frozen_turbulence/correlation2D/u1.png, id=40, 1104.125pt
+ x 602.25pt>
+File: ../output/split_time/frozen_turbulence/correlation2D/u1.png Graphic file 
+(type png)
+<use ../output/split_time/frozen_turbulence/correlation2D/u1.png>
+Package pdftex.def Info: ../output/split_time/frozen_turbulence/correlation2D/u
+1.png  used on input line 104.
+(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/split_time/frozen_turbulence/correlation2D/u2.png, id=41, 1104.125pt
+ x 602.25pt>
+File: ../output/split_time/frozen_turbulence/correlation2D/u2.png Graphic file 
+(type png)
+<use ../output/split_time/frozen_turbulence/correlation2D/u2.png>
+Package pdftex.def Info: ../output/split_time/frozen_turbulence/correlation2D/u
+2.png  used on input line 111.
+(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/split_time/frozen_turbulence/correlation2D/u3.png, id=42, 1104.125pt
+ x 602.25pt>
+File: ../output/split_time/frozen_turbulence/correlation2D/u3.png Graphic file 
+(type png)
+<use ../output/split_time/frozen_turbulence/correlation2D/u3.png>
+Package pdftex.def Info: ../output/split_time/frozen_turbulence/correlation2D/u
+3.png  used on input line 118.
+(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/split_time/frozen_turbulence/correlation2D/u_1c.png, id=43, 702.625p
+t x 501.875pt>
+File: ../output/split_time/frozen_turbulence/correlation2D/u_1c.png Graphic fil
+e (type png)
+<use ../output/split_time/frozen_turbulence/correlation2D/u_1c.png>
+Package pdftex.def Info: ../output/split_time/frozen_turbulence/correlation2D/u
+_1c.png  used on input line 125.
+(pdftex.def)             Requested size: 512.14963pt x 365.85262pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/split_time/frozen_turbulence/correlation2D/u_ratio.png, id=44, 702.6
+25pt x 501.875pt>
+File: ../output/split_time/frozen_turbulence/correlation2D/u_ratio.png Graphic 
+file (type png)
+<use ../output/split_time/frozen_turbulence/correlation2D/u_ratio.png>
+Package pdftex.def Info: ../output/split_time/frozen_turbulence/correlation2D/u
+_ratio.png  used on input line 132.
+(pdftex.def)             Requested size: 512.14963pt x 365.85262pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/split_time/space_correlation/streamwise.png, id=45, 903.375pt x 602.
 25pt>
 File: ../output/split_time/space_correlation/streamwise.png Graphic file (type 
 png)
 <use ../output/split_time/space_correlation/streamwise.png>
 Package pdftex.def Info: ../output/split_time/space_correlation/streamwise.png 
- used on input line 92.
+ used on input line 143.
 (pdftex.def)             Requested size: 460.93153pt x 307.29047pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-File: ../output/split_time/space_correlation/streamwise.png Graphic file (type 
-png)
-<use ../output/split_time/space_correlation/streamwise.png>
-Package pdftex.def Info: ../output/split_time/space_correlation/streamwise.png 
- used on input line 98.
+<../output/split_time/space_correlation/spanwise.png, id=46, 903.375pt x 602.25
+pt>
+File: ../output/split_time/space_correlation/spanwise.png Graphic file (type pn
+g)
+<use ../output/split_time/space_correlation/spanwise.png>
+Package pdftex.def Info: ../output/split_time/space_correlation/spanwise.png  u
+sed on input line 149.
 (pdftex.def)             Requested size: 460.93153pt x 307.29047pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../output/split_time/gamma/gamma_u1.png, id=25, 1104.125pt x 602.25pt>
+<../output/split_time/gamma/gamma_u1.png, id=47, 1104.125pt x 602.25pt>
 File: ../output/split_time/gamma/gamma_u1.png Graphic file (type png)
 <use ../output/split_time/gamma/gamma_u1.png>
 Package pdftex.def Info: ../output/split_time/gamma/gamma_u1.png  used on input
- line 108.
-(pdftex.def)             Requested size: 460.93153pt x 251.4178pt.
+ line 159.
+(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../output/split_time/gamma/gamma_u2.png, id=26, 1104.125pt x 602.25pt>
+<../output/split_time/gamma/gamma_u2.png, id=48, 1104.125pt x 602.25pt>
 File: ../output/split_time/gamma/gamma_u2.png Graphic file (type png)
 <use ../output/split_time/gamma/gamma_u2.png>
 Package pdftex.def Info: ../output/split_time/gamma/gamma_u2.png  used on input
- line 114.
-(pdftex.def)             Requested size: 460.93153pt x 251.4178pt.
+ line 165.
+(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../output/split_time/gamma/gamma_u3.png, id=27, 1104.125pt x 602.25pt>
+<../output/split_time/gamma/gamma_u3.png, id=49, 1104.125pt x 602.25pt>
 File: ../output/split_time/gamma/gamma_u3.png Graphic file (type png)
 <use ../output/split_time/gamma/gamma_u3.png>
 Package pdftex.def Info: ../output/split_time/gamma/gamma_u3.png  used on input
- line 120.
-(pdftex.def)             Requested size: 460.93153pt x 251.4178pt.
+ line 171.
+(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[2 <../output/velocity_profile.png>] [3 <../output/split_time/frozen_turbulence
-/power_spectra/u1_all.png>] [4 <../output/split_time/frozen_turbulence/power_sp
-ectra/u2_all.png>] [5 <../output/split_time/frozen_turbulence/power_spectra/u3_
-all.png>] [6 <../output/split_time/space_correlation/streamwise.png>] [7 <../ou
-tput/split_time/gamma/gamma_u1.png> <../output/split_time/gamma/gamma_u2.png>]
-[8 <../output/split_time/gamma/gamma_u3.png>] (./annexe_figures.aux)
+<../output/split_time/gamma/gamma_view.png, id=50, 803.0pt x 602.25pt>
+File: ../output/split_time/gamma/gamma_view.png Graphic file (type png)
+<use ../output/split_time/gamma/gamma_view.png>
+Package pdftex.def Info: ../output/split_time/gamma/gamma_view.png  used on inp
+ut line 178.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../output/RANS/RANS_profil
+es.png>] [2 <../output/RANS/mean_velocity_profiles.png>] [3 <../output/RANS/var
+_velocity_profiles.png>] [4 <../output/RANS/velocity_ratio_profiles.png>]
+[5 <../output/split_time/frozen_turbulence/power_spectra/u1_all.png>] [6 <../ou
+tput/split_time/frozen_turbulence/power_spectra/u2_all.png>] [7 <../output/spli
+t_time/frozen_turbulence/power_spectra/u3_all.png>] [8 <../output/split_time/fr
+ozen_turbulence/correlation2D/u1.png> <../output/split_time/frozen_turbulence/c
+orrelation2D/u2.png>] [9 <../output/split_time/frozen_turbulence/correlation2D/
+u3.png> <../output/split_time/frozen_turbulence/correlation2D/u_1c.png>]
+[10 <../output/split_time/frozen_turbulence/correlation2D/u_ratio.png> <../outp
+ut/split_time/space_correlation/streamwise.png>] [11 <../output/split_time/spac
+e_correlation/spanwise.png> <../output/split_time/gamma/gamma_u1.png>] [12 <../
+output/split_time/gamma/gamma_u2.png> <../output/split_time/gamma/gamma_u3.png>
+] [13 <../output/split_time/gamma/gamma_view.png>] (./annexe_figures.aux)
 Package rerunfilecheck Info: File `annexe_figures.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: F9DA192EDE1A0E581EF8023AD3E7253F;935.
  ) 
 Here is how much of TeX's memory you used:
- 14626 strings out of 480247
- 233935 string characters out of 5896151
- 527921 words of memory out of 5000000
- 32352 multiletter control sequences out of 15000+600000
+ 14713 strings out of 480247
+ 237613 string characters out of 5896151
+ 536939 words of memory out of 5000000
+ 32416 multiletter control sequences out of 15000+600000
  472467 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 70i,7n,76p,462b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,7n,76p,464b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texli
@@ -780,10 +875,10 @@ fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmsy7.pfb>
-Output written on annexe_figures.pdf (8 pages, 677127 bytes).
+Output written on annexe_figures.pdf (13 pages, 1145911 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 203 PDF objects out of 1000 (max. 8388607)
+ 132 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 
