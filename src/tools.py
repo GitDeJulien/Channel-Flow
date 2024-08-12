@@ -5,6 +5,7 @@ from tqdm import tqdm
 
 
 from read_fpar import *
+from parameters import *
 
 font = dict(family="serif",
         size=16,
@@ -492,4 +493,84 @@ def von_karman_spectra(data1, data2, geom = 'plan', axis = "streamwise"):
         
         
     return(phi)
+
+
+#====================================================================
+#======================= Gamma Function =========================
+#==================================================================== 
+
+def Gamma_function(datas, dt, Uc, geom = "plan", axis = "streamwise"):
+    
+    if geom == 'line':
+        niters, npts = datas.shape
+        nperseg_time = get_nperseg(niters)
+        
+        frequency, psd = signal.welch(datas[:, :], fs=1/dt, window='hann', nperseg=nperseg_time//8, scaling='density', axis=0)
+        psd = np.mean(psd, axis=1)
+
+        phi =np.zeros((niters, npts))
+        phi, _ = Correlation_2d(datas, geom=geom, axis=axis)
+        n = frequency.shape[0]
+        phi = fft.ifft(phi, axis=1, workers=3)
+        
+        
+        Dx = np.linspace(0, xlen, npts)
+        omega = 2*np.pi*frequency
+
+        funct = np.zeros((n, npts))
+        for i in range(npts):
+            #phi_int = np.interp(omega, Dx, phi[:,i])
+            for w in range(n):
+                funct[w,i] = np.abs(phi[w,i]*np.exp(-1j * omega[w]/Uc * Dx[i]) / psd[w])
+        
+        funct = np.log(funct)
+            
+    if geom == 'plan':
+        if axis == 'streamwise':
+            niters, npts, nlines = datas.shape
+            nperseg_time = get_nperseg(niters)
+            
+
+            frequency, psd = signal.welch(datas[:, :, :], fs=1/dt, window='hann', nperseg=nperseg_time//8, scaling='density', axis=0)
+            psd = np.mean(np.mean(psd, axis=2), axis=1)
+            
+            phi =np.zeros((niters, npts))
+            phi, _ = Correlation_2d(datas, geom=geom, axis=axis)
+            n = frequency.shape[0]
+            phi = fft.ifft(phi, axis=1, workers=3)
+            
+            Dx = np.linspace(0, xlen, npts)
+            omega = 2*np.pi*frequency
+
+            funct = np.zeros((n, npts))
+            for i in range(npts):
+                for w in range(n):
+                    funct[w,i] = np.abs(phi[w,i]*np.exp(-1j * omega[w]/Uc * Dx[i]) / psd[w])
+            
+            funct = np.log(funct)
+            
+        if axis == 'spanwise':
+            niters, nlines, npts = datas.shape
+            nperseg_time = get_nperseg(niters)
+
+            frequency, psd = signal.welch(datas[:, :, :], fs=1/dt, window='hann', nperseg=nperseg_time//8, scaling='density', axis=0)
+            psd = np.mean(np.mean(psd, axis=2), axis=1)
+
+            phi =np.zeros((niters, npts))
+            phi, _ = Correlation_2d(datas, geom=geom, axis=axis)
+            n = frequency.shape[0]
+            phi = fft.ifft(phi, axis=1, workers=3)
+            
+            Dx = np.linspace(0, ylen, npts)
+            omega = 2*np.pi*frequency
+
+            funct = np.zeros((n, npts))
+            for i in range(npts):
+                for w in range(n):
+                    funct[w,i] = np.abs(phi[w,i]*np.exp(-1j * omega[w]/Uc * Dx[i]) / psd[w])
+            
+            funct = np.log(funct)
+            
+
+    return (funct, omega, Dx)
         

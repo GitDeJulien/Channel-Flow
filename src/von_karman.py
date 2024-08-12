@@ -22,17 +22,12 @@ def phi_11(omega, a1, Uc, sigma1c, Le):
         res[w] = a1 * 36*special.gamma(17/6.)*sigma1c**2*ke[w]**(2/3.) / (Uc*np.sqrt(np.pi)*55*special.gamma(1/3.) * (ke[w]**2 + (a1*kc[w])**2)**(5/6.))
     return(kc, res)
 
-def L(C, kt, tens = 'omega', eps=None, omega=None):
-    if tens == 'omega':
-        nw = omega.shape[0]
-        res = np.zeros((nw))
-        for w in range(nw):
-            res[w] = C*kt[w]**(1./2)/omega[w]
-    if tens == 'eps':
-        neps = omega.shape[0]
-        res = np.zeros((neps))
-        for ep in range(neps):
-            res[ep] = C*kt[ep]**0.66/eps[ep]
+def L(C, kt, omega):
+    nw = omega.shape[0]
+    res = np.zeros((nw))
+    eps = omega * 0.09 * kt
+    for w in range(nw):
+        res[w] = C*kt[w]**(2./3)/eps[w]
     return(res)
 
 
@@ -45,18 +40,6 @@ def sigma_1c(sigma1, w1, sigma2, w2, sigma3, w3):
     return(res)
 
 
-def sigma(datas, n, axis = "streamwise"):
-    if axis == "streamwise" or axis == "wallnormal":
-        res = np.abs(fft.fft(datas[:,:,:], n, axis=0))
-        res = np.mean(np.mean(res, axis=-1),axis=-1)
-        
-    if axis == "spanwise":
-        res = np.abs(fft.fft(datas[:,:,:], n, axis=0))
-        res = np.mean(np.mean(res, axis=-1), axis=-1)
-    
-    return(res)
-
-
 def sigma_power2(data_fluct, axis = "streamwise"):
     if axis == "streamwise" or axis == "wallnormal":
         res = np.mean(np.mean(np.mean(data_fluct[:,:,:]**2, axis=0), axis=1))
@@ -66,7 +49,9 @@ def sigma_power2(data_fluct, axis = "streamwise"):
         
     return(res)
         
-
+        
+######################################
+######################################
 
 
 def Lambda2_22(a1, a2, ke, omega, Uc):

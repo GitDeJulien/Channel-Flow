@@ -407,9 +407,11 @@ def main():
     # _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
     # nt = nt - 1
     # dx = cflow.xlen / n1
+    # num_split_t = nt // split_t
     
     # ch_plot ="normal" 
     # figu1g, figu2g, figu3g = init_figures_gamma(zp, n2, ch=ch_plot) #Figure initialization
+    # figu1g_r, figu2g_r, figu3g_r = init_figures_gamma(zp, n2, ch=ch_plot)
     
     # figgamma = make_subplots(rows=1, cols=2, shared_yaxes=True, y_title='$\gamma$', subplot_titles=("First slop", "Second slop"))
     # gamma_u1_1 = []
@@ -439,78 +441,189 @@ def main():
     #     U1 = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
     
     #     cpt = 0
-    #     for delta_x in range(1, 20, 5):
-    #         ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
+    #     # for delta_x in range(1, 20, 5):
+    #     #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
-    #         r = np.abs(x1[delta_x] - x1[0])
+    #     #     r = np.abs(x1[delta_x] - x1[0])
             
 
-    #         slop1, slop2 = frozen_turbulence_plot(figu1g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
-    #         cpt += 1
+    #     #     slop1, slop2 = frozen_turbulence_plot(figu1g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
+    #     #     cpt += 1
+        
+    #     _, omega, _ = Gamma_function(datas_u1[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
+        
+    #     funct = np.zeros((omega.shape[0], n1))
+    #     omega = np.zeros((omega.shape[0]))
+    #     Dx = np.zeros((n1))
+    #     for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
             
-    #     gamma_u1_1.append(slop1[0]*U1/r)
-    #     gamma_u1_2.append(slop2[0]*U1/r)
+    #         funct += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
+    #         omega += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
+    #         Dx += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
+            
+    #     funct /= (num_split_t-1)
+    #     omega /= (num_split_t-1)
+    #     Dx /= (num_split_t-1)
+        
+    #     del datas_u1
+        
+    #     omega_lim = 20 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind0 = i
+    #             break
+            
+    #     omega_lim = 40 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind1 = i
+    #             break
+                
+    #     omega_lim = 70
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind2 = i
+    #             break
+            
+    #     slop1, slop2 = gamma_plot(figu1g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
+            
+    #     gamma_u1_1.append(slop1[0]*U1/Dx[15])
+    #     gamma_u1_2.append(slop2[0]*U1/Dx[15])
+        
+    #     gamma_plot(figu1g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
             
     #     del omega
     #     del funct
-    #     del kc
+    #     del Dx
     #     del slop1
     #     del slop2
-        
-    #     del datas_u1
         
     #     #### u2 ####
     #     print("\nReading input files u2 streamwise ...")
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
     #     datas_u2 = var[1:,:,:]
         
-    #     cpt = 0
-    #     for delta_x in range(1, 20, 5):
-    #         ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
+    #     # cpt = 0
+    #     # for delta_x in range(1, 20, 5):
+    #     #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
-    #         r = np.abs(x1[delta_x] - x1[0])
+    #     #     r = np.abs(x1[delta_x] - x1[0])
             
 
-    #         slop1, slop2 = frozen_turbulence_plot(figu2g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
-    #         cpt += 1
+    #     #     slop1, slop2 = frozen_turbulence_plot(figu2g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
+    #     #     cpt += 1
+        
+    #     _, omega, _ = Gamma_function(datas_u2[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
+        
+    #     funct = np.zeros((omega.shape[0], n1))
+    #     omega = np.zeros((omega.shape[0]))
+    #     Dx = np.zeros((n1))
+    #     for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
             
-    #     gamma_u2_1.append(slop1[0]*U1/r)
-    #     gamma_u2_2.append(slop2[0]*U1/r)
+    #         funct += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
+    #         omega += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
+    #         Dx += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
+            
+    #     funct /= (num_split_t-1)
+    #     omega /= (num_split_t-1)
+    #     Dx /= (num_split_t-1)
+        
+    #     del datas_u2
+        
+    #     omega_lim = 20 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind0 = i
+    #             break
+            
+    #     omega_lim = 40 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind1 = i
+    #             break
+                
+    #     omega_lim = 70
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind2 = i
+    #             break
+            
+    #     slop1, slop2 = gamma_plot(figu2g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
+            
+    #     gamma_u2_1.append(slop1[0]*U1/Dx[15])
+    #     gamma_u2_2.append(slop2[0]*U1/Dx[15])
+        
+    #     gamma_plot(figu2g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
             
     #     del omega
     #     del funct
-    #     del kc
+    #     del Dx
     #     del slop1
     #     del slop2
-        
-    #     del datas_u2
         
     #     #### u3 ####
     #     print("\nReading input files u3 streamwise ...")
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
     #     datas_u3 = var[1:,:,:]
         
-    #     cpt = 0
-    #     for delta_x in range(1, 20, 5):
-    #         ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
+    #     # cpt = 0
+    #     # for delta_x in range(1, 20, 5):
+    #     #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
-    #         r = np.abs(x1[delta_x] - x1[0])
+    #     #     r = np.abs(x1[delta_x] - x1[0])
         
 
-    #         slop1, slop2 = frozen_turbulence_plot(figu3g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
-    #         cpt += 1
+    #     #     slop1, slop2 = frozen_turbulence_plot(figu3g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
+    #     #     cpt += 1
+        
+    #     _, omega, _ = Gamma_function(datas_u3[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
+        
+    #     funct = np.zeros((omega.shape[0], n1))
+    #     omega = np.zeros((omega.shape[0]))
+    #     Dx = np.zeros((n1))
+    #     for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
             
-    #     gamma_u3_1.append(slop1[0]*U1/r)
-    #     gamma_u3_2.append(slop2[0]*U1/r)
+    #         funct += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
+    #         omega += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
+    #         Dx += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
+            
+    #     funct /= (num_split_t-1)
+    #     omega /= (num_split_t-1)
+    #     Dx /= (num_split_t-1)
+        
+    #     del datas_u3
+        
+    #     omega_lim = 20 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind0 = i
+    #             break
+            
+    #     omega_lim = 40 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind1 = i
+    #             break
+                
+    #     omega_lim = 70
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind2 = i
+    #             break
+            
+    #     slop1, slop2 = gamma_plot(figu3g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
+            
+    #     gamma_u3_1.append(slop1[0]*U1/Dx[15])
+    #     gamma_u3_2.append(slop2[0]*U1/Dx[15])
+        
+    #     gamma_plot(figu3g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
             
     #     del omega
     #     del funct
-    #     del kc
+    #     del Dx
     #     del slop1
     #     del slop2
         
-        
-    #     del datas_u3
         
     #     col +=1
     #     if zplan == 4:
@@ -526,6 +639,12 @@ def main():
         
     #     figu3g.update_layout(height=600, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
+    #     figu1g_r.update_layout(height=600, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+        
+    #     figu2g_r.update_layout(height=600, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+        
+    #     figu3g_r.update_layout(height=600, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+        
     #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1, name='$\gamma_{u1}$', line=dict(color='midnightblue')), row=1, col=1)
     #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1, name='$\gamma_{u2}$', line=dict(color='firebrick')), row=1, col=1)
     #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1, name='$\gamma_{u3}$', line=dict(color='darkgreen')), row=1, col=1)
@@ -540,13 +659,19 @@ def main():
         
     #     if split_time == 'Y':
 
-    #         save_figures(figu1g, "output/split_time/gamma/gamma_u1.png")
+    #         save_figures(figu1g, "output/split_time/gamma/gamma_u1_w.png")
             
-    #         save_figures(figu2g, "output/split_time/gamma/gamma_u2.png")
+    #         save_figures(figu2g, "output/split_time/gamma/gamma_u2_w.png")
         
-    #         save_figures(figu3g, "output/split_time/gamma/gamma_u3.png")
+    #         save_figures(figu3g, "output/split_time/gamma/gamma_u3_w.png")
             
-    #         save_figures(figgamma, "output/split_time/gamma/gamma_view.png")
+    #         save_figures(figu1g_r, "output/split_time/gamma/gamma_u1_r.png")
+            
+    #         save_figures(figu2g_r, "output/split_time/gamma/gamma_u2_r.png")
+        
+    #         save_figures(figu3g_r, "output/split_time/gamma/gamma_u3_r.png")
+            
+    #         save_figures(figgamma, "output/split_time/gamma/gamma_view_w.png")
         
     # # # Update layout properties for full plots.
     # if ch_plot == "all":
@@ -571,13 +696,19 @@ def main():
         
     #     if split_time == 'Y':
 
-    #         save_figures(figu1g, "output/split_time/gamma/gamma_u1.png")
+    #         save_figures(figu1g, "output/split_time/gamma/gamma_u1_w_all.png")
 
-    #         save_figures(figu2g, "output/split_time/gamma/gamma_u2_all.png")
+    #         save_figures(figu2g, "output/split_time/gamma/gamma_u2_w_all.png")
 
-    #         save_figures(figu3g, "output/split_time/gamma/gamma_u3_all.png")
+    #         save_figures(figu3g, "output/split_time/gamma/gamma_u3_w_all.png")
             
-    #         save_figures(figgamma, "output/split_time/gamma/gamma_view_all.png")
+    #         save_figures(figu1g_r, "output/split_time/gamma/gamma_u1_r_all.png")
+            
+    #         save_figures(figu2g_r, "output/split_time/gamma/gamma_u2_r_all.png")
+        
+    #         save_figures(figu3g_r, "output/split_time/gamma/gamma_u3_r_all.png")
+            
+    #         save_figures(figgamma, "output/split_time/gamma/gamma_view_w_all.png")
             
     # elapsed_time = time.time() - start_time
     # minutes, seconds = divmod(elapsed_time, 60)
@@ -588,252 +719,390 @@ def main():
     #=======================================================
                 #### SPACE CORRELATION ####
     #=======================================================
-    print("\n========================================")
-    print(f"{YELLOW}Space correlation computation{RESET}")
-    start_time = time.time()
-    print("========================================")
-    print(f"{YELLOW}Streamwise{RESET}")
-    col = 1
-    row = 1
-    print("\nReading input files ...")
+    # print("\n========================================")
+    # print(f"{YELLOW}Space correlation computation{RESET}")
+    # start_time = time.time()
+    # print("========================================")
+    # print(f"{YELLOW}Streamwise{RESET}")
+    # col = 1
+    # row = 1
+    # print("\nReading input files ...")
     
-    _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
-    nt = nt - 1
-    dx = cflow.xlen / n1
+    # _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
+    # nt = nt - 1
+    # dx = cflow.xlen / n1
     
-    ch_plot ="normal"
-    fig1sc= init_figures_sc(zp, n2, ch=ch_plot) #Figure initialization
+    # ch_plot ="normal"
+    # fig1sc= init_figures_sc(zp, n2, ch=ch_plot) #Figure initialization
     
-    for zplan in np.arange(0, n2, n2//3, dtype=int):
-    #for zplan, zpvalue in enumerate(zp):
+    # for zplan in np.arange(0, n2, n2//3, dtype=int):
+    # #for zplan, zpvalue in enumerate(zp):
         
-        print("========================================")
-        print(f'Space correlation for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
-        print('Plan number:', zplan)
-        print("Reading input files streamwise...")
+    #     print("========================================")
+    #     print(f'Space correlation for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
+    #     print('Plan number:', zplan)
+    #     print("Reading input files streamwise...")
         
-        split_t = int(2**10)
-        num_split_t = nt // split_t
-        Dx = np.linspace(0,xlen//2,n1)
+    #     split_t = int(2**10)
+    #     num_split_t = nt // split_t
+    #     Dx = np.linspace(0,xlen//2,n1)
         
-        ## uu ##
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-        datas_u1 = var[1:,:,:]
+    #     ## uu ##
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+    #     datas_u1 = var[1:,:,:]
         
-        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-        print('Ux:', Ux)
+    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+    #     print('Ux:', Ux)
         
-        datas_u1 = datas_u1 - Ux
+    #     datas_u1 = datas_u1 - Ux
         
-        if split_time == 'Y':
+    #     if split_time == 'Y':
             
-            # datas_fluct_u1 = np.zeros((split_t, n1, n2))
-            # for n in range(1,num_split_t):
-            #     datas_fluct_u1 += datas_u1[(n-1)*split_t:n*split_t,:,:] - Ux
-            # del datas_u1
-            # datas_fluct_u1 /= (num_split_t-1)
+    #         # datas_fluct_u1 = np.zeros((split_t, n1, n2))
+    #         # for n in range(1,num_split_t):
+    #         #     datas_fluct_u1 += datas_u1[(n-1)*split_t:n*split_t,:,:] - Ux
+    #         # del datas_u1
+    #         # datas_fluct_u1 /= (num_split_t-1)
             
-            R_uu = np.zeros((n1))
-            for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
-                R_uu += Space_correation(datas_u1[(n-1)*split_t:n*split_t,:,:], datas_u1[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
-            R_uu /= (num_split_t-1)
+    #         R_uu = np.zeros((n1))
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #             R_uu += Space_correation(datas_u1[(n-1)*split_t:n*split_t,:,:], datas_u1[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
+    #         R_uu /= (num_split_t-1)
             
-        if split_time == 'n':
-            R_uu = Space_correation(datas_u1, datas_u1, geom = "plan", mode_corr = 'half', axis = "streamwise")
+    #     if split_time == 'n':
+    #         R_uu = Space_correation(datas_u1, datas_u1, geom = "plan", mode_corr = 'half', axis = "streamwise")
             
-        space_correlation_plot(fig1sc, col, row, Dx, R_uu, name = '$R_{UU}$', color='midnightblue', axis='streamwise')
-        del R_uu
-        del datas_u1
+    #     space_correlation_plot(fig1sc, col, row, Dx, R_uu, name = '$R_{UU}$', color='midnightblue', axis='streamwise')
+    #     del R_uu
+    #     del datas_u1
         
-        ## vv ##
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-        datas_u2 = var[1:,:,:]
+    #     ## vv ##
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+    #     datas_u2 = var[1:,:,:]
         
-        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
         
-        datas_u2 = datas_u2 - Uy
+    #     datas_u2 = datas_u2 - Uy
         
-        if split_time == 'Y':
+    #     if split_time == 'Y':
             
-            # datas_fluct_u2 = np.zeros((split_t, n1, n2))
-            # for n in range(1,num_split_t):
-            #     datas_fluct_u2 += datas_u2[(n-1)*split_t:n*split_t,:,:] - Uy
-            # del datas_u2
-            # datas_fluct_u2 /= (num_split_t-1)
+    #         # datas_fluct_u2 = np.zeros((split_t, n1, n2))
+    #         # for n in range(1,num_split_t):
+    #         #     datas_fluct_u2 += datas_u2[(n-1)*split_t:n*split_t,:,:] - Uy
+    #         # del datas_u2
+    #         # datas_fluct_u2 /= (num_split_t-1)
             
-            R_vv = np.zeros((n1))
-            for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
-                R_vv += Space_correation(datas_u2[(n-1)*split_t:n*split_t,:,:], datas_u2[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
-            R_vv /= (num_split_t-1)
+    #         R_vv = np.zeros((n1))
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #             R_vv += Space_correation(datas_u2[(n-1)*split_t:n*split_t,:,:], datas_u2[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
+    #         R_vv /= (num_split_t-1)
         
-        if split_time == 'n':
-            R_vv = Space_correation(datas_u2, datas_u2, geom = "plan", mode_corr = 'half', axis = "streamwise")
+    #     if split_time == 'n':
+    #         R_vv = Space_correation(datas_u2, datas_u2, geom = "plan", mode_corr = 'half', axis = "streamwise")
             
-        space_correlation_plot(fig1sc, col, row, Dx, R_vv, name = '$R_{VV}$', color='firebrick', axis='streamwise')
-        del R_vv
-        del datas_u2
+    #     space_correlation_plot(fig1sc, col, row, Dx, R_vv, name = '$R_{VV}$', color='firebrick', axis='streamwise')
+    #     del R_vv
+    #     del datas_u2
         
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-        datas_u3 = var[1:,:,:]
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+    #     datas_u3 = var[1:,:,:]
         
-        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
         
-        datas_u3 = datas_u3 - Uz
+    #     datas_u3 = datas_u3 - Uz
         
-        if split_time == 'Y':
+    #     if split_time == 'Y':
             
-            # datas_fluct_u3 = np.zeros((split_t, n1, n2))
-            # for n in range(1,num_split_t):
-            #     datas_fluct_u3 += datas_u3[(n-1)*split_t:n*split_t,:,:] - Uz
-            # del datas_u3
-            # datas_fluct_u3 /= (num_split_t-1)
+    #         # datas_fluct_u3 = np.zeros((split_t, n1, n2))
+    #         # for n in range(1,num_split_t):
+    #         #     datas_fluct_u3 += datas_u3[(n-1)*split_t:n*split_t,:,:] - Uz
+    #         # del datas_u3
+    #         # datas_fluct_u3 /= (num_split_t-1)
             
-            R_ww = np.zeros((n1))
-            for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
-                R_ww += Space_correation(datas_u3[(n-1)*split_t:n*split_t,:,:], datas_u3[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
-            R_ww /= (num_split_t-1)
+    #         R_ww = np.zeros((n1))
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #             R_ww += Space_correation(datas_u3[(n-1)*split_t:n*split_t,:,:], datas_u3[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
+    #         R_ww /= (num_split_t-1)
         
-        if split_time == 'n':
-            R_ww = Space_correation(datas_u3, datas_u3, geom = "plan", mode_corr = 'half', axis = "streamwise")
+    #     if split_time == 'n':
+    #         R_ww = Space_correation(datas_u3, datas_u3, geom = "plan", mode_corr = 'half', axis = "streamwise")
             
-        space_correlation_plot(fig1sc, col, row, Dx, R_ww, name = '$R_{WW}$', color='darkgreen', axis='streamwise')
-        del R_ww
-        del datas_u3
+    #     space_correlation_plot(fig1sc, col, row, Dx, R_ww, name = '$R_{WW}$', color='darkgreen', axis='streamwise')
+    #     del R_ww
+    #     del datas_u3
         
-        col +=1
-        if zplan == 4:
-            row +=1
-            col = 1
+    #     col +=1
+    #     if zplan == 4:
+    #         row +=1
+    #         col = 1
             
         
-    if ch_plot == 'normal':
-        fig1sc.update_layout(height=600, width=900, title_text='Space Correlation Streamwise', font=font,  legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1, orientation='h'))
-    if ch_plot == 'all':
-        fig1sc.update_layout(height=900, width=900, title_text='Space Correlation Streamwise', font=font,  legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1, orientation='h'))
+    # if ch_plot == 'normal':
+    #     fig1sc.update_layout(height=600, width=900, title_text='Space Correlation Streamwise', font=font,  legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1, orientation='h'))
+    # if ch_plot == 'all':
+    #     fig1sc.update_layout(height=900, width=900, title_text='Space Correlation Streamwise', font=font,  legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1, orientation='h'))
         
-    if split_time == 'Y':
+    # if split_time == 'Y':
         
-        if ch_plot == 'normal':
-            save_figures(fig1sc, "output/split_time/space_correlation/streamwise.png")
-        if ch_plot == 'all':
-            save_figures(fig1sc, "output/split_time/space_correlation/streamwise_all.png")
-        
-    elapsed_time = time.time() - start_time
-    minutes, seconds = divmod(elapsed_time, 60)
+    #     if ch_plot == 'normal':
+    #         save_figures(fig1sc, "output/split_time/space_correlation/streamwise.png")
+    #     if ch_plot == 'all':
+    #         save_figures(fig1sc, "output/split_time/space_correlation/streamwise_all.png")
+            
+    # print("\n========================================")
+    # print(f"{YELLOW}Spanwise{RESET}")
+    # col = 1
+    # row = 1
+    # print("Reading input files ...")
     
-    print(f'\n Space correlation done in : {int(minutes)}m {seconds:.2f}s \n')
+    # _, x1, x2, _, nt, n2, n1, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_spanwise_u1[0])
+    # nt = nt - 1
+    # print('n1:', n1)
+    # print('n2:', n2)
+    # dx = cflow.xlen / n1
+    
+    # ch_plot ="normal"
+    # fig2sc= init_figures_sc(zp, n2, ch=ch_plot) #Figure initialization
+    
+    # for zplan in np.arange(0, n2, n2//3, dtype=int):
+    # #for zplan, zpvalue in enumerate(zp):
+        
+    #     print("========================================")
+    #     print(f'Space correlation for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
+    #     print('Plan number:', zplan)
+    #     print("Reading input files spanwise...")
+        
+    #     split_t = int(2**10)
+    #     num_split_t = nt // split_t
+    #     Dx = np.linspace(0,ylen//2,n1)
+        
+    #     ## uu ##
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_spanwise_u1[zplan])
+    #     datas_u1 = var[1:,:,:]
+        
+    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        
+    #     datas_u1 = datas_u1 - Ux
+        
+    #     if split_time == 'Y':
+            
+    #         # datas_fluct_u1 = np.zeros((split_t, n2, n1))
+    #         # for n in range(1,num_split_t):
+    #         #     datas_fluct_u1 += datas_u1[(n-1)*split_t:n*split_t,:,:] - Ux
+    #         # del datas_u1
+    #         # datas_fluct_u1 /= (num_split_t-1)
+            
+    #         R_uu = np.zeros((n1))
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #             R_uu += Space_correation(datas_u1[(n-1)*split_t:n*split_t,:,:], datas_u1[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "spanwise")
+    #         R_uu /= (num_split_t-1)
+            
+    #     if split_time == 'n':
+    #         R_uu = Space_correation(datas_u1, datas_u1, geom = "plan", mode_corr = 'half', axis = "spanwise")
+            
+    #     space_correlation_plot(fig2sc, col, row, Dx, R_uu, name = '$R_{UU}$', color='midnightblue', axis='spanwise')
+    #     del R_uu
+    #     del datas_u1
+        
+    #     ## vv ##
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_spanwise_u2[zplan])
+    #     datas_u2 = var[1:,:,:]
+        
+    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        
+    #     datas_u2 = datas_u2 - Uy
+        
+    #     if split_time == 'Y':
+            
+    #         # datas_fluct_u2 = np.zeros((split_t, n2, n1))
+    #         # for n in range(1,num_split_t):
+    #         #     datas_fluct_u2 += datas_u2[(n-1)*split_t:n*split_t,:,:] - Uy
+    #         # del datas_u2
+    #         # datas_fluct_u2 /= (num_split_t-1)
+            
+    #         R_vv = np.zeros((n1))
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #             R_vv += Space_correation(datas_u2[(n-1)*split_t:n*split_t,:,:], datas_u2[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "spanwise")
+    #         R_vv /= (num_split_t-1)
+        
+    #     if split_time == 'n':
+    #         R_vv = Space_correation(datas_u2, datas_u2, geom = "plan", mode_corr = 'half', axis = "spanwise")
+            
+    #     space_correlation_plot(fig2sc, col, row, Dx, R_vv, name = '$R_{VV}$', color='firebrick', axis='spanwise')
+    #     del R_vv
+    #     del datas_u2
+        
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_spanwise_u3[zplan])
+    #     datas_u3 = var[1:,:,:]
+        
+    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        
+    #     datas_u3 = datas_u3 - Uz
+        
+    #     if split_time == 'Y':
+            
+    #         # datas_fluct_u3 = np.zeros((split_t, n2, n1))
+    #         # for n in range(1,num_split_t):
+    #         #     datas_fluct_u3 += datas_u3[(n-1)*split_t:n*split_t,:,:] - Uz
+    #         # del datas_u3
+    #         # datas_fluct_u3 /= (num_split_t-1)
+            
+    #         R_ww = np.zeros((n1))
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #             R_ww += Space_correation(datas_u3[(n-1)*split_t:n*split_t,:,:], datas_u3[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "spanwise")
+    #         R_ww /= (num_split_t-1)
+        
+    #     if split_time == 'n':
+    #         R_ww = Space_correation(datas_u3, datas_u3, geom = "plan", mode_corr = 'half', axis = "spanwise")
+            
+    #     space_correlation_plot(fig2sc, col, row, Dx, R_ww, name = '$R_{WW}$', color='darkgreen', axis='spanwise')
+    #     del R_ww
+    #     del datas_u3
+        
+    #     col +=1
+    #     if zplan == 4:
+    #         row +=1
+    #         col = 1
+            
+        
+    # if ch_plot == 'normal':
+    #     fig2sc.update_layout(height=600, width=900, title_text='Space Correlation Spanwise', font=font,  legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1, orientation='h'))
+    # if ch_plot == 'all':
+    #     fig2sc.update_layout(height=900, width=900, title_text='Space Correlation Spanwise', font=font,  legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1, orientation='h'))
+        
+    # if split_time == 'Y':
+        
+    #     if ch_plot == 'normal':
+    #         save_figures(fig2sc, "output/split_time/space_correlation/spanwise.png")
+    #     if ch_plot == 'all':
+    #         save_figures(fig2sc, "output/split_time/space_correlation/spanwise_all.png")
+            
+        
+    # elapsed_time = time.time() - start_time
+    # minutes, seconds = divmod(elapsed_time, 60)
+    
+    # print(f'\n Space correlation done in : {int(minutes)}m {seconds:.2f}s \n')
         
     
     
     #=======================================================
                 #### RANS AND LES ANALYSIS ####
     #=======================================================
-    # print("\n========================================")
-    # print(f"{YELLOW}Von Karman theorical computation{RESET}")
-    # start_time = time.time()
-    # print("========================================")
-    # zp_RANS = cflow.ut/cflow.nu * normal
-    # fig_RANS = make_subplots(rows=1, cols=2, shared_yaxes= True, y_title='$z^+$')
-    # fig_vel_profil = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
-    # fig_var = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
-    # fig_vel_ratio_profil = go.Figure()
-    # fig_RANS.add_trace(go.Scatter(x=u_velocity, y=zp_RANS, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(RANS)}$'), row=1, col=1)
-    # fig_RANS.add_trace(go.Scatter(x=ko2_tke, y=zp_RANS, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='circle'), name='$k_T\\text{(RANS)}$'), row=1, col=2)
+    print("\n========================================")
+    print(f"{YELLOW}Von Karman theorical computation{RESET}")
+    start_time = time.time()
+    print("========================================")
+    zp_RANS = cflow.ut/cflow.nu * normal
+    fig_RANS = make_subplots(rows=1, cols=2, shared_yaxes= True, y_title='$z^+$')
+    fig_vel_profil = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
+    fig_var = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
+    fig_vel_ratio_profil = make_subplots(rows=1, cols=2, shared_yaxes= True, y_title='$z^+$')
+    fig_RANS.add_trace(go.Scatter(x=u_velocity, y=zp_RANS, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(RANS)}$'), row=1, col=1)
+    fig_RANS.add_trace(go.Scatter(x=ko2_tke, y=zp_RANS, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='circle'), name='$k_T\\text{(RANS)}$'), row=1, col=2)
     
-    # U = []
-    # V = []
-    # W = []
-    # var1 = []
-    # var2 = []
-    # var3 = []
-    # kt = []
-    # for zplan, zpvalue in enumerate(zp):
-    #     print('zp:', zpvalue)
+    U = []
+    V = []
+    W = []
+    var1 = []
+    var2 = []
+    var3 = []
+    kt = []
+    for zplan, zpvalue in enumerate(zp):
+        print('zp:', zpvalue)
         
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-    #     datas_u1 = var[1:,:,:]
-    #     del var
-    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-    #     varUx = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=-1), axis=-1))
-    #     U.append(Ux)
-    #     var1.append(varUx)
-    #     del datas_u1
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        datas_u1 = var[1:,:,:]
+        del var
+        #Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        Ux = np.mean(datas_u1[:,:,:], axis=0)
+        datas_u1 = datas_u1 - Ux[:,:,np.newaxis]
+        varUx = np.mean(np.mean(np.mean((datas_u1)**2, axis=0), axis=-1))
+        U.append(Ux)
+        var1.append(varUx)
+        del datas_u1
         
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-    #     datas_u2 = var[1:,:,:]
-    #     del var
-    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-    #     varUy = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=-1), axis=-1))
-    #     V.append(Uy)
-    #     var2.append(varUy)
-    #     del datas_u2
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        datas_u2 = var[1:,:,:]
+        del var
+        #Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        Uy = np.mean(datas_u2[:,:,:], axis=0)
+        datas_u2 = datas_u2 - Uy[:,:,np.newaxis]
+        varUy = np.mean(np.mean(np.mean((datas_u2)**2, axis=0), axis=-1))
+        V.append(Uy)
+        var2.append(varUy)
+        del datas_u2
         
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-    #     datas_u3 = var[1:,:,:]
-    #     del var
-    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-    #     varUz = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uy)**2, axis=-1), axis=-1))
-    #     W.append(Uz)
-    #     var3.append(varUz)
-    #     del datas_u3
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+        datas_u3 = var[1:,:,:]
+        del var
+        #Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        Uz = np.mean(datas_u3[:,:,:], axis=-1)
+        datas_u3 = datas_u3 - Uz[:,:,np.newaxis]
+        varUz = np.mean(np.mean(np.mean((datas_u3)**2, axis=0), axis=-1))
+        W.append(Uz)
+        var3.append(varUz)
+        del datas_u3
         
-    #     kt.append(varUx + varUy + varUz)
+        kt.append(varUx + varUy + varUz)
         
-    # kt = np.array(kt)
-    # U = np.array(U)
-    # V = np.array(V)
-    # W = np.array(W)
-    # var1 = np.array(var1)
-    # var2 = np.array(var2)
-    # var3 = np.array(var3)
-    # kt /= 2.
-    # ratio2 = var2 / var1
-    # ratio3 = var3 / var1
+    kt = np.array(kt)
+    U = np.array(U)
+    V = np.array(V)
+    W = np.array(W)
+    var1 = np.array(var1)
+    var2 = np.array(var2)
+    var3 = np.array(var3)
+    kt /= 2.
+    ratio2 = var2 / var1
+    ratio3 = var3 / var1
+    ratio1 = var2 / var3
     
-    # fig_RANS.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='x'), name='$U\\text{(LES)}$'), row=1, col=1)
-    # fig_RANS.add_trace(go.Scatter(x=kt, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$k_T\\text{(LES)}$'), row=1, col=2)
+    fig_RANS.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='x'), name='$U\\text{(LES)}$'), row=1, col=1)
+    fig_RANS.add_trace(go.Scatter(x=kt, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$k_T\\text{(LES)}$'), row=1, col=2)
     
-    # fig_RANS.update_xaxes(title='$\\text{velocity}~(m.s^{-1})$', row=1, col=1)
-    # fig_RANS.update_xaxes(title='$\\text{kinetic energy}~(m^2.s^{-2})$', row=1, col=2)
-    # fig_RANS.update_layout(height=600, width=800, title="RANS and LES data profiles", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    fig_RANS.update_xaxes(title='$\\text{velocity}~(m.s^{-1})$', row=1, col=1)
+    fig_RANS.update_xaxes(title='$\\text{kinetic energy}~(m^2.s^{-2})$', row=1, col=2)
+    fig_RANS.update_layout(height=600, width=800, title="RANS and LES data profiles", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_RANS, "output/RANS/RANS_profiles.png")
+    save_figures(fig_RANS, "output/RANS/RANS_profiles.png")
     
-    # fig_vel_profil.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(LES)}$'), row=1, col=1)
-    # fig_vel_profil.add_trace(go.Scatter(x=V, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$V\\text{(LES)}$'), row=1, col=2)
-    # fig_vel_profil.add_trace(go.Scatter(x=W, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$W\\text{(LES)}$'),  row=1, col=3)
+    fig_vel_profil.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(LES)}$'), row=1, col=1)
+    fig_vel_profil.add_trace(go.Scatter(x=V, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$V\\text{(LES)}$'), row=1, col=2)
+    fig_vel_profil.add_trace(go.Scatter(x=W, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$W\\text{(LES)}$'),  row=1, col=3)
     
-    # fig_vel_profil.update_xaxes(title='$U~(m.s^{-1})$', row=1, col=1)
-    # fig_vel_profil.update_xaxes(title='$V~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
-    # fig_vel_profil.update_xaxes(title='$W~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
-    # fig_vel_profil.update_layout(height=600, width=800, title="Velocity profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    fig_vel_profil.update_xaxes(title='$U~(m.s^{-1})$', row=1, col=1)
+    fig_vel_profil.update_xaxes(title='$V~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
+    fig_vel_profil.update_xaxes(title='$W~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
+    fig_vel_profil.update_layout(height=600, width=800, title="Velocity profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_vel_profil, "output/RANS/mean_velocity_profiles.png")
+    save_figures(fig_vel_profil, "output/RANS/mean_velocity_profiles.png")
     
-    # fig_var.add_trace(go.Scatter(x=var1, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$u_1$'), row=1, col=1)
-    # fig_var.add_trace(go.Scatter(x=var2, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$u_2$'), row=1, col=2)
-    # fig_var.add_trace(go.Scatter(x=var3, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$u_3$'),  row=1, col=3)
+    fig_var.add_trace(go.Scatter(x=var1, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$u_1$'), row=1, col=1)
+    fig_var.add_trace(go.Scatter(x=var2, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$u_2$'), row=1, col=2)
+    fig_var.add_trace(go.Scatter(x=var3, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$u_3$'),  row=1, col=3)
     
-    # fig_var.update_xaxes(title='$u_1~(m.s^{-1})$', row=1, col=1)
-    # fig_var.update_xaxes(title='$u_2~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
-    # fig_var.update_xaxes(title='$u_3~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
-    # fig_var.update_layout(height=600, width=800, title="Variance velocity fluctuation profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    fig_var.update_xaxes(title='$u_1~(m.s^{-1})$', row=1, col=1)
+    fig_var.update_xaxes(title='$u_2~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
+    fig_var.update_xaxes(title='$u_3~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
+    fig_var.update_layout(height=600, width=800, title="Variance velocity fluctuation profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_var, "output/RANS/var_velocity_profiles.png")
+    save_figures(fig_var, "output/RANS/var_velocity_profiles.png")
     
-    # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio2, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$u_2^2 / u_1^2$'))
-    # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio3, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$u_3^2 / u_1^2$'))
+    fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio2, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$u_2^2 / u_1^2$'), row=1, col=1)
+    fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio3, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$u_3^2 / u_1^2$'), row=1, col=1)
+    fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio1, y=zp, mode= 'lines+markers', line=dict(color='green', width=2), marker=dict(symbol='x'), name='$u_2^2 / u_3^2$'), row=1, col=2)
     
-    # fig_vel_ratio_profil.update_yaxes(title='$z^+$')
-    # fig_vel_ratio_profil.update_xaxes(title='velocity ratio')
-    # fig_vel_ratio_profil.update_layout(height=600, width=800, title="Variance velocity ratio profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    #fig_vel_ratio_profil.update_yaxes(title='$z^+$')
+    fig_vel_ratio_profil.update_xaxes(title='velocity ratio', row=1, col=1)
+    fig_vel_ratio_profil.update_xaxes(title='velocity ratio', row=1, col=2)
+    fig_vel_ratio_profil.update_layout(height=600, width=800, title="Variance velocity ratio profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_vel_ratio_profil, "output/RANS/velocity_ratio_profiles.png")
+    save_figures(fig_vel_ratio_profil, "output/RANS/velocity_ratio_profiles.png")
     
-    # elapsed_time = time.time() - start_time
-    # minutes, seconds = divmod(elapsed_time, 60)
+    elapsed_time = time.time() - start_time
+    minutes, seconds = divmod(elapsed_time, 60)
     
-    # print(f'\n RANS study done in : {int(minutes)}m {seconds:.2f}s \n')
+    print(f'\n RANS study done in : {int(minutes)}m {seconds:.2f}s \n')
     
     
     #=======================================================
@@ -859,21 +1128,25 @@ def main():
     # for zplan in np.arange(0, n2, n2//3, dtype=int):
     # #for zplan, zpvalue in enumerate(zp):
         
-    #     # print("========================================")
-    #     # print(f'Von Karman theory for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
-    #     # print('Plan number:', zplan)
+    #     print("========================================")
+    #     print(f'Von Karman theory for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
+    #     print('Plan number:', zplan)
     
-    #     # print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     # _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-    #     # nt = nt - 1
-    #     # datas_u1 = var[1:,:,:]
-    #     # print('datas_u1.shape:',datas_u1.shape)
+    #     print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+    #     nt = nt - 1
+    #     datas_u1 = var[1:,:,:]
+    #     del var
+    #     print('datas_u1.shape:',datas_u1.shape)
         
-    #     # Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-    #     # print('Ux:', Ux)
+    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+    #     print('Ux:', Ux)
+    #     #datas_u1 = datas_u1 - Ux
+    #     #sigma_u_squared = sigma_power2(datas_u1, axis = "streamwise")
+    #     sigma_u_squared = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=-1), axis=-1))
         
-    #     split_t = int(2**10)
-    #     num_split_t = nt // split_t
+    #     # split_t = int(2**10)
+    #     # num_split_t = nt // split_t
         
     #     # if split_time == 'Y':
     #     #     datas_fluct_u1 = np.zeros((split_t, n1, n2))
@@ -891,19 +1164,23 @@ def main():
     #     #     # sigma_u_squared = sigma(datas_fluct_u1, ko2_omega.shape[0], axis = "streamwise")
     #     #     # sigma_u_squared = sigma_u_squared**2
             
-    #     # del datas_u1
-    #     # del datas_fluct_u1
-    #     # print('sigma_u_squared:', sigma_u_squared)
+    #     del datas_u1
+    #     #del datas_fluct_u1
+    #     print('sigma_u_squared:', sigma_u_squared)
         
-    #     # print("========================================")
-    #     # print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     # _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-    #     # nt = nt - 1
-    #     # datas_u2 = var[1:,:,:]
-    #     # print('datas_u1.shape:',datas_u2.shape)
+    #     print("========================================")
+    #     print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+    #     nt = nt - 1
+    #     datas_u2 = var[1:,:,:]
+    #     del var
+    #     print('datas_u1.shape:',datas_u2.shape)
         
-    #     # Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-    #     # print('Uy:', Uy)
+    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+    #     print('Uy:', Uy)
+    #     # datas_u2 = datas_u2 - Uy
+    #     # sigma_v_squared = sigma_power2(datas_u2, axis = "streamwise")
+    #     sigma_v_squared = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=-1), axis=-1))
         
     #     # if split_time == 'Y':
 
@@ -923,19 +1200,23 @@ def main():
     #     #     # sigma_v_squared = sigma(datas_fluct_u2, ko2_omega.shape[0], axis = "streamwise")
     #     #     # sigma_v_squared = sigma_v_squared**2
             
-    #     # del datas_u2
-    #     # del datas_fluct_u2
-    #     # print('sigma_v_squared:', sigma_v_squared)
+    #     del datas_u2
+    #     #del datas_fluct_u2
+    #     print('sigma_v_squared:', sigma_v_squared)
         
-    #     # print("========================================")
-    #     # print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     # _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-    #     # nt = nt - 1
-    #     # datas_u3 = var[1:,:,:]
-    #     # print('datas_u1.shape:',datas_u3.shape)
+    #     print("========================================")
+    #     print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+    #     nt = nt - 1
+    #     datas_u3 = var[1:,:,:]
+    #     del var
+    #     print('datas_u1.shape:',datas_u3.shape)
         
-    #     # Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-    #     # print('Uz:', Uz)
+    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+    #     print('Uz:', Uz)
+    #     #datas_u3 = datas_u3 - Uz
+    #     #sigma_w_squared = sigma_power2(datas_u3, axis = "streamwise")
+    #     sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=-1), axis=-1))
         
     #     # if split_time == 'Y':
     #     #     datas_fluct_u3 = np.zeros((split_t, n1, n2))
@@ -954,30 +1235,30 @@ def main():
     #     #     # sigma_w_squared = sigma(datas_fluct_u3, ko2_omega.shape[0], axis = "streamwise")
     #     #     # sigma_w_squared = sigma_w_squared**2
             
-    #     # del datas_u3
-    #     # del datas_fluct_u3
-    #     # print('sigma_w_squared:', sigma_w_squared)
+    #     del datas_u3
+    #     #del datas_fluct_u3
+    #     print('sigma_w_squared:', sigma_w_squared)
         
         
-    #     # print("========================================")
-    #     # print(f"Computing sigma1c for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+    #     print("========================================")
+    #     print(f"Computing sigma1c for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
         
-    #     # sigma1c = sigma_1c(sigma_u_squared, 1/3., sigma_v_squared, 1/3., sigma_w_squared, 1/3.)
+    #     sigma1c = sigma_1c(sigma_u_squared, 1./3, sigma_v_squared, 1./3, sigma_w_squared, 1./3)
         
-    #     # print("========================================")
-    #     # print(f"Computing L for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+    #     print("========================================")
+    #     print(f"Computing L for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
         
-    #     # Le = L(0.09*0.519, ko2_tke, tens = 'omega', omega=ko2_omega) #list length omega
+    #     Le = L(0.519, ko2_tke, ko2_omega) #list length omega
         
-    #     # kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma1c, Le)
-    #     # kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma1c, Le) #=R33
+    #     kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma1c, Le)
+    #     kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma1c, Le) #=R33
         
-    #     # von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick')
-    #     # von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue')
+    #     von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
+    #     von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
         
-    #     # del kc
-    #     # del phi11
-    #     # del phi22
+    #     del kc
+    #     del phi11
+    #     del phi22
         
         
     #     ### experience ###
@@ -985,25 +1266,12 @@ def main():
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
     #     datas_u1 = var[1:,:,:]
     #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-        
+    #     datas_u1 = datas_u1 - Ux
     #     phi11_exp__ = von_karman_spectra(datas_u1, datas_u1, geom='plan', axis='streamwise')
     #     del datas_u1
     #     phi11_exp = np.mean(np.mean(phi11_exp__, axis=-1), axis=-1)
-    #     # freq1 = 2*np.pi*fft.fftfreq(n1, d=dx)
-    #     # freq2 = 2*np.pi*fft.fftfreq(n2, d=dy)
-        
-    #     # phi11_exp_ = np.zeros((phi11_exp__.shape[0], phi11_exp__.shape[2]))
-    #     # for w in range (phi11_exp__.shape[0]):
-    #     #     for line in range (phi11_exp__.shape[2]):
-    #     #         phi11_exp_[w,line] = integrate.simpson(phi11_exp__[w,:,line], freq1)
                 
     #     del phi11_exp__
-                
-    #     # phi11_exp = np.zeros((phi11_exp_.shape[0]))
-    #     # for w in range (phi11_exp_.shape[0]):
-    #     #     phi11_exp[w] = integrate.simpson(phi11_exp_[w,:], freq2)
-            
-    #     # del phi11_exp_
         
     #     freq = fft.fftfreq(2*split_t, d=dt)
     #     freq = freq[:freq.shape[0]//2]
@@ -1020,30 +1288,18 @@ def main():
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
     #     nt = nt - 1
     #     datas_u2 = var[1:,:,:]
-        
+    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+    #     datas_u2 = datas_u2 - Uy
     #     phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
     #     del datas_u2
     #     phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
         
-    #     # phi22_exp_ = np.zeros((phi22_exp__.shape[0], phi22_exp__.shape[2]))
-    #     # for w in range (phi22_exp__.shape[0]):
-    #     #     for line in range (phi22_exp__.shape[2]):
-    #     #         phi22_exp_[w,line] = integrate.simpson(phi22_exp__[w,:,line], freq1)
-                
     #     del phi22_exp__
                 
-    #     # phi22_exp = np.zeros((phi22_exp_.shape[0]))
-    #     # for w in range (phi22_exp_.shape[0]):
-    #     #     phi22_exp[w] = integrate.simpson(phi22_exp_[w,:], freq2)
-
-    #     # del phi22_exp_
-        
     #     von_karman_plot(fig_vanK, col, row, k1, k1*phi22_exp, name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
             
     #     del phi22_exp
     #     del k1
-    #     # del freq2
-    #     # del freq1
         
         
     #     col +=1
@@ -1054,7 +1310,7 @@ def main():
             
     # if ch_plot == 'normal':
     #     fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.03))
-    #     save_figures(fig_vanK, "output/von_karman/von_karman_spectra_exp.png")
+    #     save_figures(fig_vanK, "output/von_karman/von_karman_spectra.png")
     # if ch_plot == 'all':
     #     fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.03))
     #     save_figures(fig_vanK, "output/von_karman/von_karman_spectra_all.png")

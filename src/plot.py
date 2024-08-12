@@ -189,9 +189,9 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
 def init_figures_gamma(z, n2, ch='normal'):
     
     if ch == 'normal':
-        figu1 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', subplot_titles=(f"z={z[0]}", f"z={z[n2//3]}", f"z={z[2*n2//3]}", f"z={z[3*floor(n2//3)]}"))
-        figu2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{VV}(\omega))$', subplot_titles=(f"z={z[0]}", f"z={z[n2//3]}", f"z={z[2*n2//3]}", f"z={z[3*floor(n2//3)]}"))
-        figu3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{WW}(\omega))$', subplot_titles=(f"z={z[0]}", f"z={z[n2//3]}", f"z={z[2*n2//3]}", f"z={z[3*floor(n2//3)]}"))
+        figu1 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[n2//3]}$", f"$z^+={z[2*n2//3]}$", f"$z^+={z[3*floor(n2//3)]}$"))
+        figu2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{VV}(\omega))$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[n2//3]}$", f"$z^+={z[2*n2//3]}$", f"$z^+={z[3*floor(n2//3)]}$"))
+        figu3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{WW}(\omega))$', subplot_titles=(f"$^+z={z[0]}$", f"$z^+={z[n2//3]}$", f"$z^+={z[2*n2//3]}$", f"$z^+={z[3*floor(n2//3)]}$"))
         
     if ch == "all":
         figu1 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]:.2f}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
@@ -258,6 +258,97 @@ def space_correlation_plot(fig, col, row, Dx, corr, name = 'corr', color = 'fire
             fig.update_xaxes(row=row, col=col, title_text="$\delta z$")
         
     return(None)
+
+
+def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w'):
+    
+    if ch == 'w':
+        if col == 1 and row == 1:
+            
+            slop1 = np.polyfit(omega[ind0:ind1], funct[ind0:ind1, 5], 1)
+            slop2 = np.polyfit(omega[ind1:ind2], funct[ind1:ind2, 5], 1)
+            
+            fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=slop1[0]*omega[ind0:ind1]+20, mode='lines', showlegend=False, line=dict(color='firebrick', dash='dash', width=2)), row=1, col=col)
+                
+            fig.add_annotation(x=55, y=23, text=f'$s1:~{slop1[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            # fig.add_trace(go.Scatter(x=omega[ind1:ind2], y=slop2[0]*omega[ind1:ind2]+10, mode='lines', showlegend=False, line=dict(color='midnightblue', dash='dash', width=2)), row=1, col=col)
+            
+            # fig.add_annotation(x=60, y=20, text=f'$s2:~{slop2[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,1], mode='lines', name=f'$r={Dx[1]:.2f}$', line=dict(color='olive')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,5], mode='lines', name=f'$r={Dx[5]:.2f}$', line=dict(color='orangered')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,10], mode='lines', name=f'$r={Dx[10]:.2f}$', line=dict(color='purple')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,15], mode='lines', name=f'$r={Dx[15]:.2f}$', line=dict(color='mediumvioletred')), row=row, col=col)
+            
+            fig.update_xaxes(row=row, col=col, title_text="$\omega~(s^{-1})$")
+            
+        else:
+            
+            slop1 = np.polyfit(omega[ind0:ind1], funct[ind0:ind1, 5], 1)
+            slop2 = np.polyfit(omega[ind1:ind2], funct[ind1:ind2, 5], 1)
+            
+            fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=slop1[0]*omega[ind0:ind1]+20, mode='lines', showlegend=False, line=dict(color='firebrick', dash='dash', width=2)), row=1, col=col)
+                
+            fig.add_annotation(x=55, y=23, text=f'$s1:~{slop1[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            fig.add_trace(go.Scatter(x=omega[ind1:ind2], y=slop2[0]*omega[ind1:ind2]+10, mode='lines', showlegend=False, line=dict(color='midnightblue', dash='dash', width=2)), row=1, col=col)
+            
+            fig.add_annotation(x=55, y=20, text=f'$s2:~{slop2[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,1], mode='lines', showlegend=False, line=dict(color='olive')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,5], mode='lines', showlegend=False, line=dict(color='orangered')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,10], mode='lines', showlegend=False, line=dict(color='purple')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=omega[ind0:ind2], y=funct[ind0:ind2,15], mode='lines', showlegend=False, line=dict(color='mediumvioletred')), row=row, col=col)
+            
+            fig.update_xaxes(row=row, col=col, title_text="$\omega~(s^{-1})$")
+            
+        return(slop1, slop2)
+            
+    if ch == 'x':
+        if col == 4 and row == 1:
+            
+            # slop1 = np.polyfit(omega[2:ind1], funct[2:ind1,5], 1)
+            # slop2 = np.polyfit(omega[ind1:ind2], funct[ind1:ind2,5], 1)
+            
+            # fig.add_trace(go.Scatter(x=omega[2:ind1], y=slop1[0]*omega[2:ind1]+20, mode='lines', showlegend=False, line=dict(color='firebrick', dash='dash', width=2)), row=1, col=col)
+                
+            # fig.add_annotation(x=35, y=10, text=f'$slop:~{slop1[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            # fig.add_trace(go.Scatter(x=omega[ind2:ind1], y=slop2[0]*omega[ind2:ind1], mode='lines', showlegend=False, line=dict(color='midnightblue', dash='dash', width=2)), row=1, col=col)
+            
+            # fig.add_annotation(x=20, y=30, text=f'$slop:~{slop2[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            fig.add_trace(go.Scatter(x=Dx, y=funct[3,:], mode='lines', name=f'$\omega={omega[3]:.2f}$', line=dict(color='olive')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=funct[5,:], mode='lines', name=f'$\omega={omega[5]:.2f}$', line=dict(color='orangered')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=funct[10,:], mode='lines', name=f'$\omega={omega[10]:.2f}$', line=dict(color='purple')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=funct[15,:], mode='lines', name=f'$\omega={omega[15]:.2f}$', line=dict(color='mediumvioletred')), row=row, col=col)
+            
+            fig.update_xaxes(row=row, col=col, title_text="$r_1$")
+            
+        else:
+            
+            # slop1 = np.polyfit(omega[2:ind1], funct[2:ind1, 5], 1)
+            # slop2 = np.polyfit(omega[ind1:ind2], funct[ind1:ind2, 5], 1)
+            
+            # fig.add_trace(go.Scatter(x=omega[2:ind1], y=slop1[0]*omega[2:ind1]+20, mode='lines', showlegend=False, line=dict(color='firebrick', dash='dash', width=2)), row=1, col=col)
+                
+            # fig.add_annotation(x=35, y=10, text=f'$slop:~{slop1[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            # fig.add_trace(go.Scatter(x=omega[ind2:ind1], y=slop2[0]*omega[ind2:ind1], mode='lines', showlegend=False, line=dict(color='midnightblue', dash='dash', width=2)), row=1, col=col)
+            
+            # fig.add_annotation(x=20, y=30, text=f'$slop:~{slop2[0]:.3f}$', showarrow = False, row=row, col=col)
+            
+            fig.add_trace(go.Scatter(x=Dx, y=funct[3,:], mode='lines', showlegend=False, line=dict(color='olive')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=funct[5,:], mode='lines', showlegend=False, line=dict(color='orangered')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=funct[10,:], mode='lines', showlegend=False, line=dict(color='purple')), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=funct[15,:], mode='lines', showlegend=False, line=dict(color='mediumvioletred')), row=row, col=col)
+            
+            fig.update_xaxes(row=row, col=col, title_text="$r_1$")
+            
+        return(None)
+            
+    
 
 
 def save_figures(fig, path):

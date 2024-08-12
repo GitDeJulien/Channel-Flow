@@ -4,6 +4,7 @@ from scipy import integrate
 
 from tools import *
 from plot import *
+from parameters import *
 
 
 
@@ -43,7 +44,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
         if ch == 'corr':
             
             Dt = np.linspace(0,(tEnd-tStart)*dt, split_t)
-            Dx = np.linspace(0,np.pi,n1)
+            Dx = np.linspace(0,xlen//2,n1)
             
             R_time = np.zeros((split_t))
             R_space = np.zeros((n1))
@@ -86,7 +87,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             
             Dt = np.linspace(-2*(tEnd-tStart)*dt,2*(tEnd-tStart)*dt,2*split_t)
 
-            Dx = np.linspace(-2*np.pi, 2*np.pi, 2*n1)
+            Dx = np.linspace(-xlen, xlen, 2*n1)
             
             for n in tqdm(range(1,num_split_t), desc=f'Autocorr 2D', colour= 'GREEN'):
                 
@@ -160,7 +161,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
         if ch == 'corr':
             
             Dt = np.linspace(0,(tEnd-tStart)*dt, split_t)
-            Dx = np.linspace(0,np.pi,n1)
+            Dx = np.linspace(0,xlen//2,n1)
             
             R_time = np.zeros((nt))
             R_space = np.zeros((n1))
@@ -177,7 +178,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             
             Dt = np.linspace(-2*(tEnd-tStart)*dt,2*(tEnd-tStart)*dt,2*nt)
 
-            Dx = np.linspace(-2*np.pi, 2*np.pi, 2*n1)
+            Dx = np.linspace(-xlen, xlen, 2*n1)
             
                 
             R += Correlation_2d(datas[:,:,:], geom='plan', axis='streamwise')[1]
