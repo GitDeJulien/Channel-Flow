@@ -226,12 +226,12 @@ def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', 
     if col == 4 and row == 1:
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols)), row=row, col=col)
         fig.update_xaxes(title='$k_c(m.s^{-2})$', type="log", exponentformat='power', row=row, col=col)
-        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col)
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-6,0])
         
     else:
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols), showlegend=False), row=row, col=col)
         fig.update_xaxes(title='$k_c(m.s^{-2})$', type="log", exponentformat='power', row=row, col=col)
-        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col)
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-6,0])
         
     return(None)
 

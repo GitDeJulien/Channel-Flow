@@ -101,7 +101,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             
             #levels = [0.9, 0.92, 0.94, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
             # levels = [0.9, 0.95, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
-            levels = [0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]
+            levels = [0.75, 0.8, 0.85, 0.9, 0.95, 1]
             coef = get_ellispses_slop(R, levels , 0.01, Dt, Dx, n1, split_t=split_t)
             
             print('slop:', 1./coef[0])

@@ -4,7 +4,7 @@ from scipy import fft
 from tqdm import tqdm
 
 
-from read_fpar import *
+from read_fpars import *
 from parameters import *
 
 font = dict(family="serif",
@@ -62,6 +62,12 @@ def get_ellispses_slop(R, levels, eps, Dt, Dx, n1, split_t = None):
                         jmax = j
         y_slop.append(Dt[imax])
         x_slop.append(Dx[jmax])
+        
+    # y_slop.insert(0, 0.0)
+    # x_slop.insert(0, 0.0)
+    
+    print('y_slop:', y_slop)
+    print('x_slop:', x_slop)
         
     
     # for level in levels:

@@ -4,7 +4,7 @@ from scipy import integrate
 import glob
 from tqdm import tqdm
 
-from read_fpar import *
+from read_fpars import *
 from parameters import *
 from tools import *
 from engine import *
@@ -57,7 +57,7 @@ def main():
     # path = 'input/' #change it as you want
     path = '/media/julien/Verbatim/julien/channel_wrles_retau395/' #on the external disc
     #### Streamwise files ####
-    fpars_files_streamwise_p = sorted(glob.glob(path + "streamwise/*fpar.p"))
+    #fpars_files_streamwise_p = sorted(glob.glob(path + "streamwise/*fpar.p"))
     
     fpars_files_streamwise_u1 = sorted(glob.glob(path + "streamwise/*fpar.u1"))
     
@@ -66,7 +66,7 @@ def main():
     fpars_files_streamwise_u3 = sorted(glob.glob(path + "streamwise/*fpar.u3"))
     
     #### Spanwise files ####
-    fpars_files_spanwise_p = sorted(glob.glob(path + "spanwise/*fpar.p"))
+    #fpars_files_spanwise_p = sorted(glob.glob(path + "spanwise/*fpar.p"))
     
     fpars_files_spanwise_u1 = sorted(glob.glob(path + "spanwise/*fpar.u1"))
     
@@ -75,13 +75,12 @@ def main():
     fpars_files_spanwise_u3 = sorted(glob.glob(path + "spanwise/*fpar.u3"))
     
     #### Wall normal files ####
-    fpars_files_normal_p = sorted(glob.glob(path + "normal/*fpar.p"))
     
-    fpars_files_normal_u1 = sorted(glob.glob(path + "normal/*fpar.u1"))
+    fpars_files_normal_u1 = sorted(glob.glob(path + "normal_line/*fpar.u1"))
     
-    fpars_files_normal_u2 = sorted(glob.glob(path + "normal/*fpar.u2"))
+    fpars_files_normal_u2 = sorted(glob.glob(path + "normal_line/*fpar.u2"))
     
-    fpars_files_normal_u3 = sorted(glob.glob(path + "normal/*fpar.u3"))
+    fpars_files_normal_u3 = sorted(glob.glob(path + "normal_line/*fpar.u3"))
     
     if len(fpars_files_streamwise_u1) == 0:
         print("Error: Input fiels didn't find.")
@@ -135,7 +134,7 @@ def main():
 
     # col = 1
     # row = 1
-    # ch_plot ="all"
+    # ch_plot ="normal"
     # fig1u1, fig2u1, fig3u1 = init_figures_ft(zp, n2, ch=ch_plot) #Figure initialization
     # fig1u2, fig2u2, fig3u2 = init_figures_ft(zp, n2, ch=ch_plot)
     # fig1u3, fig2u3, fig3u3 = init_figures_ft(zp, n2, ch=ch_plot)
@@ -148,11 +147,11 @@ def main():
     # figU1c = go.Figure()
     # U1_list = []
     # Uc_list = []
-    
+    # cpt = 0
     # start_time = time.time()
     
-    # # for zplan in np.arange(0, n2, n2//3, dtype=int):
-    # for zplan, zpvalue in enumerate(zp):
+    # for zplan in np.arange(0, n2, n2//3, dtype=int):
+    # # for zplan, zpvalue in enumerate(zp):
         
     #     print("========================================")
     #     print(f'Frozen turbulence validation for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
@@ -168,17 +167,6 @@ def main():
         
     #     #datas_fluct_u1 = np.zeros_like(datas_u1)
     #     datas_u1 = datas_u1 - U1
-    #     #del datas_u1
-        
-    #     #### Spectra ####
-    #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
-        
-    #     frozen_turbulence_plot(fig1u1, col, row, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
-        
-    #     del time_spectra
-    #     del space_spectra
-    #     del omega
-    #     del k
         
     #     #### Autocorrelation ####
     #     # ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr", dx=dx, Uc=U1)
@@ -192,19 +180,29 @@ def main():
         
     #     #### Autocorrelation 2D ####
         
-    #     # Dt, Dx, R2d, coef = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
+    #     Dt, Dx, R2d, coef = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
         
-    #     # frozen_turbulence_plot(fig3u1, col, row, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+    #     frozen_turbulence_plot(fig3u1, col, row, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
         
-    #     # U_ratio.append((1./coef[0])/U1)
-    #     # X_ratio.append(zp[zplan])
+    #     U_ratio.append((1./coef[0])/U1)
+    #     X_ratio.append(zp[zplan])
         
-    #     # U1_list.append(U1)
-    #     # Uc_list.append(1./coef[0])
+    #     U1_list.append(U1)
+    #     Uc_list.append(1./coef[0])
         
-    #     # del Dt
-    #     # del Dx
-    #     # del R2d
+    #     del Dt
+    #     del Dx
+    #     del R2d
+    
+    #     #### Spectra ####
+    #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        
+    #     frozen_turbulence_plot(fig1u1, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        
+    #     del time_spectra
+    #     del space_spectra
+    #     del omega
+    #     del k
         
         
     #     del datas_u1
@@ -218,17 +216,7 @@ def main():
     #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
     #     #datas_fluct_u2 = np.zeros_like(datas_u2)
     #     datas_u2 = datas_u2 - Uy
-    #     # del datas_u2
-        
-    #     #### Spectra ####
-    #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
-        
-    #     frozen_turbulence_plot(fig1u2, col, row, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
-        
-    #     del time_spectra
-    #     del space_spectra
-    #     del omega
-    #     del k
+    
         
     #     #### Autocorrelation ####
     #     # ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr", dx=dx, Uc=U1)
@@ -242,14 +230,23 @@ def main():
         
     #     #### Autocorrelation 2D ####
         
-    #     # Dt, Dx, R2d, coef = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
+    #     Dt, Dx, R2d, coef = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
         
-    #     # frozen_turbulence_plot(fig3u2, col, row, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+    #     frozen_turbulence_plot(fig3u2, col, row, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
         
-    #     # del Dt
-    #     # del Dx
-    #     # del R2d
-
+    #     del Dt
+    #     del Dx
+    #     del R2d
+    
+    #     #### Spectra ####
+    #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        
+    #     frozen_turbulence_plot(fig1u2, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        
+    #     del time_spectra
+    #     del space_spectra
+    #     del omega
+    #     del k
         
     #     del datas_u2
         
@@ -262,17 +259,6 @@ def main():
     #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
     #     #datas_fluct_u3 = np.zeros_like(datas_u3)
     #     datas_u3 = datas_u3 - Uz
-    #     #del datas_u3
-        
-    #     #### Spectra ####
-    #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
-        
-    #     frozen_turbulence_plot(fig1u3, col, row, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
-        
-    #     del time_spectra
-    #     del space_spectra
-    #     del omega
-    #     del k
         
     #     #### Autocorrelation ####
     #     # ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, tEnd=tEnd, tStart=tStart, ch="corr", dx=dx, Uc=U1)
@@ -286,17 +272,28 @@ def main():
         
     #     #### Autocorrelation 2D ####
         
-    #     # Dt, Dx, R2d, coef = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
+    #     Dt, Dx, R2d, coef = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, tEnd = tEnd, tStart = tStart, ch = "corr2d")
         
-    #     # frozen_turbulence_plot(fig3u3, col, row, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
+    #     frozen_turbulence_plot(fig3u3, col, row, Dt = Dt, Dx = Dx, R2d=R2d, coef=coef, ch = "corr2d")
         
-    #     # del Dt
-    #     # del Dx
-    #     # del R2d
+    #     del Dt
+    #     del Dx
+    #     del R2d
+    
+    #     #### Spectra ####
+    #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        
+    #     frozen_turbulence_plot(fig1u3, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        
+    #     del time_spectra
+    #     del space_spectra
+    #     del omega
+    #     del k
         
     #     del datas_u3
         
     #     col +=1
+    #     cpt +=1
     #     if zplan == 4:
     #         row +=1
     #         col = 1
@@ -330,19 +327,19 @@ def main():
     #     if split_time == 'Y':
     #         save_figures(fig1u1, "output/split_time/frozen_turbulence/power_spectra/u1.png")
     #         #save_figures(fig2u1, "output/split_time/frozen_turbulence/correlation_st/u1.png")
-    #         #save_figures(fig3u1, "output/split_time/frozen_turbulence/correlation2D/u1.png")
+    #         save_figures(fig3u1, "output/split_time/frozen_turbulence/correlation2D/u1.png")
             
     #         save_figures(fig1u2, "output/split_time/frozen_turbulence/power_spectra/u2.png")
     #         #save_figures(fig2u2, "output/split_time/frozen_turbulence/correlation_st/u2.png")
-    #         #save_figures(fig3u2, "output/split_time/frozen_turbulence/correlation2D/u2.png")
+    #         save_figures(fig3u2, "output/split_time/frozen_turbulence/correlation2D/u2.png")
         
     #         save_figures(fig1u3, "output/split_time/frozen_turbulence/power_spectra/u3.png")
     #         #save_figures(fig2u3, "output/split_time/frozen_turbulence/correlation_st/u3.png")
-    #         #save_figures(fig3u3, "output/split_time/frozen_turbulence/correlation2D/u3.png")
+    #         save_figures(fig3u3, "output/split_time/frozen_turbulence/correlation2D/u3.png")
             
-    #         #save_figures(figU, "output/split_time/frozen_turbulence/correlation2D/u_ratio.png")
+    #         save_figures(figU, "output/split_time/frozen_turbulence/correlation2D/u_ratio.png")
             
-    #         #save_figures(figU1c, "output/split_time/frozen_turbulence/correlation2D/u_1c.png")
+    #         save_figures(figU1c, "output/split_time/frozen_turbulence/correlation2D/u_1c.png")
         
     # # # Update layout properties for full plots.
     # if ch_plot == "all":
@@ -372,19 +369,19 @@ def main():
     #     if split_time == 'Y':
     #         save_figures(fig1u1, "output/split_time/frozen_turbulence/power_spectra/u1_all.png")
     #         #save_figures(fig2u1, "output/split_time/frozen_turbulence/correlation_st/u1_all.png")
-    #         #save_figures(fig3u1, "output/split_time/frozen_turbulence/correlation2D/u1_all.png")
+    #         save_figures(fig3u1, "output/split_time/frozen_turbulence/correlation2D/u1_all.png")
             
     #         save_figures(fig1u2, "output/split_time/frozen_turbulence/power_spectra/u2_all.png")
     #         #save_figures(fig2u2, "output/split_time/frozen_turbulence/correlation_st/u2_all.png")
-    #         #save_figures(fig3u2, "output/split_time/frozen_turbulence/correlation2D/u2_all.png")
+    #         save_figures(fig3u2, "output/split_time/frozen_turbulence/correlation2D/u2_all.png")
             
     #         save_figures(fig1u3, "output/split_time/frozen_turbulence/power_spectra/u3_all.png")
     #         #save_figures(fig2u3, "output/split_time/frozen_turbulence/correlation_st/u3_all.png")
-    #         #save_figures(fig3u3, "output/split_time/frozen_turbulence/correlation2D/u3_all.png")
+    #         save_figures(fig3u3, "output/split_time/frozen_turbulence/correlation2D/u3_all.png")
             
-    #         #save_figures(figU, "output/split_time/frozen_turbulence/correlation2D/u_ratio.png")
+    #         save_figures(figU, "output/split_time/frozen_turbulence/correlation2D/u_ratio_all.png")
             
-    #         #save_figures(figU1c, "output/split_time/frozen_turbulence/correlation2D/u_1c.png")
+    #         save_figures(figU1c, "output/split_time/frozen_turbulence/correlation2D/u_1c_all.png")
             
     # elapsed_time = time.time() - start_time
     # minutes, seconds = divmod(elapsed_time, 60)
@@ -988,121 +985,177 @@ def main():
     #=======================================================
                 #### RANS AND LES ANALYSIS ####
     #=======================================================
-    print("\n========================================")
-    print(f"{YELLOW}Von Karman theorical computation{RESET}")
-    start_time = time.time()
-    print("========================================")
-    zp_RANS = cflow.ut/cflow.nu * normal
-    fig_RANS = make_subplots(rows=1, cols=2, shared_yaxes= True, y_title='$z^+$')
-    fig_vel_profil = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
-    fig_var = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
-    fig_vel_ratio_profil = make_subplots(rows=1, cols=2, shared_yaxes= True, y_title='$z^+$')
-    fig_RANS.add_trace(go.Scatter(x=u_velocity, y=zp_RANS, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(RANS)}$'), row=1, col=1)
-    fig_RANS.add_trace(go.Scatter(x=ko2_tke, y=zp_RANS, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='circle'), name='$k_T\\text{(RANS)}$'), row=1, col=2)
+    # print("\n========================================")
+    # print(f"{YELLOW}RANS AND LES COMPARISON{RESET}")
+    # start_time = time.time()
+    # print("========================================")
+    # zp_RANS = cflow.ut/cflow.nu * normal
+    # fig_RANS = make_subplots(rows=1, cols=2, shared_yaxes= True, y_title='$z^+$')
+    # fig_vel_profil = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
+    # fig_var = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
+    # fig_vel_ratio_profil = go.Figure()
+    # fig_up = go.Figure()
+    # fig_RANS.add_trace(go.Scatter(x=u_velocity, y=zp_RANS, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(RANS)}$'), row=1, col=1)
+    # fig_RANS.add_trace(go.Scatter(x=ko2_tke, y=zp_RANS, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='circle'), name='$k_T\\text{(RANS)}$'), row=1, col=2)
     
-    U = []
-    V = []
-    W = []
-    var1 = []
-    var2 = []
-    var3 = []
-    kt = []
-    for zplan, zpvalue in enumerate(zp):
-        print('zp:', zpvalue)
+    # U = []
+    # V = []
+    # W = []
+    # var1 = []
+    # var2 = []
+    # var3 = []
+    # kt = []
+    # for zplan, zpvalue in enumerate(zp):
+    #     print('zp:', zpvalue)
         
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-        datas_u1 = var[1:,:,:]
-        del var
-        #Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-        Ux = np.mean(datas_u1[:,:,:], axis=0)
-        datas_u1 = datas_u1 - Ux[:,:,np.newaxis]
-        varUx = np.mean(np.mean(np.mean((datas_u1)**2, axis=0), axis=-1))
-        U.append(Ux)
-        var1.append(varUx)
-        del datas_u1
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+    #     datas_u1 = var[1:,:,:]
+    #     del var
+    #     #Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+    #     Ux = np.mean(datas_u1[:,:,:], axis=0)
+    #     datas_u1 = datas_u1 - Ux[np.newaxis,:,:]
+    #     varUx = np.mean(np.mean(np.mean((datas_u1)**2, axis=0), axis=-1))
+    #     U.append(np.mean(np.mean(Ux, axis=-1)))
+    #     var1.append(varUx)
+    #     del datas_u1
         
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-        datas_u2 = var[1:,:,:]
-        del var
-        #Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-        Uy = np.mean(datas_u2[:,:,:], axis=0)
-        datas_u2 = datas_u2 - Uy[:,:,np.newaxis]
-        varUy = np.mean(np.mean(np.mean((datas_u2)**2, axis=0), axis=-1))
-        V.append(Uy)
-        var2.append(varUy)
-        del datas_u2
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+    #     datas_u2 = var[1:,:,:]
+    #     del var
+    #     #Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+    #     Uy = np.mean(datas_u2[:,:,:], axis=0)
+    #     datas_u2 = datas_u2 - Uy[np.newaxis,:,:]
+    #     varUy = np.mean(np.mean(np.mean((datas_u2)**2, axis=0), axis=-1))
+    #     V.append(np.mean(np.mean(Uy, axis=-1)))
+    #     var2.append(varUy)
+    #     del datas_u2
         
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-        datas_u3 = var[1:,:,:]
-        del var
-        #Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-        Uz = np.mean(datas_u3[:,:,:], axis=-1)
-        datas_u3 = datas_u3 - Uz[:,:,np.newaxis]
-        varUz = np.mean(np.mean(np.mean((datas_u3)**2, axis=0), axis=-1))
-        W.append(Uz)
-        var3.append(varUz)
-        del datas_u3
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+    #     datas_u3 = var[1:,:,:]
+    #     del var
+    #     #Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+    #     Uz = np.mean(datas_u3[:,:,:], axis=0)
+    #     datas_u3 = datas_u3 - Uz[np.newaxis,:,:]
+    #     varUz = np.mean(np.mean(np.mean((datas_u3)**2, axis=0), axis=-1))
+    #     W.append(np.mean(np.mean(Uz, axis=-1)))
+    #     var3.append(varUz)
+    #     del datas_u3
         
-        kt.append(varUx + varUy + varUz)
+    #     kt.append(varUx + varUy + varUz)
         
-    kt = np.array(kt)
-    U = np.array(U)
-    V = np.array(V)
-    W = np.array(W)
-    var1 = np.array(var1)
-    var2 = np.array(var2)
-    var3 = np.array(var3)
-    kt /= 2.
-    ratio2 = var2 / var1
-    ratio3 = var3 / var1
-    ratio1 = var2 / var3
+    # kt = np.array(kt)
+    # U = np.array(U)
+    # V = np.array(V)
+    # W = np.array(W)
+    # up = U / cflow.ut
+    # var1 = np.array(var1)
+    # var2 = np.array(var2)
+    # var3 = np.array(var3)
+    # kt /= 2.
+    # ratio2 = var2 / var1
+    # ratio3 = var3 / var1
+    # ratio1 = var3 / var2
     
-    fig_RANS.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='x'), name='$U\\text{(LES)}$'), row=1, col=1)
-    fig_RANS.add_trace(go.Scatter(x=kt, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$k_T\\text{(LES)}$'), row=1, col=2)
+    # fig_RANS.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='x'), name='$U\\text{(LES)}$'), row=1, col=1)
+    # fig_RANS.add_trace(go.Scatter(x=kt, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$k_T\\text{(LES)}$'), row=1, col=2)
     
-    fig_RANS.update_xaxes(title='$\\text{velocity}~(m.s^{-1})$', row=1, col=1)
-    fig_RANS.update_xaxes(title='$\\text{kinetic energy}~(m^2.s^{-2})$', row=1, col=2)
-    fig_RANS.update_layout(height=600, width=800, title="RANS and LES data profiles", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    # fig_RANS.update_xaxes(title='$\\text{velocity}~(m.s^{-1})$', row=1, col=1)
+    # fig_RANS.update_xaxes(title='$\\text{kinetic energy}~(m^2.s^{-2})$', row=1, col=2)
+    # fig_RANS.update_layout(height=600, width=800, title="RANS and LES data profiles", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    save_figures(fig_RANS, "output/RANS/RANS_profiles.png")
+    # save_figures(fig_RANS, "output/RANS/RANS_profiles.png")
     
-    fig_vel_profil.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(LES)}$'), row=1, col=1)
-    fig_vel_profil.add_trace(go.Scatter(x=V, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$V\\text{(LES)}$'), row=1, col=2)
-    fig_vel_profil.add_trace(go.Scatter(x=W, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$W\\text{(LES)}$'),  row=1, col=3)
+    # fig_vel_profil.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(LES)}$'), row=1, col=1)
+    # fig_vel_profil.add_trace(go.Scatter(x=V, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$V\\text{(LES)}$'), row=1, col=2)
+    # fig_vel_profil.add_trace(go.Scatter(x=W, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$W\\text{(LES)}$'),  row=1, col=3)
     
-    fig_vel_profil.update_xaxes(title='$U~(m.s^{-1})$', row=1, col=1)
-    fig_vel_profil.update_xaxes(title='$V~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
-    fig_vel_profil.update_xaxes(title='$W~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
-    fig_vel_profil.update_layout(height=600, width=800, title="Velocity profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    # fig_vel_profil.update_xaxes(title='$U~(m.s^{-1})$', row=1, col=1)
+    # fig_vel_profil.update_xaxes(title='$V~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
+    # fig_vel_profil.update_xaxes(title='$W~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
+    # fig_vel_profil.update_layout(height=600, width=800, title="Velocity profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    save_figures(fig_vel_profil, "output/RANS/mean_velocity_profiles.png")
+    # save_figures(fig_vel_profil, "output/RANS/mean_velocity_profiles.png")
     
-    fig_var.add_trace(go.Scatter(x=var1, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$u_1$'), row=1, col=1)
-    fig_var.add_trace(go.Scatter(x=var2, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$u_2$'), row=1, col=2)
-    fig_var.add_trace(go.Scatter(x=var3, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$u_3$'),  row=1, col=3)
+    # fig_var.add_trace(go.Scatter(x=var1, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$\overline{u_1u_1}$'), row=1, col=1)
+    # fig_var.add_trace(go.Scatter(x=var2, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$\overline{u_2u_2}$'), row=1, col=2)
+    # fig_var.add_trace(go.Scatter(x=var3, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$\overline{u_3u_3}$'),  row=1, col=3)
     
-    fig_var.update_xaxes(title='$u_1~(m.s^{-1})$', row=1, col=1)
-    fig_var.update_xaxes(title='$u_2~(m.s^{-1})$', row=1, col=2, exponentformat = 'e')
-    fig_var.update_xaxes(title='$u_3~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
-    fig_var.update_layout(height=600, width=800, title="Variance velocity fluctuation profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    # fig_var.update_xaxes(title='$\overline{u_1u_1}$', row=1, col=1)
+    # fig_var.update_xaxes(title='$\overline{u_2u_2}$', row=1, col=2, exponentformat = 'e')
+    # fig_var.update_xaxes(title='$\overline{u_3u_3}$', row=1, col=3, exponentformat = 'e')
+    # fig_var.update_layout(height=600, width=800, title="Variance velocity fluctuation profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    save_figures(fig_var, "output/RANS/var_velocity_profiles.png")
+    # save_figures(fig_var, "output/RANS/var_velocity_profiles.png")
     
-    fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio2, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$u_2^2 / u_1^2$'), row=1, col=1)
-    fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio3, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$u_3^2 / u_1^2$'), row=1, col=1)
-    fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio1, y=zp, mode= 'lines+markers', line=dict(color='green', width=2), marker=dict(symbol='x'), name='$u_2^2 / u_3^2$'), row=1, col=2)
+    # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio2, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$\overline{u_2u_2} / \overline{u_1u_1}$'))
+    # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio3, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$\overline{u_3u_3} / \overline{u_1u_1}$'))
+    # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio1, y=zp, mode= 'lines+markers', line=dict(color='green', width=2), marker=dict(symbol='x'), name='$\overline{u_3u_3} / \overline{u_2u_2}$'))
     
-    #fig_vel_ratio_profil.update_yaxes(title='$z^+$')
-    fig_vel_ratio_profil.update_xaxes(title='velocity ratio', row=1, col=1)
-    fig_vel_ratio_profil.update_xaxes(title='velocity ratio', row=1, col=2)
-    fig_vel_ratio_profil.update_layout(height=600, width=800, title="Variance velocity ratio profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    # fig_vel_ratio_profil.update_yaxes(title='$z^+$')
+    # fig_vel_ratio_profil.update_xaxes(title='velocity ratio')
+    # fig_vel_ratio_profil.update_layout(height=600, width=800, title="Variance velocity ratio profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    save_figures(fig_vel_ratio_profil, "output/RANS/velocity_ratio_profiles.png")
+    # save_figures(fig_vel_ratio_profil, "output/RANS/velocity_ratio_profiles.png")
     
-    elapsed_time = time.time() - start_time
-    minutes, seconds = divmod(elapsed_time, 60)
+    # fig_up.add_trace(go.Scatter(x=zp, y=up, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle-open'), showlegend=False))
     
-    print(f'\n RANS study done in : {int(minutes)}m {seconds:.2f}s \n')
+    # fig_up.update_yaxes(title='$u^+$')
+    # fig_up.update_xaxes(title='$z^+$')
+    # fig_up.update_layout(height=600, width=800, title="Adimentionelized velocity profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    
+    # save_figures(fig_up, "output/RANS/velocity_ad.png")
+    
+    # elapsed_time = time.time() - start_time
+    # minutes, seconds = divmod(elapsed_time, 60)
+    
+    # print(f'\n RANS study done in : {int(minutes)}m {seconds:.2f}s \n')
+    
+    #=======================================================
+                #### NORMAL PLAN ####
+    #=======================================================
+    nlines = len(fpars_files_normal_u1)
+    _, x1, x2, _, nt, n2, n1, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane_line(fpars_files_normal_u1[0])
+    nt = nt - 1
+    print('n1:', n1)
+    print('n2:', n2)
+    print('x2 shape:', x2.shape)
+    data_u1 = np.zeros((nt, n1), dtype=float)
+    
+    #Figure initiaization
+    fig_u1 = go.Figure()
+    
+    for line in range(nlines):
+        print('line number:', line)
+        
+        var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
+        print('var shape',var.shape)
+        print('u1 shape',data_u1.shape)
+        data_u1 += var[1:,:]
+        
+    data_u1 /= nlines
+    data_u1 = np.mean(data_u1, axis=0)
+    fig_u1.add_trace(go.Scatter(x=data_u1, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False))
+    
+    # var1 = np.var(data_u1**2, axis=0)
+    del data_u1
+    U1 /= cflow.ut
+    
+    fig_u1.update_yaxes(title='$z^+$')
+    fig_u1.update_xaxes(title='$u^+$')
+    fig_u1.update_layout(height=600, width=800, title="Streamwise velocity profile adimentionalized", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    
+    save_figures(fig_u1, "output/Normal_plan/velocity_ad.png")
+    
+    del var1
+    
+    # U = []
+    # V = []
+    # W = []
+    # var1 = []
+    # var2 = []
+    # var3 = []
+    # kt = []
+        
     
     
     #=======================================================
@@ -1145,24 +1198,6 @@ def main():
     #     #sigma_u_squared = sigma_power2(datas_u1, axis = "streamwise")
     #     sigma_u_squared = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=-1), axis=-1))
         
-    #     # split_t = int(2**10)
-    #     # num_split_t = nt // split_t
-        
-    #     # if split_time == 'Y':
-    #     #     datas_fluct_u1 = np.zeros((split_t, n1, n2))
-    #     #     for n in range(1,num_split_t):
-    #     #         datas_fluct_u1 += np.abs(datas_u1[(n-1)*split_t:n*split_t,:,:] - Ux)
-                
-    #     #     datas_fluct_u1 /= (num_split_t-1)    
-    #     #     sigma_u_squared = sigma_power2(datas_fluct_u1, axis = "streamwise")
-    #     #     # sigma_u_squared = sigma(datas_fluct_u1, ko2_omega.shape[0], axis = "streamwise")
-    #     #     # sigma_u_squared = sigma_u_squared**2
-            
-    #     # if split_time == 'n':
-    #     #     datas_fluct_u1 = np.abs(datas_u1 - Ux)
-    #     #     sigma_u_squared = sigma_power2(datas_fluct_u1, axis = "streamwise")
-    #     #     # sigma_u_squared = sigma(datas_fluct_u1, ko2_omega.shape[0], axis = "streamwise")
-    #     #     # sigma_u_squared = sigma_u_squared**2
             
     #     del datas_u1
     #     #del datas_fluct_u1
@@ -1182,23 +1217,6 @@ def main():
     #     # sigma_v_squared = sigma_power2(datas_u2, axis = "streamwise")
     #     sigma_v_squared = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=-1), axis=-1))
         
-    #     # if split_time == 'Y':
-
-    #     #     datas_fluct_u2 = np.zeros((split_t, n1, n2))
-    #     #     for n in range(1,num_split_t):
-    #     #         datas_fluct_u2 += np.abs(datas_u2[(n-1)*split_t:n*split_t,:,:] - Uy)
-                
-    #     #     datas_fluct_u2 /= (num_split_t-1)    
-    #     #     sigma_v_squared = sigma_power2(datas_fluct_u2, axis = "streamwise")
-    #     #     # sigma_v_squared = sigma(datas_fluct_u2, ko2_omega.shape[0], axis = "streamwise")
-    #     #     # sigma_v_squared = sigma_v_squared**2
-                
-            
-    #     # if split_time == 'n':
-    #     #     datas_fluct_u2 = np.abs(datas_u2 - Uy)
-    #     #     sigma_v_squared = sigma_power2(datas_fluct_u2, axis = "streamwise")
-    #     #     # sigma_v_squared = sigma(datas_fluct_u2, ko2_omega.shape[0], axis = "streamwise")
-    #     #     # sigma_v_squared = sigma_v_squared**2
             
     #     del datas_u2
     #     #del datas_fluct_u2
@@ -1218,22 +1236,6 @@ def main():
     #     #sigma_w_squared = sigma_power2(datas_u3, axis = "streamwise")
     #     sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=-1), axis=-1))
         
-    #     # if split_time == 'Y':
-    #     #     datas_fluct_u3 = np.zeros((split_t, n1, n2))
-    #     #     for n in range(1,num_split_t):
-    #     #         datas_fluct_u3 += np.abs(datas_u3[(n-1)*split_t:n*split_t,:,:] - Uz)
-                
-    #     #     datas_fluct_u3 /= (num_split_t-1)    
-    #     #     sigma_w_squared = sigma_power2(datas_fluct_u3, axis = "streamwise")
-    #     #     # sigma_w_squared = sigma(datas_fluct_u3, ko2_omega.shape[0], axis = "streamwise")
-    #     #     # sigma_w_squared = sigma_w_squared**2
-                
-            
-    #     # if split_time == 'n':
-    #     #     datas_fluct_u3 = np.abs(datas_u3 - Uz)
-    #     #     sigma_w_squared = sigma_power2(datas_fluct_u3, axis = "streamwise")
-    #     #     # sigma_w_squared = sigma(datas_fluct_u3, ko2_omega.shape[0], axis = "streamwise")
-    #     #     # sigma_w_squared = sigma_w_squared**2
             
     #     del datas_u3
     #     #del datas_fluct_u3
@@ -1263,26 +1265,31 @@ def main():
         
     #     ### experience ###
     #     ## u1 ##
+    #     print(f"Computing spectra from LES datas for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
     #     datas_u1 = var[1:,:,:]
     #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
     #     datas_u1 = datas_u1 - Ux
-    #     phi11_exp__ = von_karman_spectra(datas_u1, datas_u1, geom='plan', axis='streamwise')
-    #     del datas_u1
-    #     phi11_exp = np.mean(np.mean(phi11_exp__, axis=-1), axis=-1)
+    #     # phi11_exp__ = von_karman_spectra(datas_u1, datas_u1, geom='plan', axis='streamwise')
+    #     # del datas_u1
+    #     # phi11_exp = np.mean(np.mean(phi11_exp__, axis=-1), axis=-1)
                 
-    #     del phi11_exp__
+    #     # del phi11_exp__
         
-    #     freq = fft.fftfreq(2*split_t, d=dt)
-    #     freq = freq[:freq.shape[0]//2]
-    #     om = 2*np.pi*freq
-    #     k1 = Ux*om
+    #     omega, k, _, phi11_exp = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+    #     del datas_u1
         
-    #     von_karman_plot(fig_vanK, col, row, k1, k1*phi11_exp, name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
+    #     # freq = fft.fftfreq(2*split_t, d=dt)
+    #     # freq = freq[:freq.shape[0]//2]
+    #     # om = 2*np.pi*freq
+    #     # k1 = Ux*om
+        
+    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi11_exp[1:], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
         
     #     del phi11_exp
-    #     del om
-    #     del freq
+    #     del k
+    #     # del om
+    #     # del freq
         
     #     ## u2 ##
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
@@ -1290,16 +1297,20 @@ def main():
     #     datas_u2 = var[1:,:,:]
     #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
     #     datas_u2 = datas_u2 - Uy
-    #     phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
-    #     del datas_u2
-    #     phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
+    #     # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
+    #     # del datas_u2
+    #     # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
         
-    #     del phi22_exp__
+    #     # del phi22_exp__
+        
+    #     omega, k, _, phi22_exp = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
+    #     del datas_u2
                 
-    #     von_karman_plot(fig_vanK, col, row, k1, k1*phi22_exp, name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
+    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi22_exp[1:], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
             
     #     del phi22_exp
-    #     del k1
+    #     del k
+    #     # del k1
         
         
     #     col +=1
@@ -1321,7 +1332,15 @@ def main():
     # print(f'\n Von Karman study done in : {int(minutes)}m {seconds:.2f}s \n')
         
         
-        
+    del fpars_files_streamwise_u1
+    del fpars_files_streamwise_u2
+    del fpars_files_streamwise_u3
+    del fpars_files_spanwise_u1
+    del fpars_files_spanwise_u2
+    del fpars_files_spanwise_u3
+    del fpars_files_normal_u1
+    del fpars_files_normal_u2
+    del fpars_files_normal_u3
         
 ############################################################
         
