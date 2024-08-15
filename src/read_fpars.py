@@ -23,7 +23,7 @@ def read_fpar_extract_plane(infile):
             quaternion = np.array([1.0, 0.0, 0.0, 0.0])
         elif version == -1:
             # New version
-            print('New version')
+            #print('New version')
             data_array = np.fromfile(fid, np.int32, 5)
             nt = data_array[0]  # Number of timesteps
             n1 = data_array[1]
@@ -69,7 +69,7 @@ def read_fpar_extract_plane_line(infile):
         data_array = np.fromfile(fid, np.int32, 5)
         nt = data_array[0]  # Number of timesteps
         n1 = data_array[1]
-        n2 = data_array[2] ; print(data_array[4])
+        n2 = data_array[2] #; print(data_array[4])
         n3 = 1
         iprecision = data_array[4]
         ndata = n1 * n2 * n3
