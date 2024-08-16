@@ -45,42 +45,52 @@ class ChannelFlow(object):
     
 def main():
     
-    
     cflow = ChannelFlow(xlen=xlen, ylen=ylen, zlen=zlen, rho=rho, uinf=uinf, re=re, ret=ret)
     
-    #Reading input files.
-    zp = [5, 20, 40, 60, 80, 98, 151, 199, 251, 302]
+    ## Choose number of plans
+    if ch_plot == "all":
+        zp_ind = np.arange(0, len(zplus), 1, dtype=int)
+        zp = zplus
+        print('zp:',zp)
+        print("mode 'all' chosen")
+    elif ch_plot == "normal":
+        zp_ind = np.arange(0, len(zplus), len(zplus)//3, dtype=int)
+        zp = zplus[::3]
+        print('zp:',zp)
+        print('zp_ind:', zp_ind)
+        print("mode 'normal' chosen")
+    else:
+        print("Error: 'ch_plot' in parameters.py have to be 'normal' or 'all' ")
+        
     z = []
     for he in zp:
         z.append(he * cflow.nu / cflow.ut)
-    
-    # path = 'input/' #change it as you want
-    path = '/media/julien/Verbatim/julien/channel_wrles_retau395/' #on the external disc
+        
     #### Streamwise files ####
     #fpars_files_streamwise_p = sorted(glob.glob(path + "streamwise/*fpar.p"))
     
-    fpars_files_streamwise_u1 = sorted(glob.glob(path + "streamwise/*fpar.u1"))
+    fpars_files_streamwise_u1 = sorted(glob.glob(in_path + "streamwise/*fpar.u1"))
     
-    fpars_files_streamwise_u2 = sorted(glob.glob(path + "streamwise/*fpar.u2"))
+    fpars_files_streamwise_u2 = sorted(glob.glob(in_path + "streamwise/*fpar.u2"))
     
-    fpars_files_streamwise_u3 = sorted(glob.glob(path + "streamwise/*fpar.u3"))
+    fpars_files_streamwise_u3 = sorted(glob.glob(in_path + "streamwise/*fpar.u3"))
     
     #### Spanwise files ####
     #fpars_files_spanwise_p = sorted(glob.glob(path + "spanwise/*fpar.p"))
     
-    fpars_files_spanwise_u1 = sorted(glob.glob(path + "spanwise/*fpar.u1"))
+    fpars_files_spanwise_u1 = sorted(glob.glob(in_path + "spanwise/*fpar.u1"))
     
-    fpars_files_spanwise_u2 = sorted(glob.glob(path + "spanwise/*fpar.u2"))
+    fpars_files_spanwise_u2 = sorted(glob.glob(in_path + "spanwise/*fpar.u2"))
     
-    fpars_files_spanwise_u3 = sorted(glob.glob(path + "spanwise/*fpar.u3"))
+    fpars_files_spanwise_u3 = sorted(glob.glob(in_path + "spanwise/*fpar.u3"))
     
     #### Wall normal files ####
     
-    fpars_files_normal_u1 = sorted(glob.glob(path + "normal_line/*fpar.u1"))
+    fpars_files_normal_u1 = sorted(glob.glob(in_path + "normal_line/*fpar.u1"))
     
-    fpars_files_normal_u2 = sorted(glob.glob(path + "normal_line/*fpar.u2"))
+    fpars_files_normal_u2 = sorted(glob.glob(in_path + "normal_line/*fpar.u2"))
     
-    fpars_files_normal_u3 = sorted(glob.glob(path + "normal_line/*fpar.u3"))
+    fpars_files_normal_u3 = sorted(glob.glob(in_path + "normal_line/*fpar.u3"))
     
     if len(fpars_files_streamwise_u1) == 0:
         print("Error: Input fiels didn't find.")
@@ -135,9 +145,9 @@ def main():
     # col = 1
     # row = 1
     # ch_plot ="normal"
-    # fig1u1, fig2u1, fig3u1 = init_figures_ft(zp, n2, ch=ch_plot) #Figure initialization
-    # fig1u2, fig2u2, fig3u2 = init_figures_ft(zp, n2, ch=ch_plot)
-    # fig1u3, fig2u3, fig3u3 = init_figures_ft(zp, n2, ch=ch_plot)
+    # fig1u1, fig2u1, fig3u1 = init_figures_ft(zp, ch=ch_plot) #Figure initialization
+    # fig1u2, fig2u2, fig3u2 = init_figures_ft(zp, ch=ch_plot)
+    # fig1u3, fig2u3, fig3u3 = init_figures_ft(zp, ch=ch_plot)
     
     # figU = go.Figure()
     # U_ratio = []
@@ -150,8 +160,8 @@ def main():
     # cpt = 0
     # start_time = time.time()
     
-    # for zplan in np.arange(0, n2, n2//3, dtype=int):
-    # # for zplan, zpvalue in enumerate(zp):
+    # #for zplan in np.arange(0, n2, n2//3, dtype=int):
+    # for zplan in zp_ind:
         
     #     print("========================================")
     #     print(f'Frozen turbulence validation for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
@@ -325,21 +335,21 @@ def main():
     #     figU1c.update_layout(title='Velocity comparison', font=font, legend=dict(yanchor="bottom", xanchor="right"))
         
     #     if split_time == 'Y':
-    #         save_figures(fig1u1, "output/split_time/frozen_turbulence/power_spectra/u1.png")
-    #         #save_figures(fig2u1, "output/split_time/frozen_turbulence/correlation_st/u1.png")
-    #         save_figures(fig3u1, "output/split_time/frozen_turbulence/correlation2D/u1.png")
+    #         save_figures(fig1u1, "split_time/frozen_turbulence/power_spectra/u1.png")
+    #         #save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1.png")
+    #         save_figures(fig3u1, "split_time/frozen_turbulence/correlation2D/u1.png")
             
-    #         save_figures(fig1u2, "output/split_time/frozen_turbulence/power_spectra/u2.png")
-    #         #save_figures(fig2u2, "output/split_time/frozen_turbulence/correlation_st/u2.png")
-    #         save_figures(fig3u2, "output/split_time/frozen_turbulence/correlation2D/u2.png")
+    #         save_figures(fig1u2, "split_time/frozen_turbulence/power_spectra/u2.png")
+    #         #save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2.png")
+    #         save_figures(fig3u2, "split_time/frozen_turbulence/correlation2D/u2.png")
         
-    #         save_figures(fig1u3, "output/split_time/frozen_turbulence/power_spectra/u3.png")
-    #         #save_figures(fig2u3, "output/split_time/frozen_turbulence/correlation_st/u3.png")
-    #         save_figures(fig3u3, "output/split_time/frozen_turbulence/correlation2D/u3.png")
+    #         save_figures(fig1u3, "split_time/frozen_turbulence/power_spectra/u3.png")
+    #         #save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3.png")
+    #         save_figures(fig3u3, "split_time/frozen_turbulence/correlation2D/u3.png")
             
-    #         save_figures(figU, "output/split_time/frozen_turbulence/correlation2D/u_ratio.png")
+    #         save_figures(figU, "split_time/frozen_turbulence/correlation2D/u_ratio.png")
             
-    #         save_figures(figU1c, "output/split_time/frozen_turbulence/correlation2D/u_1c.png")
+    #         save_figures(figU1c, "split_time/frozen_turbulence/correlation2D/u_1c.png")
         
     # # # Update layout properties for full plots.
     # if ch_plot == "all":
@@ -367,21 +377,21 @@ def main():
     #     figU1c.update_layout(title='Velocity comparison', font=font, legend=dict(yanchor="bottom", xanchor="right"))
         
     #     if split_time == 'Y':
-    #         save_figures(fig1u1, "output/split_time/frozen_turbulence/power_spectra/u1_all.png")
-    #         #save_figures(fig2u1, "output/split_time/frozen_turbulence/correlation_st/u1_all.png")
-    #         save_figures(fig3u1, "output/split_time/frozen_turbulence/correlation2D/u1_all.png")
+    #         save_figures(fig1u1, "split_time/frozen_turbulence/power_spectra/u1_all.png")
+    #         #save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1_all.png")
+    #         save_figures(fig3u1, "split_time/frozen_turbulence/correlation2D/u1_all.png")
             
-    #         save_figures(fig1u2, "output/split_time/frozen_turbulence/power_spectra/u2_all.png")
-    #         #save_figures(fig2u2, "output/split_time/frozen_turbulence/correlation_st/u2_all.png")
-    #         save_figures(fig3u2, "output/split_time/frozen_turbulence/correlation2D/u2_all.png")
+    #         save_figures(fig1u2, "split_time/frozen_turbulence/power_spectra/u2_all.png")
+    #         #save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2_all.png")
+    #         save_figures(fig3u2, "split_time/frozen_turbulence/correlation2D/u2_all.png")
             
-    #         save_figures(fig1u3, "output/split_time/frozen_turbulence/power_spectra/u3_all.png")
-    #         #save_figures(fig2u3, "output/split_time/frozen_turbulence/correlation_st/u3_all.png")
-    #         save_figures(fig3u3, "output/split_time/frozen_turbulence/correlation2D/u3_all.png")
+    #         save_figures(fig1u3, "split_time/frozen_turbulence/power_spectra/u3_all.png")
+    #         #save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3_all.png")
+    #         save_figures(fig3u3, "split_time/frozen_turbulence/correlation2D/u3_all.png")
             
-    #         save_figures(figU, "output/split_time/frozen_turbulence/correlation2D/u_ratio_all.png")
+    #         save_figures(figU, "split_time/frozen_turbulence/correlation2D/u_ratio_all.png")
             
-    #         save_figures(figU1c, "output/split_time/frozen_turbulence/correlation2D/u_1c_all.png")
+    #         save_figures(figU1c, "split_time/frozen_turbulence/correlation2D/u_1c_all.png")
             
     # elapsed_time = time.time() - start_time
     # minutes, seconds = divmod(elapsed_time, 60)
@@ -392,441 +402,451 @@ def main():
     #=======================================================
                     #### GAMMA ####
     #=======================================================
-    print("\n========================================")
-    print(f"{YELLOW}Gamma determination{RESET}")
-    start_time = time.time()
-    print("========================================")
-    print(f"{YELLOW}Streamwise{RESET}")
-    col = 1
-    row = 1
+    # print("\n========================================")
+    # print(f"{YELLOW}Gamma determination{RESET}")
+    # start_time = time.time()
+    # print("========================================")
+    # print(f"{YELLOW}Streamwise{RESET}")
+    # col = 1
+    # row = 1
     
-    print("\nReading input files ...")
-    _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
-    nt = nt - 1
-    dx = cflow.xlen / n1
-    num_split_t = nt // split_t
+    # print("\nReading input files ...")
+    # _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
+    # nt = nt - 1
+    # dx = cflow.xlen / n1
+    # num_split_t = nt // split_t
     
-    ch_plot ="all" 
-    figu1g, figu2g, figu3g = init_figures_gamma(zp, n2, ch=ch_plot) #Figure initialization
-    figu1g_r, figu2g_r, figu3g_r = init_figures_gamma(zp, n2, ch=ch_plot)
+    # ch_plot ="all" 
+    # figu1g, figu2g, figu3g = init_figures_gamma(zp, ch=ch_plot) #Figure initialization
+    # figu1g_r, figu2g_r, figu3g_r = init_figures_gamma(zp, ch=ch_plot)
     
-    figgamma = make_subplots(rows=1, cols=2, shared_yaxes=True, y_title='$\gamma$', subplot_titles=("First slop", "Second slop"))
-    gamma_u1_1 = []
-    gamma_u2_1 = []
-    gamma_u3_1 = []
-    gamma_u1_2 = []
-    gamma_u2_2 = []
-    gamma_u3_2 = []
+    # figgamma = make_subplots(rows=1, cols=2, shared_yaxes=True, y_title='$\gamma$', subplot_titles=("First slop", "Second slop"))
+    # gamma_u1_1 = []
+    # gamma_u2_1 = []
+    # gamma_u3_1 = []
+    # gamma_u1_2 = []
+    # gamma_u2_2 = []
+    # gamma_u3_2 = []
     
-    figgamma_r = make_subplots(rows=1, cols=3, shared_yaxes=True, y_title='$\gamma$', subplot_titles=("$u_1$)", "$u_2$)", "$u_3$"))
-    gamma_u1_1_r = []
-    gamma_u2_1_r = []
-    gamma_u3_1_r = []
-    gamma_u1_2_r = []
-    gamma_u2_2_r = []
-    gamma_u3_2_r = []
-    gamma_u1_3_r = []
-    gamma_u2_3_r = []
-    gamma_u3_3_r = []
-    gamma_u1_4_r = []
-    gamma_u2_4_r = []
-    gamma_u3_4_r = []
+    # figgamma_r = make_subplots(rows=1, cols=3, shared_yaxes=True, y_title='$\gamma$', subplot_titles=("$u_1$)", "$u_2$)", "$u_3$"))
+    # gamma_u1_1_r = []
+    # gamma_u2_1_r = []
+    # gamma_u3_1_r = []
+    # gamma_u1_2_r = []
+    # gamma_u2_2_r = []
+    # gamma_u3_2_r = []
+    # gamma_u1_3_r = []
+    # gamma_u2_3_r = []
+    # gamma_u3_3_r = []
+    # gamma_u1_4_r = []
+    # gamma_u2_4_r = []
+    # gamma_u3_4_r = []
     
-    z_axis = []
+    # z_axis = []
     
-    # for zplan in np.arange(0, n2, n2//3, dtype=int):
-    for zplan, zpvalue in enumerate(zp):
+    # # for zplan in np.arange(0, n2, n2//3, dtype=int):
+    # for zplan in zp_ind:
     
         
-        print("========================================")
-        print(f'Gamma determination for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
-        print('Plan number:', zplan)
+    #     print("========================================")
+    #     print(f'Gamma determination for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
+    #     print('Plan number:', zplan)
         
-        z_axis.append(zp[zplan])
+    #     z_axis.append(zp[zplan])
         
-        #### u1 ####
-        print("\nReading input files u1 streamwise...")
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-        datas_u1 = var[1:,:,:]
+    #     #### u1 ####
+    #     print("\nReading input files u1 streamwise...")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+    #     datas_u1 = var[1:,:,:]
         
-        U1 = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+    #     U1 = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=0), axis=-1))
+        
+    #     datas_u1 = datas_u1 - U1
     
-        cpt = 0
-        # for delta_x in range(1, 20, 5):
-        #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
+    #     #cpt = 0
+    #     # for delta_x in range(1, 20, 5):
+    #     #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
-        #     r = np.abs(x1[delta_x] - x1[0])
+    #     #     r = np.abs(x1[delta_x] - x1[0])
             
 
-        #     slop1, slop2 = frozen_turbulence_plot(figu1g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
-        #     cpt += 1
+    #     #     slop1, slop2 = frozen_turbulence_plot(figu1g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
+    #     #     cpt += 1
         
-        _, omega, _ = Gamma_function(datas_u1[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
+    #     _, omega, _ = Gamma_function(datas_u1[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
         
-        funct = np.zeros((omega.shape[0], n1))
-        omega = np.zeros((omega.shape[0]))
-        Dx = np.zeros((n1))
-        for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
+    #     funct = np.zeros((omega.shape[0], n1))
+    #     omega = np.zeros((omega.shape[0]))
+    #     Dx = np.zeros((n1))
+    #     for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
             
-            funct += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
-            omega += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
-            Dx += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
+    #         funct += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
+    #         omega += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
+    #         Dx += Gamma_function(datas_u1[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
             
-        funct /= (num_split_t-1)
-        omega /= (num_split_t-1)
-        Dx /= (num_split_t-1)
+    #     funct /= (num_split_t-1)
+    #     omega /= (num_split_t-1)
+    #     Dx /= (num_split_t-1)
         
-        del datas_u1
+    #     del datas_u1
         
-        omega_lim = 20 ##have to be computed (mesh size?)
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind0 = i
-                break
+    #     omega_lim = 20 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind0 = i
+    #             break
             
-        omega_lim = 40 ##have to be computed (mesh size?)
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind1 = i
-                break
+    #     omega_lim = 40 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind1 = i
+    #             break
                 
-        omega_lim = 70
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind2 = i
-                break
+    #     omega_lim = 70
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind2 = i
+    #             break
             
-        slop1, slop2 = gamma_plot(figu1g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
+    #     slop1, slop2 = gamma_plot(figu1g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
             
-        ind0 = Dx.shape[0]//2
+    #     ind0 = Dx.shape[0]//2
             
-        r_lim = 4
-        for i in range(Dx.shape[0]):
-            if Dx[i]>r_lim:
-                ind1 = i
-                break
+    #     r_lim = 4
+    #     for i in range(Dx.shape[0]):
+    #         if Dx[i]>r_lim:
+    #             ind1 = i
+    #             break
             
-        print("ind0",ind0) ; print("ind1",ind1)
-        # print("Dx shape:", Dx[n1//2:].shape)
+    #     print("ind0",ind0) ; print("ind1",ind1)
+    #     # print("Dx shape:", Dx[n1//2:].shape)
         
-        moy1, moy2, moy3, moy4 = gamma_plot(figu1g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
+    #     moy1, moy2, moy3, moy4 = gamma_plot(figu1g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
         
-        gamma_u1_1.append(slop1[0]*U1/Dx[15])
-        gamma_u1_2.append(slop2[0]*U1/Dx[15])
+    #     gamma_u1_1.append(slop1[0]*U1/Dx[15])
+    #     gamma_u1_2.append(slop2[0]*U1/Dx[15])
         
-        gamma_u1_1_r.append(moy1*U1/(omega[3]*Dx[ind1]))
-        gamma_u1_2_r.append(moy2*U1/(omega[5]*Dx[ind1]))
-        gamma_u1_3_r.append(moy3*U1/(omega[10]*Dx[ind1]))
-        gamma_u1_4_r.append(moy4*U1/(omega[13]*Dx[ind1]))
+    #     gamma_u1_1_r.append(moy1*U1/(omega[3]*Dx[ind1]))
+    #     gamma_u1_2_r.append(moy2*U1/(omega[5]*Dx[ind1]))
+    #     gamma_u1_3_r.append(moy3*U1/(omega[10]*Dx[ind1]))
+    #     gamma_u1_4_r.append(moy4*U1/(omega[13]*Dx[ind1]))
             
-        del omega
-        del funct
-        del Dx
-        del slop1
-        del slop2
+    #     del omega
+    #     del funct
+    #     del Dx
+    #     del slop1
+    #     del slop2
         
-        #### u2 ####
-        print("\nReading input files u2 streamwise ...")
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-        datas_u2 = var[1:,:,:]
+    #     #### u2 ####
+    #     print("\nReading input files u2 streamwise ...")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+    #     datas_u2 = var[1:,:,:]
         
-        # cpt = 0
-        # for delta_x in range(1, 20, 5):
-        #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
+    #     U2 = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=0), axis=-1))
+        
+    #     datas_u2 = datas_u2 - U2
+        
+    #     # cpt = 0
+    #     # for delta_x in range(1, 20, 5):
+    #     #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
-        #     r = np.abs(x1[delta_x] - x1[0])
+    #     #     r = np.abs(x1[delta_x] - x1[0])
             
 
-        #     slop1, slop2 = frozen_turbulence_plot(figu2g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
-        #     cpt += 1
+    #     #     slop1, slop2 = frozen_turbulence_plot(figu2g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
+    #     #     cpt += 1
         
-        _, omega, _ = Gamma_function(datas_u2[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
+    #     _, omega, _ = Gamma_function(datas_u2[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
         
-        funct = np.zeros((omega.shape[0], n1))
-        omega = np.zeros((omega.shape[0]))
-        Dx = np.zeros((n1))
-        for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
+    #     funct = np.zeros((omega.shape[0], n1))
+    #     omega = np.zeros((omega.shape[0]))
+    #     Dx = np.zeros((n1))
+    #     for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
             
-            funct += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
-            omega += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
-            Dx += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
+    #         funct += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0]
+    #         omega += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
+    #         Dx += Gamma_function(datas_u2[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
             
-        funct /= (num_split_t-1)
-        omega /= (num_split_t-1)
-        Dx /= (num_split_t-1)
+    #     funct /= (num_split_t-1)
+    #     omega /= (num_split_t-1)
+    #     Dx /= (num_split_t-1)
         
-        del datas_u2
+    #     del datas_u2
         
-        omega_lim = 20 ##have to be computed (mesh size?)
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind0 = i
-                break
+    #     omega_lim = 20 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind0 = i
+    #             break
             
-        omega_lim = 40 ##have to be computed (mesh size?)
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind1 = i
-                break
+    #     omega_lim = 40 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind1 = i
+    #             break
                 
-        omega_lim = 70
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind2 = i
-                break
+    #     omega_lim = 70
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind2 = i
+    #             break
             
-        slop1, slop2 = gamma_plot(figu2g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
+    #     slop1, slop2 = gamma_plot(figu2g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
             
-        ind0 = Dx.shape[0]//2
+    #     ind0 = Dx.shape[0]//2
             
-        r_lim = 4
-        for i in range(Dx.shape[0]):
-            if Dx[i]>r_lim:
-                ind1 = i
-                break
+    #     r_lim = 4
+    #     for i in range(Dx.shape[0]):
+    #         if Dx[i]>r_lim:
+    #             ind1 = i
+    #             break
         
-        moy1, moy2, moy3, moy4 = gamma_plot(figu2g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
+    #     moy1, moy2, moy3, moy4 = gamma_plot(figu2g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
         
-        gamma_u2_1.append(slop1[0]*U1/Dx[ind1])
-        gamma_u2_2.append(slop2[0]*U1/Dx[ind1])
+    #     gamma_u2_1.append(slop1[0]*U1/Dx[ind1])
+    #     gamma_u2_2.append(slop2[0]*U1/Dx[ind1])
         
-        gamma_u2_1_r.append(moy1*U1/(omega[3]*Dx[ind1]))
-        gamma_u2_2_r.append(moy2*U1/(omega[5]*Dx[ind1]))
-        gamma_u2_3_r.append(moy3*U1/(omega[10]*Dx[ind1]))
-        gamma_u2_4_r.append(moy4*U1/(omega[13]*Dx[ind1]))
+    #     gamma_u2_1_r.append(moy1*U1/(omega[3]*Dx[ind1]))
+    #     gamma_u2_2_r.append(moy2*U1/(omega[5]*Dx[ind1]))
+    #     gamma_u2_3_r.append(moy3*U1/(omega[10]*Dx[ind1]))
+    #     gamma_u2_4_r.append(moy4*U1/(omega[13]*Dx[ind1]))
             
-        del omega
-        del funct
-        del Dx
-        del slop1
-        del slop2
+    #     del omega
+    #     del funct
+    #     del Dx
+    #     del slop1
+    #     del slop2
         
-        #### u3 ####
-        print("\nReading input files u3 streamwise ...")
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-        datas_u3 = var[1:,:,:]
+    #     #### u3 ####
+    #     print("\nReading input files u3 streamwise ...")
+    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+    #     datas_u3 = var[1:,:,:]
         
-        # cpt = 0
-        # for delta_x in range(1, 20, 5):
-        #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
+    #     U3 = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=0), axis=-1))
+        
+    #     datas_u3 = datas_u3 - U3
+        
+    #     # cpt = 0
+    #     # for delta_x in range(1, 20, 5):
+    #     #     ind1, ind2, kc, omega, funct = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx = dx, delta_x=delta_x, x1 = x1, Uc = U1, ch = "gamma")
             
-        #     r = np.abs(x1[delta_x] - x1[0])
+    #     #     r = np.abs(x1[delta_x] - x1[0])
         
 
-        #     slop1, slop2 = frozen_turbulence_plot(figu3g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
-        #     cpt += 1
+    #     #     slop1, slop2 = frozen_turbulence_plot(figu3g, col, row, omega = omega, k = kc, delta_x=delta_x, funct=funct, r=r, z=zp[zplan], ind1=ind1, ind2=ind2, cpt=cpt, ch = "w_gamma")
+    #     #     cpt += 1
         
-        _, omega, _ = Gamma_function(datas_u3[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
+    #     _, omega, _ = Gamma_function(datas_u3[0:split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")
         
-        funct = np.zeros((omega.shape[0], n1))
-        omega = np.zeros((omega.shape[0]))
-        Dx = np.zeros((n1))
-        for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
+    #     funct = np.zeros((omega.shape[0], n1))
+    #     omega = np.zeros((omega.shape[0]))
+    #     Dx = np.zeros((n1))
+    #     for n in tqdm(range(1,num_split_t), desc=f'Gamma', colour= 'GREEN'):
             
-            funct += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0] #I hould take Uc here
-            omega += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
-            Dx += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
+    #         funct += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[0] #I hould take Uc here
+    #         omega += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[1]
+    #         Dx += Gamma_function(datas_u3[(n-1)*split_t:n*split_t,:,:], dt, U1, geom = "plan", axis = "streamwise")[2]
             
-        funct /= (num_split_t-1)
-        omega /= (num_split_t-1)
-        Dx /= (num_split_t-1)
+    #     funct /= (num_split_t-1)
+    #     omega /= (num_split_t-1)
+    #     Dx /= (num_split_t-1)
         
-        del datas_u3
+    #     del datas_u3
         
-        omega_lim = 20 ##have to be computed (mesh size?)
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind0 = i
-                break
+    #     omega_lim = 20 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind0 = i
+    #             break
             
-        omega_lim = 40 ##have to be computed (mesh size?)
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind1 = i
-                break
+    #     omega_lim = 40 ##have to be computed (mesh size?)
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind1 = i
+    #             break
                 
-        omega_lim = 70
-        for i in range(omega.shape[0]):
-            if omega[i]>omega_lim:
-                ind2 = i
-                break
+    #     omega_lim = 70
+    #     for i in range(omega.shape[0]):
+    #         if omega[i]>omega_lim:
+    #             ind2 = i
+    #             break
             
-        slop1, slop2 = gamma_plot(figu3g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
+    #     slop1, slop2 = gamma_plot(figu3g, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w')
             
-        ind0 = Dx.shape[0]//2
+    #     ind0 = Dx.shape[0]//2
             
-        r_lim = 4
-        for i in range(Dx.shape[0]):
-            if Dx[i]>r_lim:
-                ind1 = i
-                break
+    #     r_lim = 4
+    #     for i in range(Dx.shape[0]):
+    #         if Dx[i]>r_lim:
+    #             ind1 = i
+    #             break
         
-        moy1, moy2, moy3, moy4 = gamma_plot(figu3g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
+    #     moy1, moy2, moy3, moy4 = gamma_plot(figu3g_r, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'x')
         
-        gamma_u3_1.append(slop1[0]*U1/Dx[ind1])
-        gamma_u3_2.append(slop2[0]*U1/Dx[ind1])
+    #     gamma_u3_1.append(slop1[0]*U1/Dx[ind1])
+    #     gamma_u3_2.append(slop2[0]*U1/Dx[ind1])
         
-        gamma_u3_1_r.append(moy1*U1/(omega[3]*Dx[ind1]))
-        gamma_u3_2_r.append(moy2*U1/(omega[5]*Dx[ind1]))
-        gamma_u3_3_r.append(moy3*U1/(omega[10]*Dx[ind1]))
-        gamma_u3_4_r.append(moy4*U1/(omega[13]*Dx[ind1]))
+    #     gamma_u3_1_r.append(moy1*U1/(omega[3]*Dx[ind1]))
+    #     gamma_u3_2_r.append(moy2*U1/(omega[5]*Dx[ind1]))
+    #     gamma_u3_3_r.append(moy3*U1/(omega[10]*Dx[ind1]))
+    #     gamma_u3_4_r.append(moy4*U1/(omega[13]*Dx[ind1]))
             
-        del funct
-        del Dx
-        del slop1
-        del slop2
+    #     del funct
+    #     del Dx
+    #     del slop1
+    #     del slop2
         
         
-        col +=1
-        if zplan == 4:
-            row +=1
-            col = 1
+    #     col +=1
+    #     if zplan == 4:
+    #         row +=1
+    #         col = 1
             
             
-    # Update layout properties for 4 plots
-    if ch_plot == "normal":
-        figu1g.update_layout(height=600, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    # # Update layout properties for 4 plots
+    # if ch_plot == "normal":
+    #     figu1g.update_layout(height=600, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu2g.update_layout(height=600, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu2g.update_layout(height=600, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu3g.update_layout(height=600, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu3g.update_layout(height=600, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu1g_r.update_layout(height=600, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu1g_r.update_layout(height=600, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu2g_r.update_layout(height=600, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu2g_r.update_layout(height=600, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu3g_r.update_layout(height=600, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu3g_r.update_layout(height=600, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        ## Gamma for omega ##
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1, name='$\gamma_{u1}$', line=dict(color='midnightblue')), row=1, col=1)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1, name='$\gamma_{u2}$', line=dict(color='firebrick')), row=1, col=1)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1, name='$\gamma_{u3}$', line=dict(color='darkgreen')), row=1, col=1)
+    #     ## Gamma for omega ##
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1, name='$\gamma_{u1}$', line=dict(color='midnightblue')), row=1, col=1)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1, name='$\gamma_{u2}$', line=dict(color='firebrick')), row=1, col=1)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1, name='$\gamma_{u3}$', line=dict(color='darkgreen')), row=1, col=1)
         
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2, showlegend=False, line=dict(color='darkgreen')), row=1, col=2)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2, showlegend=False, line=dict(color='darkgreen')), row=1, col=2)
         
-        figgamma.update_xaxes(title_text='$z^+$', row=1, col=1)
-        figgamma.update_xaxes(title_text='$z^+$', row=1, col=2)
-        figgamma.update_layout(height=600, width=800, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figgamma.update_xaxes(title_text='$z^+$', row=1, col=1)
+    #     figgamma.update_xaxes(title_text='$z^+$', row=1, col=2)
+    #     figgamma.update_layout(height=600, width=800, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        ## Gamme for r ##
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=1)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=1)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_3_r, showlegend=False, line=dict(color='green')), row=1, col=1)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_4_r, showlegend=False, line=dict(color='purple')), row=1, col=1)
+    #     ## Gamme for r ##
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=1)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=1)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_3_r, showlegend=False, line=dict(color='green')), row=1, col=1)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_4_r, showlegend=False, line=dict(color='purple')), row=1, col=1)
         
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_3_r, showlegend=False, line=dict(color='green')), row=1, col=2)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_4_r, showlegend=False, line=dict(color='purple')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_3_r, showlegend=False, line=dict(color='green')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_4_r, showlegend=False, line=dict(color='purple')), row=1, col=2)
         
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1_r, name=f'$\omega={omega[3]:.2f}$', line=dict(color='midnightblue')), row=1, col=3)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2_r, name=f'$\omega={omega[5]:.2f}$', line=dict(color='firebrick')), row=1, col=3)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_3_r, name=f'$\omega={omega[10]:.2f}$', line=dict(color='green')), row=1, col=3)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_4_r, name=f'$\omega={omega[13]:.2f}$', line=dict(color='purple')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1_r, name=f'$\omega={omega[3]:.2f}$', line=dict(color='midnightblue')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2_r, name=f'$\omega={omega[5]:.2f}$', line=dict(color='firebrick')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_3_r, name=f'$\omega={omega[10]:.2f}$', line=dict(color='green')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_4_r, name=f'$\omega={omega[13]:.2f}$', line=dict(color='purple')), row=1, col=3)
         
-        del omega
+    #     del omega
         
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=1)
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=2)
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=3)
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=4)
-        figgamma_r.update_layout(height=600, width=1100, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=1)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=2)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=3)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=4)
+    #     figgamma_r.update_layout(height=600, width=1100, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
         
-        if split_time == 'Y':
+    #     if split_time == 'Y':
 
-            save_figures(figu1g, "output/split_time/gamma/gamma_u1_w.png")
+    #         save_figures(figu1g, "split_time/gamma/gamma_u1_w.png")
             
-            save_figures(figu2g, "output/split_time/gamma/gamma_u2_w.png")
+    #         save_figures(figu2g, "split_time/gamma/gamma_u2_w.png")
         
-            save_figures(figu3g, "output/split_time/gamma/gamma_u3_w.png")
+    #         save_figures(figu3g, "split_time/gamma/gamma_u3_w.png")
             
-            save_figures(figu1g_r, "output/split_time/gamma/gamma_u1_r.png")
+    #         save_figures(figu1g_r, "split_time/gamma/gamma_u1_r.png")
             
-            save_figures(figu2g_r, "output/split_time/gamma/gamma_u2_r.png")
+    #         save_figures(figu2g_r, "split_time/gamma/gamma_u2_r.png")
         
-            save_figures(figu3g_r, "output/split_time/gamma/gamma_u3_r.png")
+    #         save_figures(figu3g_r, "split_time/gamma/gamma_u3_r.png")
             
-            save_figures(figgamma, "output/split_time/gamma/gamma_view_w.png")
+    #         save_figures(figgamma, "split_time/gamma/gamma_view_w.png")
             
-            save_figures(figgamma_r, "output/split_time/gamma/gamma_view_r.png")
+    #         save_figures(figgamma_r, "split_time/gamma/gamma_view_r.png")
         
-    # # Update layout properties for full plots.
-    if ch_plot == "all":
+    # # # Update layout properties for full plots.
+    # if ch_plot == "all":
 
-        figu1g.update_layout(height=900, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu1g.update_layout(height=900, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu2g.update_layout(height=900, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu2g.update_layout(height=900, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu3g.update_layout(height=900, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu3g.update_layout(height=900, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu1g_r.update_layout(height=900, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu1g_r.update_layout(height=900, width=1100, title_text='Gamma determination u1', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu2g_r.update_layout(height=900, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu2g_r.update_layout(height=900, width=1100, title_text='Gamma determination u2', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        figu3g_r.update_layout(height=900, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figu3g_r.update_layout(height=900, width=1100, title_text='Gamma determination u3', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        ## Gamma for omega ##
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1, name='$\gamma_{u1}$', line=dict(color='midnightblue')), row=1, col=1)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1, name='$\gamma_{u2}$', line=dict(color='firebrick')), row=1, col=1)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1, name='$\gamma_{u3}$', line=dict(color='darkgreen')), row=1, col=1)
+    #     ## Gamma for omega ##
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1, name='$\gamma_{u1}$', line=dict(color='midnightblue')), row=1, col=1)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1, name='$\gamma_{u2}$', line=dict(color='firebrick')), row=1, col=1)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1, name='$\gamma_{u3}$', line=dict(color='darkgreen')), row=1, col=1)
         
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
-        figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2, showlegend=False, line=dict(color='darkgreen')), row=1, col=2)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
+    #     figgamma.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2, showlegend=False, line=dict(color='darkgreen')), row=1, col=2)
         
-        figgamma.update_xaxes(title_text='$z^+$', row=1, col=1)
-        figgamma.update_xaxes(title_text='$z^+$', row=1, col=2)
-        figgamma.update_layout(height=600, width=1100, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figgamma.update_xaxes(title_text='$z^+$', row=1, col=1)
+    #     figgamma.update_xaxes(title_text='$z^+$', row=1, col=2)
+    #     figgamma.update_layout(height=600, width=1100, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        ## Gamme for r ##
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=1)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=1)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_3_r, showlegend=False, line=dict(color='green')), row=1, col=1)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_4_r, showlegend=False, line=dict(color='purple')), row=1, col=1)
+    #     ## Gamme for r ##
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=1)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=1)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_3_r, showlegend=False, line=dict(color='green')), row=1, col=1)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u1_4_r, showlegend=False, line=dict(color='purple')), row=1, col=1)
         
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_3_r, showlegend=False, line=dict(color='green')), row=1, col=2)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_4_r, showlegend=False, line=dict(color='purple')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_1_r, showlegend=False, line=dict(color='midnightblue')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_2_r, showlegend=False, line=dict(color='firebrick')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_3_r, showlegend=False, line=dict(color='green')), row=1, col=2)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u2_4_r, showlegend=False, line=dict(color='purple')), row=1, col=2)
         
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1_r, name=f'$\omega={omega[3]:.2f}$', line=dict(color='midnightblue')), row=1, col=3)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2_r, name=f'$\omega={omega[5]:.2f}$', line=dict(color='firebrick')), row=1, col=3)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_3_r, name=f'$\omega={omega[10]:.2f}$', line=dict(color='green')), row=1, col=3)
-        figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_4_r, name=f'$\omega={omega[13]:.2f}$', line=dict(color='purple')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_1_r, name=f'$\omega={omega[3]:.2f}$', line=dict(color='midnightblue')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_2_r, name=f'$\omega={omega[5]:.2f}$', line=dict(color='firebrick')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_3_r, name=f'$\omega={omega[10]:.2f}$', line=dict(color='green')), row=1, col=3)
+    #     figgamma_r.add_trace(go.Scatter(x=z_axis, y=gamma_u3_4_r, name=f'$\omega={omega[13]:.2f}$', line=dict(color='purple')), row=1, col=3)
         
-        del omega
+    #     del omega
         
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=1)
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=2)
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=3)
-        figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=4)
-        figgamma_r.update_layout(height=600, width=1100, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=1)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=2)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=3)
+    #     figgamma_r.update_xaxes(title_text='$z^+$', row=1, col=4)
+    #     figgamma_r.update_layout(height=600, width=1100, title_text='Gamma evolution', legend=dict(yanchor="bottom", xanchor="right"), font=font)
         
-        if split_time == 'Y':
+    #     if split_time == 'Y':
 
-            save_figures(figu1g, "output/split_time/gamma/gamma_u1_w_all.png")
+    #         save_figures(figu1g, "split_time/gamma/gamma_u1_w_all.png")
 
-            save_figures(figu2g, "output/split_time/gamma/gamma_u2_w_all.png")
+    #         save_figures(figu2g, "split_time/gamma/gamma_u2_w_all.png")
 
-            save_figures(figu3g, "output/split_time/gamma/gamma_u3_w_all.png")
+    #         save_figures(figu3g, "split_time/gamma/gamma_u3_w_all.png")
             
-            save_figures(figu1g_r, "output/split_time/gamma/gamma_u1_r_all.png")
+    #         save_figures(figu1g_r, "split_time/gamma/gamma_u1_r_all.png")
             
-            save_figures(figu2g_r, "output/split_time/gamma/gamma_u2_r_all.png")
+    #         save_figures(figu2g_r, "split_time/gamma/gamma_u2_r_all.png")
         
-            save_figures(figu3g_r, "output/split_time/gamma/gamma_u3_r_all.png")
+    #         save_figures(figu3g_r, "split_time/gamma/gamma_u3_r_all.png")
             
-            save_figures(figgamma, "output/split_time/gamma/gamma_view_w_all.png")
+    #         save_figures(figgamma, "split_time/gamma/gamma_view_w_all.png")
             
-            save_figures(figgamma_r, "output/split_time/gamma/gamma_view_r_all.png")
+    #         save_figures(figgamma_r, "split_time/gamma/gamma_view_r_all.png")
             
-    elapsed_time = time.time() - start_time
-    minutes, seconds = divmod(elapsed_time, 60)
+    # elapsed_time = time.time() - start_time
+    # minutes, seconds = divmod(elapsed_time, 60)
     
-    print(f'\n Gamma determination done in : {int(minutes)}m {seconds:.2f}s \n')
+    # print(f'\n Gamma determination done in : {int(minutes)}m {seconds:.2f}s \n')
     
     
     #=======================================================
@@ -846,10 +866,10 @@ def main():
     # dx = cflow.xlen / n1
     
     # ch_plot ="normal"
-    # fig1sc= init_figures_sc(zp, n2, ch=ch_plot) #Figure initialization
+    # fig1sc= init_figures_sc(zp, ch=ch_plot) #Figure initialization
     
-    # for zplan in np.arange(0, n2, n2//3, dtype=int):
-    # #for zplan, zpvalue in enumerate(zp):
+    # #for zplan in np.arange(0, n2, n2//3, dtype=int):
+    # for zplan in zp_ind:
         
     #     print("========================================")
     #     print(f'Space correlation for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
@@ -878,7 +898,7 @@ def main():
     #         # datas_fluct_u1 /= (num_split_t-1)
             
     #         R_uu = np.zeros((n1))
-    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (zp={zp[zplan]:.2f})', colour= 'GREEN'):
     #             R_uu += Space_correation(datas_u1[(n-1)*split_t:n*split_t,:,:], datas_u1[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
     #         R_uu /= (num_split_t-1)
             
@@ -906,7 +926,7 @@ def main():
     #         # datas_fluct_u2 /= (num_split_t-1)
             
     #         R_vv = np.zeros((n1))
-    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (zp={zp[zplan]:.2f})', colour= 'GREEN'):
     #             R_vv += Space_correation(datas_u2[(n-1)*split_t:n*split_t,:,:], datas_u2[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
     #         R_vv /= (num_split_t-1)
         
@@ -933,7 +953,7 @@ def main():
     #         # datas_fluct_u3 /= (num_split_t-1)
             
     #         R_ww = np.zeros((n1))
-    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
+    #         for n in tqdm(range(1,num_split_t), desc=f'PSD (zp={zp[zplan]:.2f})', colour= 'GREEN'):
     #             R_ww += Space_correation(datas_u3[(n-1)*split_t:n*split_t,:,:], datas_u3[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "streamwise")
     #         R_ww /= (num_split_t-1)
         
@@ -958,9 +978,9 @@ def main():
     # if split_time == 'Y':
         
     #     if ch_plot == 'normal':
-    #         save_figures(fig1sc, "output/split_time/space_correlation/streamwise.png")
+    #         save_figures(fig1sc, "split_time/space_correlation/streamwise.png")
     #     if ch_plot == 'all':
-    #         save_figures(fig1sc, "output/split_time/space_correlation/streamwise_all.png")
+    #         save_figures(fig1sc, "split_time/space_correlation/streamwise_all.png")
             
     # print("\n========================================")
     # print(f"{YELLOW}Spanwise{RESET}")
@@ -975,7 +995,7 @@ def main():
     # dx = cflow.xlen / n1
     
     # ch_plot ="normal"
-    # fig2sc= init_figures_sc(zp, n2, ch=ch_plot) #Figure initialization
+    # fig2sc= init_figures_sc(zp, ch=ch_plot) #Figure initialization
     
     # for zplan in np.arange(0, n2, n2//3, dtype=int):
     # #for zplan, zpvalue in enumerate(zp):
@@ -999,12 +1019,6 @@ def main():
         
     #     if split_time == 'Y':
             
-    #         # datas_fluct_u1 = np.zeros((split_t, n2, n1))
-    #         # for n in range(1,num_split_t):
-    #         #     datas_fluct_u1 += datas_u1[(n-1)*split_t:n*split_t,:,:] - Ux
-    #         # del datas_u1
-    #         # datas_fluct_u1 /= (num_split_t-1)
-            
     #         R_uu = np.zeros((n1))
     #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
     #             R_uu += Space_correation(datas_u1[(n-1)*split_t:n*split_t,:,:], datas_u1[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "spanwise")
@@ -1027,12 +1041,6 @@ def main():
         
     #     if split_time == 'Y':
             
-    #         # datas_fluct_u2 = np.zeros((split_t, n2, n1))
-    #         # for n in range(1,num_split_t):
-    #         #     datas_fluct_u2 += datas_u2[(n-1)*split_t:n*split_t,:,:] - Uy
-    #         # del datas_u2
-    #         # datas_fluct_u2 /= (num_split_t-1)
-            
     #         R_vv = np.zeros((n1))
     #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
     #             R_vv += Space_correation(datas_u2[(n-1)*split_t:n*split_t,:,:], datas_u2[(n-1)*split_t:n*split_t,:,:], geom = "plan", mode_corr = 'half', axis = "spanwise")
@@ -1053,12 +1061,6 @@ def main():
     #     datas_u3 = datas_u3 - Uz
         
     #     if split_time == 'Y':
-            
-    #         # datas_fluct_u3 = np.zeros((split_t, n2, n1))
-    #         # for n in range(1,num_split_t):
-    #         #     datas_fluct_u3 += datas_u3[(n-1)*split_t:n*split_t,:,:] - Uz
-    #         # del datas_u3
-    #         # datas_fluct_u3 /= (num_split_t-1)
             
     #         R_ww = np.zeros((n1))
     #         for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
@@ -1086,9 +1088,9 @@ def main():
     # if split_time == 'Y':
         
     #     if ch_plot == 'normal':
-    #         save_figures(fig2sc, "output/split_time/space_correlation/spanwise.png")
+    #         save_figures(fig2sc, "split_time/space_correlation/spanwise.png")
     #     if ch_plot == 'all':
-    #         save_figures(fig2sc, "output/split_time/space_correlation/spanwise_all.png")
+    #         save_figures(fig2sc, "split_time/space_correlation/spanwise_all.png")
             
         
     # elapsed_time = time.time() - start_time
@@ -1121,8 +1123,8 @@ def main():
     # var2 = []
     # var3 = []
     # kt = []
-    # for zplan, zpvalue in enumerate(zp):
-    #     print('zp:', zpvalue)
+    # for zplan in zp_ind:
+    #     print('zp:', zp[zplan])
         
     #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
     #     datas_u1 = var[1:,:,:]
@@ -1172,14 +1174,14 @@ def main():
     # ratio3 = var3 / var1
     # ratio1 = var3 / var2
     
-    # fig_RANS.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='x'), name='$U\\text{(LES)}$'), row=1, col=1)
+    # fig_RANS.add_trace(go.Scatter(x=U, y=z, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='x'), name='$U\\text{(LES)}$'), row=1, col=1)
     # fig_RANS.add_trace(go.Scatter(x=kt, y=zp, mode= 'lines+markers', line=dict(color='darkgreen', width=2), marker=dict(symbol='x'), name='$k_T\\text{(LES)}$'), row=1, col=2)
     
     # fig_RANS.update_xaxes(title='$\\text{velocity}~(m.s^{-1})$', row=1, col=1)
     # fig_RANS.update_xaxes(title='$\\text{kinetic energy}~(m^2.s^{-2})$', row=1, col=2)
     # fig_RANS.update_layout(height=600, width=800, title="RANS and LES data profiles", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_RANS, "output/RANS/RANS_profiles.png")
+    # save_figures(fig_RANS, "RANS/RANS_profiles.png")
     
     # fig_vel_profil.add_trace(go.Scatter(x=U, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$U\\text{(LES)}$'), row=1, col=1)
     # fig_vel_profil.add_trace(go.Scatter(x=V, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$V\\text{(LES)}$'), row=1, col=2)
@@ -1190,7 +1192,7 @@ def main():
     # fig_vel_profil.update_xaxes(title='$W~(m.s^{-1})$', row=1, col=3, exponentformat = 'e')
     # fig_vel_profil.update_layout(height=600, width=800, title="Velocity profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_vel_profil, "output/RANS/mean_velocity_profiles.png")
+    # save_figures(fig_vel_profil, "RANS/mean_velocity_profiles.png")
     
     # fig_var.add_trace(go.Scatter(x=var1, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$\overline{u_1u_1}$'), row=1, col=1)
     # fig_var.add_trace(go.Scatter(x=var2, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$\overline{u_2u_2}$'), row=1, col=2)
@@ -1201,7 +1203,7 @@ def main():
     # fig_var.update_xaxes(title='$\overline{u_3u_3}$', row=1, col=3, exponentformat = 'e')
     # fig_var.update_layout(height=600, width=800, title="Variance velocity fluctuation profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_var, "output/RANS/var_velocity_profiles.png")
+    # save_figures(fig_var, "RANS/var_velocity_profiles.png")
     
     # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio2, y=zp, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle'), name='$\overline{u_2u_2} / \overline{u_1u_1}$'))
     # fig_vel_ratio_profil.add_trace(go.Scatter(x=ratio3, y=zp, mode= 'lines+markers', line=dict(color='midnightblue', width=2), marker=dict(symbol='diamond'), name='$\overline{u_3u_3} / \overline{u_1u_1}$'))
@@ -1211,7 +1213,7 @@ def main():
     # fig_vel_ratio_profil.update_xaxes(title='velocity ratio')
     # fig_vel_ratio_profil.update_layout(height=600, width=800, title="Variance velocity ratio profile (LES data)", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_vel_ratio_profil, "output/RANS/velocity_ratio_profiles.png")
+    # save_figures(fig_vel_ratio_profil, "RANS/velocity_ratio_profiles.png")
     
     # fig_up.add_trace(go.Scatter(x=zp, y=up, mode= 'lines+markers', line=dict(color='firebrick', width=2), marker=dict(symbol='circle-open'), showlegend=False))
     
@@ -1219,12 +1221,13 @@ def main():
     # fig_up.update_xaxes(title='$z^+$')
     # fig_up.update_layout(height=600, width=800, title="Adimentionelized velocity profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_up, "output/RANS/velocity_ad.png")
+    # save_figures(fig_up, "RANS/velocity_ad.png")
     
     # elapsed_time = time.time() - start_time
     # minutes, seconds = divmod(elapsed_time, 60)
     
     # print(f'\n RANS study done in : {int(minutes)}m {seconds:.2f}s \n')
+    
     
     #=======================================================
                 #### NORMAL PLAN COMPUTATION ####
@@ -1243,7 +1246,7 @@ def main():
     # x2 *= cflow.ut / cflow.nu
     # zp_RANS = cflow.ut/cflow.nu * normal
     
-    ##Figure initiaization##
+    # #Figure initiaization##
     # fig_u_z = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
     # #fig_corr_z = go.Figure()
     
@@ -1304,9 +1307,9 @@ def main():
     # fig_u_z.update_xaxes(title='velocity', row=1, col=3)
     # fig_u_z.update_layout(height=600, width=800, title="Wall-normal velocity profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_u_z, "output/Normal_plan/velocity_profiles.png")
+    # save_figures(fig_u_z, "Normal_plan/velocity_profiles.png")
     
-    ## Correation ##
+    # # Correation ##
     # fig_corr_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title='$\delta z^+$')
     
     # print('\nUU correlation')
@@ -1517,10 +1520,10 @@ def main():
     
     # fig_corr_z.update_layout(height=600, width=900, title="Wall-normal auto-correlation", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_corr_z, "output/Normal_plan/autocorreation_z.png")
+    # save_figures(fig_corr_z, "Normal_plan/autocorreation_z.png")
     
     
-    ## Decorrelation Length ##
+    # # Decorrelation Length ##
     # fig_lii_z = go.Figure()
     
     # print('UU decorrelation length')
@@ -1633,7 +1636,7 @@ def main():
     
     # fig_lii_z.update_layout(height=600, width=800, title="Wall-normal auto-correlation", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
     
-    # save_figures(fig_lii_z, "output/Normal_plan/autocorreation.png")
+    # save_figures(fig_lii_z, "Normal_plan/autocorreation.png")
     
     # elapsed_time = time.time() - start_time
     # minutes, seconds = divmod(elapsed_time, 60)
@@ -1645,196 +1648,206 @@ def main():
     #=======================================================
                 #### VON KARMAN MODEL ####
     #=======================================================
-    # print("\n========================================")
-    # print(f"{YELLOW}Von Karman theorical computation{RESET}")
-    # start_time = time.time()
-    # print("========================================")
     
-    # col = 1
-    # row = 1
-    # print("\nReading input files ...")
+    print("\n========================================")
+    print(f"{YELLOW}Von Karman theorical computation{RESET}")
+    start_time = time.time()
+    print("========================================")
     
-    # _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
-    # nt = nt - 1
-    # dx = cflow.xlen / n1
-    # dy = cflow.ylen / n2
+    col = 1
+    row = 1
+    print("\nReading input files ...")
     
-    # ch_plot ="normal"
-    # fig_vanK = init_figures_vk(zp, n2, ch=ch_plot)
+    _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
+    nt = nt - 1
+    dx = cflow.xlen / n1
+    dy = cflow.ylen / n2
     
-    # for zplan in np.arange(0, n2, n2//3, dtype=int):
-    # #for zplan, zpvalue in enumerate(zp):
+    fig_vanK = init_figures_vk(zp, ch=ch_plot)
+    
+    #for zplan in np.arange(0, n2, n2//3, dtype=int):
+    for ind, zplan in enumerate(zp_ind):
         
-    #     print("========================================")
-    #     print(f'Von Karman theory for {YELLOW}zp={zp[zplan]:.2f}{RESET}')
-    #     print('Plan number:', zplan)
+        print("========================================")
+        print(f'Von Karman theory for {YELLOW}zp={zp[ind]:.2f}{RESET}')
+        print('Plan number:', zplan)
     
-    #     print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-    #     nt = nt - 1
-    #     datas_u1 = var[1:,:,:]
-    #     del var
-    #     print('datas_u1.shape:',datas_u1.shape)
+        print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        nt = nt - 1
+        datas_u1 = var[1:,:,:]
+        del var
+        print('datas_u1.shape:',datas_u1.shape)
         
-    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-    #     print('Ux:', Ux)
-    #     #datas_u1 = datas_u1 - Ux
-    #     #sigma_u_squared = sigma_power2(datas_u1, axis = "streamwise")
-    #     sigma_u_squared = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=0), axis=-1))
+        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        print('Ux:', Ux)
+
+        sigma_u_squared = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=0), axis=-1))
         
             
-    #     del datas_u1
-    #     #del datas_fluct_u1
-    #     print('sigma_u_squared:', sigma_u_squared)
+        del datas_u1
+        print('sigma_u_squared:', sigma_u_squared)
         
-    #     print("========================================")
-    #     print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-    #     nt = nt - 1
-    #     datas_u2 = var[1:,:,:]
-    #     del var
-    #     print('datas_u1.shape:',datas_u2.shape)
+        print("========================================")
+        print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        nt = nt - 1
+        datas_u2 = var[1:,:,:]
+        del var
+        print('datas_u1.shape:',datas_u2.shape)
         
-    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-    #     print('Uy:', Uy)
-    #     # datas_u2 = datas_u2 - Uy
-    #     # sigma_v_squared = sigma_power2(datas_u2, axis = "streamwise")
-    #     sigma_v_squared = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=0), axis=-1))
+        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        print('Uy:', Uy)
+
+        sigma_v_squared = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=0), axis=-1))
         
             
-    #     del datas_u2
-    #     #del datas_fluct_u2
-    #     print('sigma_v_squared:', sigma_v_squared)
+        del datas_u2
+        print('sigma_v_squared:', sigma_v_squared)
         
-    #     print("========================================")
-    #     print(f"Reading input files (u3 velocity) for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-    #     nt = nt - 1
-    #     datas_u3 = var[1:,:,:]
-    #     del var
-    #     print('datas_u1.shape:',datas_u3.shape)
+        print("========================================")
+        print(f"Reading input files (u3 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+        nt = nt - 1
+        datas_u3 = var[1:,:,:]
+        del var
+        print('datas_u1.shape:',datas_u3.shape)
         
-    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-    #     print('Uz:', Uz)
-    #     #datas_u3 = datas_u3 - Uz
-    #     #sigma_w_squared = sigma_power2(datas_u3, axis = "streamwise")
-    #     sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=0), axis=-1))
+        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        print('Uz:', Uz)
+
+        sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=0), axis=-1))
         
             
-    #     del datas_u3
-    #     #del datas_fluct_u3
-    #     print('sigma_w_squared:', sigma_w_squared)
+        del datas_u3
+        print('sigma_w_squared:', sigma_w_squared)
         
         
-    #     print("========================================")
-    #     print(f"Computing sigma1c for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+        print("========================================")
+        print(f"Computing sigma1c for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
         
-    #     sigma11 = sigma_1c(sigma_u_squared, 1., sigma_v_squared, 0., sigma_w_squared, 0.)
-    #     sigma12 = sigma_1c(sigma_u_squared, 0., sigma_v_squared, 1., sigma_w_squared, 0.)
+        sigma11 = sigma_1c(sigma_u_squared, 1., sigma_v_squared, 0., sigma_w_squared, 0.)
+        sigma12 = sigma_1c(sigma_u_squared, 0., sigma_v_squared, 1., sigma_w_squared, 0.)
         
-    #     print("========================================")
-    #     print(f"Computing L for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
+        print("========================================")
+        print(f"Computing L for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
         
-    #     Le = L(0.519, ko2_tke, ko2_omega) #list length omega
+        Le = L(0.519, ko2_tke, ko2_omega) #list length omega
         
-    #     kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma11, Le)
-    #     kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma12, Le) #=R33
+        kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma11, Le)
+        kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma12, Le) #=R33
         
-    #     von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
-    #     von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
+        ratio11 = sigma11**2*Le
+        ratio12 = sigma12**2*Le
+        ratio21 = (3 + 8*(1*kc*Le)**2) / (1 + (1*kc * Le)**2)**(11/6.)
+        ratio22 = 1. / (1 + (1*kc*Le)**2)**(5/6.)
         
-    #     del kc
-    #     del phi11
-    #     del phi22
+        print('sum21:', sum(ratio21))
+        print('sum22:', sum(ratio22))
+        
+        ratio21 = integrate.simps(ratio21, ko2_omega)
+        ratio22 = integrate.simps(ratio22, ko2_omega)
+        
+        # print('ratio11:', ratio11)
+        # print('ratio12:', ratio12)
+        print('ratio21:', ratio21)
+        print('ratio22:', ratio22)
+        
+        von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
+        von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
+        
+        del kc
+        del phi11
+        del phi22
         
         
-    #     ### experience ###
-    #     ## u1 ##
-    #     print(f"Computing spectra from LES datas for {YELLOW}z={zp[zplan]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-    #     datas_u1 = var[1:,:,:]
-    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-    #     datas_u1 = datas_u1 - Ux
-    #     # phi11_exp__ = von_karman_spectra(datas_u1, datas_u1, geom='plan', axis='streamwise')
-    #     # del datas_u1
-    #     # phi11_exp = np.mean(np.mean(phi11_exp__, axis=-1), axis=-1)
+        ### experience ###
+        ## u1 ##
+        print(f"Computing spectra from LES datas for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        datas_u1 = var[1:,:,:]
+        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        datas_u1 = datas_u1 - Ux
+        # phi11_exp__ = von_karman_spectra(datas_u1, datas_u1, geom='plan', axis='streamwise')
+        # del datas_u1
+        # phi11_exp = np.mean(np.mean(phi11_exp__, axis=-1), axis=-1)
                 
-    #     # del phi11_exp__
+        # del phi11_exp__
         
-    #     omega, k, _, phi11_exp = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
-    #     del datas_u1
+        omega, k, _, phi11_exp = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        del datas_u1
         
-    #     # freq = fft.fftfreq(2*split_t, d=dt)
-    #     # freq = freq[:freq.shape[0]//2]
-    #     # om = 2*np.pi*freq
-    #     # k1 = Ux*om
+        # freq = fft.fftfreq(2*split_t, d=dt)
+        # freq = freq[:freq.shape[0]//2]
+        # om = 2*np.pi*freq
+        # k1 = Ux*om
         
-    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi11_exp[1:], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
+        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi11_exp[1:], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
         
-    #     del phi11_exp
-    #     del k
-    #     # del om
-    #     # del freq
+        del phi11_exp
+        del k
+        # del om
+        # del freq
         
-    #     ## u2 ##
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-    #     nt = nt - 1
-    #     datas_u2 = var[1:,:,:]
-    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-    #     datas_u2 = datas_u2 - Uy
-    #     # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
-    #     # del datas_u2
-    #     # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
+        ## u2 ##
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        nt = nt - 1
+        datas_u2 = var[1:,:,:]
+        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        datas_u2 = datas_u2 - Uy
+        # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
+        # del datas_u2
+        # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
         
-    #     # del phi22_exp__
+        # del phi22_exp__
         
-    #     omega, k, _, phi22_exp = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
-    #     del datas_u2
+        omega, k, _, phi22_exp = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        del datas_u2
                 
-    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi22_exp[1:], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
+        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi22_exp[1:], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
             
-    #     del phi22_exp
-    #     del k
-    #     # del k1
+        del phi22_exp
+        del k
+        # del k1
         
-    #     ## u3 ##
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-    #     nt = nt - 1
-    #     datas_u3 = var[1:,:,:]
-    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-    #     datas_u3 = datas_u3 - Uz
-    #     # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
-    #     # del datas_u2
-    #     # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
+        ## u3 ##
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+        nt = nt - 1
+        datas_u3 = var[1:,:,:]
+        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        datas_u3 = datas_u3 - Uz
+        # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
+        # del datas_u2
+        # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
         
-    #     # del phi22_exp__
+        # del phi22_exp__
         
-    #     omega, k, _, phi33_exp = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
-    #     del datas_u3
+        omega, k, _, phi33_exp = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        del datas_u3
                 
-    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi33_exp[1:], name = '$\phi_{33}exp$', color = 'darkgreen', symbols='x')
+        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi33_exp[1:], name = '$\phi_{33}exp$', color = 'darkgreen', symbols='x')
             
-    #     del phi33_exp
-    #     del k
+        del phi33_exp
+        del k
         
         
-    #     col +=1
-    #     if zplan == 4:
-    #         row +=1
-    #         col = 1
+        col +=1
+        if zplan == 4:
+            row +=1
+            col = 1
             
             
-    # if ch_plot == 'normal':
-    #     fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.03))
-    #     save_figures(fig_vanK, "output/von_karman/von_karman_spectra.png")
-    # if ch_plot == 'all':
-    #     fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.03))
-    #     save_figures(fig_vanK, "output/von_karman/von_karman_spectra_all.png")
+    if ch_plot == 'normal':
+        fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
+        save_figures(fig_vanK, "von_karman/von_karman_spectra.png")
+    if ch_plot == 'all':
+        fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
+        save_figures(fig_vanK, "von_karman/von_karman_spectra_all.png")
         
-    # elapsed_time = time.time() - start_time
-    # minutes, seconds = divmod(elapsed_time, 60)
+    elapsed_time = time.time() - start_time
+    minutes, seconds = divmod(elapsed_time, 60)
     
-    # print(f'\n Von Karman study done in : {int(minutes)}m {seconds:.2f}s \n')
+    print(f'\n Von Karman study done in : {int(minutes)}m {seconds:.2f}s \n')
         
         
     del fpars_files_streamwise_u1
@@ -1848,9 +1861,8 @@ def main():
     del fpars_files_normal_u3
         
 ############################################################
-        
-    
-    
+######################## END ###############################
+############################################################
     
 if __name__ == "__main__":
     main()
