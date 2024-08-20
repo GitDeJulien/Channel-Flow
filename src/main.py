@@ -1249,403 +1249,490 @@ def main():
     x2 = np.array(x2)
     x2 *= cflow.ut / cflow.nu
     zp_RANS = cflow.ut/cflow.nu * normal
+    print('x2[0]:',x2[0])
+    print('x2[len(x2)]:',x2[len(x2)-1])
     
-    #Figure initiaization##
-    fig_u_z = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
-    #fig_corr_z = go.Figure()
+    ##Figure initiaization##
+    # fig_u_z = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
+    # #fig_corr_z = go.Figure()
     
-    print('U1 profile')
-    data_u1 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+    # print('U1 profile')
+    # data_u1 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u3[line])[3]
-        data_u1 += var[1:,:]
-        del var
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u3[line])[3]
+    #     data_u1 += var[1:,:]
+    #     del var
         
-    data_u1 /= nlines
-    data_u1 = np.mean(data_u1, axis=0)
-    #data_u1 /= cflow.ut
-    fig_u_z.add_trace(go.Scatter(x=data_u1, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), name='$U_1(LES)$'), row=1, col=1)
-    fig_u_z.add_trace(go.Scatter(x=u_velocity, y=zp_RANS, mode= 'markers', marker=dict(color='firebrick', symbol='circle-open'), name='$U_1(RANS)$'), row=1, col=1)
+    # data_u1 /= nlines
+    # data_u1 = np.mean(data_u1, axis=0)
+    # #data_u1 /= cflow.ut
+    # fig_u_z.add_trace(go.Scatter(x=data_u1, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), name='$U_1(LES)$'), row=1, col=1)
+    # fig_u_z.add_trace(go.Scatter(x=u_velocity, y=zp_RANS, mode= 'markers', marker=dict(color='firebrick', symbol='circle-open'), name='$U_1(RANS)$'), row=1, col=1)
     
-    del data_u1
+    # del data_u1
     
-    print('U2 profile')
-    data_u2 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+    # print('U2 profile')
+    # data_u2 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u2[line])[3]
-        data_u2 += var[1:,:]
-        del var
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u2[line])[3]
+    #     data_u2 += var[1:,:]
+    #     del var
         
-    data_u2 /= nlines
-    data_u2 = np.mean(data_u2, axis=0)
-    #data_u2 /= cflow.ut
-    fig_u_z.add_trace(go.Scatter(x=data_u2, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), name='$U_2(LES)$'), row=1, col=2)
-    #fig_u_z.add_trace(go.Scatter(x=v_velocity, y=zp_RANS, mode= 'markers', marker=dict(color='midnightblue', symbol='circle-open'), name='$U_2(RANS)$'), row=1, col=2)
+    # data_u2 /= nlines
+    # data_u2 = np.mean(data_u2, axis=0)
+    # #data_u2 /= cflow.ut
+    # fig_u_z.add_trace(go.Scatter(x=data_u2, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), name='$U_2(LES)$'), row=1, col=2)
+    # #fig_u_z.add_trace(go.Scatter(x=v_velocity, y=zp_RANS, mode= 'markers', marker=dict(color='midnightblue', symbol='circle-open'), name='$U_2(RANS)$'), row=1, col=2)
     
-    del data_u2
+    # del data_u2
     
-    print('U3 profile')
-    data_u3 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+    # print('U3 profile')
+    # data_u3 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
-        data_u3 += var[1:,:]
-        del var
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
+    #     data_u3 += var[1:,:]
+    #     del var
         
-    data_u3 /= nlines
-    data_u3 = np.mean(data_u3, axis=0)
-    #data_u3 /= cflow.ut
-    fig_u_z.add_trace(go.Scatter(x=data_u3, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), name='$U_3(LES)$'), row=1, col=3)
-    #fig_u_z.add_trace(go.Scatter(x=w_velocity, y=zp_RANS, mode= 'markers', marker=dict(color='darkgreen', symbol='circle-open'), name='$U_3(RANS)$'), row=1, col=3)
+    # data_u3 /= nlines
+    # data_u3 = np.mean(data_u3, axis=0)
+    # #data_u3 /= cflow.ut
+    # fig_u_z.add_trace(go.Scatter(x=data_u3, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), name='$U_3(LES)$'), row=1, col=3)
+    # #fig_u_z.add_trace(go.Scatter(x=w_velocity, y=zp_RANS, mode= 'markers', marker=dict(color='darkgreen', symbol='circle-open'), name='$U_3(RANS)$'), row=1, col=3)
     
-    del data_u3
+    # del data_u3
     
-    #fig_u1_z.update_yaxes(title='$z^+$')
-    fig_u_z.update_xaxes(title='velocity', row=1, col=1)
-    fig_u_z.update_xaxes(title='velocity', row=1, col=2)
-    fig_u_z.update_xaxes(title='velocity', row=1, col=3)
-    fig_u_z.update_layout(height=600, width=800, title="Wall-normal velocity profile", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
+    # #fig_u1_z.update_yaxes(title='$z^+$')
+    # fig_u_z.update_xaxes(title='velocity', row=1, col=1)
+    # fig_u_z.update_xaxes(title='velocity', row=1, col=2)
+    # fig_u_z.update_xaxes(title='velocity', row=1, col=3)
+    # fig_u_z.update_layout(height=600, width=800, title="Wall-normal velocity profile", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
     
-    save_figures(fig_u_z, "Normal_plan/velocity_profiles.png")
+    # save_figures(fig_u_z, "Normal_plan/velocity_profiles.png")
     
-    # Correation ##
-    fig_corr_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title='$\delta z^+$')
+    ################
+    ## Correation ##
+    ################
     
-    print('\nUU correlation')
-    data_u1 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+    # if len(zp) == 4:
+    #     fig_corr_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title='$\delta z^+$', subplot_titles=(f"$z_0={zp[0]:.2f}$", f"$z_0={zp[1]:.2f}$", f"$z_0={zp[2]:.2f}$", f"$z_0={zp[3]:.2f}$"))
+    # else:
+    #     fig_corr_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title='$\delta z^+$', subplot_titles=(f"$z_0={z[0]:.2f}$", f"$z_0={z[1]:.2f}$", f"$z_0={z[2]:.2f}$", f"$z_0={z[3]:.2f}$", f"$z_0={z[4]:.2f}$", f"$z_0={z[5]:.2f}$", f"$z_0={z[6]:.2f}$", f"$z_0={z[7]:.2f}$", f"$z_0={z[8]:.2f}$", f"$z_0={z[9]:.2f}$"))
+    
+    # print('\nUU correlation')
+    # data_u1 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u3[line])[3]
-        Ux = np.mean(var[1:,:], axis=0)
-        data_u1 += var[1:,:] - Ux[np.newaxis, :]
-        del var
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u3[line])[3]
+    #     Ux = np.mean(var[1:,:], axis=0)
+    #     data_u1 += var[1:,:] - Ux[np.newaxis, :]
+    #     del var
         
-    data_u1 /= nlines
-    corr = np.zeros((n1), dtype=float)
+    # data_u1 /= nlines
+    # corr = np.zeros((n1), dtype=float)
     
-    for t in range (nt):
-        full_corr = signal.correlate(data_u1[t,:], data_u1[t,:], mode='full', method='auto')
-        corr[:] += full_corr[full_corr.shape[0]//2:]
+    # col = 1
+    # row = 1
+    # for v, lim in enumerate(zp):
+    #     for i in range(x2.shape[0]):
+    #         if x2[i] > lim:
+    #             ind = i
+    #             break
+            
+    #     for t in range (nt):
+    #         full_corr = signal.correlate(data_u1[t,ind:], data_u1[t,ind:], mode='full', method='auto')
+    #         corrp = full_corr[full_corr.shape[0]//2:]
+    #         corrp /= max(corrp)
+    #         full_corr = signal.correlate(data_u1[t,0:ind], data_u1[t,0:ind], mode='full', method='auto')
+    #         corrm = full_corr[full_corr.shape[0]//2:]
+    #         corrm /= max(corrm)
+    #         corr[:] += np.concatenate((corrm[::-1], corrp))
+            
+    #     corr /= nt
+        
+    #     print('corr shape:', corr.shape)
+    #     print('x2 shape:', x2.shape)
+        
+    #     if row == 1 and col == 4:
+    #         fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), name='$R_{UU}^{(3)}$'), row=row, col=col)
+    #     else:
+    #         fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False), row=row, col=col)
+        
+    #     col +=1
+    #     if v == 4:
+    #         row +=1
+    #         col = 1
+    
+    # del data_u1
+    # del corr
+    
+    # print('\nVV correlation')
+    # data_u2 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
+        
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u2[line])[3]
+    #     Uy = np.mean(var[1:,:], axis=0)
+    #     data_u2 += var[1:,:] - Uy[np.newaxis, :]
+    #     del var
+        
+    # data_u2 /= nlines
+    # corr = np.zeros((n1), dtype=float)
+    
+    # col = 1
+    # row = 1
+    # for v, lim in enumerate(zp):
+    #     for i in range(x2.shape[0]):
+    #         if x2[i] > lim:
+    #             ind = i
+    #             break
+            
+    #     for t in range (nt):
+    #         full_corr = signal.correlate(data_u2[t,ind:], data_u2[t,ind:], mode='full', method='auto')
+    #         corrp = full_corr[full_corr.shape[0]//2:]
+    #         corrp /= max(corrp)
+    #         full_corr = signal.correlate(data_u2[t,0:ind], data_u2[t,0:ind], mode='full', method='auto')
+    #         corrm = full_corr[full_corr.shape[0]//2:]
+    #         corrm /= max(corrm)
+    #         corr[:] += np.concatenate((corrm[::-1], corrp))
+            
+    #     corr /= nt
+        
+    #     print('corr shape:', corr.shape)
+    #     print('x2 shape:', x2.shape)
+        
+    #     if row == 1 and col == 4:
+    #         fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), name='$R_{VV}^{(3)}$'), row=row, col=col)
+    #     else:
+    #         fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), showlegend=False), row=row, col=col)
+        
+    #     col +=1
+    #     if v == 4:
+    #         row +=1
+    #         col = 1
+    
+    # del data_u2
+    # del corr
+    
+    # print('\nWW correlation')
+    # data_u3 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
+        
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
+    #     Uz = np.mean(var[1:,:], axis=0)
+    #     data_u3 += var[1:,:] - Uz[np.newaxis, :]
+    #     del var
+        
+    # data_u3 /= nlines
+    # corr = np.zeros((n1), dtype=float)
+    
+    # col = 1
+    # row = 1
+    # for v, lim in enumerate(zp):
+    #     for i in range(x2.shape[0]):
+    #         if x2[i] > lim:
+    #             ind = i
+    #             break
+            
+    #     for t in range (nt):
+    #         full_corr = signal.correlate(data_u3[t,ind:], data_u3[t,ind:], mode='full', method='auto')
+    #         corrp = full_corr[full_corr.shape[0]//2:]
+    #         corrp /= max(corrp)
+    #         full_corr = signal.correlate(data_u3[t,0:ind], data_u3[t,0:ind], mode='full', method='auto')
+    #         corrm = full_corr[full_corr.shape[0]//2:]
+    #         corrm /= max(corrm)
+    #         corr[:] += np.concatenate((corrm[::-1], corrp))
+            
+    #     corr /= nt
+        
+    #     print('corr shape:', corr.shape)
+    #     print('x2 shape:', x2.shape)
+        
+    #     if row == 1 and col == 4:
+    #         fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), name='$R_{WW}^{(3)}$'), row=row, col=col)
+    #     else:
+    #         fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), showlegend=False), row=row, col=col)
+        
+    #     col +=1
+    #     if v == 4:
+    #         row +=1
+    #         col = 1
+    
+    # del data_u3
+    # del corr
+    
+    # row = 1
+    # col = 1
+    # for i in range(len(zp)):
+    #     fig_corr_z.update_xaxes(title='$R_{ii}^{(3)}$', row=row, col=col)
+    #     col +=1
+    #     if i == 4:
+    #         row +=1
+    #         col = 1
+        
+    # fig_corr_z.update_layout(height=600, width=900, title="Wall-normal auto-correlation", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
+    
+    # save_figures(fig_corr_z, "Normal_plan/autocorreation_z.png")
+    
+    ##########################
+    ## Decorrelation Length ##
+    ##########################
+    
+    # file_int = open(out_path+'Normal_plan/Lii.dat', 'w')
+    
+    # if len(zp) == 4:
+    #     fig_liip_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title='$R_{ii}^+(\omega)$', subplot_titles=(f"$z_0={zp[0]:.2f}$", f"$z_0={zp[1]:.2f}$", f"$z_0={zp[2]:.2f}$", f"$z_0={zp[3]:.2f}$"))
+    #     fig_liim_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title='$R_{ii}^-(\omega)$', subplot_titles=(f"$z_0={zp[0]:.2f}$", f"$z_0={zp[1]:.2f}$", f"$z_0={zp[2]:.2f}$", f"$z_0={zp[3]:.2f}$"))
+    # else:
+    #     fig_liip_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title=('$R_{ii}^+(\omega)$','$R_{ii}^+(\omega)$'), subplot_titles=(f"$z_0={z[0]:.2f}$", f"$z_0={z[1]:.2f}$", f"$z_0={z[2]:.2f}$", f"$z_0={z[3]:.2f}$", f"$z_0={z[4]:.2f}$", f"$z_0={z[5]:.2f}$", f"$z_0={z[6]:.2f}$", f"$z_0={z[7]:.2f}$", f"$z_0={z[8]:.2f}$", f"$z_0={z[9]:.2f}$"))
+    #     fig_liim_z = make_subplots(rows=1, cols=4, shared_yaxes= True, y_title=('$R_{ii}^-(\omega)$','$R_{ii}^-(\omega)$'), subplot_titles=(f"$z_0={z[0]:.2f}$", f"$z_0={z[1]:.2f}$", f"$z_0={z[2]:.2f}$", f"$z_0={z[3]:.2f}$", f"$z_0={z[4]:.2f}$", f"$z_0={z[5]:.2f}$", f"$z_0={z[6]:.2f}$", f"$z_0={z[7]:.2f}$", f"$z_0={z[8]:.2f}$", f"$z_0={z[9]:.2f}$"))
+    
+    # print('UU decorrelation length')
+    # data_u1 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
+        
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u3[line])[3]
+    #     Ux = np.mean(var[1:,:], axis=0)
+    #     data_u1 += var[1:,:] - Ux[np.newaxis, :]
+    #     del var
+        
+    # data_u1 /= nlines
 
-    corr /= nt
-    corr /= max(corr)
+    # file_int.write("u1\n")
+    # file_int.write("z+ \t L+ \t L-\n")
+    # col = 1
+    # row = 1
+    # for v, lim in enumerate(zp):
+    #     for i in range(x2.shape[0]):
+    #         if x2[i] > lim:
+    #             ind = i
+    #             break
+            
+    #     corrp = np.zeros((split_t, n1 - ind), dtype=float)
+    #     corrm = np.zeros((split_t, ind), dtype=float)
     
-    print('corr shape:', corr.shape)
-    print('x2 shape:', x2.shape)
-    
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False), row=1, col=1)
-    
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u1[t,n1//4:], data_u1[t,n1//4:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u1[t,n1//4:0:-1], data_u1[t,n1//4:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+    #     num_split_t = nt // split_t
+    #     for n in tqdm(range(1,num_split_t), desc=f'PSD normal plan', colour= 'GREEN'):
+    #         fourier = fft.fft(data_u1[(n-1)*split_t:n*split_t,:], axis=0, workers=3)
+    #         for w in range(split_t):
+    #             full_corr = np.real(signal.correlate(fourier[w,ind:], fourier[w,ind:], mode='full', method='auto'))
+    #             corrp[w,:] += full_corr[full_corr.shape[0]//2:]
 
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False), row=1, col=2)
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u1[t,n1//2:], data_u1[t,n1//2:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u1[t,n1//2:0:-1], data_u1[t,n1//2:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+    #             full_corr = np.real(signal.correlate(fourier[w,0:ind], fourier[w,0:ind], mode='full', method='auto'))
+    #             corrm[w,:] += full_corr[full_corr.shape[0]//2:]
 
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False), row=1, col=3)
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u1[t,3*n1//4:], data_u1[t,3*n1//4:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u1[t,3*n1//4:0:-1], data_u1[t,3*n1//4:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+        
+    #     for w in range(split_t):
+    #         corrp[w,:] /= (num_split_t-1)
+    #         corrm[w,:] /= (num_split_t-1)
 
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='firebrick', width=2), name='$R_{UU}^{(3)}$'), row=1, col=4)
-    
-    del data_u1
-    del corr
-    
-    print('\nVV correlation')
-    data_u2 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+    #     omega = 2*np.pi*np.linspace(0, 1./(dt), split_t)
+    #     Liip = np.mean(integrate.simps(corrp, omega, axis=0))
+    #     Liim = np.mean(integrate.simps(corrm, omega, axis=0))
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u2[line])[3]
-        Uy = np.mean(var[1:,:], axis=0)
-        data_u2 += var[1:,:] - Uy[np.newaxis, :]
-        del var
+    #     file_int.write(f"{lim} \t {Liip} \t {Liim}\n")
         
-    data_u2 /= nlines
-    corr = np.zeros((n1), dtype=float)
-    
-    for t in range (nt):
-        full_corr = signal.correlate(data_u2[t,:], data_u2[t,:], mode='full', method='auto')
-        corr[:] += full_corr[full_corr.shape[0]//2:]
+    #     corrp = np.mean(corrp, axis=1)
+    #     corrm = np.mean(corrm, axis=1)
+        
+    #     corrp /= max(corrp)
+    #     corrm /= max(corrm)
+        
+    #     if row == 1 and col == 4:
+    #         fig_liip_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='firebrick', width=2), name='$R_{UU}^+(\omega)$'), row=row, col=col)
+    #         fig_liim_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrm[:split_t//2+1], mode= 'lines', line=dict(color='firebrick', width=2), name='$R_{UU}^-(\omega)$'), row=row, col=col)
+            
+    #     else:
+    #         fig_liip_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False), row=row, col=col)
+    #         fig_liim_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrm[:split_t//2+1], mode= 'lines', line=dict(color='firebrick', width=2), showlegend=False), row=row, col=col)
+            
+        
+    #     col +=1
+    #     if v == 4:
+    #         row +=1
+    #         col = 1
+    # #del corr
+    # del corrp
+    # del corrm
+    # del data_u1
 
-    corr /= nt
-    corr /= max(corr)
     
     
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), showlegend=False), row=1, col=1)
+    # print('VV decorrelation length')
+    # data_u2 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
+        
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u2[line])[3]
+    #     Uy = np.mean(var[1:,:], axis=0)
+    #     data_u2 += var[1:,:] - Uy[np.newaxis, :]
+    #     del var
+        
+    # data_u2 /= nlines
     
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u2[t,n1//4:], data_u2[t,n1//4:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u2[t,n1//4:0:-1], data_u2[t,n1//4:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+    # file_int.write("\nu2\n")
+    # file_int.write("z+ \t L+ \t L-\n")
+    # col = 1
+    # row = 1
+    # for v, lim in enumerate(zp):
+    #     for i in range(x2.shape[0]):
+    #         if x2[i] > lim:
+    #             ind = i
+    #             break
+            
+    #     corrp = np.zeros((split_t, n1 - ind), dtype=float)
+    #     corrm = np.zeros((split_t, ind), dtype=float)
 
-    corr /= nt
-    corr /= max(corr)
     
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), showlegend=False), row=1, col=2)
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u2[t,n1//2:], data_u2[t,n1//2:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u2[t,n1//2:0:-1], data_u2[t,n1//2:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+    #     num_split_t = nt // split_t
+    #     for n in tqdm(range(1,num_split_t), desc=f'PSD normal plan', colour= 'GREEN'):
+    #         fourier = fft.fft(data_u2[(n-1)*split_t:n*split_t,:], axis=0, workers=3)
+    #         for w in range(split_t):
+    #             full_corr = np.real(signal.correlate(fourier[w,ind:], fourier[w,ind:], mode='full', method='auto'))
+    #             corrp[w,:] += full_corr[full_corr.shape[0]//2:]
 
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), showlegend=False), row=1, col=3)
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u2[t,3*n1//4:], data_u2[t,3*n1//4:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u2[t,3*n1//4:0:-1], data_u2[t,3*n1//4:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+    #             full_corr = np.real(signal.correlate(fourier[w,0:ind], fourier[w,0:ind], mode='full', method='auto'))
+    #             corrm[w,:] += full_corr[full_corr.shape[0]//2:]
 
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='midnightblue', width=2), name='$R_{VV}^{(3)}$'), row=1, col=4)
-    
-    del data_u2
-    del corr
-    
-    print('\nWW correlation')
-    data_u3 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
-        Uz = np.mean(var[1:,:], axis=0)
-        data_u3 += var[1:,:] - Uz[np.newaxis, :]
-        del var
-        
-    data_u3 /= nlines
-    corr = np.zeros((n1), dtype=float)
-    
-    for t in range (nt):
-        full_corr = signal.correlate(data_u3[t,:], data_u3[t,:], mode='full', method='auto')
-        corr[:] += full_corr[full_corr.shape[0]//2:]
+    #     for w in range(split_t):
+    #         corrp[w,:] /= (num_split_t-1)
+    #         corrm[w,:] /= (num_split_t-1)
 
-    corr /= nt
-    corr /= max(corr)
+            
+    #     omega = 2*np.pi*np.linspace(0, 1./(dt), split_t)
+    #     Liip = np.mean(integrate.simps(corrp, omega, axis=0))
+    #     Liim = np.mean(integrate.simps(corrm, omega, axis=0))
+        
+    #     file_int.write(f"{lim} \t {Liip} \t {Liim}\n")
+        
+    #     corrp = np.mean(corrp, axis=1)
+    #     corrm = np.mean(corrm, axis=1)
+        
+    #     corrp /= max(corrp)
+    #     corrm /= max(corrm)
+        
+    #     if row == 1 and col == 4:
+    #         fig_liip_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='midnightblue', width=2), name='$R_{VV}^+(\omega)$'), row=row, col=col)
+    #         fig_liim_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='midnightblue', width=2), name='$R_{VV}^-(\omega)$'), row=row, col=col)
+            
+    #     else:
+    #         fig_liip_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='midnightblue', width=2), showlegend=False), row=row, col=col)
+    #         fig_liim_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrm[:split_t//2+1], mode= 'lines', line=dict(color='midnightblue', width=2), showlegend=False), row=row, col=col)
+            
+        
+    #     col +=1
+    #     if v == 4:
+    #         row +=1
+    #         col = 1
+            
+    # del corrp
+    # del corrm
+    # del data_u2
     
+    # print('WW decorrelation length')
+    # data_u3 = np.zeros((nt, n1), dtype=float)
+    # for line in range(nlines):
+    #     print('line number:', line)
+        
+    #     var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
+    #     Uz = np.mean(var[1:,:], axis=0)
+    #     data_u3 += var[1:,:] - Uz[np.newaxis, :]
+    #     del var
+        
+    # data_u3 /= nlines
     
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), showlegend=False), row=1, col=1)
+    # file_int.write("\nu3\n")
+    # file_int.write("z+ \t L+ \t L-\n")
+    # col = 1
+    # row = 1
+    # for v, lim in enumerate(zp):
+    #     for i in range(x2.shape[0]):
+    #         if x2[i] > lim:
+    #             ind = i
+    #             break
+            
+    #     corrp = np.zeros((split_t, n1 - ind), dtype=float)
+    #     corrm = np.zeros((split_t, ind), dtype=float)
     
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u3[t,n1//4:], data_u3[t,n1//4:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u3[t,n1//4:0:-1], data_u3[t,n1//4:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
+    #     num_split_t = nt // split_t
+    #     for n in tqdm(range(1,num_split_t), desc=f'PSD normal plan', colour= 'GREEN'):
+    #         fourier = fft.fft(data_u3[(n-1)*split_t:n*split_t,:], axis=0, workers=3)
+    #         for w in range(split_t):
+    #             full_corr = np.real(signal.correlate(fourier[w,ind:], fourier[w,ind:], mode='full', method='auto'))
+    #             corrp[w,:] += full_corr[full_corr.shape[0]//2:]
+                
+    #             full_corr = np.real(signal.correlate(fourier[w,0:ind], fourier[w,0:ind], mode='full', method='auto'))
+    #             corrm[w,:] += full_corr[full_corr.shape[0]//2:]
+                
+                
+        
+    #     for w in range(split_t):
+    #         corrp[w,:] /= (num_split_t-1)
+    #         corrm[w,:] /= (num_split_t-1)
 
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), showlegend=False), row=1, col=2)
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u3[t,n1//2:], data_u3[t,n1//2:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u3[t,n1//2:0:-1], data_u3[t,n1//2:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
-
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), showlegend=False), row=1, col=3)
-    
-    corr = np.zeros((n1), dtype=float)
-    for t in range (nt):
-        full_corr = signal.correlate(data_u3[t,3*n1//4:], data_u3[t,3*n1//4:], mode='full', method='auto')
-        corrp = full_corr[full_corr.shape[0]//2:]
-        full_corr = signal.correlate(data_u3[t,3*n1//4:0:-1], data_u3[t,3*n1//4:0:-1], mode='full', method='auto')
-        corrm = full_corr[:full_corr.shape[0]//2+1]
-        corr[:] += np.concatenate((corrm, corrp))
-
-    corr /= nt
-    corr /= max(corr)
-    
-    fig_corr_z.add_trace(go.Scatter(x=corr, y=x2, mode= 'lines', line=dict(color='darkgreen', width=2), name='$R_{WW}^{(3)}$'), row=1, col=4)
-    
-    del data_u3
-    del corr
-    
-    fig_corr_z.update_xaxes(title='$R_{ii}^{(3)}$', row=1, col=1)
-    fig_corr_z.update_xaxes(title='$R_{ii}^{(3)}$', row=1, col=2)
-    fig_corr_z.update_xaxes(title='$R_{ii}^{(3)}$', row=1, col=3)
-    fig_corr_z.update_xaxes(title='$R_{ii}^{(3)}$', row=1, col=4)
-    
-    fig_corr_z.update_layout(height=600, width=900, title="Wall-normal auto-correlation", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
-    
-    save_figures(fig_corr_z, "Normal_plan/autocorreation_z.png")
-    
-    
-    # Decorrelation Length ##
-    fig_lii_z = go.Figure()
-    
-    print('UU decorrelation length')
-    data_u1 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+            
+    #     omega = 2*np.pi*np.linspace(0, 1./dt, split_t)
+    #     Liip = np.mean(integrate.simps(corrp, omega, axis=0))
+    #     Liim = np.mean(integrate.simps(corrm, omega, axis=0))
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u3[line])[3]
-        Ux = np.mean(var[1:,:], axis=0)
-        data_u1 += var[1:,:] - Ux[np.newaxis, :]
-        del var
+    #     file_int.write(f"{lim} \t {Liip} \t {Liim} \n")
         
-    data_u1 /= nlines
-    corr = np.zeros((n1), dtype=float)
-    #corr = np.zeros((split_t, n1))
-    
-    
-    num_split_t = nt // split_t
-    for n in tqdm(range(1,num_split_t), desc=f'PSD normal plan', colour= 'GREEN'):
-        fourier = fft.fft(data_u1[(n-1)*split_t:n*split_t,:], axis=0, workers=3)
-        for w in range(split_t):
-            full_corr = np.abs(signal.correlate(fourier[w,:], fourier[w,:], mode='full', method='auto'))
-            corr += full_corr[full_corr.shape[0]//2:]
-        corr /= split_t
+    #     corrp = np.mean(corrp, axis=1)
+    #     corrm = np.mean(corrm, axis=1)
         
-    corr /= (num_split_t-1)
+    #     corrp /= max(corrp)
+    #     corrm /= max(corrm)
         
-    
-    corr /= max(corr)
-    del data_u1
-    #x2 = np.concatenate((-x2[::-1] , x2[:-2]))
-    fig_lii_z.add_trace(go.Scatter(x=x2, y=corr, mode= 'lines', line=dict(color='firebrick', width=2), name='$R_{UU}^{(3)}$'))
-    
-    del corr
-    
-    print('VV decorrelation length')
-    data_u2 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
+    #     if row == 1 and col == 4:
+    #         fig_liip_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='darkgreen', width=2), name='$R_{WW}^+(\omega)$'), row=row, col=col)
+    #         fig_liim_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrm[:split_t//2+1], mode= 'lines', line=dict(color='darkgreen', width=2), name='$R_{WW}^-(\omega)$'), row=row, col=col)
+            
+    #     else:
+    #         fig_liip_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrp[:split_t//2+1], mode= 'lines', line=dict(color='darkgreen', width=2), showlegend=False), row=row, col=col)
+    #         fig_liim_z.add_trace(go.Scatter(x=omega[:split_t//2+1], y=corrm[:split_t//2+1], mode= 'lines', line=dict(color='darkgreen', width=2), showlegend=False), row=row, col=col)
+            
         
-        var = read_fpar_extract_plane_line(fpars_files_normal_u2[line])[3]
-        Uy = np.mean(var[1:,:], axis=0)
-        data_u2 += var[1:,:] - Uy[np.newaxis, :]
-        del var
-        
-    data_u2 /= nlines
-    corr = np.zeros((n1), dtype=float)
+    #     col +=1
+    #     if v == 4:
+    #         row +=1
+    #         col = 1, range=[0:100]
+            
+    # del corrp
+    # del corrm
+    # del data_u3
     
-    num_split_t = nt // split_t
-    for n in tqdm(range(1,num_split_t), desc=f'PSD normal plan', colour= 'GREEN'):
-        fourier = fft.fft(data_u2[(n-1)*split_t:n*split_t,:], axis=0, workers=3)
-        for w in range(split_t):
-            full_corr = np.abs(signal.correlate(fourier[w,:], fourier[w,:], mode='full', method='auto'))
-            corr += full_corr[full_corr.shape[0]//2:]
-        corr /= split_t
-        
-    corr /= (num_split_t-1)
+    # row = 1
+    # col = 1
+    # for i in range(len(zp)):
+    #     fig_liip_z.update_xaxes(title='$\omega$', row=row, col=col, range=[0,100])
+    #     fig_liim_z.update_xaxes(title='$\omega$', row=row, col=col, range=[0,100])
+    #     col +=1
+    #     if i == 4:
+    #         row +=1
+    #         col = 1
     
-    # for t in range (nt):
-    #     # full_corr = signal.correlate(data_u2[t,:], data_u2[t,:], mode='full', method='auto')
-    #     # corr[:] += full_corr[full_corr.shape[0]//2:]
-    #     corr[:] += signal.correlate(data_u2[t,:], data_u2[t,:], mode='full', method='auto')
-        
-    # corr /= nt
-    corr /= max(corr)
-    del data_u2
+    # fig_liip_z.update_layout(height=600, width=800, title="Wall-normal correlation length (+)", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
+    # fig_liim_z.update_layout(height=600, width=800, title="Wall-normal correlation length (-)", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
     
-    fig_lii_z.add_trace(go.Scatter(x=x2, y=corr, mode= 'lines', line=dict(color='midnightblue', width=2), name='$R_{VV}^{(3)}$'))
+    # save_figures(fig_liip_z, "Normal_plan/correation_length_plus.png")
+    # save_figures(fig_liim_z, "Normal_plan/correation_length_minus.png")
     
-    del corr
     
-    print('WW decorrelation length')
-    data_u3 = np.zeros((nt, n1), dtype=float)
-    for line in range(nlines):
-        print('line number:', line)
-        
-        var = read_fpar_extract_plane_line(fpars_files_normal_u1[line])[3]
-        Uz = np.mean(var[1:,:], axis=0)
-        data_u3 += var[1:,:] - Uz[np.newaxis, :]
-        del var
-        
-    data_u3 /= nlines
-    corr = np.zeros((n1), dtype=float)
+    # file_int.close()
     
-    num_split_t = nt // split_t
-    for n in tqdm(range(1,num_split_t), desc=f'PSD normal plan', colour= 'GREEN'):
-        fourier = fft.fft(data_u3[(n-1)*split_t:n*split_t,:], axis=0, workers=3)
-        for w in range(split_t):
-            full_corr = np.abs(signal.correlate(fourier[w,:], fourier[w,:], mode='full', method='auto'))
-            corr += full_corr[full_corr.shape[0]//2:]
-        corr /= split_t
-        
-    corr /= (num_split_t-1)
+    # elapsed_time = time.time() - start_time
+    # minutes, seconds = divmod(elapsed_time, 60)
     
-    # for t in range (nt):
-    #     # full_corr = signal.correlate(data_u3[t,:], data_u3[t,:], mode='full', method='auto')
-    #     # corr[:] += full_corr[full_corr.shape[0]//2:]
-    #     corr[:] += signal.correlate(data_u3[t,:], data_u3[t,:], mode='full', method='auto')
-        
-    # corr /= nt
-    corr /= max(corr)
-    del data_u3
-    
-    fig_lii_z.add_trace(go.Scatter(x=x2, y=corr, mode= 'lines', line=dict(color='darkgreen', width=2), name='$R_{WW}^{(3)}$'))
-    
-    del corr
-    
-    fig_lii_z.update_xaxes(title='$\delta z^+$')
-    fig_lii_z.update_yaxes(title='$R_{ii}^{(3)}$')
-    
-    fig_lii_z.update_layout(height=600, width=800, title="Wall-normal auto-correlation", font=font, showlegend=True, legend=dict(yanchor='bottom', y=1.03, xanchor='left', x=0.9))
-    
-    save_figures(fig_lii_z, "Normal_plan/autocorreation.png")
-    
-    elapsed_time = time.time() - start_time
-    minutes, seconds = divmod(elapsed_time, 60)
-    
-    print(f'\n Normal plan study done in : {int(minutes)}m {seconds:.2f}s \n')
+    # print(f'\n Normal plan study done in : {int(minutes)}m {seconds:.2f}s \n')
 
     
     
@@ -1653,205 +1740,183 @@ def main():
                 #### VON KARMAN MODEL ####
     #=======================================================
     
-    # print("\n========================================")
-    # print(f"{YELLOW}Von Karman theorical computation{RESET}")
-    # start_time = time.time()
-    # print("========================================")
+    print("\n========================================")
+    print(f"{YELLOW}Von Karman theorical computation{RESET}")
+    start_time = time.time()
+    print("========================================")
     
-    # col = 1
-    # row = 1
-    # print("\nReading input files ...")
+    col = 1
+    row = 1
+    print("\nReading input files ...")
     
-    # _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
-    # nt = nt - 1
-    # dx = cflow.xlen / n1
-    # dy = cflow.ylen / n2
+    _, x1, x2, _, nt, n1, n2, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane(fpars_files_streamwise_u1[0])
+    nt = nt - 1
+    dx = cflow.xlen / n1
+    dy = cflow.ylen / n2
     
-    # fig_vanK = init_figures_vk(zp, ch=ch_plot)
+    fig_vanK = init_figures_vk(zp, ch=ch_plot)
     
-    # #for zplan in np.arange(0, n2, n2//3, dtype=int):
-    # for ind, zplan in enumerate(zp_ind):
+    #for zplan in np.arange(0, n2, n2//3, dtype=int):
+    for ind, zplan in enumerate(zp_ind):
         
-    #     print("========================================")
-    #     print(f'Von Karman theory for {YELLOW}zp={zp[ind]:.2f}{RESET}')
-    #     print('Plan number:', zplan)
+        print("========================================")
+        print(f'Von Karman theory for {YELLOW}zp={zp[ind]:.2f}{RESET}')
+        print('Plan number:', zplan)
     
-    #     print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-    #     nt = nt - 1
-    #     datas_u1 = var[1:,:,:]
-    #     del var
-    #     print('datas_u1.shape:',datas_u1.shape)
+        print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        nt = nt - 1
+        datas_u1 = var[1:,:,:]
+        del var
+        print('datas_u1.shape:',datas_u1.shape)
         
-    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-    #     print('Ux:', Ux)
+        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        print('Ux:', Ux)
 
-    #     sigma_u_squared = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=0), axis=-1))
+        sigma_u_squared = np.mean(np.mean(np.mean((datas_u1[:,:,:]-Ux)**2, axis=0), axis=-1))
         
             
-    #     del datas_u1
-    #     print('sigma_u_squared:', sigma_u_squared)
+        del datas_u1
+        print('sigma_u_squared:', sigma_u_squared)
         
-    #     print("========================================")
-    #     print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-    #     nt = nt - 1
-    #     datas_u2 = var[1:,:,:]
-    #     del var
-    #     print('datas_u1.shape:',datas_u2.shape)
+        print("========================================")
+        print(f"Reading input files (u2 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        nt = nt - 1
+        datas_u2 = var[1:,:,:]
+        del var
+        print('datas_u1.shape:',datas_u2.shape)
         
-    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-    #     print('Uy:', Uy)
+        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        print('Uy:', Uy)
 
-    #     sigma_v_squared = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=0), axis=-1))
+        sigma_v_squared = np.mean(np.mean(np.mean((datas_u2[:,:,:]-Uy)**2, axis=0), axis=-1))
         
             
-    #     del datas_u2
-    #     print('sigma_v_squared:', sigma_v_squared)
+        del datas_u2
+        print('sigma_v_squared:', sigma_v_squared)
         
-    #     print("========================================")
-    #     print(f"Reading input files (u3 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-    #     nt = nt - 1
-    #     datas_u3 = var[1:,:,:]
-    #     del var
-    #     print('datas_u1.shape:',datas_u3.shape)
+        print("========================================")
+        print(f"Reading input files (u3 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+        nt = nt - 1
+        datas_u3 = var[1:,:,:]
+        del var
+        print('datas_u1.shape:',datas_u3.shape)
         
-    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-    #     print('Uz:', Uz)
+        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        print('Uz:', Uz)
 
-    #     sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=0), axis=-1))
+        sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=0), axis=-1))
         
             
-    #     del datas_u3
-    #     print('sigma_w_squared:', sigma_w_squared)
+        del datas_u3
+        print('sigma_w_squared:', sigma_w_squared)
         
         
-    #     print("========================================")
-    #     print(f"Computing sigma1c for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        print("========================================")
+        print(f"Computing sigma1c for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
         
-    #     sigma11 = sigma_1c(sigma_u_squared, 1., sigma_v_squared, 0., sigma_w_squared, 0.)
-    #     sigma12 = sigma_1c(sigma_u_squared, 0., sigma_v_squared, 1., sigma_w_squared, 0.)
+        sigma11 = sigma_1c(sigma_u_squared, 1., sigma_v_squared, 0., sigma_w_squared, 0.)
+        sigma12 = sigma_1c(sigma_u_squared, 0., sigma_v_squared, 1., sigma_w_squared, 0.)
         
-    #     print("========================================")
-    #     print(f"Computing L for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        print("========================================")
+        print(f"Computing L for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
         
-    #     Le = L(0.519, ko2_tke, ko2_omega) #list length omega
+        Le = L(0.519, ko2_tke, ko2_omega) #list length omega
         
-    #     kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma11, Le)
-    #     kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma12, Le) #=R33
+        kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma11, Le)
+        kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma12, Le) #=R33
         
-    #     ratio11 = sigma11**2*Le
-    #     ratio12 = sigma12**2*Le
-    #     ratio21 = (3 + 8*(1*kc*Le)**2) / (1 + (1*kc * Le)**2)**(11/6.)
-    #     ratio22 = 1. / (1 + (1*kc*Le)**2)**(5/6.)
+        ratio11 = sigma11**2*Le
+        ratio12 = sigma12**2*Le
+        ratio21 = (3 + 8*(1*kc*Le)**2) / (1 + (1*kc * Le)**2)**(11/6.)
+        ratio22 = 1. / (1 + (1*kc*Le)**2)**(5/6.)
         
-    #     print('sum21:', sum(ratio21))
-    #     print('sum22:', sum(ratio22))
+        print('sum21:', sum(ratio21))
+        print('sum22:', sum(ratio22))
         
-    #     ratio21 = integrate.simps(ratio21, ko2_omega)
-    #     ratio22 = integrate.simps(ratio22, ko2_omega)
+        ratio21 = integrate.simps(ratio21, ko2_omega)
+        ratio22 = integrate.simps(ratio22, ko2_omega)
         
-    #     # print('ratio11:', ratio11)
-    #     # print('ratio12:', ratio12)
-    #     print('ratio21:', ratio21)
-    #     print('ratio22:', ratio22)
+        # print('ratio11:', ratio11)
+        # print('ratio12:', ratio12)
+        print('ratio21:', ratio21)
+        print('ratio22:', ratio22)
         
-    #     von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
-    #     von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
+        von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
+        von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
         
-    #     del kc
-    #     del phi11
-    #     del phi22
+        del kc
+        del phi11
+        del phi22
         
         
-    #     ### experience ###
-    #     ## u1 ##
-    #     print(f"Computing spectra from LES datas for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-    #     datas_u1 = var[1:,:,:]
-    #     Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-    #     datas_u1 = datas_u1 - Ux
-    #     # phi11_exp__ = von_karman_spectra(datas_u1, datas_u1, geom='plan', axis='streamwise')
-    #     # del datas_u1
-    #     # phi11_exp = np.mean(np.mean(phi11_exp__, axis=-1), axis=-1)
+        ### experience ###
+        ## u1 ##
+        print(f"Computing spectra from LES datas for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        datas_u1 = var[1:,:,:]
+        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        datas_u1 = datas_u1 - Ux
+        
+        omega, k, _, phi11_exp = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        del datas_u1
+        
+        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi11_exp[1:], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
+        
+        del phi11_exp
+        del k
+
+        
+        ## u2 ##
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        nt = nt - 1
+        datas_u2 = var[1:,:,:]
+        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        datas_u2 = datas_u2 - Uy
+
+        omega, k, _, phi22_exp = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        del datas_u2
                 
-    #     # del phi11_exp__
+        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi22_exp[1:], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
+            
+        del phi22_exp
+        del k
+
         
-    #     omega, k, _, phi11_exp = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
-    #     del datas_u1
-        
-    #     # freq = fft.fftfreq(2*split_t, d=dt)
-    #     # freq = freq[:freq.shape[0]//2]
-    #     # om = 2*np.pi*freq
-    #     # k1 = Ux*om
-        
-    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi11_exp[1:], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
-        
-    #     del phi11_exp
-    #     del k
-    #     # del om
-    #     # del freq
-        
-    #     ## u2 ##
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-    #     nt = nt - 1
-    #     datas_u2 = var[1:,:,:]
-    #     Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-    #     datas_u2 = datas_u2 - Uy
-    #     # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
-    #     # del datas_u2
-    #     # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
-        
-    #     # del phi22_exp__
-        
-    #     omega, k, _, phi22_exp = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
-    #     del datas_u2
+        ## u3 ##
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+        nt = nt - 1
+        datas_u3 = var[1:,:,:]
+        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        datas_u3 = datas_u3 - Uz
+
+        omega, k, _, phi33_exp = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        del datas_u3
                 
-    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi22_exp[1:], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
+        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi33_exp[1:], name = '$\phi_{33}exp$', color = 'darkgreen', symbols='x')
             
-    #     del phi22_exp
-    #     del k
-    #     # del k1
+        del phi33_exp
+        del k
         
-    #     ## u3 ##
-    #     _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-    #     nt = nt - 1
-    #     datas_u3 = var[1:,:,:]
-    #     Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-    #     datas_u3 = datas_u3 - Uz
-    #     # phi22_exp__ = von_karman_spectra(datas_u2, datas_u2, geom='plan', axis='streamwise')
-    #     # del datas_u2
-    #     # phi22_exp = np.mean(np.mean(phi22_exp__, axis=-1), axis=-1)
-        
-    #     # del phi22_exp__
-        
-    #     omega, k, _, phi33_exp = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
-    #     del datas_u3
-                
-    #     von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi33_exp[1:], name = '$\phi_{33}exp$', color = 'darkgreen', symbols='x')
-            
-    #     del phi33_exp
-    #     del k
-        
-        
-    #     col +=1
-    #     if zplan == 4:
-    #         row +=1
-    #         col = 1
+        col +=1
+        if zplan == 4:
+            row +=1
+            col = 1
             
             
-    # if ch_plot == 'normal':
-    #     fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
-    #     save_figures(fig_vanK, "von_karman/von_karman_spectra.png")
-    # if ch_plot == 'all':
-    #     fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
-    #     save_figures(fig_vanK, "von_karman/von_karman_spectra_all.png")
+    if ch_plot == 'normal':
+        fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
+        save_figures(fig_vanK, "von_karman/von_karman_spectra.png")
+    if ch_plot == 'all':
+        fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
+        save_figures(fig_vanK, "von_karman/von_karman_spectra_all.png")
         
-    # elapsed_time = time.time() - start_time
-    # minutes, seconds = divmod(elapsed_time, 60)
+    elapsed_time = time.time() - start_time
+    minutes, seconds = divmod(elapsed_time, 60)
     
-    # print(f'\n Von Karman study done in : {int(minutes)}m {seconds:.2f}s \n')
+    print(f'\n Von Karman study done in : {int(minutes)}m {seconds:.2f}s \n')
         
         
     del fpars_files_streamwise_u1
