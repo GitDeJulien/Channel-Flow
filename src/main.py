@@ -1763,6 +1763,72 @@ def main():
         print(f'Von Karman theory for {YELLOW}zp={zp[ind]:.2f}{RESET}')
         print('Plan number:', zplan)
     
+        ### experience ###
+        ## u1 ##
+        print(f"Computing spectra from LES datas for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
+        datas_u1 = var[1:,:,:]
+        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
+        datas_u1 = datas_u1 - Ux
+        
+        omega, k, _, phi11_exp = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        k /= Ux
+        
+        lim = 400
+        for i in range(k.shape[0]):
+            if k[i] > lim:
+                tick_w = i
+                break
+            
+        del datas_u1
+        
+        von_karman_plot(fig_vanK, col, row, k[1:tick_w], k[1:tick_w]*phi11_exp[1:tick_w], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
+        
+        int_exp1 = integrate.simpson(phi11_exp[1:], k[1:])
+        
+        del phi11_exp
+        del k
+
+        
+        ## u2 ##
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
+        nt = nt - 1
+        datas_u2 = var[1:,:,:]
+        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
+        datas_u2 = datas_u2 - Uy
+
+        omega, k, _, phi22_exp = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        k /= Ux
+        
+        del datas_u2
+                
+        von_karman_plot(fig_vanK, col, row, k[1:tick_w], k[1:tick_w]*phi22_exp[1:tick_w], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
+        
+        int_exp2 = integrate.simpson(phi22_exp[1:], k[1:])
+            
+        del phi22_exp
+        del k
+
+        
+        ## u3 ##
+        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
+        nt = nt - 1
+        datas_u3 = var[1:,:,:]
+        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
+        datas_u3 = datas_u3 - Uz
+
+        omega, k, _, phi33_exp = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
+        k /= Ux
+        print('k:', k)
+        
+        del datas_u3
+        
+        von_karman_plot(fig_vanK, col, row, k[1:tick_w], k[1:tick_w]*phi33_exp[1:tick_w], name = '$\phi_{33}exp$', color = 'darkgreen', symbols='x')
+            
+        del phi33_exp
+        #del k
+    
+        ## Theoric VK ##
         print(f"Reading input files (u1 velocity) for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
         _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
         nt = nt - 1
@@ -1809,6 +1875,7 @@ def main():
 
         sigma_w_squared = np.mean(np.mean(np.mean((datas_u3[:,:,:]-Uz)**2, axis=0), axis=-1))
         
+        kt = 1./2 * (sigma_u_squared + sigma_v_squared + sigma_w_squared)
             
         del datas_u3
         print('sigma_w_squared:', sigma_w_squared)
@@ -1823,82 +1890,58 @@ def main():
         print("========================================")
         print(f"Computing L for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
         
-        Le = L(0.519, ko2_tke, ko2_omega) #list length omega
+        dis = ko2_omega.shape[0]
+        Le = L(0.519, ko2_tke[dis//2:], ko2_omega[dis//2:]) #list length omega
+        #Le = L(0.519, kt, k*Ux)
         
-        kc, phi11 = phi_11(ko2_omega, 1.0, Ux, sigma11, Le)
-        kc, phi22 = phi_22(ko2_omega, 1.0, Ux, sigma12, Le) #=R33
+        kc, phi11 = phi_11(ko2_omega[dis//2:], 1.0, Ux, sigma11, Le)
+        kc, phi22 = phi_22(ko2_omega[dis//2:], 1.0, Ux, sigma12, Le) #=R33
+        # kc, phi11 = phi_11(k, 1.0, Ux, sigma11, Le)
+        # kc, phi22 = phi_22(k, 1.0, Ux, sigma12, Le)
+
         
-        ratio11 = sigma11**2*Le
-        ratio12 = sigma12**2*Le
-        ratio21 = (3 + 8*(1*kc*Le)**2) / (1 + (1*kc * Le)**2)**(11/6.)
-        ratio22 = 1. / (1 + (1*kc*Le)**2)**(5/6.)
+        lim = 400
+        for i in range(kc.shape[0]):
+            if kc[i] > lim:
+                tick_w = i
+                break
+            
+        print('tick_w',tick_w)
         
-        print('sum21:', sum(ratio21))
-        print('sum22:', sum(ratio22))
+        # ratio11 = sigma11**2*Le
+        # ratio12 = sigma12**2*Le
+        # ratio21 = (3 + 8*(1*kc*Le)**2) / (1 + (1*kc * Le)**2)**(11/6.)
+        # ratio22 = 1. / (1 + (1*kc*Le)**2)**(5/6.)
         
-        ratio21 = integrate.simps(ratio21, ko2_omega)
-        ratio22 = integrate.simps(ratio22, ko2_omega)
+        # print('sum21:', sum(ratio21))
+        # print('sum22:', sum(ratio22))
+        
+        # ratio21 = integrate.simps(ratio21, ko2_omega)
+        # ratio22 = integrate.simps(ratio22, ko2_omega)
+        
+        int_theo1 = integrate.simpson(phi11[:tick_w], kc[:tick_w])
+        int_theo2 = integrate.simpson(phi22[:tick_w], kc[:tick_w])
+        
+        # int_theo1 = sum(phi11)
+        # int_theo2 = sum(phi22)
         
         # print('ratio11:', ratio11)
         # print('ratio12:', ratio12)
-        print('ratio21:', ratio21)
-        print('ratio22:', ratio22)
+        # print('ratio21:', ratio21)
+        # print('ratio22:', ratio22)
+        print('int_theo1:', int_theo1)
+        print('int_theo2:', int_theo2)
         
-        von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi11[:-2], name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
-        von_karman_plot(fig_vanK, col, row, kc[:-2], kc[:-2]*phi22[:-2], name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
+        new_phi11 = kc[:tick_w]*phi11[:tick_w]# * int_exp1**2 / int_theo1**2
+        new_phi22 = kc[:tick_w]*phi22[:tick_w]# * int_exp2**2 / int_theo2**2
+        
+        von_karman_plot(fig_vanK, col, row, kc[:tick_w], new_phi11, name = '$\phi^{0}_{11}$', color = 'firebrick', symbols='circle-open')
+        von_karman_plot(fig_vanK, col, row, kc[:tick_w], new_phi22, name = '$\phi^{0}_{22}$', color = 'midnightblue', symbols='circle-open')
         
         del kc
         del phi11
         del phi22
         
-        
-        ### experience ###
-        ## u1 ##
-        print(f"Computing spectra from LES datas for {YELLOW}z={zp[ind]:.2f}{RESET} ...\n")
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u1[zplan])
-        datas_u1 = var[1:,:,:]
-        Ux = np.mean(np.mean(np.mean(datas_u1[:,:,:], axis=-1), axis=-1))
-        datas_u1 = datas_u1 - Ux
-        
-        omega, k, _, phi11_exp = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
-        del datas_u1
-        
-        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi11_exp[1:], name = '$\phi_{11}exp$', color = 'firebrick', symbols='x')
-        
-        del phi11_exp
-        del k
-
-        
-        ## u2 ##
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u2[zplan])
-        nt = nt - 1
-        datas_u2 = var[1:,:,:]
-        Uy = np.mean(np.mean(np.mean(datas_u2[:,:,:], axis=-1), axis=-1))
-        datas_u2 = datas_u2 - Uy
-
-        omega, k, _, phi22_exp = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
-        del datas_u2
-                
-        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi22_exp[1:], name = '$\phi_{22}exp$', color = 'midnightblue', symbols='x')
-            
-        del phi22_exp
-        del k
-
-        
-        ## u3 ##
-        _,_,_,var,_,_,_,_,_,_,_,_,_ = read_fpar_extract_plane(fpars_files_streamwise_u3[zplan])
-        nt = nt - 1
-        datas_u3 = var[1:,:,:]
-        Uz = np.mean(np.mean(np.mean(datas_u3[:,:,:], axis=-1), axis=-1))
-        datas_u3 = datas_u3 - Uz
-
-        omega, k, _, phi33_exp = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
-        del datas_u3
-                
-        von_karman_plot(fig_vanK, col, row, k[1:], k[1:]*phi33_exp[1:], name = '$\phi_{33}exp$', color = 'darkgreen', symbols='x')
-            
-        del phi33_exp
-        del k
         
         col +=1
         if zplan == 4:
@@ -1907,10 +1950,10 @@ def main():
             
             
     if ch_plot == 'normal':
-        fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
-        save_figures(fig_vanK, "von_karman/von_karman_spectra.png")
+        fig_vanK.update_layout(height=600, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="top", xanchor="right"))
+        save_figures(fig_vanK, "von_karman/von_karman_spectra_.png")
     if ch_plot == 'all':
-        fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="bottom", y=1.03, xanchor="right", x=1.05))
+        fig_vanK.update_layout(height=900, width=900, title=f"Von Karman Spectra", font=font, showlegend=True, legend=dict(yanchor="top", xanchor="right"))
         save_figures(fig_vanK, "von_karman/von_karman_spectra_all.png")
         
     elapsed_time = time.time() - start_time

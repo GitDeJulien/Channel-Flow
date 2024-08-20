@@ -17,7 +17,7 @@ def phi_11(omega, a1, Uc, sigma1c, Le):
     nw = omega.shape[0]
     res = np.zeros((nw))
     kc = omega / Uc
-    ke = 1./Le
+    #ke = 1./Le
     for w in range(nw):
         res[w] = a1 * 36*special.gamma(17/6.)*sigma1c**2*Le[w] / (np.sqrt(np.pi)*55*special.gamma(1/3.) * (1 + (a1*kc[w]*Le[w])**2)**(5/6.))
     return(kc, res)

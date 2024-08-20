@@ -19,6 +19,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             var1 = 0.
             inte_space = 0.
             inte_time = 0.
+            sum_space = 0.
             
             for n in tqdm(range(1,num_split_t), desc=f'PSD (z={z[zplan]:.2f})', colour= 'GREEN'):
 
@@ -35,6 +36,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             var1 /= (num_split_t-1)
             inte_time /= (num_split_t-1)
             inte_space /= (num_split_t-1)
+            sum_space /= (num_split_t-1)
             print('<uiui>=',var1)
             print('Inte_time:', inte_time)
             print('Inte_space:', inte_space)
