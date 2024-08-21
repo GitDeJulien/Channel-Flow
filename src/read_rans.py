@@ -1,6 +1,7 @@
 import numpy as np
+from parameters import *
 
-with open('input/chan_rans_mean.dat', 'r') as f:
+with open(rans_path, 'r') as f:
     y = []
     ko2_omega = []
     ko2_tke = []
