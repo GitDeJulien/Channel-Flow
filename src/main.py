@@ -207,7 +207,7 @@ def main():
     #     #### Spectra ####
     #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
         
-    #     frozen_turbulence_plot(fig1u1, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+    #     frozen_turbulence_plot(fig1u1, col, row, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
     #     del time_spectra
     #     del space_spectra
@@ -251,7 +251,7 @@ def main():
     #     #### Spectra ####
     #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
         
-    #     frozen_turbulence_plot(fig1u2, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+    #     frozen_turbulence_plot(fig1u2, col, row, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
     #     del time_spectra
     #     del space_spectra
@@ -293,7 +293,7 @@ def main():
     #     #### Spectra ####
     #     omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u3, zplan, z, nt, split_time, dt, n1, dx=dx, ch="spectra")
         
-    #     frozen_turbulence_plot(fig1u3, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+    #     frozen_turbulence_plot(fig1u3, col, row, omega = omega, Uc = U1, time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
     #     del time_spectra
     #     del space_spectra
@@ -880,7 +880,6 @@ def main():
     #     print('Plan number:', zplan)
     #     print("Reading input files streamwise...")
         
-    #     split_t = int(2**10)
     #     num_split_t = nt // split_t
     #     Dx = np.linspace(0,xlen//2,n1)
         
@@ -1009,7 +1008,6 @@ def main():
     #     print('Plan number:', zplan)
     #     print("Reading input files spanwise...")
         
-    #     split_t = int(2**10)
     #     num_split_t = nt // split_t
     #     Dx = np.linspace(0,ylen//2,n1)
         
@@ -1236,21 +1234,21 @@ def main():
     #=======================================================
                 #### NORMAL PLAN COMPUTATION ####
     #=======================================================
-    print("\n========================================")
-    print(f"{YELLOW}NORMAL PLAN COMPUTATION{RESET}")
-    start_time = time.time()
-    print("========================================")
-    nlines = len(fpars_files_normal_u1)
-    _, x1, x2, _, nt, n2, n1, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane_line(fpars_files_normal_u1[0])
-    nt = nt - 1
-    print('n1:', n1)
-    print('n2:', n2)
-    print('x2:', x2)
-    x2 = np.array(x2)
-    x2 *= cflow.ut / cflow.nu
-    zp_RANS = cflow.ut/cflow.nu * normal
-    print('x2[0]:',x2[0])
-    print('x2[len(x2)]:',x2[len(x2)-1])
+    # print("\n========================================")
+    # print(f"{YELLOW}NORMAL PLAN COMPUTATION{RESET}")
+    # start_time = time.time()
+    # print("========================================")
+    # nlines = len(fpars_files_normal_u1)
+    # _, x1, x2, _, nt, n2, n1, _, tEnd, _, iprecision, _, _ = read_fpar_extract_plane_line(fpars_files_normal_u1[0])
+    # nt = nt - 1
+    # print('n1:', n1)
+    # print('n2:', n2)
+    # print('x2:', x2)
+    # x2 = np.array(x2)
+    # x2 *= cflow.ut / cflow.nu
+    # zp_RANS = cflow.ut/cflow.nu * normal
+    # print('x2[0]:',x2[0])
+    # print('x2[len(x2)]:',x2[len(x2)-1])
     
     ##Figure initiaization##
     # fig_u_z = make_subplots(rows=1, cols=3, shared_yaxes= True, y_title='$z^+$')
@@ -1479,7 +1477,7 @@ def main():
         
     # fig_corr_z.update_layout(height=600, width=900, title="Wall-normal auto-correlation", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
     
-    # save_figures(fig_corr_z, "Normal_plan/autocorreation_z.png")
+    # save_figures(fig_corr_z, "Normal_plan/autocorrelation_z.png")
     
     ##########################
     ## Decorrelation Length ##
@@ -1723,8 +1721,8 @@ def main():
     # fig_liip_z.update_layout(height=600, width=800, title="Wall-normal correlation length (+)", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
     # fig_liim_z.update_layout(height=600, width=800, title="Wall-normal correlation length (-)", font=font, showlegend=True, legend=dict(yanchor='bottom', xanchor='right'))
     
-    # save_figures(fig_liip_z, "Normal_plan/correation_length_plus.png")
-    # save_figures(fig_liim_z, "Normal_plan/correation_length_minus.png")
+    # save_figures(fig_liip_z, "Normal_plan/correlation_length_plus.png")
+    # save_figures(fig_liim_z, "Normal_plan/correlation_length_minus.png")
     
     
     # file_int.close()
