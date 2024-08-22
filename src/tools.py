@@ -263,19 +263,26 @@ def Correlation_2d(data, geom = 'plan', axis = 'streamwise'):
             for lines in range(nlines):
                 fourier = fft.fft2(data[:,:,lines], workers=3)
                 phi += fourier * np.conj(fourier)
+                # phi[:,:npts//2] += fourier[:, npts//2-1::-1] * np.conj(fourier[:, npts//2-1::-1])
+                # phi[:,npts//2:] += fourier[:, npts//2:] * np.conj(fourier[:, npts//2:])
             phi /= nlines
             R = np.real(fft.ifft2(phi, workers=3))
+            #R = np.abs(fft.ifft2(phi, workers=3))
             R /= np.max(R, axis=(0,1))
             
         if axis == 'spanwise':
             niters, nlines, npts = data.shape
-            phi = np.zeros((niters, npts))
+            # phi = np.zeros((niters, npts))
+            phi = np.zeros((niters, npts//2), dtype=complex)
             R = np.zeros((niters, npts))
             for lines in range(nlines):
                 fourier = fft.fft2(data[:,lines,:], workers=3)
                 phi += np.real(fourier * np.conj(fourier))
+                # phi[:,:npts//2] += fourier[:, npts//2-1::-1] * np.conj(fourier[:, npts//2-1::-1])
+                # phi[:,npts//2:] += fourier[:, npts//2:] * np.conj(fourier[:, npts//2:])
             phi /= nlines
             R = np.real(fft.ifft2(phi, workers=3))
+            # R = np.abs(fft.ifft2(phi, workers=3))
             R /= np.max(R, axis=(0,1))
         
     return(phi, R)

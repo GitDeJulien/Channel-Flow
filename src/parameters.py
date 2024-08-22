@@ -2,7 +2,7 @@
 
 import numpy as np
 
-model = 'WRLES_retau395'
+model = 'WMLES_retau1000'
 print('model:', model)
 
 ###################################################################
@@ -39,7 +39,7 @@ if model == 'WRLES_retau395':
 #################### WMLES Ret = 1000 #############################
 ###################################################################
 
-if model == 'WMLES_retau1000':
+elif model == 'WMLES_retau1000':
     
 
     xlen = 4*np.pi #m
@@ -52,10 +52,13 @@ if model == 'WMLES_retau1000':
     tStart = 1.5500099999987353E+03 #starter time of the collected datas
     dt = 0.01                       # time step of the simulation
     split_t = int(2**10)            # size of time interval in time splited mode
-    zplus = [5, 20, 40, 60, 80, 98, 151, 199, 251, 302]  # adimentianalized height of plans (z+)
-    chplot = 'all'                 # calculation for all 10 plans "all" or only 4 plans "normal"
+    zplus = [20, 40, 60, 80, 98, 151, 199, 251, 302, 392]  # adimentianalized height of plans (z+)
+    chplot = 'normal'                 # calculation for all 10 plans "all" or only 4 plans "normal"
+    
     in_path = '/media/julien/Verbatim/julien/channel_wmles_retau1000/'
+    
     out_path = 'output/channel_wmles_retau1000/'
+    
     rans_path = 'input/chan_rans_mean.dat'
 
 
@@ -63,7 +66,7 @@ if model == 'WMLES_retau1000':
 #################### WRLES Ret = 1000 #############################
 ###################################################################
 
-if model == 'WRLES_retau1000':
+elif model == 'WRLES_retau1000':
 
     xlen = 4*np.pi #m
     ylen = 1.5*np.pi   #m
@@ -83,3 +86,8 @@ if model == 'WRLES_retau1000':
     out_path = 'output/channel_wrles_retau1000/'
     
     rans_path = 'input/chan_rans_mean.dat'
+    
+    
+else:
+    print(f"Error: This model '{model}' havn't be found. Please check the name and rerun the code")
+    exit(0)

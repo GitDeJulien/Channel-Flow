@@ -115,8 +115,8 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.add_trace(go.Contour(x=Dx, y=Dt, z=R2d, contours= dict(start = 0.2, end = 1, size=0.1), contours_coloring='lines', line_width=2, name='$R_{UU}(\delta t,\delta x)$'), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dx, y=coef[0]*Dx, line=dict(color='royalblue', dash='dash'), showlegend=False), row=row, col=col)
             
-            fig.update_yaxes(range=[-7,7], row=row, col=col)
-            fig.update_xaxes(title_text="$\delta x$", row=row, col=col, range=[-np.pi,np.pi])
+            fig.update_yaxes(row=row, col=col, range=[-5,5])
+            fig.update_xaxes(title_text="$\delta x$", row=row, col=col, range=[-5,5])
             
             fig.add_annotation(x=-1.5, y=4, text=f'$Uc\simeq{1./coef[0]:.2f}$', showarrow = False, row=row, col=col)
             
@@ -126,8 +126,8 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.add_trace(go.Contour(x=Dx, y=Dt, z=R2d, contours= dict(start = 0.2, end = 1, size=0.1), contours_coloring='lines', line_width=2, showlegend=False, showscale=False), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dx, y=coef[0]*Dx, line=dict(color='royalblue', dash='dash'), showlegend=False), row=row, col=col)
             
-            fig.update_yaxes(range=[-7,7], row=row, col=col)
-            fig.update_xaxes(row=row, col=col, title_text="$\delta x$", range=[-np.pi,np.pi])
+            fig.update_yaxes(row=row, col=col, range=[-5,5])
+            fig.update_xaxes(row=row, col=col, title_text="$\delta x$", range=[-5,5])
             
             fig.add_annotation(x=-1.5, y=4, text=f'$Uc\simeq{1./coef[0]:.2f}$', showarrow = False, row=row, col=col)
             

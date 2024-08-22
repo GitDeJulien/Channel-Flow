@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  21 AUG 2024 11:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  22 AUG 2024 09:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -953,44 +953,75 @@ n_length_minus.png  used on input line 235.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+<../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png, id=63, 90
+3.375pt x 602.25pt>
+File: ../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png Graph
+ic file (type png)
+<use ../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png>
+Package pdftex.def Info: ../output/channel_wrles_retau395/von_karman/von_karman
+_spectra_.png  used on input line 244.
+(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../output/channel_wrles_re
-tau395/RANS/RANS_profiles.png>] [2 <../output/channel_wrles_retau395/RANS/mean_
-velocity_profiles.png>] [3 <../output/channel_wrles_retau395/RANS/var_velocity_
-profiles.png>] [4 <../output/channel_wrles_retau395/RANS/velocity_ratio_profile
-s.png> <../output/channel_wrles_retau395/split_time/frozen_turbulence/correlati
-on2D/u1.png>] [5 <../output/channel_wrles_retau395/split_time/frozen_turbulence
-/correlation2D/u2.png> <../output/channel_wrles_retau395/split_time/frozen_turb
-ulence/correlation2D/u3.png>] [6 <../output/channel_wrles_retau395/split_time/f
-rozen_turbulence/correlation2D/u_1c.png>] [7 <../output/channel_wrles_retau395/
-split_time/frozen_turbulence/correlation2D/u_ratio.png>] [8 <../output/channel_
-wrles_retau395/split_time/frozen_turbulence/power_spectra/u1_all.png>]
-[9 <../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectra
-/u2_all.png>] [10 <../output/channel_wrles_retau395/split_time/frozen_turbulenc
-e/power_spectra/u3_all.png>] [11 <../output/channel_wrles_retau395/split_time/s
-pace_correlation/streamwise.png> <../output/channel_wrles_retau395/split_time/s
-pace_correlation/spanwise.png>] [12 <../output/channel_wrles_retau395/split_tim
-e/gamma/gamma_u1_w_all.png>] [13 <../output/channel_wrles_retau395/split_time/g
-amma/gamma_u1_r_all.png>] [14 <../output/channel_wrles_retau395/split_time/gamm
-a/gamma_u2_w_all.png>] [15 <../output/channel_wrles_retau395/split_time/gamma/g
-amma_u2_r_all.png>] [16 <../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u3_w_all.png>] [17 <../output/channel_wrles_retau395/split_time/gamma/gamma_u
-3_r_all.png>] [18 <../output/channel_wrles_retau395/split_time/gamma/gamma_view
-_w_all.png> <../output/channel_wrles_retau395/split_time/gamma/gamma_view_r_all
-.png>] [19 <../output/channel_wrles_retau395/Normal_plan/velocity_profiles.png>
-] [20 <../output/channel_wrles_retau395/Normal_plan/autocorreation_z.png>]
+tau395/RANS/RANS_profiles.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../output/channel_wrles_retau395/von_karman/von_karman_spectra.png, id=77, 903
+.375pt x 602.25pt>
+File: ../output/channel_wrles_retau395/von_karman/von_karman_spectra.png Graphi
+c file (type png)
+<use ../output/channel_wrles_retau395/von_karman/von_karman_spectra.png>
+Package pdftex.def Info: ../output/channel_wrles_retau395/von_karman/von_karman
+_spectra.png  used on input line 250.
+(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2 <../output/channel_wrles_retau395/RANS/mean_velocity_profiles.png>] [3 <../o
+utput/channel_wrles_retau395/RANS/var_velocity_profiles.png>] [4 <../output/cha
+nnel_wrles_retau395/RANS/velocity_ratio_profiles.png> <../output/channel_wrles_
+retau395/split_time/frozen_turbulence/correlation2D/u1.png>] [5 <../output/chan
+nel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u2.png> <../outpu
+t/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u3.png>]
+[6 <../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D
+/u_1c.png>] [7 <../output/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u_ratio.png>] [8 <../output/channel_wrles_retau395/split_time/froz
+en_turbulence/power_spectra/u1_all.png>] [9 <../output/channel_wrles_retau395/s
+plit_time/frozen_turbulence/power_spectra/u2_all.png>] [10 <../output/channel_w
+rles_retau395/split_time/frozen_turbulence/power_spectra/u3_all.png>] [11 <../o
+utput/channel_wrles_retau395/split_time/space_correlation/streamwise.png> <../o
+utput/channel_wrles_retau395/split_time/space_correlation/spanwise.png>]
+[12 <../output/channel_wrles_retau395/split_time/gamma/gamma_u1_w_all.png>]
+[13 <../output/channel_wrles_retau395/split_time/gamma/gamma_u1_r_all.png>]
+[14 <../output/channel_wrles_retau395/split_time/gamma/gamma_u2_w_all.png>]
+[15 <../output/channel_wrles_retau395/split_time/gamma/gamma_u2_r_all.png>]
+[16 <../output/channel_wrles_retau395/split_time/gamma/gamma_u3_w_all.png>]
+[17 <../output/channel_wrles_retau395/split_time/gamma/gamma_u3_r_all.png>]
+[18 <../output/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.png> <.
+./output/channel_wrles_retau395/split_time/gamma/gamma_view_r_all.png>]
+[19 <../output/channel_wrles_retau395/Normal_plan/velocity_profiles.png>]
+[20 <../output/channel_wrles_retau395/Normal_plan/autocorreation_z.png>]
 [21 <../output/channel_wrles_retau395/Normal_plan/correation_length_plus.png>]
 [22 <../output/channel_wrles_retau395/Normal_plan/correation_length_minus.png>]
+[23 <../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png> <../o
+utput/channel_wrles_retau395/von_karman/von_karman_spectra.png>]
 (./annexe_figures.aux)
-Package rerunfilecheck Info: File `annexe_figures.out' has not changed.
-(rerunfilecheck)             Checksum: 85B2A42DE5DD8346799B4FE01D7F3BA1;1198.
+
+Package rerunfilecheck Warning: File `annexe_figures.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `annexe_figures.out':
+(rerunfilecheck)             Before: 85B2A42DE5DD8346799B4FE01D7F3BA1;1198
+(rerunfilecheck)             After:  D8EAC03EBBD26EB1F2AD6655C7C9679F;1294.
  ) 
 Here is how much of TeX's memory you used:
- 14789 strings out of 480247
- 244348 string characters out of 5896151
- 540940 words of memory out of 5000000
- 32465 multiletter control sequences out of 15000+600000
+ 14808 strings out of 480247
+ 245347 string characters out of 5896151
+ 539940 words of memory out of 5000000
+ 32477 multiletter control sequences out of 15000+600000
  472467 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  70i,7n,76p,503b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1004,10 +1035,10 @@ type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy7.pfb>
-Output written on annexe_figures.pdf (22 pages, 1733051 bytes).
+Output written on annexe_figures.pdf (23 pages, 1869991 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 178 compressed objects within 2 object streams
- 57 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 288 PDF objects out of 1000 (max. 8388607)
+ 185 compressed objects within 2 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

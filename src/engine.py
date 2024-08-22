@@ -91,11 +91,17 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
 
             Dx = np.linspace(-xlen, xlen, 2*n1)
             
+            # Dt = np.linspace((tEnd-tStart)*dt//2, (tEnd-tStart)*dt//2, split_t)
+
+            # Dx = np.linspace(-xlen//2, xlen//2, n1)
+            
             for n in tqdm(range(1,num_split_t), desc=f'Autocorr 2D', colour= 'GREEN'):
                 
                 R += Correlation_2d(datas[(n-1)*split_t:n*split_t,:,:], geom='plan', axis='streamwise')[1]
+                #R_full += Correlation_2d(datas[(n-1)*split_t:n*split_t,:,:], geom='plan', axis='streamwise')[1]
                 
             R /= (num_split_t-1)
+            
             R_full[0:split_t, 0:n1] = R
             R_full[split_t:2*split_t, 0:n1] = R
             R_full[0:split_t, n1:2*n1] = R
@@ -109,6 +115,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             print('slop:', 1./coef[0])
             
             return(Dt, Dx, R_full, coef)
+            #return(Dt, Dx, R, coef)
         
         if ch == 'gamma':
             frequency,_,_,_,_,_ = Crosscorrelation_2d(datas[0:split_t,:,:], delta_x, x1, dt, Uc, geom = "plan", axis = "streamwise")
