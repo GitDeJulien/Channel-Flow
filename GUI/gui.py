@@ -1,13 +1,16 @@
 import tkinter as tk
+from tkinter import font
 from tkinter import messagebox, scrolledtext
+from subprocess import Popen, PIPE, STDOUT
 import subprocess
 import threading
+import os
+import signal
+import pexpect
 
 def run_script():
     # Check if the parameters.dat file exists and execute the shell script
     try:
-        with open("parameters.dat", "r") as f:
-            params = f.read()
             
         display_terminal_output("Running the script...\n")
 
@@ -22,22 +25,32 @@ def run_script():
         
 def execute_script():
     # Function to execute the shell script and capture its output
+    
+    base_path = os.path.join(os.path.dirname(__file__), "../stuff/")
+    
     process = subprocess.Popen(
-        ["bash", "your_script.sh"],
+        ["bash", os.path.join(base_path, "run.sh")],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
         bufsize=1
     )
 
-    for line in process.stdout:
-        display_terminal_output(line)
+    def read_output(stream):
+        for line in iter(stream.readline, ''):
+            display_terminal_output(line)
+        stream.close()
 
-    for line in process.stderr:
-        display_terminal_output(line)
+    # Create threads to read stdout and stderr
+    stdout_thread = threading.Thread(target=read_output, args=(process.stdout,))
+    stderr_thread = threading.Thread(target=read_output, args=(process.stderr,))
 
-    process.stdout.close()
-    process.stderr.close()
+    stdout_thread.start()
+    stderr_thread.start()
+
+    stdout_thread.join()
+    stderr_thread.join()
+
     process.wait()
 
     display_terminal_output("Script finished.\n")
@@ -45,6 +58,7 @@ def execute_script():
 def display_terminal_output(message):
     terminal_output.insert(tk.END, message)
     terminal_output.see(tk.END)  # Scroll to the end of the text box
+        
 
 def show_format():
     format_text = (
@@ -85,21 +99,75 @@ def show_format():
     
 def show_parameters():
     # Display the contents of parameters.dat file
+    
+    base_path = os.path.join(os.path.dirname(__file__), "../parameters/")
+    
     try:
-        with open("parameters.dat", "r") as f:
+        with open(os.path.join(base_path, "parameters.dat"), "r") as f:
             params = f.read()
         messagebox.showinfo("Current Parameters", params)
     except FileNotFoundError:
         messagebox.showerror("Error", "parameters.dat file not found!")
     except Exception as e:
         messagebox.showerror("Error", str(e))
+        
+
+def apply_model():
+    selected_model = model_var.get()
+
+    # Base path to the directory containing the C files
+    base_path = os.path.join(os.path.dirname(__file__), "../parameters/")
+
+    if selected_model == "WRLES_Retau395":
+        source_file = os.path.join(base_path, "write_parameters_wrles_395.c")
+        output_file = os.path.join(base_path, "write_parameters_wrles_395")
+    elif selected_model == "WRLES_Retau1000":
+        source_file = os.path.join(base_path, "write_parameters_wrles_1000.c")
+        output_file = os.path.join(base_path, "write_parameters_wrles_1000")
+    elif selected_model == "WMLES_Retau1000":
+        source_file = os.path.join(base_path, "write_parameters_wmles_1000.c")
+        output_file = os.path.join(base_path, "write_parameters_wmles_1000")
+    else:
+        messagebox.showerror("Error", "Please select a model.")
+        return
+
+    try:
+        # Compile the C file
+        compile_command = ["gcc", "-o", f"{output_file}", f"{source_file}"]
+        result = subprocess.run(compile_command, capture_output=True, text=True)
+        
+        if result.returncode != 0:
+            error_message = result.stderr
+            display_terminal_output(f"Compilation error:\n{error_message}\n")
+            messagebox.showerror("Compilation Error", error_message)
+            return
+        
+        display_terminal_output(f"Compiled {source_file} successfully.\n")
+
+        # Run the compiled executable
+        result = subprocess.run([output_file], cwd=base_path, capture_output=True, text=True)
+        
+        if result.returncode != 0:
+            error_message = result.stderr
+            display_terminal_output(f"Runtime error:\n{error_message}\n")
+            messagebox.showerror("Runtime Error", error_message)
+            return
+        
+        messagebox.showinfo("Success", f"{selected_model} parameters applied successfully!")
+        display_terminal_output(f"Ran {output_file} successfully.\n")
+        
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+        display_terminal_output(f"Error: {str(e)}\n")
+
+
 
 # Create the main window
 root = tk.Tk()
 root.title("Run Simulation")
 
 # Styling variables
-font = ("Arial", 14)
+font = ("new century schoolbook", 13)
 bg_color = "#e6f2ff"  # Light blue background
 button_color = "#4da6ff"  # Blue button
 text_color = "#003366"  # Dark blue text
@@ -108,19 +176,34 @@ text_color = "#003366"  # Dark blue text
 root.configure(bg=bg_color)
 
 # Create and place labels and buttons
-tk.Label(root, text="Run the cflow analysis with the 'parameters.dat' file", font=font, bg=bg_color, fg=text_color).pack(pady=20)
+tk.Label(root, text="Cflow analysis with the 'parameters.dat' file", font=font, bg=bg_color, fg=text_color).pack(pady=20)
 
-button_format = tk.Button(root, text="Show File Format", font=font, command=show_format)
+# Dropdown menu for model selection
+model_var = tk.StringVar(root)
+model_var.set("Select Model")  # Default value
+
+model_menu = tk.OptionMenu(root, model_var, "WRLES_Retau395", "WRLES_Retau1000", "WMLES_Retau1000")
+model_menu.config(font=font)
+model_menu.pack(pady=10)
+
+# Apply button
+button_apply = tk.Button(root, text="Apply", font=font, bg=button_color, fg="white", command=apply_model)
+button_apply.pack(pady=10)
+
+# Show file format button
+button_format = tk.Button(root, text="Show Data File Format", command=show_format, font=font)
 button_format.pack(pady=10)
 
-button_show_params = tk.Button(root, text="Show Parameters", font=font, command=show_parameters)
+# Show parameters button
+button_show_params = tk.Button(root, text="Show Parameters File", command=show_parameters, font=font)
 button_show_params.pack(pady=10)
 
+# Run button
 button_run = tk.Button(root, text="Run", font=font, bg=button_color, fg="white", command=run_script)
 button_run.pack(pady=10)
 
 # Add a ScrolledText widget to display terminal output
-terminal_output = scrolledtext.ScrolledText(root, height=10, font=("Courier", 12), bg="#f2f2f2", fg="black")
+terminal_output = scrolledtext.ScrolledText(root, height=15, font=font, bg="#1e1e1e", fg="#c5c5c5", insertbackground="white")
 terminal_output.pack(pady=20, padx=10, fill=tk.BOTH, expand=True)
 
 

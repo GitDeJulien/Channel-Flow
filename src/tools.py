@@ -35,7 +35,7 @@ def get_nperseg(len_sig):
 #===================== Get ellipses slop ============================
 #====================================================================
 
-def get_ellispses_slop(R, levels, eps, Dt, Dx, n1, split_t = None):
+def get_ellispses_slop(R, levels, eps, Dt, Dx):
     """ Get the appropriate slop of ellispses for the 2D Correlation contour plot 
     INPUT: - R (np.array) : 2D correlation
         - levels (list) : list of relevent ellipse values
@@ -62,26 +62,9 @@ def get_ellispses_slop(R, levels, eps, Dt, Dx, n1, split_t = None):
                         jmax = j
         y_slop.append(Dt[imax])
         x_slop.append(Dx[jmax])
-        
-    # y_slop.insert(0, 0.0)
-    # x_slop.insert(0, 0.0)
     
     print('y_slop:', y_slop)
     print('x_slop:', x_slop)
-        
-    
-    # for level in levels:
-    #     imin = R.shape[0]
-    #     jmin = R.shape[1]
-    #     for i in range(R.shape[0]//2 , R.shape[0]):
-    #         for j in range(R.shape[1]//2 , R.shape[1]):
-    #             if R[i,j] > level - eps and R[i,j] < level + eps:
-    #                 if i<imin:
-    #                     imin = i
-    #                 if j<jmin:
-    #                     jmin = j
-    #     y_slop.append(Dt[split_t-1 + imin])
-    #     x_slop.append(Dx[n1-1+jmin])
 
         
     coef = np.polyfit(x_slop, y_slop, 1)

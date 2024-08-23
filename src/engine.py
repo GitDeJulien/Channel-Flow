@@ -3,15 +3,14 @@ from tqdm import tqdm
 from scipy import integrate
 
 from tools import *
-from plot import *
+from plot_figures import *
 from parameters import *
 
 
 
-def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd = None, tStart = None, x1 = None, Uc = None, delta_x=None, ch = "spectra"):
+def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = None, Uc = None, delta_x=None, ch = "spectra"):
     
     if split_time == 'Y':
-        split_t = int(2**10)
         num_split_t = nt // split_t
     
         if ch == "spectra":
@@ -45,7 +44,8 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             
         if ch == 'corr':
             
-            Dt = np.linspace(0,(tEnd-tStart)*dt, split_t)
+            #Dt = np.linspace(0,(tEnd-tStart)*dt, split_t)
+            Dt = np.linspace(0, split_t*dt, split_t)
             Dx = np.linspace(0,xlen//2,n1)
             
             R_time = np.zeros((split_t))
@@ -59,7 +59,6 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_space /= (num_split_t-1)
             R_time /= (num_split_t-1)
             
-            # cut_t = (tEnd-tStart)*dt/3
             cut_t = 3.0
             ind1 = 0
             ind2 = 0
@@ -87,7 +86,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R = np.zeros((split_t, n1))  
             R_full = np.zeros((2*split_t, 2*n1)) 
             
-            Dt = np.linspace(-2*(tEnd-tStart)*dt,2*(tEnd-tStart)*dt,2*split_t)
+            Dt = np.linspace(-split_t*dt,split_t*dt,2*split_t)
 
             Dx = np.linspace(-xlen, xlen, 2*n1)
             
@@ -107,10 +106,8 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_full[0:split_t, n1:2*n1] = R
             R_full[split_t:2*split_t, n1:2*n1] = R
             
-            #levels = [0.9, 0.92, 0.94, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
-            # levels = [0.9, 0.95, 0.96, 0.98, 0.982, 0.984, 0.986, 0.988, 0.990, 0.992, 0.994, 0.996, 0.998]
             levels = [0.75, 0.8, 0.85, 0.9, 0.95, 1]
-            coef = get_ellispses_slop(R, levels , 0.01, Dt, Dx, n1, split_t=split_t)
+            coef = get_ellispses_slop(R, levels , 0.01, Dt, Dx)
             
             print('slop:', 1./coef[0])
             
@@ -169,7 +166,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             
         if ch == 'corr':
             
-            Dt = np.linspace(0,(tEnd-tStart)*dt, split_t)
+            Dt = np.linspace(0, nt*dt, nt)
             Dx = np.linspace(0,xlen//2,n1)
             
             R_time = np.zeros((nt))
@@ -185,7 +182,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R = np.zeros((nt, n1))  
             R_full = np.zeros((2*nt, 2*n1)) 
             
-            Dt = np.linspace(-2*(tEnd-tStart)*dt,2*(tEnd-tStart)*dt,2*nt)
+            Dt = np.linspace(-nt*dt,nt*dt,2*nt)
 
             Dx = np.linspace(-xlen, xlen, 2*n1)
             
@@ -198,7 +195,7 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, tEnd =
             R_full[nt:2*nt, n1:2*n1] = R
             
             levels = [0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]
-            coef = get_ellispses_slop(R, levels, 0.001, Dt, Dx, n1, split_t=nt)
+            coef = get_ellispses_slop(R, levels, 0.001, Dt, Dx)
             
             print('slop:', 1./coef[0])
             
