@@ -180,16 +180,6 @@ def main():
         
         datas_u1 = datas_u1 - U1
         
-        #### Autocorrelation ####
-        # ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, ch="corr", dx=dx, Uc=U1)
-
-        # frozen_turbulence_plot(fig2u1, col, row, Uc=U1, R_time = R_time[:ind1], R_space = R_space[:ind2], Dt = Dt[:ind1], Dx = Dx[:ind2], ch = "corr")
-        
-        # del Dt
-        # del Dx
-        # del R_time
-        # del R_space
-        
         #### Autocorrelation 2D ####
         
         Dt, Dx, R2d, coef = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, ch = "corr2d")
@@ -205,6 +195,18 @@ def main():
         del Dt
         del Dx
         del R2d
+        
+        #### Autocorrelation ####
+        ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, ch="corr", dx=dx, Uc=U1)
+
+        # frozen_turbulence_plot(fig2u1, col, row, Uc=Uc_list[cpt], R_time = R_time[:ind1], R_space = R_space[:ind2], Dt = Dt[:ind1], Dx = Dx[:ind2], ch = "corr")
+        frozen_turbulence_plot(fig2u1, col, row, Uc=Uc_list[cpt], R_time = R_time[:], R_space = R_space[:], Dt = Dt[:], Dx = Dx[:], ch = "corr")
+        
+        
+        del Dt
+        del Dx
+        del R_time
+        del R_space
     
         #### Spectra ####
         omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
@@ -230,16 +232,6 @@ def main():
         datas_u2 = datas_u2 - Uy
     
         
-        #### Autocorrelation ####
-        # ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, ch="corr", dx=dx, Uc=U1)
-
-        # frozen_turbulence_plot(fig2u2, col, row, Uc=U1, R_time = R_time[:ind1], R_space = R_space[:ind2], Dt = Dt[:ind1], Dx = Dx[:ind2], ch = "corr")
-        
-        # del Dt
-        # del Dx
-        # del R_time
-        # del R_space
-        
         #### Autocorrelation 2D ####
         
         Dt, Dx, R2d, coef = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, ch = "corr2d")
@@ -249,6 +241,18 @@ def main():
         del Dt
         del Dx
         del R2d
+        
+        #### Autocorrelation ####
+        ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, ch="corr", dx=dx, Uc=U1)
+
+        # frozen_turbulence_plot(fig2u2, col, row, Uc=Uc_list[cpt], R_time = R_time[:ind1], R_space = R_space[:ind2], Dt = Dt[:ind1], Dx = Dx[:ind2], ch = "corr")
+        frozen_turbulence_plot(fig2u2, col, row, Uc=Uc_list[cpt], R_time = R_time[:], R_space = R_space[:], Dt = Dt[:], Dx = Dx[:], ch = "corr")
+        
+        
+        del Dt
+        del Dx
+        del R_time
+        del R_space
     
         #### Spectra ####
         omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
@@ -272,16 +276,6 @@ def main():
 
         datas_u3 = datas_u3 - Uz
         
-        #### Autocorrelation ####
-        # ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, ch="corr", dx=dx, Uc=U1)
-
-        # frozen_turbulence_plot(fig2u3, col, row, Uc=U1, R_time = R_time[:ind1], R_space = R_space[:ind2], Dt = Dt[:ind1], Dx = Dx[:ind2], ch = "corr")
-        
-        # del Dt
-        # del Dx
-        # del R_time
-        # del R_space
-        
         #### Autocorrelation 2D ####
         
         Dt, Dx, R2d, coef = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, ch = "corr2d")
@@ -291,6 +285,18 @@ def main():
         del Dt
         del Dx
         del R2d
+        
+        #### Autocorrelation ####
+        ind1, ind2, Dt, Dx, R_time, R_space = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, ch="corr", dx=dx, Uc=U1)
+
+        # frozen_turbulence_plot(fig2u3, col, row, Uc=Uc_list[cpt], R_time = R_time[:ind1], R_space = R_space[:ind2], Dt = Dt[:ind1], Dx = Dx[:ind2], ch = "corr")
+        frozen_turbulence_plot(fig2u3, col, row, Uc=Uc_list[cpt], R_time = R_time[:], R_space = R_space[:], Dt = Dt[:], Dx = Dx[:], ch = "corr")
+        
+        
+        del Dt
+        del Dx
+        del R_time
+        del R_space
     
         #### Spectra ####
         omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra")
@@ -338,15 +344,15 @@ def main():
         
         if split_time == 'Y':
             save_figures(fig1u1, "split_time/frozen_turbulence/power_spectra/u1.png")
-            #save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1.png")
+            save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1.png")
             save_figures(fig3u1, "split_time/frozen_turbulence/correlation2D/u1.png")
             
             save_figures(fig1u2, "split_time/frozen_turbulence/power_spectra/u2.png")
-            #save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2.png")
+            save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2.png")
             save_figures(fig3u2, "split_time/frozen_turbulence/correlation2D/u2.png")
         
             save_figures(fig1u3, "split_time/frozen_turbulence/power_spectra/u3.png")
-            #save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3.png")
+            save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3.png")
             save_figures(fig3u3, "split_time/frozen_turbulence/correlation2D/u3.png")
             
             save_figures(figU, "split_time/frozen_turbulence/correlation2D/u_ratio.png")
@@ -380,15 +386,15 @@ def main():
         
         if split_time == 'Y':
             save_figures(fig1u1, "split_time/frozen_turbulence/power_spectra/u1_all.png")
-            #save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1_all.png")
+            save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1_all.png")
             save_figures(fig3u1, "split_time/frozen_turbulence/correlation2D/u1_all.png")
             
             save_figures(fig1u2, "split_time/frozen_turbulence/power_spectra/u2_all.png")
-            #save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2_all.png")
+            save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2_all.png")
             save_figures(fig3u2, "split_time/frozen_turbulence/correlation2D/u2_all.png")
             
             save_figures(fig1u3, "split_time/frozen_turbulence/power_spectra/u3_all.png")
-            #save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3_all.png")
+            save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3_all.png")
             save_figures(fig3u3, "split_time/frozen_turbulence/correlation2D/u3_all.png")
             
             save_figures(figU, "split_time/frozen_turbulence/correlation2D/u_ratio_all.png")

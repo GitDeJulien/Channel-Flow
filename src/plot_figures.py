@@ -42,7 +42,7 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             
             # Update axis properties
             fig.update_xaxes(range=[0,2], title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
-            fig.update_yaxes(range=[-9,0], type="log", exponentformat='power')
+            fig.update_yaxes(range=[-9,-1], type="log", exponentformat='power')
             
             
         else:
@@ -55,24 +55,24 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             
             # Update axis properties
             fig.update_xaxes(range=[0,2],title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
-            fig.update_yaxes(range=[-9,0], type="log", exponentformat='power')
+            fig.update_yaxes(range=[-9,-1], type="log", exponentformat='power')
             
         
     if ch == "corr":
         
         if col == 4 and row == 1:
-            fig.add_trace(go.Scatter(x=Dt, y=R_time, name='time', line=dict(color='midnightblue', width=3)), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dt, y=R_time*Uc, name='time', line=dict(color='midnightblue', width=3)), row=row, col=col)
             # R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
             # fig.add_trace(go.Scatter(x=Dt, y=R_space_interpol, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=R_space, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=R_space*Uc, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
             
             # fit_space = np.polyfit(Dt, np.log(np.abs(R_space_interpol)), 1)
-            fit_space = np.polyfit(Dx/Uc, np.log(np.abs(R_space)), 1)
-            fit_time = np.polyfit(Dt, np.log(np.abs(R_time)), 1)
-            curve_fit_space = np.exp(fit_space[0]*Dt)
-            curve_fit_time = np.exp(fit_time[0]*Dt)
+            fit_space = np.polyfit(Dx, np.log(np.abs(R_space*Uc)), 1)
+            fit_time = np.polyfit(Dt, np.log(np.abs(R_time*Uc)), 1)
+            curve_fit_space = fit_space[0]*Dx
+            curve_fit_time = fit_time[0]*Dt
             # fig.add_trace(go.Scatter(x=Dt, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dt, y=curve_fit_time, line=dict(color='midnightblue', dash='dash', width=3), name='$\\text{fit time } (\gamma)$'), row=row, col=col)
             fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=1, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
             fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=0.9, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
@@ -82,21 +82,21 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             
             # Update axis properties
             fig.update_xaxes(title_text="$\delta t$")
-            #fig.update_yaxes(type="log", exponentformat='power')
+            fig.update_yaxes(type="log", exponentformat='power')
             
         else:
-            fig.add_trace(go.Scatter(x=Dt, y=R_time, line=dict(color='midnightblue', width=3), showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dt, y=R_time*Uc, line=dict(color='midnightblue', width=3), showlegend=False), row=row, col=col)
             # R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
             # fig.add_trace(go.Scatter(x=Dt, y=R_space_interpol, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=R_space, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=R_space*Uc, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
             
             # fit_space = np.polyfit(Dt, np.log(np.abs(R_space_interpol)), 1)
-            fit_space = np.polyfit(Dx/Uc, np.log(np.abs(R_space)), 1)
-            fit_time = np.polyfit(Dt, np.log(np.abs(R_time)), 1)
-            curve_fit_space = np.exp(fit_space[0]*Dt)
-            curve_fit_time = np.exp(fit_time[0]*Dt)
+            fit_space = np.polyfit(Dx, np.log(np.abs(R_space*Uc)), 1)
+            fit_time = np.polyfit(Dt, np.log(np.abs(R_time*Uc)), 1)
+            curve_fit_space = fit_space[0]*Dx
+            curve_fit_time = fit_time[0]*Dt
             # fig.add_trace(go.Scatter(x=Dt, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dt, y=curve_fit_time, line=dict(color='midnightblue', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\gamma\delta t}$', showlegend=False), row=row, col=col)
             fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=1, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
             fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=0.9, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
