@@ -39,7 +39,7 @@ def read_rans(rans_path):
     ko2_tke = np.array(ko2_tke)
     ko2_omega = np.array(ko2_omega)
     
-    return(y, u_velocity, v_velocity, w_velocity, pressure, vis, vorticity, normal, ko2_omega, ko2_omega)
+    return(y, u_velocity, v_velocity, w_velocity, pressure, vis, vorticity, normal, ko2_tke, ko2_omega)
 
 
 

@@ -1,4 +1,5 @@
 import numpy as np
+from parameters import*
 
 def read_fpar_extract_plane(infile):
     # Read extract out plane saved in fparser binary format initially based on script from Mads B.
@@ -41,7 +42,7 @@ def read_fpar_extract_plane(infile):
             dtype = np.float32
         elif iprecision == 2:
             dtype = np.float64
-        t = np.linspace(tStart, tEnd, nt)
+        t = np.linspace(0, nt*dt, nt)
         fid.seek(recordlength, 0)
         x1 = np.fromfile(fid, dtype, n1)
         fid.seek(recordlength * 2, 0)
@@ -82,7 +83,7 @@ def read_fpar_extract_plane_line(infile):
             dtype = np.float32
         elif iprecision == 2:
             dtype = np.float64
-        t = np.linspace(tStart, tEnd, nt)
+        t = np.linspace(0, nt*dt, nt)
         recordlength = 96
         fid.seek(recordlength, 0)
         x1 = np.fromfile(fid, dtype, n1)

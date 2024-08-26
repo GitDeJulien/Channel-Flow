@@ -38,7 +38,7 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.add_trace(go.Scatter(x=k[1:], y=space_spectra[1:]/Uc, mode='lines', name='$P(k_1)_{UU}/Uc$', line=dict(color='firebrick', width=3)), row=row, col=col)
             
             lin1 = np.logspace(0,3)
-            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkgreen', dash='dash', width=2), name='slop: -5/3'), row=row, col=col)
+            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)-100, line=dict(color='darkgreen', dash='dash', width=2), name='slop: -5/3'), row=row, col=col)
             
             # Update axis properties
             fig.update_xaxes(range=[0,2], title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
@@ -51,7 +51,7 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.add_trace(go.Scatter(x=k[1:], y=space_spectra[1:]/Uc, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
             
             lin1 = np.logspace(0,3)
-            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkgreen', dash='dash', width=2), showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)-100, line=dict(color='darkgreen', dash='dash', width=2), showlegend=False), row=row, col=col)
             
             # Update axis properties
             fig.update_xaxes(range=[0,2],title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
@@ -61,21 +61,22 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
     if ch == "corr":
         
         if col == 4 and row == 1:
-            fig.add_trace(go.Scatter(x=Dt, y=R_time*Uc, name='time', line=dict(color='midnightblue', width=3)), row=row, col=col)
-            # R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
-            # fig.add_trace(go.Scatter(x=Dt, y=R_space_interpol, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx, y=R_space*Uc, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dt, y=R_time/Uc, name='time', line=dict(color='midnightblue', width=3)), row=row, col=col)
+            #R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
+            #fig.add_trace(go.Scatter(x=Dt*Uc, y=R_space_interpol*Uc, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx/Uc, y=R_space, name='space', line=dict(color='firebrick', width=3)), row=row, col=col)
             
-            # fit_space = np.polyfit(Dt, np.log(np.abs(R_space_interpol)), 1)
-            fit_space = np.polyfit(Dx, np.log(np.abs(R_space*Uc)), 1)
-            fit_time = np.polyfit(Dt, np.log(np.abs(R_time*Uc)), 1)
-            curve_fit_space = fit_space[0]*Dx
+            #fit_space = np.polyfit(Dt*Uc, np.log(np.abs(R_space_interpol*Uc)), 1)
+            fit_space = np.polyfit(Dx/Uc, np.log(R_space), 1)
+            fit_time = np.polyfit(Dt, np.log(R_time/Uc), 1)
+            curve_fit_space = fit_space[0]*Dx/Uc
+            #curve_fit_space = fit_space[0]*Dt
             curve_fit_time = fit_time[0]*Dt
-            # fig.add_trace(go.Scatter(x=Dt, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
+            #fig.add_trace(go.Scatter(x=Dt*Uc, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$\\text{fit space } (\Gamma)$'), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dt, y=curve_fit_time, line=dict(color='midnightblue', dash='dash', width=3), name='$\\text{fit time } (\gamma)$'), row=row, col=col)
-            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=1, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
-            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=0.9, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
+            fig.add_annotation(xanchor='left',x=1, yanchor='bottom', y=0, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
+            fig.add_annotation(xanchor='left',x=0.5, yanchor='bottom', y=-3, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
             
             print('Gamma:', np.abs(fit_space[0]))
             print('gamma:', np.abs(fit_time[0]))
@@ -85,28 +86,29 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.update_yaxes(type="log", exponentformat='power')
             
         else:
-            fig.add_trace(go.Scatter(x=Dt, y=R_time*Uc, line=dict(color='midnightblue', width=3), showlegend=False), row=row, col=col)
-            # R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
-            # fig.add_trace(go.Scatter(x=Dt, y=R_space_interpol, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx, y=R_space*Uc, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dt, y=R_time/Uc, line=dict(color='midnightblue', width=3), showlegend=False), row=row, col=col)
+            #R_space_interpol = np.interp(Dt*Uc, Dx, R_space)
+            #fig.add_trace(go.Scatter(x=Dt*Uc, y=R_space_interpol*Uc, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx/Uc, y=R_space, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
             
-            # fit_space = np.polyfit(Dt, np.log(np.abs(R_space_interpol)), 1)
-            fit_space = np.polyfit(Dx, np.log(np.abs(R_space*Uc)), 1)
-            fit_time = np.polyfit(Dt, np.log(np.abs(R_time*Uc)), 1)
-            curve_fit_space = fit_space[0]*Dx
+            #fit_space = np.polyfit(Dt*Uc, np.log(np.abs(R_space_interpol*Uc)), 1)
+            fit_space = np.polyfit(Dx/Uc, np.log(np.abs(R_space)), 1)
+            fit_time = np.polyfit(Dt, np.log(np.abs(R_time/Uc)), 1)
+            curve_fit_space = fit_space[0]*Dx/Uc
+            #curve_fit_space = fit_space[0]*Dt
             curve_fit_time = fit_time[0]*Dt
-            # fig.add_trace(go.Scatter(x=Dt, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
-            fig.add_trace(go.Scatter(x=Dx, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
+            #fig.add_trace(go.Scatter(x=Dt*Uc, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
+            fig.add_trace(go.Scatter(x=Dx/Uc, y=curve_fit_space, line=dict(color='firebrick', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\Gamma\delta t*U_c}$', showlegend=False), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dt, y=curve_fit_time, line=dict(color='midnightblue', dash='dash', width=3), name='$y=\\frac{1}{U_c}e^{-\gamma\delta t}$', showlegend=False), row=row, col=col)
-            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=1, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
-            fig.add_annotation(xanchor='left',x=1.5, yanchor='bottom', y=0.9, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
+            fig.add_annotation(xanchor='left',x=1, yanchor='bottom', y=0, text=f'$\Gamma \simeq {np.abs(fit_space[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
+            fig.add_annotation(xanchor='left',x=0.5, yanchor='bottom', y=-3, text=f'$\gamma \simeq {np.abs(fit_time[0]):.2f}$', font=font, showarrow=False, row=row, col=col)
             
             print('Gamma:', np.abs(fit_space[0]))
             print('gamma:', np.abs(fit_time[0]))
             
             # Update axis properties
             fig.update_xaxes(title_text="$\delta t$", row=row, col=col)
-            #fig.update_yaxes(type="log", exponentformat='power')
+            fig.update_yaxes(type="log", exponentformat='power')
             
 
     if ch == 'corr2d':
@@ -215,10 +217,10 @@ def init_figures_sc(z, ch='normal'):
 def init_figures_vk(z, ch='normal'):
     
     if ch == 'normal':
-        fig = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$k_c.\phi_{ij}(k_c)$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
+        fig = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\phi_{ij}(k_c)$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
         
     if ch == "all":
-        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$k_c.\phi_{ij}(k_c)$', '$k_c.\phi_{ij}(k_c)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$\phi_{ij}(k_c)$', '$k_c.\phi_{ij}(k_c)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
     
     return(fig)
 
@@ -226,18 +228,18 @@ def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', 
     
     if col == 4 and row == 1:
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols)), row=row, col=col)
-        lin1 = np.logspace(0,2)
-        fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkgreen', dash='dash', width=2), showlegend=False), row=row, col=col)
-        fig.update_xaxes(title='$k_c(m.s^{-2})$', type="log", exponentformat='power', row=row, col=col)
-        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col)#, range=[-6,0])
+        lin1 = np.logspace(0,4)
+        fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
+        fig.update_xaxes(title='$\omega$', type="log", exponentformat='power', row=row, col=col)
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-12,0])
         
         
     else:
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols), showlegend=False), row=row, col=col)
-        lin1 = np.logspace(0,2)
-        fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkgreen', dash='dash', width=2), showlegend=False), row=row, col=col)
-        fig.update_xaxes(title='$k_c(m.s^{-2})$', type="log", exponentformat='power', row=row, col=col)
-        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col)#, range=[-6,0])
+        lin1 = np.logspace(0,4)
+        fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
+        fig.update_xaxes(title='$\omega$', type="log", exponentformat='power', row=row, col=col)
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-12,0])
         
         
     return(None)
@@ -267,21 +269,16 @@ def space_correlation_plot(fig, col, row, Dx, corr, name = 'corr', color = 'fire
     return(None)
 
 
-def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w'):
+def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ch = 'w'):
     
     if ch == 'w':
         if col == 1 and row == 1:
             
             slop1 = np.polyfit(omega[ind0:ind1], funct[ind0:ind1, 5], 1)
-            #slop2 = np.polyfit(omega[ind1:ind2], funct[ind1:ind2, 5], 1)
             
             fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=slop1[0]*omega[ind0:ind1]+20, mode='lines', showlegend=False, line=dict(color='firebrick', dash='dash', width=2)), row=row, col=col)
                 
             fig.add_annotation(x=20, y=23, text=f'$s1:~{slop1[0]:.3f}$', showarrow = False, row=row, col=col)
-            
-            # fig.add_trace(go.Scatter(x=omega[ind1:ind2], y=slop2[0]*omega[ind1:ind2]+10, mode='lines', showlegend=False, line=dict(color='midnightblue', dash='dash', width=2)), row=1, col=col)
-            
-            # fig.add_annotation(x=60, y=20, text=f'$s2:~{slop2[0]:.3f}$', showarrow = False, row=row, col=col)
             
             fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=funct[ind0:ind1,1], mode='lines', name=f'$r={Dx[1]:.2f}$', line=dict(color='olive')), row=row, col=col)
             fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=funct[ind0:ind1,5], mode='lines', name=f'$r={Dx[5]:.2f}$', line=dict(color='orangered')), row=row, col=col)
@@ -293,15 +290,10 @@ def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w'):
         else:
             
             slop1 = np.polyfit(omega[ind0:ind1], funct[ind0:ind1, 5], 1)
-            #slop2 = np.polyfit(omega[ind1:ind2], funct[ind1:ind2, 5], 1)
             
             fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=slop1[0]*omega[ind0:ind1]+20, mode='lines', showlegend=False, line=dict(color='firebrick', dash='dash', width=2)), row=row, col=col)
                 
             fig.add_annotation(x=20, y=23, text=f'$s1:~{slop1[0]:.3f}$', showarrow = False, row=row, col=col)
-            
-            # fig.add_trace(go.Scatter(x=omega[ind1:ind2], y=slop2[0]*omega[ind1:ind2]+10, mode='lines', showlegend=False, line=dict(color='midnightblue', dash='dash', width=2)), row=1, col=col)
-            
-            # fig.add_annotation(x=55, y=20, text=f'$s2:~{slop2[0]:.3f}$', showarrow = False, row=row, col=col)
             
             fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=funct[ind0:ind1,1], mode='lines', showlegend=False, line=dict(color='olive')), row=row, col=col)
             fig.add_trace(go.Scatter(x=omega[ind0:ind1], y=funct[ind0:ind1,5], mode='lines', showlegend=False, line=dict(color='orangered')), row=row, col=col)
@@ -320,10 +312,6 @@ def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w'):
             moy3 = np.mean(funct[3, ind0:ind1])
             moy4 = np.mean(funct[4, ind0:ind1])
             
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop1[0]*Dx[ind0:ind1]+15, mode='lines', showlegend=False, line=dict(color='olive', dash='dash', width=2)), row=1, col=col)
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop2[0]*Dx[ind0:ind1]+17, mode='lines', showlegend=False, line=dict(color='orangered', dash='dash', width=2)), row=1, col=col)
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop3[0]*Dx[ind0:ind1]+20, mode='lines', showlegend=False, line=dict(color='purple', dash='dash', width=2)), row=1, col=col)
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop4[0]*Dx[ind0:ind1]+23, mode='lines', showlegend=False, line=dict(color='mediumvioletred', dash='dash', width=2)), row=1, col=col)
                 
             fig.add_trace(go.Scatter(x=Dx[ind0:ind1]-xlen//2, y=funct[1,ind0:ind1], mode='lines', name=f'$\omega={omega[1]:.2f}$', line=dict(color='olive')), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dx[ind0:ind1]-xlen//2, y=funct[2,ind0:ind1], mode='lines', name=f'$\omega={omega[2]:.2f}$', line=dict(color='orangered')), row=row, col=col)
@@ -338,11 +326,6 @@ def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w'):
             moy3 = np.mean(funct[3, ind0:ind1])
             moy4 = np.mean(funct[4, ind0:ind1])         
             
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop1[0]*Dx[ind0:ind1]+15, mode='lines', showlegend=False, line=dict(color='olive', dash='dash', width=2)), row=1, col=col)
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop2[0]*Dx[ind0:ind1]+17, mode='lines', showlegend=False, line=dict(color='orangered', dash='dash', width=2)), row=1, col=col)
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop3[0]*Dx[ind0:ind1]+20, mode='lines', showlegend=False, line=dict(color='purple', dash='dash', width=2)), row=1, col=col)
-            # fig.add_trace(go.Scatter(x=Dx[ind0:ind1], y=slop4[0]*Dx[ind0:ind1]+23, mode='lines', showlegend=False, line=dict(color='mediumvioletred', dash='dash', width=2)), row=1, col=col)
-            
             fig.add_trace(go.Scatter(x=Dx[ind0:ind1]-xlen//2, y=funct[1,ind0:ind1], mode='lines', showlegend=False, line=dict(color='olive')), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dx[ind0:ind1]-xlen//2, y=funct[2,ind0:ind1], mode='lines', showlegend=False, line=dict(color='orangered')), row=row, col=col)
             fig.add_trace(go.Scatter(x=Dx[ind0:ind1]-xlen//2, y=funct[3,ind0:ind1], mode='lines', showlegend=False, line=dict(color='purple')), row=row, col=col)
@@ -356,5 +339,8 @@ def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ind2, ch = 'w'):
 
 
 def save_figures(fig, path):
-    fig.write_image(out_path + path)
+    """save figure files"""
+    
+    fig.write_image(out_figure_path + path)
     return(None)
+

@@ -62,9 +62,6 @@ def get_ellispses_slop(R, levels, eps, Dt, Dx):
                         jmax = j
         y_slop.append(Dt[imax])
         x_slop.append(Dx[jmax])
-    
-    print('y_slop:', y_slop)
-    print('x_slop:', x_slop)
 
         
     coef = np.polyfit(x_slop, y_slop, 1)
@@ -492,7 +489,7 @@ def von_karman_spectra(data1, data2, geom = 'plan', axis = "streamwise"):
 
 
 #====================================================================
-#======================= Gamma Function =========================
+#======================= Gamma Function =============================
 #==================================================================== 
 
 def Gamma_function(datas, dt, Uc, geom = "plan", axis = "streamwise"):
@@ -569,4 +566,40 @@ def Gamma_function(datas, dt, Uc, geom = "plan", axis = "streamwise"):
             
 
     return (funct, omega, Dx)
+
+
+#====================================================================
+#=========================== SAVE DATA ==============================
+#==================================================================== 
+
+def save_datas(data, key, path, title):
+    """save data files"""
+    
+    if len(data) != len(key):
+        print("Error: In save_data argument 'data' and 'key' should have the same length.")
+        exit(0)
+        
+    nk = len(key)
+    rng = 0
+    for n in range(nk):
+        if rng < data[n].shape[0]:
+            rng = data[n].shape[0]
+    
+    with open(out_data_path + path, "w") as f:
+        f.write(f'## {title} (nlines: {rng})\n\n')
+        f.write('##')
+        for n in range(nk):
+            f.write(f'{key[n]}\t')
+        f.write('\n')
+        for r in range(rng):
+            for n in range(nk):
+                if r >= data[n].shape[0]:
+                    f.write('- \t')
+                else:
+                    f.write(f'{data[n][r]} \t')
+            f.write('\n')
+        f.write('#######################################')
+        f.close()
+        
+    return(None)
         

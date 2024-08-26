@@ -1,64 +1,97 @@
 import tkinter as tk
+# import customtkinter as ctk 
 from tkinter import font
 from tkinter import messagebox, scrolledtext
 from subprocess import Popen, PIPE, STDOUT
-import subprocess
 import threading
+import subprocess
 import os
+from tkinter import ttk
 import signal
-import pexpect
 
-def run_script():
-    # Check if the parameters.dat file exists and execute the shell script
-    try:
-            
-        display_terminal_output("Running the script...\n")
+# def run_script():
+#     """ Run the script in the same terminal and handle CTRL + C """
+#     try:
+#         # Define the script to run
+#         script_path = os.path.join(os.path.dirname(__file__), "../run.sh")
+        
+#         #Running the script in the same terminal using Popen
+#         process = subprocess.Popen(
+#             ["bash", script_path] if os.name == "posix" else ["cmd", "/c", script_path],
+#             stdout=subprocess.PIPE,
+#             stderr=subprocess.PIPE,
+#             text=True
+#         )
+        
+#         # process = subprocess.Popen(
+#         #     script_path,
+#         #     shell=True,
+#         #     stdin=subprocess.PIPE,
+#         #     stdout=subprocess.PIPE,
+#         #     stderr=subprocess.PIPE,
+#         #     universal_newlines=True
+#         # )
+        
+        
+#         # Reading the output and error streams
+#         for line in process.stdout:
+#             print(line, end="")  # Print output in real-time to the terminal
+#         for line in process.stderr:
+#             print(line, end="")  # Print errors in real-time to the terminal
 
-        # Run the shell script in a separate thread to keep the UI responsive
-        thread = threading.Thread(target=execute_script)
-        thread.start()
+#         # Wait for the process to complete
+#         process.wait()
         
-    except FileNotFoundError:
-        messagebox.showerror("Error", "parameters.dat file not found!")
-    except Exception as e:
-        messagebox.showerror("Error", str(e))
+
+#     except KeyboardInterrupt:
+#         print("\nScript interrupted with CTRL + C. You can run the script again.")
+#         # Optionally handle cleanup or restart logic here
+#     except Exception as e:
+#         messagebox.showerror("Error", str(e))
+#         print(f"Error: {str(e)}\n")
         
-def execute_script():
-    # Function to execute the shell script and capture its output
+# def run_script():
+#     # Path to your bash script
+#     script_path = os.path.join(os.path.dirname(__file__), "../run.sh")
+
+#     # Open the bash script with Popen
+#     process = subprocess.Popen(
+#         script_path,
+#         shell=True,
+#         stdout=subprocess.PIPE,
+#         stderr=subprocess.PIPE,
+#         text=True
+#     )
+
+#     # Continuously read the output
+#     for line in iter(process.stdout.readline, ''):
+#         terminal_output.insert(tk.END, line)
+#         terminal_output.see(tk.END)  # Scroll to the end of the text widget
+
+#     process.stdout.close()
+#     process.wait()
+
+#     # Capture any errors
+#     if process.returncode != 0:
+#         error_output = process.stderr.read()
+#         terminal_output.insert(tk.END, error_output)
+#         terminal_output.see(tk.END)
     
-    base_path = os.path.join(os.path.dirname(__file__), "../stuff/")
+#     process.stderr.close() 
+
     
-    process = subprocess.Popen(
-        ["bash", os.path.join(base_path, "run.sh")],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        bufsize=1
-    )
+def run_script_in_terminal():
+    # Path to your bash script or Python script
+    command = os.path.join(os.path.dirname(__file__), "../run.sh") # or ['python3', 'your_python_script.py']
 
-    def read_output(stream):
-        for line in iter(stream.readline, ''):
-            display_terminal_output(line)
-        stream.close()
+    # Run the command in the terminal without capturing the output in the GUI
+    subprocess.run(command, shell=True)
 
-    # Create threads to read stdout and stderr
-    stdout_thread = threading.Thread(target=read_output, args=(process.stdout,))
-    stderr_thread = threading.Thread(target=read_output, args=(process.stderr,))
-
-    stdout_thread.start()
-    stderr_thread.start()
-
-    stdout_thread.join()
-    stderr_thread.join()
-
-    process.wait()
-
-    display_terminal_output("Script finished.\n")
-
-def display_terminal_output(message):
-    terminal_output.insert(tk.END, message)
-    terminal_output.see(tk.END)  # Scroll to the end of the text box
-        
+def start_script():
+    # Run the script in a separate thread to keep the GUI responsive
+    threading.Thread(target=run_script_in_terminal, daemon=True).start()
+    
+    
 
 def show_format():
     format_text = (
@@ -70,8 +103,9 @@ def show_format():
         "uinf = <float>\n"
         "re = <float>\n"
         "ret = <float>\n"
-        "tStart = <float>\n"
         "dt = <float>\n"
+        "g_limit0 = <float>\n"
+        "g_limit1 = <float>\n"
         "split_t = <integer>\n"
         "zplus = <list of integers>\n"
         "chplot = <string>\n"
@@ -86,8 +120,9 @@ def show_format():
         "uinf = 0.5\n"
         "re = 10000\n"
         "ret = 200\n"
-        "tStart = 0.0\n"
         "dt = 0.01\n"
+        "glimit0 = 10.3\n"
+        "glimit1 = 20.5\n"
         "split_t = 10\n"
         "zplus = [10, 20, 30]\n"
         "chplot = 'normal' or 'all'\n"
@@ -110,6 +145,8 @@ def show_parameters():
         messagebox.showerror("Error", "parameters.dat file not found!")
     except Exception as e:
         messagebox.showerror("Error", str(e))
+        
+    
         
 
 def apply_model():
@@ -138,28 +175,35 @@ def apply_model():
         
         if result.returncode != 0:
             error_message = result.stderr
-            display_terminal_output(f"Compilation error:\n{error_message}\n")
+            print(f"Compilation error:\n{error_message}\n")
             messagebox.showerror("Compilation Error", error_message)
             return
         
-        display_terminal_output(f"Compiled {source_file} successfully.\n")
+        print(f"Compiled {source_file} successfully.\n")
 
         # Run the compiled executable
         result = subprocess.run([output_file], cwd=base_path, capture_output=True, text=True)
         
+        
         if result.returncode != 0:
             error_message = result.stderr
-            display_terminal_output(f"Runtime error:\n{error_message}\n")
+            print(f"Runtime error:\n{error_message}\n")
             messagebox.showerror("Runtime Error", error_message)
             return
         
+        with open(os.path.join(base_path, "parameters.dat"), "a") as file:
+            file.write(f"split_time = {split_time_var.get()}\n")
+            file.write(f"nb_split_t = {n_var.get()}\n")
+            file.write(f'chplot = {chplot_var.get()}\n')
+            file.close()
+        
         messagebox.showinfo("Success", f"{selected_model} parameters applied successfully!")
-        display_terminal_output(f"Ran {output_file} successfully.\n")
+        print(f"Ran {output_file} successfully.\n")
         
     except Exception as e:
         messagebox.showerror("Error", str(e))
-        display_terminal_output(f"Error: {str(e)}\n")
-
+        print(f"Error: {str(e)}\n")
+        
 
 
 # Create the main window
@@ -176,7 +220,7 @@ text_color = "#003366"  # Dark blue text
 root.configure(bg=bg_color)
 
 # Create and place labels and buttons
-tk.Label(root, text="Cflow analysis with the 'parameters.dat' file", font=font, bg=bg_color, fg=text_color).pack(pady=20)
+tk.Label(root, text="Cflow analysis with the 'parameters.dat' file", font=font, bg=bg_color, fg=text_color).grid(row=0, column=0, columnspan = 2, padx=10, pady=10)
 
 # Dropdown menu for model selection
 model_var = tk.StringVar(root)
@@ -184,28 +228,69 @@ model_var.set("Select Model")  # Default value
 
 model_menu = tk.OptionMenu(root, model_var, "WRLES_Retau395", "WRLES_Retau1000", "WMLES_Retau1000")
 model_menu.config(font=font)
-model_menu.pack(pady=10)
+model_menu.grid(row=1, column=0, padx=5, pady=10)
+
+# Frame of split_time parameters
+frame_split_time = tk.Frame(root, bg=bg_color)
+frame_split_time.grid(row=1, column=1, padx=10, pady=10)
+
+time_split_info = tk.Label(frame_split_time, text="Do you want to split the time series in order to use\nless RAM and to reduce the computation time.\nIf 'Yes' choose the number of time step in the splitted\ntime series (default: Yes).", font=font, bg=bg_color)
+time_split_info.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
+
+split_time_var = tk.StringVar(root)
+split_time_var.set("Y")  # Default value
+
+yes_radiobutton = tk.Radiobutton(frame_split_time, text="Yes", variable=split_time_var, value="Y", font=font)
+yes_radiobutton.grid(row=1, column=0, padx=5, pady=5)
+no_radiobutton = tk.Radiobutton(frame_split_time, text="No", variable=split_time_var, value="n", font=font)
+no_radiobutton.grid(row=2, column=0, padx=5, pady=5)
+
+
+n_var = tk.IntVar(root)
+n_var.set("Select number")
+split_time_menu = tk.OptionMenu(frame_split_time, n_var, int(2**10), int(2**11), int(2**12), int(2**13), int(2**14))
+split_time_menu.config(font=font)
+split_time_menu.grid(row=1, column=1, rowspan=2, padx=5, pady=5)
+
+
+# chplot choice
+chplot_frame = tk.Frame(root, bg=bg_color)
+chplot_frame.grid(row=2, column=0, padx=5, pady=5)
+
+text_chplot = tk.Label(chplot_frame, text="Choose if you want to make the computation\nfor allplanes or only 4 plans equally\ndistributed (default: normal): ", bg=bg_color, font=font)
+text_chplot.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
+
+chplot_var = tk.StringVar(root)
+chplot_var.set("normal")  # Default value
+
+all_radiobutton = tk.Radiobutton(chplot_frame, text="all", variable=chplot_var, value="all", font=font)
+all_radiobutton.grid(row=1, column=0, padx=5, pady=5)
+normal_radiobutton = tk.Radiobutton(chplot_frame, text="normal", variable=chplot_var, value="normal", font=font)
+normal_radiobutton.grid(row=1, column=1, padx=5, pady=5)
+
 
 # Apply button
 button_apply = tk.Button(root, text="Apply", font=font, bg=button_color, fg="white", command=apply_model)
-button_apply.pack(pady=10)
+button_apply.grid(row=2, column=1, pady=5)
+
+separator = ttk.Separator(root, orient='horizontal')
+separator.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="ew")
+
 
 # Show file format button
 button_format = tk.Button(root, text="Show Data File Format", command=show_format, font=font)
-button_format.pack(pady=10)
+button_format.grid(row=4, column=0, padx=5, pady=10)
 
 # Show parameters button
 button_show_params = tk.Button(root, text="Show Parameters File", command=show_parameters, font=font)
-button_show_params.pack(pady=10)
+button_show_params.grid(row=4, column=1, padx=5, pady=10)
+
+separator = ttk.Separator(root, orient='horizontal')
+separator.grid(row=5, column=0, columnspan=2, padx=10, pady=10, sticky="ew")
 
 # Run button
-button_run = tk.Button(root, text="Run", font=font, bg=button_color, fg="white", command=run_script)
-button_run.pack(pady=10)
-
-# Add a ScrolledText widget to display terminal output
-terminal_output = scrolledtext.ScrolledText(root, height=15, font=font, bg="#1e1e1e", fg="#c5c5c5", insertbackground="white")
-terminal_output.pack(pady=20, padx=10, fill=tk.BOTH, expand=True)
-
+button_run = tk.Button(root, text="Run", font=font, bg=button_color, fg="white", command=start_script)
+button_run.grid(row=6, column=0, pady=10, padx=5)
 
 
 # Run the application

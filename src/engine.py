@@ -59,16 +59,15 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = N
             R_space /= (num_split_t-1)
             R_time /= (num_split_t-1)
             
-            cut_t = 3.0
             ind1 = 0
             ind2 = 0
             for i in range(Dt.shape[0]):
-                if Dt[i]>cut_t:
+                if R_time[i]<0.0:
                     ind1 = i
                     break
             
             for i in range(Dx.shape[0]):
-                if Dx[i]/Uc>cut_t:
+                if R_space[i]<0.0:
                     ind2 = i
                     break
                 
@@ -109,7 +108,6 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = N
             levels = [0.75, 0.8, 0.85, 0.9, 0.95, 1]
             coef = get_ellispses_slop(R, levels , 0.01, Dt, Dx)
             
-            print('slop:', 1./coef[0])
             
             return(Dt, Dx, R_full, coef)
             #return(Dt, Dx, R, coef)
@@ -175,7 +173,26 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = N
             R_time = Autocorrelation_1d(datas[:,:,:], mode_corr='half', geom='plan', axis='time')
             R_space = Autocorrelation_1d(datas[:,:,:], mode_corr='half', geom='plan', axis='streamwise')
 
-            return(Dt, Dx, R_time, R_space)
+            ind1 = 0
+            ind2 = 0
+            for i in range(Dt.shape[0]):
+                if R_time[i]<0.0:
+                    ind1 = i
+                    break
+            
+            for i in range(Dx.shape[0]):
+                if R_space[i]<0.0:
+                    ind2 = i
+                    break
+                
+            if ind1 == 0:
+                ind1 = Dt.shape[0]
+            
+            if ind2 == 0:
+                ind2 = Dx.shape[0]
+                
+            
+            return(ind1, ind2, Dt, Dx, R_time, R_space)
         
         if ch == 'corr2d':
             
@@ -196,8 +213,6 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = N
             
             levels = [0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95]
             coef = get_ellispses_slop(R, levels, 0.001, Dt, Dx)
-            
-            print('slop:', 1./coef[0])
             
             return(Dt, Dx, R_full, coef)
         
