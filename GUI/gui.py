@@ -7,77 +7,7 @@ import threading
 import subprocess
 import os
 from tkinter import ttk
-import signal
 
-# def run_script():
-#     """ Run the script in the same terminal and handle CTRL + C """
-#     try:
-#         # Define the script to run
-#         script_path = os.path.join(os.path.dirname(__file__), "../run.sh")
-        
-#         #Running the script in the same terminal using Popen
-#         process = subprocess.Popen(
-#             ["bash", script_path] if os.name == "posix" else ["cmd", "/c", script_path],
-#             stdout=subprocess.PIPE,
-#             stderr=subprocess.PIPE,
-#             text=True
-#         )
-        
-#         # process = subprocess.Popen(
-#         #     script_path,
-#         #     shell=True,
-#         #     stdin=subprocess.PIPE,
-#         #     stdout=subprocess.PIPE,
-#         #     stderr=subprocess.PIPE,
-#         #     universal_newlines=True
-#         # )
-        
-        
-#         # Reading the output and error streams
-#         for line in process.stdout:
-#             print(line, end="")  # Print output in real-time to the terminal
-#         for line in process.stderr:
-#             print(line, end="")  # Print errors in real-time to the terminal
-
-#         # Wait for the process to complete
-#         process.wait()
-        
-
-#     except KeyboardInterrupt:
-#         print("\nScript interrupted with CTRL + C. You can run the script again.")
-#         # Optionally handle cleanup or restart logic here
-#     except Exception as e:
-#         messagebox.showerror("Error", str(e))
-#         print(f"Error: {str(e)}\n")
-        
-# def run_script():
-#     # Path to your bash script
-#     script_path = os.path.join(os.path.dirname(__file__), "../run.sh")
-
-#     # Open the bash script with Popen
-#     process = subprocess.Popen(
-#         script_path,
-#         shell=True,
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.PIPE,
-#         text=True
-#     )
-
-#     # Continuously read the output
-#     for line in iter(process.stdout.readline, ''):
-#         terminal_output.insert(tk.END, line)
-#         terminal_output.see(tk.END)  # Scroll to the end of the text widget
-
-#     process.stdout.close()
-#     process.wait()
-
-#     # Capture any errors
-#     if process.returncode != 0:
-#         error_output = process.stderr.read()
-#         terminal_output.insert(tk.END, error_output)
-#         terminal_output.see(tk.END)
-    
-#     process.stderr.close() 
 
     
 def run_script_in_terminal():

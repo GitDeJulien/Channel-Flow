@@ -9,6 +9,8 @@ base_path = os.path.join(os.path.dirname(__file__), "../")
 ## READ PARAMETERS ##
 parameters_path = os.path.join(base_path, "parameters/parameters.dat")
 params = read_parameters(parameters_path)
+
+model_name = params['model_name']
 xlen = params['xlen']
 ylen = params['ylen']
 zlen = params['zlen']
@@ -29,5 +31,5 @@ split_t = params['nb_split_t']
 chplot = params['chplot']
 
 ## READ RANS ##
-y, u_velocity, v_velocity, w_velocity, pressure, vis, vorticity, normal, ko2_tke, ko2_omega = read_rans(os.path.join(base_path,rans_path))
+# y, u_velocity, v_velocity, w_velocity, pressure, vis, vorticity, normal, ko2_tke, ko2_omega = read_rans(os.path.join(base_path,rans_path))
 
