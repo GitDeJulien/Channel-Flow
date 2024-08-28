@@ -2,6 +2,7 @@
 #include <math.h>
 
 #define pi acos(-1.0)
+//mutipy by 0.96855
 
 int main() {
     // Define the parameters
@@ -16,7 +17,7 @@ int main() {
     float dt = 0.01;
     float g_limit0 = 0;
     float g_limit1 = 100;
-    int zplus[] = {20, 40, 60, 80, 98, 151, 199, 251, 302, 392};
+    int zplus[] = {151, 199, 251, 302, 380.04, 392, 503.63, 638.27, 762.79, 990.67};
     char in_path[] = "/media/julien/Verbatim/julien/channel_wmles_retau1000/";
     char out_figure_path[] = "output/figures/channel_wmles_retau1000/";
     char rans_path[] = "input/chan_rans_mean.dat";

@@ -37,8 +37,8 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
         
             fig.add_trace(go.Scatter(x=k[1:], y=space_spectra[1:]/Uc, mode='lines', name='$P(k_1)_{UU}/Uc$', line=dict(color='firebrick', width=3)), row=row, col=col)
             
-            lin1 = np.logspace(0,3)
-            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)-100, line=dict(color='darkgreen', dash='dash', width=2), name='slop: -5/3'), row=row, col=col)
+            lin1 = np.logspace(0,2)
+            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)/10, line=dict(color='darkgreen', dash='dash', width=2), name='slop: -5/3'), row=row, col=col)
             
             # Update axis properties
             fig.update_xaxes(range=[0,2], title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
@@ -50,8 +50,8 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             
             fig.add_trace(go.Scatter(x=k[1:], y=space_spectra[1:]/Uc, line=dict(color='firebrick', width=3), showlegend=False), row=row, col=col)
             
-            lin1 = np.logspace(0,3)
-            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)-100, line=dict(color='darkgreen', dash='dash', width=2), showlegend=False), row=row, col=col)
+            lin1 = np.logspace(0,2)
+            fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)/10, line=dict(color='darkgreen', dash='dash', width=2), showlegend=False), row=row, col=col)
             
             # Update axis properties
             fig.update_xaxes(range=[0,2],title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
@@ -228,18 +228,18 @@ def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', 
     
     if col == 4 and row == 1:
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols)), row=row, col=col)
-        lin1 = np.logspace(0,4)
+        lin1 = np.logspace(0,5)
         fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
-        fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col)
-        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-12,0])
+        fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col, range=[0,5])
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-10,0])
         
         
     else:
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols), showlegend=False), row=row, col=col)
-        lin1 = np.logspace(0,4)
+        lin1 = np.logspace(0,5)
         fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
-        fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col)
-        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-12,0])
+        fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col, range=[0,5])
+        fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-10,0])
         
         
     return(None)

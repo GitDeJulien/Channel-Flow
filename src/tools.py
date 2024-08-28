@@ -72,7 +72,7 @@ def get_ellispses_slop(R, levels, eps, Dt, Dx):
 #======================= Welsh Power Spectra ========================
 #====================================================================
 
-def WelshPowerSpectra(data, dt, dx, geom = 'plan', axis ='time'):
+def WelshPowerSpectra(data, dt, dx, geom = 'plan', axis ='time', scaling='density'):
     """ Compute the frequency spectra psd(w, x) and when averaged psd_avg(w) 
     or the spatial spectra psd(t, k), when averaged psd_avg(k) """ 
     
@@ -80,14 +80,14 @@ def WelshPowerSpectra(data, dt, dx, geom = 'plan', axis ='time'):
         if axis == 'time':
             niters, npts  = data.shape
             nperseg_time = get_nperseg(niters)
-            freq, Pxx = signal.welch(data, fs = 1/dt, window='hann', nperseg=nperseg_time, scaling='density', axis=0)
+            freq, Pxx = signal.welch(data, fs = 1/dt, window='hann', nperseg=nperseg_time, scaling=scaling, axis=0)
             psd = Pxx
             psd_avg = np.mean(psd, axis=1)
             
         elif axis == 'streamwise' or axis == 'spanwise' or axis == 'wallnormal':
             niters, npts  = data.shape
             nperseg_space = get_nperseg(npts)
-            freq, Pxx = signal.welch(data, fs = 1/dx, window='hann', nperseg=nperseg_space, scaling='density', axis=1)
+            freq, Pxx = signal.welch(data, fs = 1/dx, window='hann', nperseg=nperseg_space, scaling=scaling, axis=1)
             psd = Pxx
             psd_avg = np.mean(psd, axis=0)
             

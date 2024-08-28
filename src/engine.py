@@ -8,7 +8,7 @@ from parameters import *
 
 
 
-def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = None, Uc = None, delta_x=None, ch = "spectra"):
+def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = None, Uc = None, delta_x=None, ch = "spectra", scaling='density'):
     
     if split_time == 'Y':
         num_split_t = nt // split_t
@@ -24,10 +24,10 @@ def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = N
 
                 var1 += np.mean(np.mean(np.var(datas[(n-1)*split_t:n*split_t,:,:], axis=0), axis=-1))
 
-                freq, psd, time_spectra = WelshPowerSpectra(datas[(n-1)*split_t:n*split_t,:,:], dt, dx, geom = 'plan', axis='time')
+                freq, psd, time_spectra = WelshPowerSpectra(datas[(n-1)*split_t:n*split_t,:,:], dt, dx, geom = 'plan', axis='time', scaling=scaling)
                 omega = 2*np.pi*freq
                 inte_time += integrate.simpson(time_spectra, freq)
-                freq, psd, space_spectra = WelshPowerSpectra(datas[(n-1)*split_t:n*split_t,:,:], dt, dx, geom = 'plan', axis='streamwise')
+                freq, psd, space_spectra = WelshPowerSpectra(datas[(n-1)*split_t:n*split_t,:,:], dt, dx, geom = 'plan', axis='streamwise', scaling=scaling)
                 k = 2*np.pi*freq
                 inte_space += integrate.simpson(space_spectra, freq)
             

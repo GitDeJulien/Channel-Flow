@@ -7,17 +7,13 @@ from tools import *
 # def phi_22(kc, a1, sigma1c, Le): #same as R_33
 #     nw = kc.shape[0]
 #     res = np.zeros((nw))
-#     #ke = 1./Le
-#     for w in range(nw):
-#         res[w] = a1 * sigma1c**2 * Le[w]*special.gamma(5./6) / (np.sqrt(np.pi)*special.gamma(1./3) * (1 + (a1*kc[w]*Le[w])**2)**(5/6.)) * (4./3 - 5/(6*(1+(a1*kc[w]*Le[w])**2)))
+#     res[:] = a1 * sigma1c * Le*special.gamma(5./6) / (np.sqrt(np.pi)*special.gamma(1./3) * (1 + (a1*kc[:]*Le)**2)**(5/6.)) * (4./3 - 5/(6*(1+(a1*kc[:]*Le)**2)))
 #     return(res)
 
 # def phi_11(kc, a1, sigma1c, Le):
 #     nw = kc.shape[0]
 #     res = np.zeros((nw))
-#     #ke = 1./Le
-#     for w in range(nw):
-#         res[w] = a1 * sigma1c**2 * Le[w]*special.gamma(5./6) / (np.sqrt(np.pi)*special.gamma(1./3) * (1 + (a1*kc[w]*Le[w])**2)**(5/6.))
+#     res[:] = a1 * sigma1c * Le*special.gamma(5./6) / (np.sqrt(np.pi)*special.gamma(1./3) * (1 + (a1*kc[:]*Le)**2)**(5/6.))
 #     return(res)
 
 # def phi_22(kc, a1, sigma1c, Le): #same as R_33
@@ -35,17 +31,15 @@ from tools import *
 #     return(res)
 
 def phi_22(kc, a1, sigma1c, Le): #same as R_33
-    nw = kc.shape[0]
-    res = np.zeros((nw))
-    for w in range(nw):
-        res[w] = a1 * 6*special.gamma(17/6.)*sigma1c**2*Le[w]*(3 + 8*(a1*kc[w]*Le[w])**2) / (np.sqrt(np.pi)*55*special.gamma(1/3.) * (1 + (a1*kc[w] * Le[w])**2)**(11/6.))
+    nk = kc.shape[0]
+    res = np.zeros((nk))
+    res[:] = a1 * 6*special.gamma(17/6.)*sigma1c*Le*(3 + 8*(a1*kc[:]*Le)**2) / (np.sqrt(np.pi)*55*special.gamma(1/3.) * (1 + (a1*kc[:] * Le)**2)**(11/6.))
     return(res)
 
 def phi_11(kc, a1, sigma1c, Le):
-    nw = kc.shape[0]
-    res = np.zeros((nw))
-    for w in range(nw):
-        res[w] = a1 * 36*special.gamma(17/6.)*sigma1c**2*Le[w] / (np.sqrt(np.pi)*55*special.gamma(1/3.) * (1 + (a1*kc[w]*Le[w])**2)**(5/6.))
+    nk = kc.shape[0]
+    res = np.zeros((nk))
+    res[:] = a1 * 36*special.gamma(17/6.)*sigma1c*Le / (np.sqrt(np.pi)*55*special.gamma(1/3.) * (1 + (a1*kc[:]*Le)**2)**(5/6.))
     return(res)
 
 def L(C, kt, omega):

@@ -16,7 +16,7 @@ int main() {
     float dt = 0.004;
     float g_limit0 = 0;
     float g_limit1 = 100;
-    int zplus[] = {20, 40, 60, 80, 98, 151, 199, 251, 302, 392};
+    int zplus[] = {20, 40, 98, 151, 199, 251, 302, 380.04, 392, 503.63, 638.27, 762.79, 990.67};
     char in_path[] = "/media/julien/Verbatim/julien/channel_wrles_retau1000/";
     char out_figure_path[] = "output/figures/channel_wrles_retau1000/";
     char rans_path[] = "input/chan_rans_mean.dat";
