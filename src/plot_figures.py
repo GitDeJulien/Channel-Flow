@@ -230,7 +230,7 @@ def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', 
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols)), row=row, col=col)
         lin1 = np.logspace(0,4)
         fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
-        fig.update_xaxes(title='$\omega$', type="log", exponentformat='power', row=row, col=col)
+        fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col)
         fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-12,0])
         
         
@@ -238,7 +238,7 @@ def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', 
         fig.add_trace(go.Scatter(x=kc, y=phi, name=name, mode= 'lines+markers', line=dict(color=color, width=3), marker=dict(symbol=symbols), showlegend=False), row=row, col=col)
         lin1 = np.logspace(0,4)
         fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
-        fig.update_xaxes(title='$\omega$', type="log", exponentformat='power', row=row, col=col)
+        fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col)
         fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-12,0])
         
         
