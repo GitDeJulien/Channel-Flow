@@ -17,7 +17,7 @@ int main() {
     float g_limit0 = 3;
     float g_limit1 = 40;
     int zplus[] = {5, 20, 40, 60, 80, 98, 151, 199, 251, 302};
-    char in_path[] = "/media/julien/Verbatim/julien/channel_wrles_retau395/";
+    char in_path[] = "/media/julien/E91C-A3F7/channel_wrles_retau395/";
     char out_figure_path[] = "output/figures/channel_wrles_retau395/";
     char rans_path[] = "input/chan_rans_mean.dat";
     char out_data_path[] = "output/datas/channel_wrles_retau395/";

@@ -20,9 +20,9 @@ def init_figures_ft(z, ch='normal'):
     if ch == "all":
         fig1 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$\phi(k_x)$', '$\phi(k_x)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
         
-        fig2 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$R_{UU}(\delta t)$', '$R_{UU}(\delta t)$'), horizontal_spacing=0.02, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        fig2 = make_subplots(rows=2, cols=5, shared_yaxes='rows', horizontal_spacing=0.02, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
         
-        fig3 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$\delta t$', '$\delta t$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        fig3 = make_subplots(rows=2, cols=5, shared_yaxes='rows', vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
         
     
     return(fig1, fig2, fig3)
@@ -35,14 +35,14 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
         if col == 4 and row == 1:
             fig.add_trace(go.Scatter(x=omega[1:]/Uc, y=time_spectra[1:], mode='lines', name='$F(\omega/Uc)_{UU}$', line=dict(color='midnightblue', width=3)), row=row, col=col)
         
-            fig.add_trace(go.Scatter(x=k[1:], y=space_spectra[1:]/Uc, mode='lines', name='$P(k_1)_{UU}/Uc$', line=dict(color='firebrick', width=3)), row=row, col=col)
+            fig.add_trace(go.Scatter(x=k[1:], y=space_spectra[1:]/Uc, mode='lines', name='$P(k_x)_{UU}/Uc$', line=dict(color='firebrick', width=3)), row=row, col=col)
             
             lin1 = np.logspace(0,2)
             fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3)/10, line=dict(color='darkgreen', dash='dash', width=2), name='slop: -5/3'), row=row, col=col)
             
             # Update axis properties
             fig.update_xaxes(range=[0,2], title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
-            fig.update_yaxes(range=[-9,-1], type="log", exponentformat='power')
+            fig.update_yaxes(range=[-7,-1], type="log", exponentformat='power')
             
             
         else:
@@ -55,7 +55,7 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             
             # Update axis properties
             fig.update_xaxes(range=[0,2],title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
-            fig.update_yaxes(range=[-9,-1], type="log", exponentformat='power')
+            fig.update_yaxes(range=[-7,-1], type="log", exponentformat='power')
             
         
     if ch == "corr":
@@ -110,6 +110,9 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.update_xaxes(title_text="$\delta t$", row=row, col=col)
             fig.update_yaxes(type="log", exponentformat='power')
             
+        if col == 1:
+            fig.update_yaxes(row=row, col=col, title_text="$R_{UU}(\delta t)$")
+            
 
     if ch == 'corr2d':
         
@@ -132,6 +135,9 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             fig.update_xaxes(row=row, col=col, title_text="$\delta x$", range=[-5,5])
             
             fig.add_annotation(x=-1.5, y=4, text=f'$Uc\simeq{1./coef[0]:.2f}$', showarrow = False, row=row, col=col)
+            
+        if col == 1:
+            fig.update_yaxes(row=row, col=col, title_text="$\delta t$")
             
             
     if ch == 'w_gamma':
@@ -197,9 +203,9 @@ def init_figures_gamma(z, ch='normal'):
         figu3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{WW}(\omega))$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
         
     if ch == "all":
-        figu1 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
-        figu2 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
-        figu3 = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$', '$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        figu1 = make_subplots(rows=2, cols=5, shared_yaxes='rows', vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        figu2 = make_subplots(rows=2, cols=5, shared_yaxes='rows', vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        figu3 = make_subplots(rows=2, cols=5, shared_yaxes='rows', vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
         
     return(figu1, figu2, figu3)
 
@@ -210,17 +216,17 @@ def init_figures_sc(z, ch='normal'):
         fig = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$R(\delta x)$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
         
     if ch == "all":
-        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$R(\delta x)$', '$\R(\delta x)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
     
     return(fig)
 
 def init_figures_vk(z, ch='normal'):
     
     if ch == 'normal':
-        fig = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\phi_{ij}(k_c)$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
+        fig = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\phi_{ij}(k_x)$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
         
     if ch == "all":
-        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', row_titles=('$\phi_{ij}(k_c)$', '$k_c.\phi_{ij}(k_c)$'), vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
+        fig = make_subplots(rows=2, cols=5, shared_yaxes='rows', vertical_spacing=0.15, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$", f"$z^+={z[4]}$", f"$z^+={z[5]}$", f"$z^+={z[6]}$", f"$z^+={z[7]}$", f"$z^+={z[8]}$", f"$z^+={z[9]}$"))
     
     return(fig)
 
@@ -240,6 +246,11 @@ def von_karman_plot(fig, col, row, kc, phi, name = 'corr', color = 'firebrick', 
         fig.add_trace(go.Scatter(x=lin1, y=lin1**(-5./3), line=dict(color='darkmagenta', dash='dash', width=2), showlegend=False), row=row, col=col)
         fig.update_xaxes(title='$k_x$', type="log", exponentformat='power', row=row, col=col, range=[0,5])
         fig.update_yaxes(type="log", exponentformat='power', row=row, col=col, range=[-10,0])
+        
+    if col == 1:
+            fig.update_yaxes(row=row, col=col, title_text="$\phi_{ij}(k_x)$")
+            
+    fig.add_annotation(x=2, y=-2, text="$k_x^{-5/3}$", showarrow=True)
         
         
     return(None)
@@ -265,6 +276,12 @@ def space_correlation_plot(fig, col, row, Dx, corr, name = 'corr', color = 'fire
             fig.update_xaxes(row=row, col=col, title_text="$\delta y$")
         if axis == 'wallnormal':
             fig.update_xaxes(row=row, col=col, title_text="$\delta z$")
+            
+    if col == 1:
+        if axis == 'streamwise':
+            fig.update_xaxes(row=row, col=col, title_text = "$R_{ii}(\delta x)$")
+        if axis == 'spanwise':
+            fig.update_xaxes(row=row, col=col, title_text = "$R_{ii}(\delta y)$")
         
     return(None)
 
@@ -302,6 +319,10 @@ def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ch = 'w'):
             
             fig.update_xaxes(row=row, col=col, title_text="$\omega~(s^{-1})$")
             
+        if col == 1:
+            fig.update_yaxes(row=row, col=col, title_text="$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$")
+            
+            
         return(slop1)
             
     if ch == 'x':
@@ -332,6 +353,9 @@ def gamma_plot(fig, col, row, funct, omega, Dx, ind0, ind1, ch = 'w'):
             fig.add_trace(go.Scatter(x=Dx[ind0:ind1]-xlen//2, y=funct[4,ind0:ind1], mode='lines', showlegend=False, line=dict(color='mediumvioletred')), row=row, col=col)
             
             fig.update_xaxes(row=row, col=col, title_text="$r_1$")
+            
+        if col == 1:
+            fig.update_yaxes(row=row, col=col, title_text="$log(\phi(r_1,\omega)e^{-ik_cr_1} / \phi_{UU}(\omega))$")
             
         return(moy1, moy2, moy3, moy4)
             
