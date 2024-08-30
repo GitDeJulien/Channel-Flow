@@ -1,6 +1,9 @@
-\documentclass[twocolumn]{article}
+\documentclass[12pt]{article}
+%\usepackage{tgschola}   % TeX Gyre Schola as the main font
 \usepackage[utf8]{inputenc}
-\usepackage[a4paper]{geometry}  \geometry{hmargin=1.0cm,vmargin=2 cm}
+\usepackage[a4paper]{geometry}  \geometry{hmargin=1.3cm,vmargin=2.3 cm}
+%\usepackage{fontspec}    % Allows you to load system fonts
+%\setmainfont{TeX Gyre Schola} % Sets the main font for the document
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -36,7 +39,13 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remarque}
 
+\renewcommand*\contentsname{Table des matières}
+\renewcommand{\listfigurename}{Liste des figures}
+\newcommand{\vect}{\overrightarrow}
+
 \begin{document}
+	
+	
 	
 	\hypersetup{pdfborder=0 0 0}
 	\begin{titlepage}
@@ -90,13 +99,20 @@
 			\tableofcontents
 		\end{minipage}
 	}
+
+\clearpage
+\section*{\Large Table des figures}
+\noindent\rule{\textwidth}{0.3pt}
+\vspace{0.5cm}
+
+\listoffigures
 	
-\newpage
-.
-\newpage
+\clearpage
 	
 	
 	\section{Introduction}
+	\noindent\rule{\linewidth}{2pt}
+	\vspace{0.3cm}
 	\subsection{Motivations et plan}
 	
 	Les éoliennes font maintenant partie de notre paysage. Elles sont de plus en présente sur terre (onshore) et maintenant en mer (offshore). En effet le besoin en énergie électrique est grandissant alors que nous somme en pleine crise écologique. Mais l'implentation et la recherche de performances des éoliennes n'est pas sans encombre. Exposition au vent, taille, raccordement au réseau... Les enjeux sont nombreux. Ce travaille s'incrit dans l'obectif de diminution du bruit généré par les pales d'éolienne. Le domaine d'étude et celui de l'aéro-acoustique. Dans de nombreux pays des normes gouvernementales sur le bruit émis [{\bf ref}] sont mises en place dans le bute de ne pas déranger les habitants aux alentours d'un parc éolien. Bien qu'aucune étude scientifique n'ai prouvé un quelconque effet nocif du bruit éolien sur la santé, de nombreuses plaintes ont été enregistrées de gens dérangés par ce bruit. Alors pour éviter que nos géants de métal ne devienne un ennemie publique, la réduction de leur effet sonore est nécessaire. \\
@@ -128,7 +144,14 @@
 		\item 30/07 : Rapport
 	\end{itemize}
 
+\begin{center}
+	\large {\bf{***}}
+\end{center}
+
+\vspace{0.4cm}
 \section{Approche statistique et spectrale de la turbulence}
+\noindent\rule{\linewidth}{1pt}
+\vspace{0.3cm}
 
 	Dans cette section nous introduiront mathématiquement certains outils d'étude statistique de la turbulence notamment dans le domaine spectrale . Nous nous pencherons sur les spectres en énergie et les fonctions de corrélation.
 	
@@ -255,8 +278,16 @@
 		Cette expression relie le spectre en fréquence et le spectre unidimensionnel en nombre d'onde. Cela met en évidence la relation $\omega=<U_1>k_1$ entre la fréquence et le nombre d'onde unidimensionnel pour des composantes de Fourier convéctés à une vitesse moyenne $<U_1>$. 
 		
 		\subsection{Spectre bidimensionnel}
-			
+		
+		
+\begin{center}
+	\large {\bf{***}}
+\end{center}
+
+\vspace{0.4cm}
 \section{Résultats théorique à partir du modèle de von Kármán de la turbulence}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.3cm}
 		
 	Dans cette section nous allons définir certaines des expressions des spectres en utilisant les résultat de von Kármán en 1948 \textbf{[\color{blue}ref von Karman 1948]} sans pour autant en dresser une liste exostive. Par la suite l'objectif sera de comparer le modèle de von Kármán théoriques avec les données issues des calculs LES à Reynolds variables. \\
 	
@@ -289,10 +320,46 @@
 	
 	
 		 
-	
-\section{Modèles WMLES et WRLES}
+\begin{center}
+	\large {\bf{***}}
+\end{center}
 
+\vspace{0.4cm}	
+\section{Modèles WMLES et WRLES}
+\noindent\rule{\linewidth}{0.3pt}
+\vspace{0.3cm}
+
+Pour commencer à décrire l'étude qui ont été menée et les résultats qui ont été obtenues durant ce stage nous devons tout d'abord parler des modèles LES (large eddy simulation) de simulation numérique qui nous on permis l'aquisition de données sur la turbulence. Toutes les données analysés par la suite viennent de la simulation d'un écoulement turbulent en régime établie dans un canal droit parallélépipédique ("channel flow") {\bf[fig ref]}. Les bord nord et sud par rapport au sens de l'écoulement sont des mures (condition 'Wall') et le reste des bords sont périodiques. Par la suite nous dénommerons l'axe de l'écoulement "streamwise" ($\vect{x}$), l'axe normal au mure "wall-normal" ($\vect{z}$) et l'axe normal au deux précédent "spanwise" ($\vect{y}$).
+
+\begin{center}
+	\large {\bf{***}}
+\end{center}
+
+\vspace{0.4cm}
 \section{Analyse simple des variables de vitesse turbulente}
+\noindent\rule{\linewidth}{0.3pt}
+\vspace{0.3cm}
+
+Commençons par analyser simplement les données de sortie obtenu afin de voir si les résultats correspondent au attente d'une simulation d'écoulement turbulent dans un "channel flow". Pour ce premier cas les paramètres d'entrer sont les suivants : \\
+
+\textcolor{blue}{Faire un tableau qui regroupe les paramètres des trois modèles et un autre tableau pour les point de mesures}
+\begin{itemize}
+	\item dimension du canal : $xlen = 2\pi$, $ylen = \pi$, $zlen = 2$
+	\item masse volumique fluide : $\rho = 1.0$
+	\item vitesse à "l'infinie" : $u_{\infty} = 1.0$
+	\item Nombre de Reynolds : $Re = 13800.0$, $Re_{\tau} = 388.97$
+	\item Pas de temps : $\delta t = 0.01$
+	\item Taille cellule : $\delta x \times \delta y \times \delta z = $
+	\item Viscosité dynamique et cinématique : $\mu = \nu = 0.000145$
+	\item vitesse de frottement : $u_{\tau} = 0.0564$
+\end{itemize}
+
+Comme la quantité de cellule est très grande nous ne pouvons pas relever les quantités d'intéret pour l'ensemble du maillage. Les points de mesure sont donc les suivants : 
+
+
+Afin de valider les résultats des calculs LES nous avions à disposition des données issues de calculs DNS (Direct Navier-Stokes) effectué auparavant \textcolor{blue}{[ref Moser]}. Aussi pour le cas $Re = 395$ un calcul avec un modèle RANS à été effectué.
+
+
 
 \section{Validation de l'hypothèse de turbulence figée}
 
