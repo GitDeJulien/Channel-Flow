@@ -10,11 +10,11 @@ font = dict(family="serif",
 
 def init_figures_ft(z, ch='normal'):
     if ch == 'normal':
-        fig1 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\phi(k_x)$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
+        fig1 = make_subplots(rows=1, cols=4, shared_yaxes=True, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
         
-        fig2 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$R_{UU}(\delta t)$', horizontal_spacing=0.02, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
+        fig2 = make_subplots(rows=1, cols=4, shared_yaxes=True, horizontal_spacing=0.02, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
         
-        fig3 = make_subplots(rows=1, cols=4, shared_yaxes=True, y_title='$\delta t$', subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
+        fig3 = make_subplots(rows=1, cols=4, shared_yaxes=True, subplot_titles=(f"$z^+={z[0]}$", f"$z^+={z[1]}$", f"$z^+={z[2]}$", f"$z^+={z[3]}$"))
 
         
     if ch == "all":
@@ -56,6 +56,9 @@ def frozen_turbulence_plot(fig, col, row, omega = None, Uc = None, time_spectra 
             # Update axis properties
             fig.update_xaxes(range=[0,2],title_text="$k_x$", type="log", exponentformat='power', minexponent= 1, dtick=1, row=row, col=col)
             fig.update_yaxes(range=[-7,-1], type="log", exponentformat='power')
+            
+        if col == 1:
+            fig.update_yaxes(row=row, col=col, title_text="$\phi(k_x)$")
             
         
     if ch == "corr":

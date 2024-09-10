@@ -1,14 +1,14 @@
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Motivations et plan}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Time line}{4}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Approche statistique et spectrale de la turbulence}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Fonction de corrélation et ses propriétés}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Spectre unidimensionnel et propriété de turbulence figée}{5}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Spectre bidimensionnel}{6}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Résultats théorique à partir du modèle de von Kármán de la turbulence}{6}{section.3}%
-\contentsline {section}{\numberline {4}Modèles WMLES et WRLES}{7}{section.4}%
-\contentsline {section}{\numberline {5}Analyse simple des variables de vitesse turbulente}{8}{section.5}%
-\contentsline {section}{\numberline {6}Validation de l'hypothèse de turbulence figée}{8}{section.6}%
-\contentsline {section}{\numberline {7}Analyse spectral des variables turbulentes}{8}{section.7}%
-\contentsline {section}{\numberline {8}Détermination du coefficient de décorrélation}{8}{section.8}%
-\contentsline {section}{\numberline {9}Comparaison des spectres avec la théorie de von Kármán}{8}{section.9}%
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivations de l'étude}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Plan}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Approche statistique et spectrale de la turbulence}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Fonction de corrélation et ses propriétés}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Spectre unidimensionnel et propriété de turbulence figée}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Coefficient de corrélation ($\gamma $)}{7}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Résultats théorique à partir du modèle de von Kármán de la turbulence}{7}{section.3}%
+\contentsline {section}{\numberline {4}Modèles WMLES et WRLES}{8}{section.4}%
+\contentsline {section}{\numberline {5}Analyse simple des variables de vitesse turbulente afin de valider les jeux de données}{9}{section.5}%
+\contentsline {section}{\numberline {6}Validation de l'hypothèse de turbulence figée}{11}{section.6}%
+\contentsline {section}{\numberline {7}Détermination du coefficient de décorrélation}{13}{section.7}%
+\contentsline {section}{\numberline {8}Comparaison des spectres avec la théorie de von Kármán}{15}{section.8}%
+\contentsline {section}{\numberline {9}Conclusion}{17}{section.9}%

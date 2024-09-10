@@ -8,7 +8,7 @@ from parameters import *
 
 
 
-def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = None, Uc = None, delta_x=None, ch = "spectra", scaling=None):
+def frozen_turbulence(datas, zplan, z, nt, split_time, dt, n1, dx = None, x1 = None, Uc = None, delta_x=None, ch = "spectra", scaling='denity'):
     
     if split_time == 'Y':
         num_split_t = nt // split_t

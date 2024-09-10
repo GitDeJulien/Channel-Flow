@@ -41,11 +41,12 @@
 
 \renewcommand*\contentsname{Table des matières}
 \renewcommand{\listfigurename}{Liste des figures}
+\renewcommand{\listtablename}{Liste des tableaux}
+
 \newcommand{\vect}{\overrightarrow}
 
 \begin{document}
-	
-	
+		
 	
 	\hypersetup{pdfborder=0 0 0}
 	\begin{titlepage}
@@ -58,7 +59,7 @@
 			
 			\HRule \\ [0.8cm]
 			{\Large {Rapport de stage :} }\\ [0.8cm]
-			{\huge \bf Travail d'étude et de validation d'un code LES/DES et comparaison avec la théorie de la turbulence de von Kármán.} \\ [0.4cm]
+			{\huge \bf Travail d'étude et de validation d'un code LES et comparaison avec la théorie de la turbulence de von Kármán.} \\ [0.4cm]
 			\HRule \\ [2cm]
 			{\large \textbf{Julien TENAUD}} \\ [0.3cm]
 			{ Étudiants en $2^{\text{ème}}$ année à \textsc{l'enseirb-matmeca}} \\ [0.2cm]
@@ -101,29 +102,36 @@
 	}
 
 \clearpage
-\section*{\Large Table des figures}
+\section*{\Large Figures}
 \noindent\rule{\textwidth}{0.3pt}
 \vspace{0.5cm}
 
 \listoffigures
+
+\clearpage
+\section*{\Large Tableaux}
+\noindent\rule{\textwidth}{0.3pt}
+\vspace{0.5cm}
+
+\listoftables
 	
 \clearpage
 	
 	
 	\section{Introduction}
 	\noindent\rule{\linewidth}{2pt}
-	\vspace{0.3cm}
-	\subsection{Motivations et plan}
+	\vspace{0.1cm}
+	\subsection{Motivations de l'étude}
 	
 	Les éoliennes font maintenant partie de notre paysage. Elles sont de plus en présente sur terre (onshore) et maintenant en mer (offshore). En effet le besoin en énergie électrique est grandissant alors que nous somme en pleine crise écologique. Mais l'implentation et la recherche de performances des éoliennes n'est pas sans encombre. Exposition au vent, taille, raccordement au réseau... Les enjeux sont nombreux. Ce travaille s'incrit dans l'obectif de diminution du bruit généré par les pales d'éolienne. Le domaine d'étude et celui de l'aéro-acoustique. Dans de nombreux pays des normes gouvernementales sur le bruit émis [{\bf ref}] sont mises en place dans le bute de ne pas déranger les habitants aux alentours d'un parc éolien. Bien qu'aucune étude scientifique n'ai prouvé un quelconque effet nocif du bruit éolien sur la santé, de nombreuses plaintes ont été enregistrées de gens dérangés par ce bruit. Alors pour éviter que nos géants de métal ne devienne un ennemie publique, la réduction de leur effet sonore est nécessaire. \\
 	
 	Pour appréhender ce problème il faut d'abord comprendre comment les éoliennes génèrent du bruit. La grande majorité du son émis viens des pales de l'éolienne. En effet quand le flux d'air rencontre une pale il est perturbé et comme il y a interaction entre un fluide et une structure alors il y a apparition d'une couche limite. Dans notre cas cette dernière est turbulente. En effet le bout de pâle se déplace en moyenne à $80 m/s$ si on considère une éolienne classique. Dans l'étude de l'écoulement on à donc des Raynolds très élevés, de l'ordre de plusieurs milliers. La grande perturbation du flux d'air va engendrer la formation, tout autour de la pale, d'onde de pression qu'on appelle plus communément le bruit. Là où le son générer et le plus intense c'est au niveau du bord de fuite et plutôt en bout de pâle. Il y a un lien de causalité directe entre turbulence et son émis. En revanche il est considéré que le son émis n'a pas d'impacte sur la turbulence. C'est pourquoi la couche limite et le sillage turbulent des pâles sont étudiés.\\
 	
-	L'étude que j'ai mené s'incrit dans le travail de développement d'un code de calcul couplant l'aérodynamique et l'acoustique. Mon travail ne s'intéraissera qu'à la partie aérodynamique et plus précisément l'étude statistique d'une couche limite turbulente dans un canal parallélépipédique. Un code LES (Large Eddy Simulation) développé à \textit{DTU} permet un relevé de vitesse et de pression dans une simulation à la manière d'une expérience. À noté que celui-ci est très utile vû le coût d'une expérience en soufflerie. Afin d'étudier et de valider les résultats obtenu après calcul j'effecturai une analyse statistique notamment dans le domaine spectral de la turbulence et principalement des variables de vitesse. \\
+	L'étude que j'ai mené s'incrit dans le travail de développement d'un code de calcul couplant l'aérodynamique et l'acoustique. Mon travail ne s'intéraissera qu'à la partie aérodynamique et plus précisément l'étude statistique d'une couche limite turbulente dans un canal parallélépipédique. Un code LES (Large Eddy Simulation) développé à \textit{DTU} permet la simulation de la turbulence notamment dans un canal à air. À noté que celui-ci est très utile vû le coût d'une expérience en soufflerie. Afin d'étudier et de valider les résultats obtenu après calcul nous effectuerons une analyse statistique notamment dans le domaine spectral de la turbulence et principalement des variables de vitesse. \\
 	
-	Plusieurs axes de recherche sont envisagés~: 
+	\subsection{Plan}
+	Nous commencerons par détailler les outils mathématiques qui ont été utilisés pour étudier la turbulence. Nous présenterons ensuite brièvement la simulation effectuée et les modèles utilisés. Ils ne seront pas présentés en détaille car cela n'a pas fait l'objet du travail. L'idée était d'utiliser les résultats donnée afin de valider ces modèles et d'analyser la turbulence une fois validation. Nous présenterons par la suite les résultats obtenus selon plusieurs axes de recherche : 
 	\begin{itemize}
-		\item Étudier l'impact du raffinement du maillage sur la turbulence et évaluer a priori l'impact sur des calculs liés à l'acoustique.
 		\item Validation des hypothèses de modèles semi-empiriques incluant la reconstitution du tenseur spectral avec les données a partir d'approche RANS.
 		\item Étudier l'impact de certaines hypothèse faites dans les modèles semi-empiriques : 
 		\begin{itemize}
@@ -132,26 +140,16 @@
 			\item validité de l'hypothèse de turbulence figée (fluctuations turbulents constantes au cours du temps)
 			\item évaluer des loi plus générales que la théorie de la turbulence isotropique.
 		\end{itemize}
-	\item Si le temps le permet le projet pourrait déboucher sur des calculs couplant la théorie de la turbulence LES/DES avec des calculs (aéro-)acoustique (à bas Reynolds pour limiter les temps de calculs).
-	\end{itemize}
-
-	\subsection{Time line} 
-	
-	\begin{itemize}
-		\item 18/06 : Théorie et pris en main des premiers calculs
-		\item 6/07 : Préparation d'un worklow pour analyser les résultats (en python)
-		\item 19/07 : Résultats et analyse (courbes)
-		\item 30/07 : Rapport
 	\end{itemize}
 
 \begin{center}
 	\large {\bf{***}}
 \end{center}
 
-\vspace{0.4cm}
-\section{Approche statistique et spectrale de la turbulence}
-\noindent\rule{\linewidth}{1pt}
 \vspace{0.3cm}
+\section{Approche statistique et spectrale de la turbulence}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
 
 	Dans cette section nous introduiront mathématiquement certains outils d'étude statistique de la turbulence notamment dans le domaine spectrale . Nous nous pencherons sur les spectres en énergie et les fonctions de corrélation.
 	
@@ -178,6 +176,7 @@
 		
 		\begin{equation}
 			R_{ij}(\textbf{r},t) = <u_i(\textbf{x},t), u_j(\textbf{x'},t)>
+			\label{eq:correlation}
 		\end{equation}
 	
 		Nous pouvons définir la fonction d'autocorrelation,
@@ -259,6 +258,7 @@
 		
 		\begin{proposition}[Hypothèse de turbulence figée ou de Taylor]
 			On considère que les structures spatiales d'intéret ne change pas de manière signifiante durant le temps de leur passage le long de la ligne de mesure. 
+			\label{prop:turb-fig}
 		\end{proposition}
 	
 		Ainsi, on suppose que l'échelle de temps liée à la dynamique des tourbillons est grande devant le temps de parcours du fluide dans la cavité de mesure. Dans le cas d'un écoulement de direction préférentiel $x_1$ cela peut s'exprimer tel que :
@@ -273,21 +273,22 @@
 		
 		\begin{equation}
 			\phi_{ij}^{[1]}(k_1,x_2,x_3)=|<U_1>|\psi_{ij}(<U_1>k_1,x_2,x_3)
+			\label{fig:turb-fig}
 		\end{equation}
 	
 		Cette expression relie le spectre en fréquence et le spectre unidimensionnel en nombre d'onde. Cela met en évidence la relation $\omega=<U_1>k_1$ entre la fréquence et le nombre d'onde unidimensionnel pour des composantes de Fourier convéctés à une vitesse moyenne $<U_1>$. 
 		
-		\subsection{Spectre bidimensionnel}
+		\subsection{Coefficient de corrélation ($\gamma$)}
 		
 		
 \begin{center}
 	\large {\bf{***}}
 \end{center}
 
-\vspace{0.4cm}
+\vspace{0.3cm}
 \section{Résultats théorique à partir du modèle de von Kármán de la turbulence}
 \noindent\rule{\linewidth}{2pt}
-\vspace{0.3cm}
+\vspace{0.1cm}
 		
 	Dans cette section nous allons définir certaines des expressions des spectres en utilisant les résultat de von Kármán en 1948 \textbf{[\color{blue}ref von Karman 1948]} sans pour autant en dresser une liste exostive. Par la suite l'objectif sera de comparer le modèle de von Kármán théoriques avec les données issues des calculs LES à Reynolds variables. \\
 	
@@ -304,14 +305,17 @@
 	
 	\begin{equation}
 		\phi_{11}^1(k_c,z) = \frac{36\Gamma(17/6)\sigma_1l}{55\sqrt{\pi}\Gamma(1/3)}\frac{1}{(1 + (k_cl)^2)^{5/6}}
+		\label{eq:phi_vk_1}
 	\end{equation}
 
 	\begin{equation}
 		\phi_{22}^1(k_c,z) = \frac{6\Gamma(17/6)\sigma_2l}{55\sqrt{\pi}\Gamma(1/3)}\frac{(3+8(k_cl)^2)}{(1 + (k_1l)^2)^{11/6}}
+		\label{eq:phi_vk_2}
 	\end{equation}
 
 	\begin{equation}
 		\phi_{33}^1(k_c,z) = \frac{6\Gamma(17/6)\sigma_3l}{55\sqrt{\pi}\Gamma(1/3)}\frac{(3+8(k_cl)^2)}{(1 + (k_1l)^2)^{11/6}}
+		\label{eq:phi_vk_3}
 	\end{equation}
 
 	avec $\sigma_i = <u_iu_i>$, $l=C\frac{k_T^{3/2}}{\varepsilon}$, $k_c = \frac{\omega}{U_c}$.\\
@@ -321,60 +325,238 @@
 	
 		 
 \begin{center}
-	\large {\bf{***}}
+	\large \bf{***}
 \end{center}
 
-\vspace{0.4cm}	
+\vspace{0.3cm}	
 \section{Modèles WMLES et WRLES}
-\noindent\rule{\linewidth}{0.3pt}
-\vspace{0.3cm}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
 
-Pour commencer à décrire l'étude qui ont été menée et les résultats qui ont été obtenues durant ce stage nous devons tout d'abord parler des modèles LES (large eddy simulation) de simulation numérique qui nous on permis l'aquisition de données sur la turbulence. Toutes les données analysés par la suite viennent de la simulation d'un écoulement turbulent en régime établie dans un canal droit parallélépipédique ("channel flow") {\bf[fig ref]}. Les bord nord et sud par rapport au sens de l'écoulement sont des mures (condition 'Wall') et le reste des bords sont périodiques. Par la suite nous dénommerons l'axe de l'écoulement "streamwise" ($\vect{x}$), l'axe normal au mure "wall-normal" ($\vect{z}$) et l'axe normal au deux précédent "spanwise" ($\vect{y}$).
+Pour commencer à décrire l'étude qui ont été menée et les résultats qui ont été obtenues durant ce stage nous devons tout d'abord parler des modèles LES (large eddy simulation) de simulation numérique qui nous on permis l'aquisition de données sur la turbulence. Toutes les données analysés par la suite viennent de la simulation d'un écoulement turbulent en régime établie dans un canal droit parallélépipédique ("channel flow") (Figure \ref{fig:channel_flow}). Les bord nord et sud par rapport au sens de l'écoulement sont des mures (condition 'Wall') et le reste des bords sont périodiques. Par la suite nous dénommerons l'axe de l'écoulement "streamwise" ($\vect{x}$), l'axe normal au mure "wall-normal" ($\vect{z}$) et l'axe normal au deux précédent "spanwise" ($\vect{y}$).
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.62\linewidth]{../../report/referance/channel_flow.png}
+		\caption{Schéma de la simulation "channel flow"}
+		\label{fig:channel_flow}
+	\end{center}
+\end{figure}
+
+Sur la Figure \ref{fig:channel_flow} une seul ligne de mesure dans les direction $x$ et $y$ est représenter par soucis de clarté. Dans nos simulation nous en avons utiliser entre 5 et 10 selon le modèle. Le détaille des maillages et des paramètres utilisés dans les simulations est présent dans la section suivante.
+
+\begin{center}
+	\large \bf{***}
+\end{center}
+
+\vspace{0.3cm}
+\section{Analyse simple des variables de vitesse turbulente afin de valider les jeux de données}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
+
+Commençons par analyser simplement les données de sortie obtenu afin de voir si les résultats correspondent au attente d'une simulation d'écoulement turbulent dans un "channel flow". Les paramètres utilisées pour les trois simulations dans le tableau \ref{tab:parameters}: \\
+
+\begin{table}[!h]
+	\begin{tabular}{l | c | c | c}
+
+		Grandeurs & WRLES $Re_{\tau}=395$ & WMLES $Re_{\tau}=1000$ & WRLES $Re_{\tau}=1000$\\ \hline \hline
+		Dimension du canal ($x\times y \times z$) &  $2\pi\times\pi\times2$ & $4\pi\times1.5\pi\times2$ & $4\pi\times1.5\pi\times2$\\
+		Masse volumique fluide &  $\rho = 1.0$ & $\rho = 1.0$ & $\rho = 1.0$ \\
+		Vitesse à "l'infinie" & $u_{\infty}=1.0$ & $u_{\infty}=1.0$ & $u_{\infty}=1.0$  \\
+		Grille ($N_x\times N_y \times N_z$) & $256\times128\times1936$ & $192\times96\times96$ & $640\times257\times320$ \\
+		Nombre d'iteration & $N_{iter}=50000$ & $N_{iter}=75000$ & $N_{iter}=150000$ \\
+		Pas de temps & $\delta t=0.01$ & $\delta t=0.01$ & $\delta t=0.004$ \\
+		Nombre de Reynolds & $Re = 13800.0$ & $Re = 40000.0$ & $Re = 40000.0$ \\
+		Reynolds de frottement & $Re_{tau} = 388.97$ & $Re_{tau} = 968.55$ & $Re_{tau} = 980.86$ \\
+		Viscosité dynamique& $\mu = 0.000145$ & $\mu = 5e-05$ & $\mu = = 5e-05$ \\
+		Viscosité cinématique & $\nu = 0.000145$ & $\nu = 5e-05$ & $\nu = 5e-05$ \\
+		Vitesse de frottement & $u_{\tau} = 0.0564$ & $u_{\tau} = 0.0484275$ & $u_{\tau} = 0.0484275$ \\
+		\hline
+	\end{tabular}
+	\caption{Paramètres des simulations numériques LES effectuées}
+	\label{tab:parameters}
+\end{table}
+
+
+Afin de valider les résultats des calculs LES nous avions à disposition des données issues de calculs DNS (Direct Navier-Stokes) effectué auparavant \textcolor{blue}{[ref Moser]}. Aussi pour le cas $Re = 395$ un calcul avec un modèle RANS à été effectué. Pour que les résultats soit comparable les données on été relevées aux même auteurs adimensionnelles que les calcules DNS (tab. \ref{tab:zplus}). \\
+
+\begin{table}[!h]
+\begin{tabular}{l | c }
+
+	Modèles & localisation normal ($z^+$) \\	\hline	\hline
+	WRLES $Re_{\tau}=395$  & $5,~20,~40,~98,~151,~199,~251,~302,~392,~$ \\
+	WMLES $Re_{\tau}=1000$ & $151,~199,~251,~302,~380.04,~392,~503.63,~638.27,~762.79,~990.67$ \\
+	WRLES $Re_{\tau}=1000$ & $~20,~40,~98,~151,~199,~251,~302,~380.04,~392,~503.63,~638.27,~762.79,~990.67$ \\
+	\hline
+\end{tabular}
+	\caption{Hauteurs adimensionnelles auxquelles ont été relevées les quantités de vitesse}
+	\label{tab:zplus}
+\end{table}
+
+Les grandeurs relevées auxquelles nous nous sommes intéressé dans ce travail sont les vitesses "streamwise" ($u_x, u_1 \text{ ou } u$), "spanwise" ($u_y, u_2 \text{ ou } v$) et wall-normal ($u_z, u_3 \text{ ou } w$). Nous noterons par la suite les vitesses moyennes turbulentes avec des majuscules ($U,~V,~W$) et les fluctuations turbulentes de vitesse avec des minuscules ($u,~v,~w$).\\
+
+Regardons pour commencer les profiles de vitesse moyenne et des composantes du tenseur de Reynolds ainsi que le profile d'énergie cinétique turbulente, $k_T=\frac{1}{2}(u^2+v^2+w^2)$ tracé en {\bf Figures \ref{fig:mean-vel}} et \ref{fig:fluct-vel}. Toutes ces vitesses ont été addimentionnées par la vitesse de frottement $u_{\tau}$. Les vitesses moyennes sont obtenues en faisant une moyenne à la fois en temps et en espace. Pour obtenir les fluctuations turbulentes on soustrait cette moyenne aux données brutes.\\
+Les profiles de vitesse "steamwise" sont comparables aux données DNS et RANS. Par ailleurs les vitesses "spanwise" et "wall-normal" sont petites devant cette dernière et le comparatif est donc un peut moins idéal. On observe un certain décalage dans la comparaison des composantes du tenseur de Reynolds pour celles incluant $u_2$ et $u_3$. Malgré ces différence dû au modèle utilisé les profiles restent semblables et les données sont donc utilisable pour une analyse plus approfondie. La même étude à été mener pour les deux modèles à Reynolds 1000.
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER_profiles_all.png}
+		\caption{Profiles de vitesse moyenne addimensionnée et d'énergie cinétique turbulente. Les données ont été comparées aux profiles des données DNS et RANS quand cela était possible.}
+		\label{fig:mean-vel}
+	\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_profiles_all.png}
+		\caption{Profiles de fluctuation. Les données ont été comparées au profiles des données DNS.}
+		\label{fig:fluct-vel}
+	\end{center}
+\end{figure}
+
+\pagebreak
+
+Maintenant que les jeux de données semble correcte nous allons pouvoir s'interesser à l'hypothèse de turbulence figée (prop. \ref{prop:turb-fig}). Dans la théorie de résolution cette hypothèse est fait on veut donc voir si les résultats du calcul la confirme. 
+
 
 \begin{center}
 	\large {\bf{***}}
 \end{center}
 
-\vspace{0.4cm}
-\section{Analyse simple des variables de vitesse turbulente}
-\noindent\rule{\linewidth}{0.3pt}
 \vspace{0.3cm}
-
-Commençons par analyser simplement les données de sortie obtenu afin de voir si les résultats correspondent au attente d'une simulation d'écoulement turbulent dans un "channel flow". Pour ce premier cas les paramètres d'entrer sont les suivants : \\
-
-\textcolor{blue}{Faire un tableau qui regroupe les paramètres des trois modèles et un autre tableau pour les point de mesures}
-\begin{itemize}
-	\item dimension du canal : $xlen = 2\pi$, $ylen = \pi$, $zlen = 2$
-	\item masse volumique fluide : $\rho = 1.0$
-	\item vitesse à "l'infinie" : $u_{\infty} = 1.0$
-	\item Nombre de Reynolds : $Re = 13800.0$, $Re_{\tau} = 388.97$
-	\item Pas de temps : $\delta t = 0.01$
-	\item Taille cellule : $\delta x \times \delta y \times \delta z = $
-	\item Viscosité dynamique et cinématique : $\mu = \nu = 0.000145$
-	\item vitesse de frottement : $u_{\tau} = 0.0564$
-\end{itemize}
-
-Comme la quantité de cellule est très grande nous ne pouvons pas relever les quantités d'intéret pour l'ensemble du maillage. Les points de mesure sont donc les suivants : 
-
-
-Afin de valider les résultats des calculs LES nous avions à disposition des données issues de calculs DNS (Direct Navier-Stokes) effectué auparavant \textcolor{blue}{[ref Moser]}. Aussi pour le cas $Re = 395$ un calcul avec un modèle RANS à été effectué.
-
-
-
 \section{Validation de l'hypothèse de turbulence figée}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
 
-\section{Analyse spectral des variables turbulentes}
+Pour cette section nous nous appuierons sur l'équation \ref{fig:turb-fig} qui traduit mathématiquement l'hypothèse de turbulence figée. Notons que les figures données par la suite correspondrons au modèle WRLES-$Re_{\tau}395$  Nous voulons vérifier que le spectre calculer par rapport à l'espace est à une constante près égale au spectre calculer par rapport au temps. Cette constante correspond à la vitesse de convection moyenne du fluide dans le sens de son écoulement dans le canal qu'on notera $U_c$. Il faut donc tout d'abord trouver cette constante. Pour cela nous allons calculer la fonction d'autocorrelation bidimensionnelle $R(\delta t, \delta x)$ et tracer ses iso-valeur sur le plan ($\delta x, \delta t$) ({\bf Figure \ref{fig:corr-2d}}). La pente définie par la direction des ellipses correspond à $\frac{1}{U_c}$.
 
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u1.png}
+		\caption{Iso-valeur de la fonction d'autocorrelation 2D selon la direction $x$ et le temps $t$ à différentes hauteurs $z^+$. Obtention de la valeur de $U_c$ par approche linéaire de la direction des ellipses.}
+		\label{fig:corr-2d}
+	\end{center}
+\end{figure}
+
+Les valeurs de $U_c$ trouver doivent se rapprocher des valeurs moyennes de vitesse "streamwise" $U_1$ (\textcolor{blue}{cf. fig ... annexe}).\\
+
+A présent on calcule le spectre selon $k$ (espace) et le spectre
+selon $\omega$ (temps) en utilisant la méthode de Welch (\textcolor{blue}{ref Welch}) avec une fenêtre de "hann". En regardant la {\bf Figure \ref{fig:spectra-space-time}} on peu conclure que l'équation \ref{fig:turb-fig} est vérifié et que l'hypothèse de turbulence figée est donc bien admissible dans notre simulation.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.85\linewidth]{../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/power_spectra/u1.png}
+		\caption{Comparaison des spectres de puissance en temps ($F$) et dans la direction $x$ ($P$) tracer en fonction de $k_x$ le nombre d'onde "streamwise". En pointillé (- - -) la pente $k_x^{-5/3}$ vérifiant la décroissance de Kolmogorov \textcolor{blue}{ref Kolmogorov}}
+		\label{fig:spectra-space-time}
+	\end{center}
+\end{figure}
+\pagebreak
+
+\begin{center}
+	\large \bf{***}
+\end{center}
+
+\vspace{0.3cm}
 \section{Détermination du coefficient de décorrélation}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
 
+Une grandeur statistique intéressante à regarder est la corrélation (Équation \ref{eq:correlation}) afin de voir son évolution en fonction de $r=\delta x$ par rapport à un point de référence.\\
+Pour points de référence nous prendrons les premiers point à $x=\delta x$ à quatre hauteurs différentes. En {\bf Figure \ref{fig:space_spectra}} vous trouverez les courbes d'auto-corrélation ($R_{UU}$, $R_{VV}$, $R_{WW}$) de vitesses dans les trois directions selon les points de relever "streamwise".  \\
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{../../output/figures/channel_wrles_retau395/split_time/space_correlation/streamwise.png}
+		\caption{Corrélation streamwise des grandeur de vitesse dans les trois directions}
+		\label{fig:space_spectra}
+	\end{center}
+\end{figure}
+
+À présent nous cherchons à déterminer le coefficient de décorrélation qu'on nommera $\gamma$. Si on suppose que l'écoulement est isotrope, homogène dans la direction de détermination du coefficient et que l'hypothèse de turbulence figée est vérifiée alors on peut déterminer l'équation suivante: 
+
+\begin{equation}
+	\phi(r, \omega) = \frac{e^{-|\gamma k_c r| + jk_cr}}{U_c}\phi(\omega)
+	\label{eq:funct}
+\end{equation} 
+
+avec $r = \delta x$, $k_c=\omega/U_c$ le nombre d'onde "streamwise", $\gamma$ le coefficient de décorrélation et $j$ le nombre imaginaire tel que $j^2=-1$. Le spectre $\phi(\omega)$ à été calculé avec la méthode de Welch et le spectre $\phi(\delta x, \omega)$ à été calculé en appliquant une transformé de Fourier à la fonction de corrélation bidimensionnelle $R_{ii}(r,\tau)$ en fonction du temps.\\
+Ainsi il est possible de tracer $\beta = |\gamma k_c r|$ en fonction de $k_c$ (ou $\omega$) ({\bf Figure \ref{fig:gamma_w}}) ou $r$ et de déterminer $\gamma$. Dans la littérature on trouve des coefficients de décorrélation de l'ordre de $0.3$.
+
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.png}
+		\caption{Tracé de la fonction $\beta$ en fonction de $k_c$ pour la vitesse $u_1$ à quatre hauteurs dans le canal et pour quatre différents $r$. Les pointillés représente la pente approchée de la courbe}
+		\label{fig:gamma_w}
+	\end{center}
+\end{figure}
+
+On a alors le coefficient de pente calculer en {\bf Figure \ref{fig:gamma_w}}, $c=\gamma r / U_c$. On peut donc déterminer le coefficient de décorrélation dont on a donné les valeurs en {\bf Figures \ref{fig:gamma_w_view}} pour les trois composantes de vitesse. \\
+
+Il semblerait que nous n'obtenions pas le coefficient attendu, notamment pour des points très rapprochés ($r$ petits). Cela signifie sûrement que le modèle pris pour déterminer l'equation \ref{eq:funct} ne s'applique pas dans notre cas. Par exemple sur les calculs LES l'isotropie n'est pas vérifié.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.png}
+		\caption{Tracé de la fonction $\beta$ en fonction de $k_c$ pour la vitesse $u_1$ à quatre hauteurs dans le canal et pour quatre différents $r$. Les pointillés représente la pente approchée de la courbe}
+		\label{fig:gamma_w_view}
+	\end{center}
+\end{figure}
+
+
+\begin{center}
+	\large \bf{***}
+\end{center}
+
+
+
+
+\vspace{0.3cm}
 \section{Comparaison des spectres avec la théorie de von Kármán}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
+
+Nous voulons maintenant comparer les résultats spectrales obtenu avec les modèles LES et les spectres obtenus avec la théorie de von Kármán explicités en section 3. Nous comparons aussi ces résultats au données DNS [{\bf ref}]. \\
+La théorie de von Kármán s'appui sur l'hypothèse d'isotropie qui n'est pas valide dans le cas des modèles LES. Nous voulons donc quantifié les écartes en énergie que la théorie de von Kármán à avec les modèles LES et DNS. Pour cela nous utilisons les équations \ref{eq:phi_vk_1}, \ref{eq:phi_vk_2} et \ref{eq:phi_vk_3} pour calculer les spectres de densité d'énergie selon la théorie de von Kármán. Les spectres issus des données LES sont quant à eux calculés grâce à la méthode de Welch en espace ({\bf Figure \ref{fig:vk_spectra}}). La pente de coefficient $-\frac{5}{3}$ à été tracé en pointillé sur la {\bf Figure \ref{fig:vk_spectra}} afin de vérifier la théorie de Kolmogorov. \\
+
+Les résultats LES et DNS sont quasiment similaire. Cela confirme que notre calcul LES est bon. Pour autant un écart assez conséquents ce remarque avec la théorie de von Kármán. Comme dans la théorie de von Kármán le spectre s'étand sur un nombre d'onde infinie nous remarquons que les spectres théorique sont bien plus étendus. Nous voulons donc s'avoir si la quantité d'énergie, c'est à dire mathématiquement "integral length scale", sont équivalentes. En {\bf Figure \ref{fig:vk_integral_scale}} on constate que le rapport de ces grandeurs sont entre 2 et 3. La théorie de von KKármán n'est donc pas une parfaite approximation des phénomènes de turbulence en canal pour autant dans certain cas ce modèle théorique peut rester une bonne approximation. 
+	
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.9\linewidth]{../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_spectra.png}
+		\caption{Comparaison des spectre de densité d'énergie issus de la théorie de von Kármán avec ceux issu des données LES et DNS.}
+		\label{fig:vk_spectra}
+	\end{center}
+\end{figure}
+\pagebreak
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{../../output/figures/channel_wrles_retau395/split_time/von_karman/integral_lenght_scale.png}
+		\caption{Rapport des échelles de longueurs intégrales entre les données LES et la théorie von Kármán}
+		\label{fig:vk_integral_scale}
+	\end{center}
+\end{figure}
+	
 
 
+\begin{center}
+	\large \bf{***}
+\end{center}
 
-	
-	
-	
-	
+\vspace{0.3cm}
+\section{Conclusion}
+\noindent\rule{\linewidth}{2pt}
+\vspace{0.1cm}
+
+Notre travaille à permis dans un premier temps de valider les résultats du code LES. Il à permis par la suite de vérifier une hypothèse forte, celle de turbulence figée. Avec ce deux résultats cela permet d'être confiant quant à l'utilisation des modèles WRLES et WMLES dans le cas d'une simulation en canal d'air. On à pu par la suit chercher à retrouver le coefficient de décorrélation. Cela n'a pas aboutit à de résultats convainquant mais pour autant il reste inintéressant vis à vis de la validité de l'équation \ref{eq:funct} dans notre cas. Pour finir nous avons pu observer les écarts entre la théorie de von Kármán et les résultats numériques LES et DES. À notre connaissance, cela n'avait pas été fait auparavant et on a pu constate que dans notre cas la théorie de von Kármán ne permet pas de recouvrir toutes l'énergie que nous obtenons avec les résultats de simulation. \\ 
+Dans ce rapport seulement les résultats du modèle WRLES - Retau395 on été montrés car ils ont représenté la majorité du travail effectué. Pour autant les calculs et des résultats on aussi été obtenus sur les modèles à $Re_{\tau}=1000$. De plus une comparaison entre les deux modèles WRLES et WMLES pourrait faire l'objet de suite à ce travail. En effet au niveau temps de calcul le modèle WMLES est bien plus rapide. Il faudrait donc voir si les résultats donnée par celui ci sont assez satisfaisant par rapport au modèle WMLES afin de détermine lequel est le plus intéressant de choisir dans le cas de notre simulation. \\
+L'objectif à terme est de pouvoir utiliser le code établie durant ces trois mois pour effectuer des calcules similaires sur une simulation de pâle en soufflerie. En revanche dans ce nouveaux cas l'écoulement n'est plus homogène dans aucune direction ce qui rend les calculs plus compliqué. Le code à été écrit de sort à ce qu'il soit modulaire et donc facilement malléable. Il serait donc assez simple, niveau programmation, d'adapter le code au cas d'une pâle. En revanche il faudrait faire attention de ne pas faire des calculs qui n'ont pas de sens dans ce cas précis.
+
 	
 	
 \end{document}

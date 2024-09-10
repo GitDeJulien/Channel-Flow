@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  30 AUG 2024 14:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  10 SEP 2024 16:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -549,24 +549,24 @@ LaTeX Warning: Label `energie_spectra' multiply defined.
 )
 \openout1 = `rapport_de_stage.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -630,7 +630,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count326
-Package hyperref Info: Link coloring OFF on input line 46.
+Package hyperref Info: Link coloring OFF on input line 48.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -643,21 +643,21 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count327
 )
-LaTeX Info: Redefining \ref on input line 46.
-LaTeX Info: Redefining \pageref on input line 46.
-LaTeX Info: Redefining \nameref on input line 46.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
 
 (./rapport_de_stage.out) (./rapport_de_stage.out)
 \@outlinefile=\write4
 \openout4 = `rapport_de_stage.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 64.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 65.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -666,7 +666,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <logo_emkk.jpg, id=60, 615.0177pt x 169.3527pt>
 File: logo_emkk.jpg Graphic file (type jpg)
 <use logo_emkk.jpg>
-Package pdftex.def Info: logo_emkk.jpg  used on input line 77.
+Package pdftex.def Info: logo_emkk.jpg  used on input line 78.
 (pdftex.def)             Requested size: 209.40901pt x 57.66183pt.
  [1
 
@@ -676,7 +676,7 @@ rt_de_stage.toc)
 \openout5 = `rapport_de_stage.toc'.
 
 
-Overfull \hbox (14.71661pt too wide) in paragraph at lines 101--102
+Overfull \hbox (14.71661pt too wide) in paragraph at lines 102--103
 [][] 
  []
 
@@ -684,76 +684,258 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.103 \clearpage
-                 [1] (./rapport_de_stage.lof)
+l.104 \clearpage
+                 [1] (./rapport_de_stage.lof
+Overfull \hbox (4.38303pt too wide) in paragraph at lines 2--2
+ [][] [][]\OT1/cmr/m/n/12 Profiles de vitesse moyenne ad-di-men-sionn^^See et d
+'^^Senergie cin^^Setique tur-bu-lente. Les donn^^Sees 
+ []
+
+)
 \tf@lof=\write6
 \openout6 = `rapport_de_stage.lof'.
 
  [2
 
+] (./rapport_de_stage.lot)
+\tf@lot=\write7
+\openout7 = `rapport_de_stage.lot'.
+
+ [3
+
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
+Underfull \hbox (badness 10000) in paragraph at lines 128--129
 
  []
 
 
-Overfull \hbox (18.88744pt too wide) in paragraph at lines 122--123
+Overfull \hbox (18.88744pt too wide) in paragraph at lines 130--131
 []\OT1/cmr/m/n/12 L'^^Setude que j'ai men^^Se s'incrit dans le tra-vail de d^^S
 eveloppement d'un code de cal-cul cou-plant l'a^^Serodynamique
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
  []
 
-[3
+[4
 
-] [4] [5]
+] [5] [6]
 Underfull \hbox (badness 10000) in paragraph at lines 270--271
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--293
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 281.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gamma' on input line 281.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 281.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
 
  []
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 301--302
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--318
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 343--344
+Underfull \hbox (badness 10000) in paragraph at lines 321--322
 
  []
 
-[8] (./rapport_de_stage.aux)
+<../../report/referance/channel_flow.png, id=187, 412.54124pt x 255.95625pt>
+File: ../../report/referance/channel_flow.png Graphic file (type png)
+<use ../../report/referance/channel_flow.png>
+Package pdftex.def Info: ../../report/referance/channel_flow.png  used on input
+ line 340.
+(pdftex.def)             Requested size: 324.58638pt x 201.38695pt.
+[8 <../../report/referance/channel_flow.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 357--358
+
+ []
+
+
+Overfull \hbox (1.33047pt too wide) in paragraph at lines 360--376
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 381--382
+
+ []
+
+
+Overfull \hbox (9.12602pt too wide) in paragraph at lines 384--392
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 396--397
+
+ []
+
+[9]
+<../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER_pro
+files_all.png, id=207, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSE
+R_profiles_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
+_profiles_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/RANS/RANS_LES_MOSER_profiles_all.png  used on input line 404.
+(pdftex.def)             Requested size: 418.82603pt x 279.22548pt.
+<../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_profi
+les_all.png, id=208, 803.0pt x 803.0pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_
+profiles_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_p
+rofiles_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/RANS/var_velocity_profiles_all.png  used on input line 412.
+(pdftex.def)             Requested size: 418.82603pt x 418.8367pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
+_profiles_all.png>] [11 <../../output/figures/channel_wrles_retau395/split_time
+/RANS/var_velocity_profiles_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
+lation2D/u1.png, id=222, 1104.125pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+correlation2D/u1.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u1.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/correlation2D/u1.png  used on input line 436.
+(pdftex.def)             Requested size: 471.17429pt x 257.00507pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 442--443
+
+ []
+
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/power
+_spectra/u1.png, id=225, 1104.125pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+power_spectra/u1.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+ower_spectra/u1.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/power_spectra/u1.png  used on input line 449.
+(pdftex.def)             Requested size: 445.00415pt x 242.73364pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 465--467
+
+ []
+
+<../../output/figures/channel_wrles_retau395/split_time/space_correlation/strea
+mwise.png, id=234, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/space_correlation/
+streamwise.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
+treamwise.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/space_correlation/streamwise.png  used on input line 471.
+(pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.png, i
+d=236, 1104.125pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.p
+ng Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.pn
+g>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u1_w.png  used on input line 491.
+(pdftex.def)             Requested size: 471.17429pt x 257.00507pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
+
+ []
+
+[13 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+ower_spectra/u1.png>]
+
+LaTeX Warning: Text page 14 contains only floats.
+
+[14 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
+treamwise.png> <../../output/figures/channel_wrles_retau395/split_time/gamma/ga
+mma_u1_w.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.
+png, id=252, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w
+_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_
+all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_view_w_all.png  used on input line 503.
+(pdftex.def)             Requested size: 418.82603pt x 279.22548pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--524
+
+ []
+
+[15 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_
+all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_s
+pectra.png, id=264, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
+man_spectra.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
+an_spectra.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/von_karman/von_karman_spectra.png  used on input line 530.
+(pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
+ [16 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
+man_spectra.png>]
+<../../output/figures/channel_wrles_retau395/split_time/von_karman/integral_len
+ght_scale.png, id=270, 602.25pt x 401.5pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/integra
+l_lenght_scale.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/von_karman/integral
+_lenght_scale.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/von_karman/integral_lenght_scale.png  used on input line 539.
+(pdftex.def)             Requested size: 366.46977pt x 244.32037pt.
+ [17 <../../output/figures/channel_wrles_retau395/split_time/von_karman/integra
+l_lenght_scale.png>] [18] (./rapport_de_stage.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `rapport_de_stage.out' has not changed.
-(rerunfilecheck)             Checksum: 388B547E9E1F786D8DE66762B8E9D8CF;3606.
+(rerunfilecheck)             Checksum: A38DAB1CB184E9496C2FF309EC57A3EB;3678.
  ) 
 Here is how much of TeX's memory you used:
- 14669 strings out of 480247
- 232184 string characters out of 5896151
- 535332 words of memory out of 5000000
- 32364 multiletter control sequences out of 15000+600000
- 479712 words of font info for 64 fonts, out of 8000000 for 9000
+ 14814 strings out of 480247
+ 239081 string characters out of 5896151
+ 544916 words of memory out of 5000000
+ 32464 multiletter control sequences out of 15000+600000
+ 482013 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 70i,17n,76p,1128b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,17n,76p,1128b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/julien/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.60
 0pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/
@@ -769,10 +951,10 @@ msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on rapport_de_stage.pdf (9 pages, 361732 bytes).
+Output written on rapport_de_stage.pdf (19 pages, 1019206 bytes).
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
- 49 named destinations out of 1000 (max. 500000)
- 118 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 369 PDF objects out of 1000 (max. 8388607)
+ 293 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
