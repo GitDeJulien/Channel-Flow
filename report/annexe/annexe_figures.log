@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  22 AUG 2024 09:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  12 SEP 2024 12:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -647,381 +647,337 @@ LaTeX Info: Redefining \nameref on input line 37.
 \@outlinefile=\write4
 \openout4 = `annexe_figures.out'.
 
-<../output/channel_wrles_retau395/RANS/RANS_profiles.png, id=36, 803.0pt x 602.
-25pt>
-File: ../output/channel_wrles_retau395/RANS/RANS_profiles.png Graphic file (typ
-e png)
-<use ../output/channel_wrles_retau395/RANS/RANS_profiles.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/RANS/RANS_profiles.pn
-g  used on input line 47.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
+<../../report/referance/channel_flow.png, id=44, 412.54124pt x 255.95625pt>
+File: ../../report/referance/channel_flow.png Graphic file (type png)
+<use ../../report/referance/channel_flow.png>
+Package pdftex.def Info: ../../report/referance/channel_flow.png  used on input
+ line 47.
+(pdftex.def)             Requested size: 512.14963pt x 317.78473pt.
+<../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER_pro
+files_all.png, id=46, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSE
+R_profiles_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
+_profiles_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/RANS/RANS_LES_MOSER_profiles_all.png  used on input line 56.
+(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 57.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 57.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<../output/channel_wrles_retau395/RANS/mean_velocity_profiles.png, id=38, 803.0
-pt x 602.25pt>
-File: ../output/channel_wrles_retau395/RANS/mean_velocity_profiles.png Graphic 
-file (type png)
-<use ../output/channel_wrles_retau395/RANS/mean_velocity_profiles.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/RANS/mean_velocity_pr
-ofiles.png  used on input line 58.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
 
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/RANS/var_velocity_profiles.png, id=39, 803.0p
-t x 602.25pt>
-File: ../output/channel_wrles_retau395/RANS/var_velocity_profiles.png Graphic f
-ile (type png)
-<use ../output/channel_wrles_retau395/RANS/var_velocity_profiles.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/RANS/var_velocity_pro
-files.png  used on input line 65.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/RANS/velocity_ratio_profiles.png, id=40, 803.
-0pt x 602.25pt>
-File: ../output/channel_wrles_retau395/RANS/velocity_ratio_profiles.png Graphic
- file (type png)
-<use ../output/channel_wrles_retau395/RANS/velocity_ratio_profiles.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/RANS/velocity_ratio_p
-rofiles.png  used on input line 72.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u1
-.png, id=41, 1104.125pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation
-2D/u1.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2
-D/u1.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/correlation2D/u1.png  used on input line 84.
-(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u2
-.png, id=42, 1104.125pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation
-2D/u2.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2
-D/u2.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/correlation2D/u2.png  used on input line 91.
-(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u3
-.png, id=43, 1104.125pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation
-2D/u3.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2
-D/u3.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/correlation2D/u3.png  used on input line 98.
-(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u_
-1c.png, id=44, 702.625pt x 501.875pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation
-2D/u_1c.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2
-D/u_1c.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/correlation2D/u_1c.png  used on input line 105.
-(pdftex.def)             Requested size: 512.14963pt x 365.85262pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u_
-ratio.png, id=45, 702.625pt x 501.875pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation
-2D/u_ratio.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2
-D/u_ratio.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/correlation2D/u_ratio.png  used on input line 112.
-(pdftex.def)             Requested size: 512.14963pt x 365.85262pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectra/u1
-_all.png, id=46, 903.375pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spect
-ra/u1_all.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectr
-a/u1_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/power_spectra/u1_all.png  used on input line 121.
-(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectra/u2
-_all.png, id=47, 903.375pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spect
-ra/u2_all.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectr
-a/u2_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/power_spectra/u2_all.png  used on input line 127.
-(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectra/u3
-_all.png, id=48, 903.375pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spect
-ra/u3_all.png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/frozen_turbulence/power_spectr
-a/u3_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/frozen_tur
-bulence/power_spectra/u3_all.png  used on input line 133.
-(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/space_correlation/streamwise.png, 
-id=49, 903.375pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/space_correlation/streamwise.
-png Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/space_correlation/streamwise.p
-ng>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/space_corr
-elation/streamwise.png  used on input line 145.
-(pdftex.def)             Requested size: 460.93153pt x 307.29047pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/space_correlation/spanwise.png, id
-=50, 903.375pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/space_correlation/spanwise.pn
-g Graphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/space_correlation/spanwise.png
->
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/space_corr
-elation/spanwise.png  used on input line 151.
-(pdftex.def)             Requested size: 460.93153pt x 307.29047pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_u1_w_all.png, id=51, 1
-104.125pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_u1_w_all.png Grap
-hic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_u1_w_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u1_w_all.png  used on input line 161.
-(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_u1_r_all.png, id=52, 1
-104.125pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_u1_r_all.png Grap
-hic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_u1_r_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u1_r_all.png  used on input line 167.
-(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_u2_w_all.png, id=53, 1
-104.125pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_u2_w_all.png Grap
-hic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_u2_w_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u2_w_all.png  used on input line 173.
-(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_u2_r_all.png, id=54, 1
-104.125pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_u2_r_all.png Grap
-hic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_u2_r_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u2_r_all.png  used on input line 179.
-(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_u3_w_all.png, id=55, 1
-104.125pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_u3_w_all.png Grap
-hic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_u3_w_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u3_w_all.png  used on input line 185.
-(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_u3_r_all.png, id=56, 1
-104.125pt x 903.375pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_u3_r_all.png Grap
-hic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_u3_r_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_u3_r_all.png  used on input line 192.
-(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.png, id=57,
- 803.0pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.png Gr
-aphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_view_w_all.png  used on input line 199.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/split_time/gamma/gamma_view_r_all.png, id=58,
- 1104.125pt x 602.25pt>
-File: ../output/channel_wrles_retau395/split_time/gamma/gamma_view_r_all.png Gr
-aphic file (type png)
-<use ../output/channel_wrles_retau395/split_time/gamma/gamma_view_r_all.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/split_time/gamma/gamm
-a_view_r_all.png  used on input line 206.
-(pdftex.def)             Requested size: 512.14963pt x 279.36333pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/Normal_plan/velocity_profiles.png, id=59, 803
-.0pt x 602.25pt>
-File: ../output/channel_wrles_retau395/Normal_plan/velocity_profiles.png Graphi
-c file (type png)
-<use ../output/channel_wrles_retau395/Normal_plan/velocity_profiles.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/Normal_plan/velocity_
-profiles.png  used on input line 215.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/Normal_plan/autocorreation_z.png, id=60, 903.
-375pt x 602.25pt>
-File: ../output/channel_wrles_retau395/Normal_plan/autocorreation_z.png Graphic
- file (type png)
-<use ../output/channel_wrles_retau395/Normal_plan/autocorreation_z.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/Normal_plan/autocorre
-ation_z.png  used on input line 222.
-(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/Normal_plan/correation_length_plus.png, id=61
-, 803.0pt x 602.25pt>
-File: ../output/channel_wrles_retau395/Normal_plan/correation_length_plus.png G
-raphic file (type png)
-<use ../output/channel_wrles_retau395/Normal_plan/correation_length_plus.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/Normal_plan/correatio
-n_length_plus.png  used on input line 229.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/Normal_plan/correation_length_minus.png, id=6
-2, 803.0pt x 602.25pt>
-File: ../output/channel_wrles_retau395/Normal_plan/correation_length_minus.png 
-Graphic file (type png)
-<use ../output/channel_wrles_retau395/Normal_plan/correation_length_minus.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/Normal_plan/correatio
-n_length_minus.png  used on input line 235.
-(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png, id=63, 90
-3.375pt x 602.25pt>
-File: ../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png Graph
-ic file (type png)
-<use ../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/von_karman/von_karman
-_spectra_.png  used on input line 244.
-(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
+<../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_profi
+les_all.png, id=47, 803.0pt x 803.0pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_
+profiles_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_p
+rofiles_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/RANS/var_velocity_profiles_all.png  used on input line 68.
+(pdftex.def)             Requested size: 512.14963pt x 512.17836pt.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../output/channel_wrles_re
-tau395/RANS/RANS_profiles.png>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../../report/referance/cha
+nnel_flow.png>] [2 <../../output/figures/channel_wrles_retau395/split_time/RANS
+/RANS_LES_MOSER_profiles_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/RANS/velocity_ratio_pro
+files_all.png, id=66, 803.0pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/RANS/velocity_rati
+o_profiles_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/RANS/velocity_ratio
+_profiles_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/RANS/velocity_ratio_profiles_all.png  used on input line 77.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+ [3 <../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_p
+rofiles_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
+lation2D/u1_all.png, id=73, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+correlation2D/u1_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u1_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/correlation2D/u1_all.png  used on input line 92.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [4 <../../output/figures/channel_wrles_retau395/split_time/RANS/velocity_ratio
+_profiles_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
+lation2D/u2_all.png, id=81, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+correlation2D/u2_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u2_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/correlation2D/u2_all.png  used on input line 99.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+[5 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/co
+rrelation2D/u1_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
+lation2D/u3_all.png, id=88, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+correlation2D/u3_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u3_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/correlation2D/u3_all.png  used on input line 106.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [6 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u2_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
+lation2D/u_1c_all.png, id=95, 702.625pt x 501.875pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+correlation2D/u_1c_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u_1c_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/correlation2D/u_1c_all.png  used on input line 113.
+(pdftex.def)             Requested size: 512.14963pt x 365.85262pt.
+ [7 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u3_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
+lation2D/u_ratio.png, id=104, 702.625pt x 501.875pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+correlation2D/u_ratio.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u_ratio.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/correlation2D/u_ratio.png  used on input line 120.
+(pdftex.def)             Requested size: 512.14963pt x 365.85262pt.
 
-<../output/channel_wrles_retau395/von_karman/von_karman_spectra.png, id=77, 903
-.375pt x 602.25pt>
-File: ../output/channel_wrles_retau395/von_karman/von_karman_spectra.png Graphi
-c file (type png)
-<use ../output/channel_wrles_retau395/von_karman/von_karman_spectra.png>
-Package pdftex.def Info: ../output/channel_wrles_retau395/von_karman/von_karman
-_spectra.png  used on input line 250.
+[8 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/co
+rrelation2D/u_1c_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/power
+_spectra/u1_all.png, id=111, 903.375pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+power_spectra/u1_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+ower_spectra/u1_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/power_spectra/u1_all.png  used on input line 130.
+(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
+ [9 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u_ratio.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/power
+_spectra/u2_all.png, id=118, 903.375pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+power_spectra/u2_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+ower_spectra/u2_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/power_spectra/u2_all.png  used on input line 136.
+(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
+ [10 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+power_spectra/u1_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/power
+_spectra/u3_all.png, id=125, 903.375pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+power_spectra/u3_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+ower_spectra/u3_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/frozen_turbulence/power_spectra/u3_all.png  used on input line 142.
+(pdftex.def)             Requested size: 512.14963pt x 512.17223pt.
+
+[11 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+ower_spectra/u2_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/space_correlation/strea
+mwise.png, id=132, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/space_correlation/
+streamwise.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
+treamwise.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/space_correlation/streamwise.png  used on input line 154.
+(pdftex.def)             Requested size: 460.93153pt x 307.29047pt.
+ [12 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+power_spectra/u3_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/space_correlation/spanw
+ise.png, id=139, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/space_correlation/
+spanwise.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
+panwise.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/space_correlation/spanwise.png  used on input line 160.
+(pdftex.def)             Requested size: 460.93153pt x 307.29047pt.
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w_all.pn
+g, id=140, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w_a
+ll.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w_al
+l.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u1_w_all.png  used on input line 170.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [13 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/
+streamwise.png> <../../output/figures/channel_wrles_retau395/split_time/space_c
+orrelation/spanwise.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r_all.pn
+g, id=150, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r_a
+ll.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r_al
+l.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u1_r_all.png  used on input line 176.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+
+[14 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w_al
+l.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_w_all.pn
+g, id=157, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_w_a
+ll.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_w_al
+l.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u2_w_all.png  used on input line 182.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [15 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r_a
+ll.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_r_all.pn
+g, id=164, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_r_a
+ll.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_r_al
+l.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u2_r_all.png  used on input line 188.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [16 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_w_a
+ll.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_w_all.pn
+g, id=171, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_w_a
+ll.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_w_al
+l.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u3_w_all.png  used on input line 194.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [17 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u2_r_a
+ll.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_r_all.pn
+g, id=178, 1104.125pt x 903.375pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_r_a
+ll.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_r_al
+l.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_u3_r_all.png  used on input line 201.
+(pdftex.def)             Requested size: 512.14963pt x 419.045pt.
+ [18 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_w_a
+ll.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.
+png, id=186, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w
+_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_
+all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_view_w_all.png  used on input line 208.
 (pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[2 <../output/channel_wrles_retau395/RANS/mean_velocity_profiles.png>] [3 <../o
-utput/channel_wrles_retau395/RANS/var_velocity_profiles.png>] [4 <../output/cha
-nnel_wrles_retau395/RANS/velocity_ratio_profiles.png> <../output/channel_wrles_
-retau395/split_time/frozen_turbulence/correlation2D/u1.png>] [5 <../output/chan
-nel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u2.png> <../outpu
-t/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D/u3.png>]
-[6 <../output/channel_wrles_retau395/split_time/frozen_turbulence/correlation2D
-/u_1c.png>] [7 <../output/channel_wrles_retau395/split_time/frozen_turbulence/c
-orrelation2D/u_ratio.png>] [8 <../output/channel_wrles_retau395/split_time/froz
-en_turbulence/power_spectra/u1_all.png>] [9 <../output/channel_wrles_retau395/s
-plit_time/frozen_turbulence/power_spectra/u2_all.png>] [10 <../output/channel_w
-rles_retau395/split_time/frozen_turbulence/power_spectra/u3_all.png>] [11 <../o
-utput/channel_wrles_retau395/split_time/space_correlation/streamwise.png> <../o
-utput/channel_wrles_retau395/split_time/space_correlation/spanwise.png>]
-[12 <../output/channel_wrles_retau395/split_time/gamma/gamma_u1_w_all.png>]
-[13 <../output/channel_wrles_retau395/split_time/gamma/gamma_u1_r_all.png>]
-[14 <../output/channel_wrles_retau395/split_time/gamma/gamma_u2_w_all.png>]
-[15 <../output/channel_wrles_retau395/split_time/gamma/gamma_u2_r_all.png>]
-[16 <../output/channel_wrles_retau395/split_time/gamma/gamma_u3_w_all.png>]
-[17 <../output/channel_wrles_retau395/split_time/gamma/gamma_u3_r_all.png>]
-[18 <../output/channel_wrles_retau395/split_time/gamma/gamma_view_w_all.png> <.
-./output/channel_wrles_retau395/split_time/gamma/gamma_view_r_all.png>]
-[19 <../output/channel_wrles_retau395/Normal_plan/velocity_profiles.png>]
-[20 <../output/channel_wrles_retau395/Normal_plan/autocorreation_z.png>]
-[21 <../output/channel_wrles_retau395/Normal_plan/correation_length_plus.png>]
-[22 <../output/channel_wrles_retau395/Normal_plan/correation_length_minus.png>]
-[23 <../output/channel_wrles_retau395/von_karman/von_karman_spectra_.png> <../o
-utput/channel_wrles_retau395/von_karman/von_karman_spectra.png>]
-(./annexe_figures.aux)
-
-Package rerunfilecheck Warning: File `annexe_figures.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `annexe_figures.out':
-(rerunfilecheck)             Before: 85B2A42DE5DD8346799B4FE01D7F3BA1;1198
-(rerunfilecheck)             After:  D8EAC03EBBD26EB1F2AD6655C7C9679F;1294.
+ [19 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u3_r_a
+ll.png>]
+<../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_r_all.
+png, id=196, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_r
+_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_r_
+all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/gamma/gamma_view_r_all.png  used on input line 215.
+(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
+ [20 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w
+_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/Normal_plan/velocity_pr
+ofiles.png, id=203, 803.0pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/veloci
+ty_profiles.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/velocit
+y_profiles.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/Normal_plan/velocity_profiles.png  used on input line 225.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+ [21 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_r
+_all.png>]
+<../../output/figures/channel_wrles_retau395/split_time/Normal_plan/autocorrela
+tion_z.png, id=210, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/autoco
+rrelation_z.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/autocor
+relation_z.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/Normal_plan/autocorrelation_z.png  used on input line 232.
+(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
+ [22 <../../output/figures/channel_wrles_retau395/split_time/Normal_plan/veloci
+ty_profiles.png>]
+<../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correlation
+_length_plus.png, id=217, 803.0pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correl
+ation_length_plus.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correla
+tion_length_plus.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/Normal_plan/correlation_length_plus.png  used on input line 239.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+ [23 <../../output/figures/channel_wrles_retau395/split_time/Normal_plan/autoco
+rrelation_z.png>]
+<../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correlation
+_length_minus.png, id=224, 803.0pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correl
+ation_length_minus.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correla
+tion_length_minus.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/Normal_plan/correlation_length_minus.png  used on input line 245.
+(pdftex.def)             Requested size: 512.14963pt x 384.13376pt.
+ [24 <../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correl
+ation_length_plus.png>]
+<../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_s
+pectra.png, id=231, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
+man_spectra.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
+an_spectra.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/von_karman/von_karman_spectra.png  used on input line 256.
+(pdftex.def)             Requested size: 512.14963pt x 341.44815pt.
+ [25 <../../output/figures/channel_wrles_retau395/split_time/Normal_plan/correl
+ation_length_minus.png>]
+<../../output/figures/channel_wrles_retau395/split_time/von_karman/integral_len
+ght_scale.png, id=240, 602.25pt x 401.5pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/integra
+l_lenght_scale.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/von_karman/integral
+_lenght_scale.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/von_karman/integral_lenght_scale.png  used on input line 263.
+(pdftex.def)             Requested size: 512.14963pt x 341.46652pt.
+ [26 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
+man_spectra.png>] [27 <../../output/figures/channel_wrles_retau395/split_time/v
+on_karman/integral_lenght_scale.png>] (./annexe_figures.aux)
+Package rerunfilecheck Info: File `annexe_figures.out' has not changed.
+(rerunfilecheck)             Checksum: 68D37188FCA241749355B46EA41007ED;1421.
  ) 
 Here is how much of TeX's memory you used:
- 14808 strings out of 480247
- 245347 string characters out of 5896151
- 539940 words of memory out of 5000000
- 32477 multiletter control sequences out of 15000+600000
+ 14814 strings out of 480247
+ 248048 string characters out of 5896151
+ 524940 words of memory out of 5000000
+ 32480 multiletter control sequences out of 15000+600000
  472467 words of font info for 41 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  70i,7n,76p,503b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1035,10 +991,10 @@ type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy7.pfb>
-Output written on annexe_figures.pdf (23 pages, 1869991 bytes).
+Output written on annexe_figures.pdf (27 pages, 2144044 bytes).
 PDF statistics:
- 288 PDF objects out of 1000 (max. 8388607)
- 185 compressed objects within 2 object streams
- 61 named destinations out of 1000 (max. 500000)
- 205 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 313 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -208,21 +208,21 @@ def main():
         # del R_space
     
         #### Spectra ####
-        omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra", scaling='density')
+        # omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u1, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra", scaling='density')
         
-        frozen_turbulence_plot(fig1u1, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        # frozen_turbulence_plot(fig1u1, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
-        if split_time == 'Y':
-            if chplot == 'all':
-                save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'split_time/frozen_turbulence/power_spectra/u1_z{zp[ind]}.dat', 'Power spectra space/time comparison')
-        if split_time == 'n':
-            if chplot == 'all':
-                save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'whole_time/frozen_turbulence/power_spectra/u1_z{zp[ind]}.dat', 'Power spectra space/time comparison')
+        # if split_time == 'Y':
+        #     if chplot == 'all':
+        #         save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'split_time/frozen_turbulence/power_spectra/u1_z{zp[ind]}.dat', 'Power spectra space/time comparison')
+        # if split_time == 'n':
+        #     if chplot == 'all':
+        #         save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'whole_time/frozen_turbulence/power_spectra/u1_z{zp[ind]}.dat', 'Power spectra space/time comparison')
         
-        del time_spectra
-        del space_spectra
-        del omega
-        del k
+        # del time_spectra
+        # del space_spectra
+        # del omega
+        # del k
         
         
         del datas_u1
@@ -275,21 +275,21 @@ def main():
         # del R_space
     
         #### Spectra ####
-        omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra", scaling='density')
+        # omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u2, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra", scaling='density')
         
-        frozen_turbulence_plot(fig1u2, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        # frozen_turbulence_plot(fig1u2, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
-        if split_time == 'Y':
-            if chplot == 'all':
-                save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'split_time/frozen_turbulence/power_spectra/u2_z{zp[ind]}.dat', 'Power spectra space/time comparison')
-        if split_time == 'n':
-            if chplot == 'all':
-                save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'whole_time/frozen_turbulence/power_spectra/u2_z{zp[ind]}.dat', 'Power spectra space/time comparison')
+        # if split_time == 'Y':
+        #     if chplot == 'all':
+        #         save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'split_time/frozen_turbulence/power_spectra/u2_z{zp[ind]}.dat', 'Power spectra space/time comparison')
+        # if split_time == 'n':
+        #     if chplot == 'all':
+        #         save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'whole_time/frozen_turbulence/power_spectra/u2_z{zp[ind]}.dat', 'Power spectra space/time comparison')
         
-        del time_spectra
-        del space_spectra
-        del omega
-        del k
+        # del time_spectra
+        # del space_spectra
+        # del omega
+        # del k
         
         del datas_u2
         
@@ -342,21 +342,21 @@ def main():
     
     
         #### Spectra ####
-        omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra", scaling='density')
+        # omega, k, time_spectra, space_spectra = frozen_turbulence(datas_u3, ind, zp, nt, split_time, dt, n1, dx=dx, ch="spectra", scaling='density')
         
-        frozen_turbulence_plot(fig1u3, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
+        # frozen_turbulence_plot(fig1u3, col, row, omega = omega, Uc = Uc_list[cpt], time_spectra = time_spectra, k = k, space_spectra = space_spectra, ch = "spectra")
         
-        if split_time == 'Y':
-            if chplot == 'all':
-                save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'split_time/frozen_turbulence/power_spectra/u3_z{zp[ind]}.dat', 'Power spectra space/time comparison')
-        if split_time == 'n':
-            if chplot == 'all':
-                save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'whole_time/frozen_turbulence/power_spectra/u3_z{zp[ind]}.dat', 'Power spectra space/time comparison')
+        # if split_time == 'Y':
+        #     if chplot == 'all':
+        #         save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'split_time/frozen_turbulence/power_spectra/u3_z{zp[ind]}.dat', 'Power spectra space/time comparison')
+        # if split_time == 'n':
+        #     if chplot == 'all':
+        #         save_datas([omega[1:]/Uc_list[cpt], k[1:], time_spectra[1:], space_spectra[1:]/Uc_list[cpt]], ['omega', 'kx', 'time spectra', 'space spectra'], f'whole_time/frozen_turbulence/power_spectra/u3_z{zp[ind]}.dat', 'Power spectra space/time comparison')
         
-        del time_spectra
-        del space_spectra
-        del omega
-        del k
+        # del time_spectra
+        # del space_spectra
+        # del omega
+        # del k
         
         del datas_u3
         
@@ -406,15 +406,15 @@ def main():
         figU1c.update_layout(title='Velocity comparison', font=font, legend=dict(yanchor="bottom", xanchor="right"))
         
         if split_time == 'Y':
-            save_figures(fig1u1, "split_time/frozen_turbulence/power_spectra/u1.png")
+            #save_figures(fig1u1, "split_time/frozen_turbulence/power_spectra/u1.png")
             # save_figures(fig2u1, "split_time/frozen_turbulence/correlation_st/u1.png")
             save_figures(fig3u1, "split_time/frozen_turbulence/correlation2D/u1.png")
             
-            save_figures(fig1u2, "split_time/frozen_turbulence/power_spectra/u2.png")
+            #save_figures(fig1u2, "split_time/frozen_turbulence/power_spectra/u2.png")
             # save_figures(fig2u2, "split_time/frozen_turbulence/correlation_st/u2.png")
             save_figures(fig3u2, "split_time/frozen_turbulence/correlation2D/u2.png")
         
-            save_figures(fig1u3, "split_time/frozen_turbulence/power_spectra/u3.png")
+            #save_figures(fig1u3, "split_time/frozen_turbulence/power_spectra/u3.png")
             # save_figures(fig2u3, "split_time/frozen_turbulence/correlation_st/u3.png")
             save_figures(fig3u3, "split_time/frozen_turbulence/correlation2D/u3.png")
             
@@ -2322,14 +2322,6 @@ def main():
         von_karman_plot(fig_vanK, col, row, kx_moser, E_vv_moser, name = '$\phi^{1}_{22}\\text{DNS}$', color = 'midnightblue', symbols='diamond-open')
         von_karman_plot(fig_vanK, col, row, kx_moser, E_ww_moser, name = '$\phi^{1}_{33}\\text{DNS}$', color = 'darkgreen', symbols='diamond-open')
     
-        # new_phi11 = kc*phi11 # * int_exp1**2 / int_theo1**2
-        # new_phi22 = kc*phi22 # * int_exp2**2 / int_theo2**2
-        
-        # slop_test = np.log(np.abs(phi11[-6] - phi11[-4])) / np.log(np.abs(kx[-6] - kx[-4]))
-        # slop_test_2 = np.log(np.abs(phi11[-6] - phi11[-4]) / np.abs(kx[-6] - kx[-4]))
-        # print('slop_test:',slop_test)
-        # print('slop_test_2:',slop_test_2)
-        # print('-5/3:', -5./3)
     
         
         if chplot == 'all':
@@ -2405,7 +2397,7 @@ def main():
     if split_time == 'Y':    
         if chplot == 'normal':
             fig_vanK.update_layout(height=600, width=900, title=f"Von Karman and LES spectra comparison", font=font, showlegend=True, legend=dict(yanchor="top", xanchor="right"))
-            save_figures(fig_vanK, "split_time/von_karman/von_karman_spectra.png")
+            save_figures(fig_vanK, "split_time/von_karman/von_karman_spectra_.png")
         if chplot == 'all':
             fig_vanK.update_layout(height=900, width=900, title=f"Von Karman and LES spectra comparison", font=font, showlegend=True, legend=dict(yanchor="top", xanchor="right"))
             save_figures(fig_vanK, "split_time/von_karman/von_karman_spectra_all.png")
@@ -2418,8 +2410,8 @@ def main():
             save_figures(fig_vanK, "whole_time/von_karman/von_karman_spectra_all.png")
             
     fig_int_scale.add_trace(go.Scatter(x=int_exp1/int_theo1, y=zp, name="$l_{11}^{LES}/l_{11}^{VK}$", mode= 'lines+markers', line=dict(color='midnightblue', width=3), marker=dict(symbol='circle')))
-    fig_int_scale.add_trace(go.Scatter(x=int_exp2/int_theo2, y=zp, name="$l_{22}^{LES}/l_{22}^{VK}$", mode= 'lines+markers', line=dict(color='midnightblue', width=3), marker=dict(symbol='circle')))
-    fig_int_scale.add_trace(go.Scatter(x=int_exp3/int_theo3, y=zp, name="$l_{33}^{LES}/l_{33}^{VK}$", mode= 'lines+markers', line=dict(color='midnightblue', width=3), marker=dict(symbol='circle')))
+    fig_int_scale.add_trace(go.Scatter(x=int_exp2/int_theo2, y=zp, name="$l_{22}^{LES}/l_{22}^{VK}$", mode= 'lines+markers', line=dict(color='firebrick', width=3), marker=dict(symbol='x')))
+    fig_int_scale.add_trace(go.Scatter(x=int_exp3/int_theo3, y=zp, name="$l_{33}^{LES}/l_{33}^{VK}$", mode= 'lines+markers', line=dict(color='darkgreen', width=3), marker=dict(symbol='diamond')))
     fig_int_scale.update_xaxes(title='$l_{ii}^{LES}/l_{ii}^{VK}$')
     fig_int_scale.update_yaxes(title='$z^+$')
     
