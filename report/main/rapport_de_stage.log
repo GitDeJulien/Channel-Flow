@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  23 SEP 2024 15:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  24 SEP 2024 11:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -651,32 +651,38 @@ LaTeX Info: Redefining \nameref on input line 48.
 \@outlinefile=\write4
 \openout4 = `rapport_de_stage.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 65.
+<Blue_RGB.png, id=68, 469.9959pt x 685.6014pt>
+File: Blue_RGB.png Graphic file (type png)
+<use Blue_RGB.png>
+Package pdftex.def Info: Blue_RGB.png  used on input line 60.
+(pdftex.def)             Requested size: 41.88115pt x 61.08423pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 62.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 62.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<logo_emkk.jpg, id=60, 615.0177pt x 169.3527pt>
+<logo_emkk.jpg, id=70, 615.0177pt x 169.3527pt>
 File: logo_emkk.jpg Graphic file (type jpg)
 <use logo_emkk.jpg>
-Package pdftex.def Info: logo_emkk.jpg  used on input line 78.
+Package pdftex.def Info: logo_emkk.jpg  used on input line 84.
 (pdftex.def)             Requested size: 209.40901pt x 57.66183pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo_emkk.jpg>] (./rappo
-rt_de_stage.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Blue_RGB.png> <./logo_em
+kk.jpg>]
+(./rapport_de_stage.toc)
 \tf@toc=\write5
 \openout5 = `rapport_de_stage.toc'.
 
 
-Overfull \hbox (14.71661pt too wide) in paragraph at lines 102--103
+Overfull \hbox (14.71661pt too wide) in paragraph at lines 110--111
 [][] 
  []
 
@@ -684,7 +690,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.104 \clearpage
+l.112 \clearpage
                  [1] (./rapport_de_stage.lof
 Overfull \hbox (4.38303pt too wide) in paragraph at lines 2--2
  [][] [][]\OT1/cmr/m/n/12 Profiles de vitesse moyenne ad-di-men-sionn^^See et d
@@ -704,288 +710,283 @@ Overfull \hbox (4.38303pt too wide) in paragraph at lines 2--2
  [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--129
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
 
-Overfull \hbox (18.88744pt too wide) in paragraph at lines 130--131
+Overfull \hbox (18.88744pt too wide) in paragraph at lines 138--139
 []\OT1/cmr/m/n/12 L'^^Setude que j'ai men^^Se s'incrit dans le tra-vail de d^^S
 eveloppement d'un code de cal-cul cou-plant l'a^^Serodynamique
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
 [4
 
 ] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 270--271
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 319--320
+Underfull \hbox (badness 10000) in paragraph at lines 308--309
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
+Underfull \hbox (badness 10000) in paragraph at lines 327--328
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
 
  []
 
-<../../report/referance/channel_flow.png, id=210, 412.54124pt x 255.95625pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
+
+ []
+
+<../../report/referance/channel_flow.png, id=221, 412.54124pt x 255.95625pt>
 File: ../../report/referance/channel_flow.png Graphic file (type png)
 <use ../../report/referance/channel_flow.png>
 Package pdftex.def Info: ../../report/referance/channel_flow.png  used on input
- line 340.
+ line 348.
 (pdftex.def)             Requested size: 324.58638pt x 201.38695pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 346--347
+Underfull \hbox (badness 10000) in paragraph at lines 354--355
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 348--350
+Underfull \hbox (badness 10000) in paragraph at lines 356--358
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 364--365
+[8] [9 <../../report/referance/channel_flow.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 372--373
 
  []
 
 
-Overfull \hbox (1.33047pt too wide) in paragraph at lines 367--383
+Overfull \hbox (1.33047pt too wide) in paragraph at lines 375--391
 [][] 
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 388--389
+Underfull \hbox (badness 10000) in paragraph at lines 396--397
 
  []
 
-[9 <../../report/referance/channel_flow.png>]
-Overfull \hbox (9.12602pt too wide) in paragraph at lines 391--399
+
+Overfull \hbox (9.12602pt too wide) in paragraph at lines 399--407
 [][] 
  []
 
-<../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER_pro
-files_all.png, id=229, 903.375pt x 602.25pt>
-File: ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSE
-R_profiles_all.png Graphic file (type png)
-<use ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
-_profiles_all.png>
-Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/RANS/RANS_LES_MOSER_profiles_all.png  used on input line 405.
-(pdftex.def)             Requested size: 418.82603pt x 279.22548pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 411--412
 
  []
 
-[10 <../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
-_profiles_all.png>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 413--414
 
  []
 
+<../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER_pro
+files_all.png, id=242, 903.375pt x 602.25pt>
+File: ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSE
+R_profiles_all.png Graphic file (type png)
+<use ../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
+_profiles_all.png>
+Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
+/RANS/RANS_LES_MOSER_profiles_all.png  used on input line 417.
+(pdftex.def)             Requested size: 418.82603pt x 279.22548pt.
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 423--424
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--426
+
+ []
+
 <../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_profi
-les_all.png, id=237, 803.0pt x 803.0pt>
+les_all.png, id=249, 803.0pt x 803.0pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_
 profiles_all.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_p
 rofiles_all.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/RANS/var_velocity_profiles_all.png  used on input line 417.
+/RANS/var_velocity_profiles_all.png  used on input line 433.
 (pdftex.def)             Requested size: 418.82603pt x 418.8367pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
-
- []
-
-[11 <../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_p
-rofiles_all.png>]
+[11 <../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER
+_profiles_all.png>]
 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
-lation2D/u1.png, id=246, 1104.125pt x 602.25pt>
+lation2D/u1.png, id=257, 1104.125pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
 correlation2D/u1.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
 orrelation2D/u1.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/frozen_turbulence/correlation2D/u1.png  used on input line 442.
+/frozen_turbulence/correlation2D/u1.png  used on input line 455.
 (pdftex.def)             Requested size: 471.17429pt x 257.00507pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 448--449
+ [12 <../../output/figures/channel_wrles_retau395/split_time/RANS/var_velocity_
+profiles_all.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 461--462
 
  []
 
-[12 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
-orrelation2D/u1.png>]
 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/power
-_spectra/u1.png, id=257, 1104.125pt x 602.25pt>
+_spectra/u1.png, id=268, 1104.125pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
 power_spectra/u1.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
 ower_spectra/u1.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/frozen_turbulence/power_spectra/u1.png  used on input line 455.
+/frozen_turbulence/power_spectra/u1.png  used on input line 468.
 (pdftex.def)             Requested size: 445.00415pt x 242.73364pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 471--473
+[13 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
+orrelation2D/u1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 484--486
 
  []
 
 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/strea
-mwise.png, id=263, 903.375pt x 602.25pt>
+mwise.png, id=280, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/space_correlation/
 streamwise.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
 treamwise.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/space_correlation/streamwise.png  used on input line 477.
+/space_correlation/streamwise.png  used on input line 490.
 (pdftex.def)             Requested size: 418.82603pt x 279.22548pt.
-[13 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
+[14 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/p
 ower_spectra/u1.png>]
 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.png, i
-d=275, 1104.125pt x 602.25pt>
+d=291, 1104.125pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.p
 ng Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.pn
 g>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/gamma/gamma_u1_w.png  used on input line 498.
+/gamma/gamma_u1_w.png  used on input line 511.
 (pdftex.def)             Requested size: 471.17429pt x 257.00507pt.
- [14 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/
+ [15 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/
 streamwise.png>]
 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_all_
-mod.png, id=282, 677.53125pt x 451.6875pt>
+mod.png, id=299, 677.53125pt x 451.6875pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w
 _all_mod.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_
 all_mod.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/gamma/gamma_view_w_all_mod.png  used on input line 508.
+/gamma/gamma_view_w_all_mod.png  used on input line 521.
 (pdftex.def)             Requested size: 418.82603pt x 279.22318pt.
- [15 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.p
+ [16 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_w.p
 ng> <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_view_w_
 all_mod.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 527--529
+Underfull \hbox (badness 10000) in paragraph at lines 540--542
 
  []
 
 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_s
-pectra_.png, id=298, 903.375pt x 602.25pt>
+pectra_.png, id=314, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
 man_spectra_.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
 an_spectra_.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/von_karman/von_karman_spectra_.png  used on input line 535.
+/von_karman/von_karman_spectra_.png  used on input line 548.
 (pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
 <../../output/figures/channel_wrles_retau395/split_time/von_karman/integral_len
-ght_scale.png, id=299, 602.25pt x 401.5pt>
+ght_scale.png, id=315, 602.25pt x 401.5pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/integra
 l_lenght_scale.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/von_karman/integral
 _lenght_scale.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/von_karman/integral_lenght_scale.png  used on input line 544.
+/von_karman/integral_lenght_scale.png  used on input line 557.
 (pdftex.def)             Requested size: 366.46977pt x 244.32037pt.
-[16 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
-an_spectra_.png>] [17 <../../output/figures/channel_wrles_retau395/split_time/v
-on_karman/integral_lenght_scale.png>] [18]
+[17 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
+an_spectra_.png>] [18 <../../output/figures/channel_wrles_retau395/split_time/v
+on_karman/integral_lenght_scale.png>] [19]
 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
-lation2D/u_1c_all.png, id=316, 702.625pt x 501.875pt>
+lation2D/u_1c_all.png, id=332, 702.625pt x 501.875pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
 correlation2D/u_1c_all.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
 orrelation2D/u_1c_all.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/frozen_turbulence/correlation2D/u_1c_all.png  used on input line 576.
+/frozen_turbulence/correlation2D/u_1c_all.png  used on input line 589.
 (pdftex.def)             Requested size: 418.82603pt x 299.16687pt.
 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/spanw
-ise.png, id=319, 903.375pt x 602.25pt>
+ise.png, id=335, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/space_correlation/
 spanwise.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
 panwise.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/space_correlation/spanwise.png  used on input line 584.
+/space_correlation/spanwise.png  used on input line 597.
 (pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
- [19 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
+ [20 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
 correlation2D/u_1c_all.png>]
 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r.png, i
-d=325, 1104.125pt x 602.25pt>
+d=341, 1104.125pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r.p
 ng Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r.pn
 g>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/gamma/gamma_u1_r.png  used on input line 592.
+/gamma/gamma_u1_r.png  used on input line 605.
 (pdftex.def)             Requested size: 471.17429pt x 257.00507pt.
 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_s
-pectra.png, id=326, 903.375pt x 602.25pt>
+pectra.png, id=342, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
 man_spectra.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
 an_spectra.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/von_karman/von_karman_spectra.png  used on input line 600.
+/von_karman/von_karman_spectra.png  used on input line 613.
 (pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
- [20 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/
+ [21 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/
 spanwise.png> <../../output/figures/channel_wrles_retau395/split_time/gamma/gam
-ma_u1_r.png>] [21 <../../output/figures/channel_wrles_retau395/split_time/von_k
-arman/von_karman_spectra.png>] [22] (./rapport_de_stage.bbl) [23]
+ma_u1_r.png>] [22 <../../output/figures/channel_wrles_retau395/split_time/von_k
+arman/von_karman_spectra.png>] [23] (./rapport_de_stage.bbl) [24]
 (./rapport_de_stage.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
-
-Package rerunfilecheck Warning: File `rapport_de_stage.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `rapport_de_stage.out':
-(rerunfilecheck)             Before: 797C44589CED7809845C4F339AC358A3;3570
-(rerunfilecheck)             After:  0C1EF7648C42F019C5E2151E32D59FA7;3673.
+Package rerunfilecheck Info: File `rapport_de_stage.out' has not changed.
+(rerunfilecheck)             Checksum: E642CC093BE24D152BEE887FF6581F32;3811.
  ) 
 Here is how much of TeX's memory you used:
- 14866 strings out of 480247
- 241834 string characters out of 5896151
- 541742 words of memory out of 5000000
- 32491 multiletter control sequences out of 15000+600000
+ 14877 strings out of 480247
+ 242010 string characters out of 5896151
+ 545750 words of memory out of 5000000
+ 32499 multiletter control sequences out of 15000+600000
  479712 words of font info for 64 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 70i,17n,76p,1134b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,17n,76p,1621b,403s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/julien/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.60
 0pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/
@@ -1001,10 +1002,10 @@ msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on rapport_de_stage.pdf (24 pages, 1256909 bytes).
+Output written on rapport_de_stage.pdf (25 pages, 1334118 bytes).
 PDF statistics:
- 438 PDF objects out of 1000 (max. 8388607)
- 346 compressed objects within 4 object streams
- 92 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 454 PDF objects out of 1000 (max. 8388607)
+ 359 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 209 words of extra memory for PDF output out of 10000 (max. 10000000)
 

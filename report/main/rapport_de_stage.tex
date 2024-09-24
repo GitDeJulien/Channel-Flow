@@ -50,10 +50,16 @@
 	
 	\hypersetup{pdfborder=0 0 0}
 	\begin{titlepage}
+		
+		
 		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 		\begin{center}
 			
-			
+			\begin{minipage}[c]{.4\textwidth}
+				\begin{center}
+					\includegraphics[width=0.2\textwidth]{Blue_RGB.png}
+				\end{center}
+			\end{minipage}
 			
 			\vspace{1cm}
 			
@@ -78,6 +84,8 @@
 					\includegraphics[width=1\textwidth]{logo_emkk.jpg}
 				\end{center}
 			\end{minipage}
+		
+			
 			
 			\vfill
 			
@@ -127,7 +135,7 @@
 	
 	Pour appréhender ce problème il faut d'abord comprendre comment les éoliennes génèrent du bruit. La grande majorité du son émis viens des pales de l'éolienne. En effet quand le flux d'air rencontre une pale il est perturbé et comme il y a interaction entre un fluide et une structure alors il y a apparition d'une couche limite. Dans notre cas cette dernière est turbulente. En effet le bout de pâle se déplace en moyenne à $80 m/s$ si on considère une éolienne classique. Dans l'étude de l'écoulement on à donc des Raynolds très élevés, de l'ordre de plusieurs milliers. La grande perturbation du flux d'air va engendrer la formation, tout autour de la pale, d'onde de pression qu'on appelle plus communément le bruit. Là où le son générer et le plus intense c'est au niveau du bord de fuite et plutôt en bout de pâle. Il y a un lien de causalité directe entre turbulence et son émis. En revanche il est considéré que le son émis n'a pas d'impacte sur la turbulence. C'est pourquoi la couche limite et le sillage turbulent des pâles sont étudiés.\\
 	
-	L'étude que j'ai mené s'incrit dans le travail de développement d'un code de calcul couplant l'aérodynamique et l'acoustique. Mon travail ne s'intéraissera qu'à la partie aérodynamique et plus précisément l'étude statistique d'une couche limite turbulente dans un canal parallélépipédique. Un code LES (Large Eddy Simulation) développé à \textit{DTU} permet la simulation de la turbulence notamment dans un canal à air. À noté que celui-ci est très utile vû le coût d'une expérience en soufflerie. Afin d'étudier et de valider les résultats obtenu après calcul nous effectuerons une analyse statistique notamment dans le domaine spectral de la turbulence et principalement des variables de vitesse. \\
+	L'étude que j'ai mené s'incrit dans le travail de développement d'un code de calcul couplant l'aérodynamique et l'acoustique. Mon travail ne s'intéraissera qu'à la partie aérodynamique et plus précisément l'étude statistique d'une couche limite turbulente dans un canal parallélépipédique. Un code LES (Large Eddy Simulation) développé à \textit{DTU} permet la simulation de la turbulence notamment dans un canal à air. À noté que celui-ci est très utile vû le coût d'une expérience en soufflerie. L'objectif de ce stage est donc dans un premier temps de valider les résultats obtenus avec les modèles LES qui seront décrits par la suit et d'analyser la turbulence en prenant en compte certaine hypothèse de modélisation. Pour ce faire nous effectuerons une analyse statistique notamment dans le domaine spectral de la turbulence et principalement une étude des variables de vitesse turbulente. Un code en \textit{Python} à été écrit afin de prendre en entrer les données de sortie du code LES et d'obtenir des résultats de validation et d'analyse sous forme de courbes. Ce programme à été codé de manière modulaire et dans la mesure du possible nous avons chercher à optimiser le temps de calcul ainsi que l'espace mémoire utiliser durant les calcules. Afin de le rendre plus facile d'utilisation nous avons ajouter une interface utilisateur (GUI) coder directement avec la bibliothèque \textit{Python} "Tkinter". Cette interface permet à l'utilisateur de changer les paramètres et données d'entrer en fonction du modèle choisi.\\
 	
 	\subsection{Plan}
 	Nous commencerons par détailler les outils mathématiques qui ont été utilisés pour étudier la turbulence. Nous présenterons ensuite brièvement la simulation effectuée et les modèles utilisés. Ils ne seront pas présentés en détaille car cela n'a pas fait l'objet du travail. L'idée était d'utiliser les résultats donnée afin de valider ces modèles et d'analyser la turbulence une fois validation. Nous présenterons par la suite les résultats obtenus selon plusieurs axes de recherche : 
@@ -400,6 +408,10 @@ Afin de valider les résultats des calculs LES nous avions à disposition des do
 	\label{tab:zplus}
 \end{table}
 
+Les grandeurs relevées auxquelles nous nous sommes intéressé dans ce travail sont les vitesses "streamwise" ($u_x, u_1 \text{ ou } u$), "spanwise" ($u_y, u_2 \text{ ou } v$) et wall-normal ($u_z, u_3 \text{ ou } w$). Nous noterons par la suite les vitesses moyennes turbulentes avec des majuscules ($U,~V,~W$) et les fluctuations turbulentes de vitesse avec des minuscules ($u,~v,~w$).\\
+
+Regardons les profiles de vitesse moyenne et des composantes du tenseur de Reynolds ainsi que le profile d'énergie cinétique turbulente, $k_T=\frac{1}{2}(u^2+v^2+w^2)$ tracé en {\bf Figures \ref{fig:mean-vel}} et {\bf  \ref{fig:fluct-vel}}. Toutes ces vitesses ont été addimentionnées par la vitesse de frottement $u_{\tau}$. Les vitesses moyennes sont obtenues en faisant une moyenne à la fois en temps et en espace. Pour obtenir les fluctuations turbulentes on soustrait cette moyenne aux données brutes.\\
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{../../output/figures/channel_wrles_retau395/split_time/RANS/RANS_LES_MOSER_profiles_all.png}
@@ -408,9 +420,13 @@ Afin de valider les résultats des calculs LES nous avions à disposition des do
 	\end{center}
 \end{figure}
 
-Les grandeurs relevées auxquelles nous nous sommes intéressé dans ce travail sont les vitesses "streamwise" ($u_x, u_1 \text{ ou } u$), "spanwise" ($u_y, u_2 \text{ ou } v$) et wall-normal ($u_z, u_3 \text{ ou } w$). Nous noterons par la suite les vitesses moyennes turbulentes avec des majuscules ($U,~V,~W$) et les fluctuations turbulentes de vitesse avec des minuscules ($u,~v,~w$).\\
+Les profiles de vitesse "steamwise" sont comparables aux données DNS et RANS. Par ailleurs les vitesses "spanwise" et "wall-normal" sont petites devant cette dernière et le comparatif est donc un peu moins idéal. On observe un certain décalage dans la comparaison des composantes du tenseur de Reynolds pour celles incluant $u_2$ et $u_3$. Ces écarts sont attendu car la DNS est une méthode de résolution directe des équation de Navier-Stokes et donc les résultats sont plus précis que pour le cas de la LES un filtrage est appliqué aux petites structures. Dans un grand nombre de cas concernant la simulation numérique appliqué à la mécanique des fluides, afin de vérifier la véracité des calculs d'un modèle ont les compare à une simulation simple calculée avec un modèle DNS considéré alors comme une solution quasi-exact. Malgré ces différences dû au modèle utilisé, les profiles de vitesse et celui de d'énergie cinétique restent semblables. Nous pouvons donc considérer que ces données calculées par le modèle LES sont utilisable pour une analyse plus approfondie. \\
 
-Regardons les profiles de vitesse moyenne et des composantes du tenseur de Reynolds ainsi que le profile d'énergie cinétique turbulente, $k_T=\frac{1}{2}(u^2+v^2+w^2)$ tracé en {\bf Figures \ref{fig:mean-vel}} et {\bf  \ref{fig:fluct-vel}}. Toutes ces vitesses ont été addimentionnées par la vitesse de frottement $u_{\tau}$. Les vitesses moyennes sont obtenues en faisant une moyenne à la fois en temps et en espace. Pour obtenir les fluctuations turbulentes on soustrait cette moyenne aux données brutes.\\
+La même étude à été mener pour les deux modèles à Reynolds 1000. Concernant ces derniers il est intéressant de noter que l'augmentation du Reynolds à considérablement augmenter le temps de calcul entre autres pour le modèle WRLES (cf. section 4). Aussi pour chaque schéma les jeux de données était lourd (~83 Go). Il a donc fallut optimiser l'utilisation de la mémoire vive (RAM) durant le calcul. Nous avons choisit de séparer les données vis à vis des itérations en temps et au lieu d'avoir des vecteurs à 50000, 75000 et 150000 itérations en temps, ils sont de $2^10$, $2^11$ ou $2^13$ (au choix de l'utilisateur et de la RAM disponible) itérations. Ensuite nous avons effectué une moyenne sur les sous groupes afin d'étudier correctement tout le jeux de données.\\
+
+
+
+Maintenant que les jeux de données semble correcte nous allons pouvoir nous intéresser à l'hypothèse de turbulence figée (prop. \ref{prop:turb-fig}). Dans la théorie de résolution cette hypothèse est fait, nous voulons donc voir si les résultats du calcul la confirme. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -420,10 +436,7 @@ Regardons les profiles de vitesse moyenne et des composantes du tenseur de Reyno
 	\end{center}
 \end{figure}
 
-Les profiles de vitesse "steamwise" sont comparables aux données DNS et RANS. Par ailleurs les vitesses "spanwise" et "wall-normal" sont petites devant cette dernière et le comparatif est donc un peu moins idéal. On observe un certain décalage dans la comparaison des composantes du tenseur de Reynolds pour celles incluant $u_2$ et $u_3$. Ces écarts sont attendu car la DNS est une méthode de résolution directe des équation de Navier-Stokes et donc les résultats sont plus précis que pour le cas de la LES un filtrage est appliqué aux petites structures. Dans un grand nombre de cas concernant la simulation numérique appliqué à la mécanique des fluides, afin de vérifier la véracité des calculs d'un modèle ont les compare à une simulation simple calculé avec un modèle DNS considérer alors comme une solution quasi-exact. Malgré ces différence dû au modèle utilisé les profiles restent semblables et les données sont donc utilisable pour une analyse plus approfondie. La même étude à été mener pour les deux modèles à Reynolds 1000. \\
 
-
-Maintenant que les jeux de données semble correcte nous allons pouvoir nous intéresser à l'hypothèse de turbulence figée (prop. \ref{prop:turb-fig}). Dans la théorie de résolution cette hypothèse est fait on veut donc voir si les résultats du calcul la confirme. 
 
 
 \begin{center}
@@ -564,10 +577,10 @@ L'objectif à terme est de pouvoir utiliser le code établie durant ces trois mo
 
 \pagebreak
 
-
-\section{Figure annexe}
+\section{Annexe}
 \noindent\rule{\linewidth}{2pt}
 \vspace{0.1cm}
+\subsection{Figures annexes}
 
 Dans cette annexe j'ai seulement voulu présenter quelques figures de plus pour préciser certains points évoqué dans le rapport.
 
@@ -606,9 +619,9 @@ Dans cette annexe j'ai seulement voulu présenter quelques figures de plus pour 
 \pagebreak
 
 
-\section{Annexe CREL}
-\noindent\rule{\linewidth}{2pt}
-\vspace{0.1cm}
+\subsection{Annexe du CREGE}
+
+Dans cette annexe nous allons détailler la gestion des projets au laboratoire DTU dans lequel j'ai pu effectuer mon stage. Celui-ci est un laboratoire de recherche travaillant sur plusieurs domaines de la physique et de l'ingénieurie appliqué au développement d'éolienne dans le cadre d'une transition vers une énergie décarbonée.
 
 \pagebreak
 
