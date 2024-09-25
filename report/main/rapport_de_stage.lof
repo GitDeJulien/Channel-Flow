@@ -1,6 +1,6 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Schéma de la simulation "channel flow"\relax }}{9}{figure.caption.7}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Profiles de vitesse moyenne addimensionnée et d'énergie cinétique turbulente. Les données ont été comparées aux profiles des données DNS et RANS quand cela était possible.\relax }}{11}{figure.caption.10}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Profiles de fluctuation. Les données ont été comparées au profiles des données DNS.\relax }}{12}{figure.caption.11}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Profils de vitesse moyenne addimensionnée et d'énergie cinétique turbulente. Les données ont été comparées aux profils des données DNS et RANS quand cela était possible.\relax }}{11}{figure.caption.10}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Profils de fluctuation. Les données ont été comparées au profils des données DNS.\relax }}{12}{figure.caption.11}%
 \contentsline {figure}{\numberline {4}{\ignorespaces Iso-valeur de la fonction d'autocorrelation 2D selon la direction $x$ et le temps $t$ à différentes hauteurs $z^+$. Obtention de la valeur de $U_c$ par approche linéaire de la direction des ellipses.\relax }}{13}{figure.caption.12}%
 \contentsline {figure}{\numberline {5}{\ignorespaces Comparaison des spectres de puissance en temps ($F$) et dans la direction $x$ ($P$) tracer en fonction de $k_x$ le nombre d'onde "streamwise". En pointillé (- - -) la pente $k_x^{-5/3}$ vérifiant la décroissance de Kolmogorov \cite {kolmogorov1991local}\relax }}{14}{figure.caption.13}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Corrélation streamwise des grandeur de vitesse dans les trois directions\relax }}{15}{figure.caption.14}%
