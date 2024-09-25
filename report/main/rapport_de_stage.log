@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  25 SEP 2024 13:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.20)  25 SEP 2024 16:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -908,17 +908,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 540--542
  []
 
 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_s
-pectra_.png, id=318, 903.375pt x 602.25pt>
+pectra_.png, id=317, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
 man_spectra_.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
 an_spectra_.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/von_karman/von_karman_spectra_.png  used on input line 548.
+/von_karman/von_karman_spectra_.png  used on input line 545.
 (pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
-[17]
+[17 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
+an_spectra_.png>]
 <../../output/figures/channel_wrles_retau395/split_time/von_karman/integral_len
-ght_scale.png, id=323, 602.25pt x 401.5pt>
+ght_scale.png, id=325, 602.25pt x 401.5pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/integra
 l_lenght_scale.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/von_karman/integral
@@ -926,72 +927,71 @@ _lenght_scale.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
 /von_karman/integral_lenght_scale.png  used on input line 557.
 (pdftex.def)             Requested size: 366.46977pt x 244.32037pt.
- [18 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
-man_spectra_.png> <../../output/figures/channel_wrles_retau395/split_time/von_k
-arman/integral_lenght_scale.png>] [19]
+ [18 <../../output/figures/channel_wrles_retau395/split_time/von_karman/integra
+l_lenght_scale.png>] [19]
 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/corre
-lation2D/u_1c_all.png, id=336, 702.625pt x 501.875pt>
+lation2D/u_1c_all.png, id=337, 702.625pt x 501.875pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
 correlation2D/u_1c_all.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/c
 orrelation2D/u_1c_all.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/frozen_turbulence/correlation2D/u_1c_all.png  used on input line 589.
+/frozen_turbulence/correlation2D/u_1c_all.png  used on input line 590.
 (pdftex.def)             Requested size: 418.82603pt x 299.16687pt.
 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/spanw
-ise.png, id=339, 903.375pt x 602.25pt>
+ise.png, id=340, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/space_correlation/
 spanwise.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/space_correlation/s
 panwise.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/space_correlation/spanwise.png  used on input line 597.
+/space_correlation/spanwise.png  used on input line 598.
 (pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
  [20 <../../output/figures/channel_wrles_retau395/split_time/frozen_turbulence/
 correlation2D/u_1c_all.png>]
 <../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r.png, i
-d=345, 1104.125pt x 602.25pt>
+d=346, 1104.125pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r.p
 ng Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/gamma/gamma_u1_r.pn
 g>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/gamma/gamma_u1_r.png  used on input line 605.
+/gamma/gamma_u1_r.png  used on input line 606.
 (pdftex.def)             Requested size: 471.17429pt x 257.00507pt.
 <../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karman_s
-pectra.png, id=346, 903.375pt x 602.25pt>
+pectra.png, id=347, 903.375pt x 602.25pt>
 File: ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_kar
 man_spectra.png Graphic file (type png)
 <use ../../output/figures/channel_wrles_retau395/split_time/von_karman/von_karm
 an_spectra.png>
 Package pdftex.def Info: ../../output/figures/channel_wrles_retau395/split_time
-/von_karman/von_karman_spectra.png  used on input line 613.
+/von_karman/von_karman_spectra.png  used on input line 614.
 (pdftex.def)             Requested size: 471.17429pt x 314.11832pt.
  [21 <../../output/figures/channel_wrles_retau395/split_time/space_correlation/
 spanwise.png> <../../output/figures/channel_wrles_retau395/split_time/gamma/gam
 ma_u1_r.png>] [22 <../../output/figures/channel_wrles_retau395/split_time/von_k
 arman/von_karman_spectra.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 624--625
+Underfull \hbox (badness 10000) in paragraph at lines 625--626
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 626--628
+Underfull \hbox (badness 10000) in paragraph at lines 627--629
 
  []
 
-<Organogram_DTU-2024.png, id=359, 2140.24594pt x 883.04906pt>
+<Organogram_DTU-2024.png, id=360, 2140.24594pt x 883.04906pt>
 File: Organogram_DTU-2024.png Graphic file (type png)
 <use Organogram_DTU-2024.png>
-Package pdftex.def Info: Organogram_DTU-2024.png  used on input line 634.
+Package pdftex.def Info: Organogram_DTU-2024.png  used on input line 635.
 (pdftex.def)             Requested size: 523.53055pt x 216.00531pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--644
+Underfull \hbox (badness 10000) in paragraph at lines 641--645
 
  []
 
 [23 <./Organogram_DTU-2024.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+Underfull \hbox (badness 10000) in paragraph at lines 646--647
 
  []
 
@@ -1022,10 +1022,10 @@ msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on rapport_de_stage.pdf (26 pages, 1700122 bytes).
+Output written on rapport_de_stage.pdf (26 pages, 1701023 bytes).
 PDF statistics:
- 466 PDF objects out of 1000 (max. 8388607)
- 368 compressed objects within 4 object streams
+ 467 PDF objects out of 1000 (max. 8388607)
+ 369 compressed objects within 4 object streams
  96 named destinations out of 1000 (max. 500000)
  214 words of extra memory for PDF output out of 10000 (max. 10000000)
 
